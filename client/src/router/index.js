@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import home from '../views/Home.vue'
+//import home from '../views/Home.vue'
 // import about from '../views/About.vue'
 // import signin from '../views/Signin.vue'
 //import signup from '../views/Signup.vue'
 //import App from '../App.vue'
 
-
+//../../server/router
 const routes = [
   {
     path: '/',
@@ -29,8 +29,8 @@ const routes = [
   {
     path: '/signup',
     name: 'signup',
-    component: () => import('../views/Signup.vue')
-  }
+    component: () => import('../views/Signup.vue'),
+  },
 ]
 
 const router = createRouter({

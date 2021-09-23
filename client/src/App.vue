@@ -1,35 +1,30 @@
 <template>
   <h1>fsdfsd</h1>
-  <div id="app">
-    <Header />
-    <!-- <Home /> -->
-    <router-view />
-    <Footer />
-  </div>
+  <Header />
+  <router-view />
+  <Footer />
 </template>
 
 <script>
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
-//import Home from "./views/Home.vue";
+
 export default {
   name: "App",
   data() {
-    // return {
-    //   username: "",
-    //   email: "",
-    // };
+    return {
+      username: "",
+      email: "",
+    };
   },
-  // data() {
-
-  // },
   methods: {
-    // registered() {
-    //   alert(this.username + " " + this.email);
-    // },
+    registered() {
+      alert(this.username + " " + this.email);
+    },
   },
   components: {
     //Home,
+    //signup,
     Header,
     Footer,
   },
