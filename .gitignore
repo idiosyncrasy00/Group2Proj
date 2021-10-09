@@ -3,7 +3,7 @@ client/node_modules
 server/node_modules
 client/public/bootstrap
 /dist
-
+*package-lock.json
 
 # local env files
 .env.local
