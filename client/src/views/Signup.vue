@@ -1,8 +1,14 @@
 <template>
-  <Header />
-  <h1>This is the signup page</h1>
-  <main class="form-signup">
-    <form action="/">
+  <!-- <div>
+    <pre>
+      {{ JSON.stringify(signupValues, null, 2) }}
+    </pre>
+  </div> -->
+  <div>
+    <Nav />
+    <h1>This is the signup page</h1>
+    <main class="form-signup">
+      <!-- <form action="/"> -->
       <img
         class="mb-4"
         src="../assets/logo.png"
@@ -13,12 +19,20 @@
       <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
 
       <div class="form-floating">
-        <input type="firstname" class="form-control" v-model="firstname" />
+        <input
+          type="firstname"
+          class="form-control"
+          v-model="signupValues.firstname"
+        />
         <label for="floatingInput">First name</label>
       </div>
 
       <div class="form-floating">
-        <input type="lastname" class="form-control" v-model="lastname" />
+        <input
+          type="lastname"
+          class="form-control"
+          v-model="signupValues.lastname"
+        />
         <label for="floatingInput">Last name</label>
       </div>
 
@@ -27,7 +41,7 @@
           type="email"
           class="form-control"
           id="floatingInput"
-          v-model="email"
+          v-model="signupValues.email"
         />
         <label for="floatingInput">email</label>
       </div>
@@ -37,7 +51,7 @@
           type="username"
           class="form-control"
           id="floatingInput"
-          v-model="username"
+          v-model="signupValues.username"
         />
         <label for="floatingInput">Username</label>
       </div>
@@ -47,48 +61,53 @@
           class="form-control"
           id="floatingPassword"
           placeholder="Password"
-          v-model="password"
+          v-model="signupValues.password"
         />
         <label for="floatingPassword">Password</label>
       </div>
       <button
         class="w-100 btn btn-lg btn-primary"
         type="submit"
-        @click="signup"
+        @click="getSignUpData"
       >
         Sign up
       </button>
       <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-    </form>
-  </main>
+      <!-- </form> -->
+    </main>
+  </div>
 </template>
 
 <script>
-import Header from "../components/Header.vue";
+import Nav from "../components/Nav.vue";
 export default {
   name: "signup",
   data() {
     return {
-      email: "",
-      username: "",
-      password: "",
+      signupValues: {
+        firstname: "",
+        lastname: "",
+        email: "",
+        username: "",
+        password: "",
+      },
+      SignUpData: "",
     };
   },
   methods: {
-    getusername() {
-      return this.username;
-    },
-    signup() {
-      console.log(this.username + " " + this.password + " " + this.email);
+    getSignUpData() {
+      this.SignUpData = JSON.stringify(this.signupValues);
+      console.log(this.SignUpData);
     },
   },
   components: {
-    Header,
-  }
+    Nav,
+  },
 };
 </script>
 
 <style>
+/* Styles */
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
@@ -106,8 +125,6 @@ export default {
 body {
   display: center;
   align-items: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
 }
 
 .signup {

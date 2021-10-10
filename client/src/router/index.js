@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
 //import home from '../views/Home.vue'
 // import about from '../views/About.vue'
 // import signin from '../views/Signin.vue'
@@ -10,15 +10,11 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import('../views/Home.vue'),
+    component: () => import('../views/Home/Home.vue'),
   },
   {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    //component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
     component: () => import('../views/About.vue'),
   },
   {
@@ -30,6 +26,31 @@ const routes = [
     path: '/signup',
     name: 'signup',
     component: () => import('../views/Signup.vue'),
+  },
+  {
+    path: '/user',
+    name: 'user',
+    component: () => import('../views/Users/User.vue'),
+  },
+  {
+    path: '/createRoom',
+    name: 'createRoom',
+    component: () => import('../views/Rooms/createRoom.vue'),
+  },
+  {
+    path: '/FindRoom',
+    name: 'FindRoom',
+    component: () => import('../views/Rooms/FindRoom.vue'),
+  },
+  {
+    path: '/FindRoom/:id',
+    name: 'roomdetails',
+    component: () => import('../views/Rooms/RoomDetails.vue'),
+  },
+  {
+    path: '/FindRoom/:city',
+    name: 'SearchResults',
+    component: () => import('../views/SearchResults.vue'),
   },
 ]
 
