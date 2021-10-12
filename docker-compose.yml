@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  client:
+    build:
+      context: client
+    ports:
+      - 4100:4100
+  server:
+    build:
+      context: server
+    environment:
+      NODE_ENV: "test"
+    ports:
+      - 3000:3000
+    command: >
+      sh -c "wget -q https://raw.githubusercontent.com/eficode/wait-for/master/wait-for -O wait-for && chmod +x wait-for &&
+            ./wait-for db:3306 -- npm start"
+  db:
+    image: mysql:5
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: root
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db/init.sql:/db/init.sql
+    command: --init-file /db/init.sql
