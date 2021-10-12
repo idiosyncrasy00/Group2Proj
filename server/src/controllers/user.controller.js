@@ -7,7 +7,6 @@ const _ = require('lodash');
 
 const registerUser = async (req, res) => {
     try {
-        // Validate message body
         const { error, value } = await validation.registerSchema.validate(req.body);
         if (error) {
             res.status(400).send({ error: error.message });
@@ -18,7 +17,12 @@ const registerUser = async (req, res) => {
             user.password = await bcrypt.hash(user.password, salt);
             await user.save();
             // Generate token in a different place
-            const token = jwt.sign({ user: user.id }, 'privateKey');
+            // Modify isAdmin later
+            const userToken = {
+                user: user.id,
+                isAdmin: true
+            };
+            const token = jwt.sign(userToken, 'privateKey');
             res.header('x-auth-token', token).send(_.pick(user, ['id', 'username']));
             console.log('User created!');
         }
