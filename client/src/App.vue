@@ -1,5 +1,5 @@
 <template>
-  <Nav />
+  <Nav :user="user" />
   <div>
     <router-view :user="user" />
   </div>
@@ -10,6 +10,7 @@ import Nav from "@/components/Nav.vue";
 //import Signin from "@/views/Signin.vue";
 export default {
   name: "App",
+  props: ["user"],
   data() {
     return {
       // username: "123",

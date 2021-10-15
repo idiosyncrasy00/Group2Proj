@@ -103,7 +103,7 @@ import Footer from "@/components/Footer.vue";
 
 export default {
   name: "home",
-  props: ["user"],
+  //props: ["user"],
   data() {
     return {
       user: null,
@@ -120,5 +120,12 @@ export default {
 <style>
 #bgimg {
   background-image: url("../../assets/phonghop.jpg");
+}
+#container {
+  margin-left: 500px;
+}
+
+img.bg-img {
+  width: 100%;
 }
 </style>
