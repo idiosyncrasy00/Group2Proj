@@ -24,4 +24,20 @@ services:
       - 3306:3306
     volumes:
       - ./db/init.sql:/db/init.sql
+      - mysql_db:/var/lib/mysql
     command: --init-file /db/init.sql
+  adminer:
+    image: adminer
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+      ADMINER_DESIGN: hydra
+    ports:
+      - 8081:8080
+    volumes:
+      - ./adminer/login-password-less.php:/var/www/html/plugins-enabled/login-password-less.php
+      - ./adminer/adminer.css:/tmp/adminer.css
+    command: >
+      sh -c "cp -f /tmp/adminer.css /var/www/html/adminer.css &&
+            php -S [::]:8080 -t /var/www/html"
+volumes:
+  mysql_db:
