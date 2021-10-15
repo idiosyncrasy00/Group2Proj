@@ -38,17 +38,17 @@ const routes = [
     component: () => import('../views/Rooms/createRoom.vue'),
   },
   {
-    path: '/FindRoom',
+    path: '/findRoom',
     name: 'FindRoom',
     component: () => import('../views/Rooms/FindRoom.vue'),
   },
   {
-    path: '/FindRoom/:id',
+    path: '/findRoom/:id',
     name: 'roomdetails',
     component: () => import('../views/Rooms/RoomDetails.vue'),
   },
   {
-    path: '/FindRoom/:city',
+    path: '/findRoom/:city',
     name: 'SearchResults',
     component: () => import('../views/SearchResults.vue'),
   },
@@ -59,4 +59,4 @@ const router = createRouter({
   routes
 });
 
-export default router
+export default router;

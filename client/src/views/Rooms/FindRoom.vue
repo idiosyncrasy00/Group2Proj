@@ -67,13 +67,10 @@
 
 <script>
 import Nav from "@/components/Nav.vue";
-//import Nav from "@/components/Nav.vue";
-// import Footer from "@/components/Footer.vue";
-// import Container from "@/components/Container.vue";
-// import signin from "@/views/Signin.vue";
+import DataServices from "@/services/DataServices.js";
 
 export default {
-  name: "findRoom",
+  name: "FindRoom",
   data() {
     return {
       searchValues: {
@@ -140,8 +137,18 @@ export default {
       ],
     };
   },
+  created() {
+    DataServices.getRoom()
+      .then((res) => {
+        this.event = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
   components: {
     Nav,
+    DataServices,
   },
   method: {
     searchResult() {

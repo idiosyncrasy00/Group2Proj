@@ -1,10 +1,9 @@
 <template>
   <!-- <slot :getUsername="signinValues.username" /> -->
   <div id="signin">
-    <!-- <Nav /> -->
     <h1>This is the signin page</h1>
-    <main class="form-signin">
-      <!-- <form action="/"> -->
+    <form @submit.prevent="handleSubmit">
+      <main class="form-signin">
         <img
           class="mb-4"
           src="../assets/logo.png"
@@ -39,22 +38,17 @@
             <input type="checkbox" value="remember-me" /> Remember me
           </label>
         </div>
-        <button
-          class="w-100 btn btn-lg btn-primary"
-          type="submit"
-          @submit="getSignIndata"
-        >
-          Sign in
-        </button>
+        <button class="w-100 btn btn-lg btn-primary">Sign in</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-      <!-- </form> -->
-    </main>
+        <!-- </form> -->
+      </main>
+    </form>
   </div>
 </template>
 
 <script>
 //import Nav from "../components/Nav.vue";
-
+import axios from "axios";
 export default {
   name: "signin",
   data() {
@@ -67,15 +61,21 @@ export default {
     };
   },
   methods: {
-    getSignIndata() {
-      // this.SigninData = JSON.stringify(this.signinValues);
-      // alert(this.SigninData);
-      //alert(this.SigninData);
-      alert(this.username + " " + this.password);
+    async handleSubmit(e) {
+      e.preventDefault();
+      const data = {
+        username: this.signinValues.username,
+        password: this.signinValues.password,
+      };
+      const res = await axios.post("signin", data);
+      console.log(res);
+      localStorage.setItem("token", res.data.token);
+      this.$router.push("/");
     },
   },
   components: {
     //Nav,
+    axios,
   },
 };
 </script>
