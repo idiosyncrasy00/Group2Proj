@@ -1,0 +1,5 @@
+# Use node:14 instead of node:14-alpine to avoid error
+FROM node:14
+RUN mkdir -p /client
+WORKDIR /client
+EXPOSE 8080
