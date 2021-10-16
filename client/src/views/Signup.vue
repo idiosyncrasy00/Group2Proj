@@ -102,7 +102,7 @@ export default {
       //   .catch((err) => {
       //     console.log(err);
       //   });
-      const res = await axios.post("signup", data);
+      const res = await axios.post("api/users/register", data);
       console.log(res);
       this.$router.push("/signin");
     },
