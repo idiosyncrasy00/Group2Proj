@@ -1,0 +1,47 @@
+version: "3.7"
+services:
+  client:
+    build:
+      context: client
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - 8080:8080
+    volumes:
+      - ./client:/client
+    command: sh -c "npm run serve"
+  server:
+    build:
+      context: server
+      dockerfile: ./Dockerfile.dev
+    environment:
+      NODE_ENV: "test"
+    ports:
+      - 3000:3000
+    volumes:
+      - ./server:/server
+    command: sh -c "npm start"
+  db:
+    image: mysql:5
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: root
+    ports:
+      - 3306:3306
+    volumes:
+      - ./deploy/db/init.sql:/tmp/init.sql
+      - mysql_db:/var/lib/mysql
+    command: --init-file /tmp/init.sql
+  adminer:
+    image: adminer
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    ports:
+      - 8081:8080
+    volumes:
+      - ./deploy/adminer/login-password-less.php:/var/www/html/plugins-enabled/login-password-less.php
+      - ./deploy/adminer/adminer.css:/tmp/adminer.css
+    command: >
+      sh -c "cp -f /tmp/adminer.css /var/www/html/adminer.css &&
+            php -S [::]:8080 -t /var/www/html"
+volumes:
+  mysql_db:

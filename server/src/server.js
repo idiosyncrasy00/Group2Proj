@@ -20,6 +20,11 @@ console.log('Setting routes ...');
 app.use('/api/users', require('./routes/user.route'));
 app.use('/api/room', require('./routes/room.route'));
 
+// Server test
+app.get('/', (req, res) => {
+    res.send('Hello there!');
+});
+
 // Start project
 console.log('Starting project ...');
 const port = process.env.PORT || 3000;
