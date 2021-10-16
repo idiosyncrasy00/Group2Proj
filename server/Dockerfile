@@ -1,5 +1,8 @@
 FROM node:14-alpine
 
+# netcat package for wait-for (for alpine image)
+RUN apk update && apk add netcat-openbsd
+
 # Add user
 RUN addgroup app && adduser -S -G app app
 

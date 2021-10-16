@@ -4,7 +4,7 @@ services:
     build:
       context: client
     ports:
-      - 4100:4100
+      - 8080:80
   server:
     build:
       context: server
@@ -23,5 +23,20 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./db/init.sql:/db/init.sql
-    command: --init-file /db/init.sql
+      - ./deploy/db/init.sql:/tmp/init.sql
+      - mysql_db:/var/lib/mysql
+    command: --init-file /tmp/init.sql
+  adminer:
+    image: adminer
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    ports:
+      - 8081:8080
+    volumes:
+      - ./deploy/adminer/login-password-less.php:/var/www/html/plugins-enabled/login-password-less.php
+      - ./deploy/adminer/adminer.css:/tmp/adminer.css
+    command: >
+      sh -c "cp -f /tmp/adminer.css /var/www/html/adminer.css &&
+            php -S [::]:8080 -t /var/www/html"
+volumes:
+  mysql_db:
