@@ -1,16 +1,20 @@
 <template>
-  <router-view />
-  <!-- <button @click="registered">Click me</button>
-  <button type="button" class="btn btn-warning">Warning</button> -->
+  <Nav :user="user" />
+  <div>
+    <router-view :user="user" />
+  </div>
 </template>
 
 <script>
+import Nav from "@/components/Nav.vue";
+//import Signin from "@/views/Signin.vue";
 export default {
   name: "App",
+  props: ["user"],
   data() {
     return {
-      username: "123",
-      password: "456",
+      // username: "123",
+      // password: "456",
     };
   },
   methods: {
@@ -19,6 +23,8 @@ export default {
     },
   },
   components: {
+    Nav,
+    //Signin,
     //Home,
     //signup,
     // Header,

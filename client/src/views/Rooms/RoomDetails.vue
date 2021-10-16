@@ -7,12 +7,25 @@
 
 <script>
 //import { defineComponent } from '@vue/composition-api'
+import DataServices from "@/services/DataServices.js";
 export default {
   data() {
     return {
       id: this.$route.params.id,
     };
   },
+  components: {
+    DataServices,
+  },
+  created() {
+    DataServices.getRoomInfo(this.id)
+    .then(res => {
+      this.event = res.data;
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
 };
 </script>
 

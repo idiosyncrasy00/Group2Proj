@@ -13,6 +13,7 @@
 
 <script>
 import Nav from "../../components/Nav.vue";
+//import DataServices from "../services/DataServices";
 
 export default {
   name: "createRoom",
@@ -22,15 +23,30 @@ export default {
       meetings: [],
     };
   },
+  create: function () {
+    this.addMeeting();
+  },
   methods: {
     addMeeting() {
       this.meetings.push(this.meeting);
       this.meeting = "";
     },
-    deleteMeeting(meeting) {
-      this.meetings = this.meetings.filter((item) => {
-        return meeting != item;
-      });
+
+    // DataServices.create(data).then(res => {
+    //   this.meeting = res.data.meeting;
+    //   console.log(res.data);
+    // }).catch(e => {
+    //   console.log(e);
+    // }),
+
+    // deleteMeeting(meeting) {
+    //   this.meetings = this.meetings.filter((item) => {
+    //     return meeting != item;
+    //   });
+    // },
+    newRoom() {
+      this.submitted = false;
+      this.rooms = {};
     },
   },
   components: {

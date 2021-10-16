@@ -5,33 +5,41 @@
 
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="/">Home</a>
+        <a href="/" class="nav-link">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/about">About</a>
+        <a href="/about" class="nav-link">About</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/createRoom">Create a conference room</a>
+        <a href="/createRoom" class="nav-link">Create a conference room</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/findRoom">Find a conference room</a>
+        <a href="/findRoom" class="nav-link">Find a conference room</a>
       </li>
     </ul>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="/signin">Sign in</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/signup">Sign up</a>
-        </li>
-      </ul>
+    <ul class="navbar-nav" v-if="!user">
+      <li class="nav-item">
+        <a href="/signin" class="nav-link">Sign in</a>
+      </li>
+      <li class="nav-item">
+        <a href="/signup" class="nav-link">Sign up</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav" v-if="user">
+      <li class="nav-item">
+        <!-- <a href="/signin" class="nav-link">Sign in</a> -->
+        <p>Hello lol</p>
+      </li>
+      <li class="nav-item">
+        <!-- <a href="/signup" class="nav-link">Sign up</a> -->
+        <a href="/signin" class="nav-link" @click="handleClick">Log out</a>
+      </li>
+    </ul>
   </nav>
 </template>
 
 <script>
-//import signin from "@/views/Signin.vue";
-// import Footer from "@/components/Footer.vue";
-// import Container from "@/components/Container.vue";
+import axios from "axios";
 export default {
   name: "Header",
   data() {
@@ -43,11 +51,24 @@ export default {
   components: {
     //signin,
   },
+  methods: {
+    handleClick() {
+      localStorage.removeItem("token");
+      this.$router.push("/");
+    },
+  },
+  async created() {
+    const response = await axios.get("user", {
+      header: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+    console.log(response);
+  },
 };
 </script>
 
 <style scoped>
-
 .navbar-brand {
   padding-left: 50px;
   position: relative;
