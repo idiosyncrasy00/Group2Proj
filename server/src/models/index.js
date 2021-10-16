@@ -27,6 +27,8 @@ Object.keys(db).forEach(modelName => {
     if (db[modelName].associate) {
         db[modelName].associate(db);
     }
+    // Development only
+    db[modelName].sync({ force: true });
 });
 
 db.sequelize = sequelize;

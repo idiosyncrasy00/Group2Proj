@@ -8,7 +8,7 @@ const db = require('./models');
 // Middlewares
 console.log('Setting middlewares ...');
 app.use(cors({
-    origin: "http://localhost:4100"
+    origin: "http://localhost:8080"
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
