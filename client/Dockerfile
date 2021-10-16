@@ -1,22 +1,19 @@
-FROM node:14-alpine
 
-# Add user
+# Stage 1: Build client app
+
+FROM node:14-alpine AS builder
 RUN addgroup app && adduser -S -G app app
-
 RUN mkdir -p /client && chown -R app /client
-
 USER app
-
 WORKDIR /client
-
-# Install dependencies
 COPY package*.json ./
 RUN npm install
-
 COPY . .
+RUN npm run build
 
-ARG PORT=4100
-ENV PORT ${PORT}
-EXPOSE ${PORT}
+# Stage 2: Build Nginx server
 
-CMD ["npm", "run", "serve"]
+FROM nginx:alpine
+RUN mkdir -p /app
+COPY --from=builder /client/dist /app
+COPY nginx.conf /etc/nginx/nginx.conf

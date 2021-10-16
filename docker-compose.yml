@@ -4,7 +4,7 @@ services:
     build:
       context: client
     ports:
-      - 4100:4100
+      - 8080:80
   server:
     build:
       context: server
