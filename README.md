@@ -1,21 +1,21 @@
 # Group 2 Project
 
-## Project architecture:
+## Project framework:
 
-#### Building:
+### Building:
 Bootstrap + VueJS + Axios + ExpressJS + NodeJS + Sequelize + MySQL
 
-#### Deployment:
+### Deployment:
 Nginx + Docker
 
 ## Deployment:
 
-#### Production deploy
+### Production deploy
 ```
 docker-compose up -d
 ```
 
-#### Development deploy
+### Development deploy
 ```
 docker-compose -f docker-compose-dev.yml up -d
 ```
@@ -27,19 +27,20 @@ cd ../server/
 npm install
 ```
 
-#### Non-docker development deploy
-Client:
+### Non-docker development deploy
+**Client:**
 ```
 cd client/
 npm run serve
 ```
-Server:
+**Server:**
 ```
 cd server/
 npm start
 ```
-Database: 
+**Database:**
 - Run a SQL server in port 3306 (default port)
+*Note: There's no Adminer database manager for Non-docker deploy. You need to install it yourself.*
 
 ## Default url and port:
 URL | Application

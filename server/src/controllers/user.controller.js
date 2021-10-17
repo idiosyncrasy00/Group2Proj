@@ -1,8 +1,8 @@
 const User = require('../models').User;
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const validation = require('../validations/user.validation');
 const _ = require('lodash');
+const token_util = require('../utilities/token');
 
 
 const registerUser = async (req, res) => {
@@ -16,14 +16,13 @@ const registerUser = async (req, res) => {
             const salt = await bcrypt.genSalt(10);
             user.password = await bcrypt.hash(user.password, salt);
             await user.save();
-            // Generate token in a different place
-            // Modify isAdmin later
+            // Generate token
             const userToken = {
                 user: user.id,
-                isAdmin: true
+                isAdmin: true  // WORK: Modify isAdmin later
             };
-            const token = jwt.sign(userToken, 'privateKey');
-            res.header('x-auth-token', token).send(_.pick(user, ['id', 'username']));
+            const token = token_util.generateToken(userToken);
+            res.header('accessToken', token).send(_.pick(user, ['id', 'username']));
             console.log('User created!');
         }
     } catch(error) {
@@ -42,14 +41,17 @@ const loginUser = async (req, res) => {
         if (!(await bcrypt.compare(req.body.password, user.password))) {
             res.status(400).send({ error: 'Invalid username or password' });
         } else {
-            // Store privateKey as environment variables
-            const token = jwt.sign({ user: user.id }, 'privateKey');
-            res.header('x-auth-token', token).send();
+            const userToken = {
+                user: user.id,
+                isAdmin: true  // WORK: Modify isAdmin later
+            };
+            const token = token_util.generateToken(userToken);
+            res.header('accessToken', token).send(_.pick(user, ['id', 'username']));
         }
     }
 };
 
-const checkUser = async (req, res) => {
+const getInfo = async (req, res) => {
     let user = await User.findOne({
         where: {
             username: req.user.user
@@ -58,4 +60,4 @@ const checkUser = async (req, res) => {
     res.send(_.pick(user, ['name', 'username']));
 };
 
-module.exports = { registerUser, loginUser, checkUser };
+module.exports = { registerUser, loginUser, getInfo };
