@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Nav />
     <input type="text" v-model="meeting" />
     <button type="button" @click="addMeeting">Add</button>
     <div v-for="meeting in meetings" :key="meeting">
