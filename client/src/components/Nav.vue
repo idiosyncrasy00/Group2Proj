@@ -128,4 +128,7 @@ export default {
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #778899;}
+nav{
+	z-index: 1;
+}
 </style>
