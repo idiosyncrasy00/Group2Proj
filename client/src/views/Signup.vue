@@ -94,16 +94,16 @@ export default {
         password: this.signupValues.password,
       };
       //console.log(data);
-      // axios
-      //   .post("http://localhost:8000/signup", data)
-      //   .then((res) => {
-      //     console.log(res);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
-      const res = await axios.post("api/users/register", data);
-      console.log(res);
+      axios
+        .post("api/users/register", data)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      //const res = await axios.post("api/users/register", data);
+      //console.log(res);
       this.$router.push("/signin");
     },
   },

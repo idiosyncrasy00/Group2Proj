@@ -67,10 +67,19 @@ export default {
         username: this.signinValues.username,
         password: this.signinValues.password,
       };
-      const res = await axios.post("signin", data);
-      console.log(res);
-      localStorage.setItem("token", res.data.token);
-      this.$router.push("/");
+      //const res = await axios.post("login", data);
+      axios
+        .post("api/users/login", data)
+        .then((res) => {
+          console.log(res);
+          localStorage.setItem("accessToken", res.data.token);
+          console.log(res.data.token);
+          this.$router.push("/");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      //console.log(res);
     },
   },
   components: {
