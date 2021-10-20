@@ -5,6 +5,8 @@ client/public/bootstrap
 /dist
 *package-lock.json
 
+.temp/
+
 # local env files
 .env.local
 .env.*.local
