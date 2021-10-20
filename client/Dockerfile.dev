@@ -1,5 +1,5 @@
-# Use node:14 instead of node:14-alpine to avoid error
-FROM node:14
+FROM node:14-alpine
 RUN mkdir -p /client
 WORKDIR /client
+COPY . .
 EXPOSE 8080
