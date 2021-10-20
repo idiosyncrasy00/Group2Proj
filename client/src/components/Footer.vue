@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id = "footer">
   <address>This project belongs to group 2</address>
   </div>
 </template>
@@ -12,7 +12,8 @@ export default {
 
 <style>
 #footer {
-  background-color: turquoise;
-  text-align: center;
+  background-color: #DEB887;
+  text-align: left;
+  height: 50px;
 }
 </style>

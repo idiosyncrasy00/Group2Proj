@@ -3,10 +3,11 @@
     {{ user.username }}
   </Container> -->
   <div>
-    <img src="../../assets/phonghop.jpg" class="bg-img" alt="" />
+    <img id = "font-image" src="../../assets/phonghop.jpg" class="bg-img" alt="" />
     <div id="container">
       <div
         class="col-lg-6 order-1 order-lg-2 hero-img aos-init aos-animate"
+
         data-aos="zoom-in"
         data-aos-delay="100"
       >
@@ -27,12 +28,7 @@
                 <h1>Title</h1>
               </div>
               <div class="card-text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                dui turpis Lorem ipsum dolor sit amet, consectetur adipiscing
-                elit. Morbi dui turpis Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit. Morbi dui turpis Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Morbi dui turpis Lorem ipsum dolor
-                sit amet, consectetur adipiscing elit. Morbi dui turpis
+                Info
               </div>
             </div>
           </div>
@@ -44,12 +40,7 @@
                 <h1>Title</h1>
               </div>
               <div class="card-text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                dui turpis Lorem ipsum dolor sit amet, consectetur adipiscing
-                elit. Morbi dui turpis Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit. Morbi dui turpis Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Morbi dui turpis Lorem ipsum dolor
-                sit amet, consectetur adipiscing elit. Morbi dui turpis
+                Info
               </div>
             </div>
           </div>
@@ -64,12 +55,7 @@
                 <h1>Title</h1>
               </div>
               <div class="card-text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                dui turpis Lorem ipsum dolor sit amet, consectetur adipiscing
-                elit. Morbi dui turpis Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit. Morbi dui turpis Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Morbi dui turpis Lorem ipsum dolor
-                sit amet, consectetur adipiscing elit. Morbi dui turpis
+				Info
               </div>
             </div>
           </div>
@@ -81,12 +67,7 @@
                 <h1>Title</h1>
               </div>
               <div class="card-text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                dui turpis Lorem ipsum dolor sit amet, consectetur adipiscing
-                elit. Morbi dui turpis Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit. Morbi dui turpis Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Morbi dui turpis Lorem ipsum dolor
-                sit amet, consectetur adipiscing elit. Morbi dui turpis
+				Info
               </div>
             </div>
           </div>
@@ -110,8 +91,7 @@ export default {
     };
   },
   components: {
-    Footer,
-    //HelloWorld,
+    Footer
   },
   method: {},
 };
@@ -127,5 +107,15 @@ export default {
 
 img.bg-img {
   width: 100%;
+}
+#font-image {
+	height: 600px;
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;	
+}
+.logo{
+		
 }
 </style>

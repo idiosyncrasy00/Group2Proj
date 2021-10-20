@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" >
     <div class="row gutters">
       <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
         <div class="card h-100">
@@ -157,7 +157,7 @@
 </template>
 
 <script>
-//import signin from "../views/Signin.vue";
+
 export default {
   name: "user",
   methods: {
@@ -165,5 +165,8 @@ export default {
       //alert(41234324213);
     },
   },
+  component:{
+
+  }
 };
 </script>

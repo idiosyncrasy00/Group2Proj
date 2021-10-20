@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Nav />
     <div id="search-sec">
       <div class="container">
         <form action="#" method="post" novalidate="novalidate"></form>
