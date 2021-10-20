@@ -1,49 +1,54 @@
 <template>
   <div>
     <form @submit="handleSubmit" action="/signup">
-      <h1>This is the signup page</h1>
-      <main class="form-signup">
+      <!--<h1>This is the signup page</h1>-->
+      <main class="form-signup card" style="background-color:var(--bg-color)">
         <!-- <form action="/"> -->
         <img
-          class="mb-4"
+          class="mb-4 img-fluid rounded mx-auto d-block"
           src="../assets/logo.png"
           alt=""
-          width="80"
-          height="90"
+          width="120"
+          height="120"
         />
-        <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
-
-        <div class="form-floating">
+        <h1 class="h3 mb-3 fw-normal mx-auto">Please sign up here</h1>
+				
+				<div class="row">
+        <div class="form-floating col-sm-6">
           <input
             type="firstname"
             class="form-control"
+						placeholder="Your first name"
             v-model="signupValues.firstname"
           />
           <label for="floatingInput">First name</label>
         </div>
-
-        <div class="form-floating">
+				
+        <div class="form-floating col-sm-6">
           <input
             type="lastname"
             class="form-control"
+						placeholder="Your last name"
             v-model="signupValues.lastname"
           />
           <label for="floatingInput">Last name</label>
         </div>
-
+				</div>
         <div class="form-floating">
           <input
             type="email"
             class="form-control"
+						placeholder="Your email"
             v-model="signupValues.email"
           />
-          <label for="floatingInput">email</label>
+          <label for="floatingInput">Email</label>
         </div>
 
         <div class="form-floating">
           <input
             type="username"
             class="form-control"
+						placeholder="Your Username"
             v-model="signupValues.username"
           />
           <label for="floatingInput">Username</label>
@@ -59,7 +64,6 @@
           <label for="floatingPassword">Password</label>
         </div>
         <button class="w-100 btn btn-lg btn-primary">Sign up</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
         <!-- </form> -->
       </main>
     </form>
@@ -94,16 +98,16 @@ export default {
         password: this.signupValues.password,
       };
       //console.log(data);
-      // axios
-      //   .post("http://localhost:8000/signup", data)
-      //   .then((res) => {
-      //     console.log(res);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
-      const res = await axios.post("api/users/register", data);
-      console.log(res);
+      axios
+        .post("api/users/register", data)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      //const res = await axios.post("api/users/register", data);
+      //console.log(res);
       this.$router.push("/signin");
     },
   },
@@ -142,7 +146,7 @@ body {
 .form-signup {
   width: 100%;
   max-width: 1000px;
-  padding: 100px;
+  padding: 70px;
   margin: auto;
 }
 
@@ -155,14 +159,14 @@ body {
 }
 
 .form-signup input[type="firstname"] {
-  width: 50%;
+  width: 80%;
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
 .form-signup input[type="lastname"] {
-  width: 50%;
+  width: 80%;
   margin-bottom: 1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
@@ -184,5 +188,8 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+.form-floating{
+	margin-bottom: 10px;
 }
 </style>

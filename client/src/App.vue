@@ -7,6 +7,7 @@
 
 <script>
 import Nav from "@/components/Nav.vue";
+
 //import Signin from "@/views/Signin.vue";
 export default {
   name: "App",
@@ -33,4 +34,6 @@ export default {
 };
 </script>
 
-
+<style>
+  @import './assets/variables.css';
+</style>

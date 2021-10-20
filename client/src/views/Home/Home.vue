@@ -2,12 +2,17 @@
   <!-- <Container v-if="user">
     {{ user.username }}
   </Container> -->
+
   <div>
-    <img id = "font-image" src="../../assets/phonghop.jpg" class="bg-img" alt="" />
+    <img
+      id="font-image"
+      src="../../assets/phonghop.jpg"
+      class="bg-img"
+      alt=""
+    />
     <div id="container">
       <div
         class="col-lg-6 order-1 order-lg-2 hero-img aos-init aos-animate"
-
         data-aos="zoom-in"
         data-aos-delay="100"
       >
@@ -27,9 +32,7 @@
               <div class="card-title">
                 <h1>Title</h1>
               </div>
-              <div class="card-text">
-                Info
-              </div>
+              <div class="card-text">Info</div>
             </div>
           </div>
         </div>
@@ -39,9 +42,7 @@
               <div class="card-title">
                 <h1>Title</h1>
               </div>
-              <div class="card-text">
-                Info
-              </div>
+              <div class="card-text">Info</div>
             </div>
           </div>
         </div>
@@ -54,9 +55,7 @@
               <div class="card-title">
                 <h1>Title</h1>
               </div>
-              <div class="card-text">
-				Info
-              </div>
+              <div class="card-text">Info</div>
             </div>
           </div>
         </div>
@@ -66,21 +65,21 @@
               <div class="card-title">
                 <h1>Title</h1>
               </div>
-              <div class="card-text">
-				Info
-              </div>
+              <div class="card-text">Info</div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <h3 v-if="user">Hi {{ user.username }}</h3>
+  <h3 v-if="!user">Not logged in!</h3>
   <Footer />
 </template>
 
 <script>
 import Footer from "@/components/Footer.vue";
-//import axios from "axios";
+import axios from "axios";
 
 export default {
   name: "home",
@@ -91,9 +90,18 @@ export default {
     };
   },
   components: {
-    Footer
+    Footer,
+    axios,
   },
   method: {},
+  // async created() {
+  //   const response = await axios.get("user", {
+  //     headers: {
+  //       Authorization: "Bearer " + localStorage.setItem("accessToken"),
+  //     },
+  //   });
+  //   console.log(response);
+  // },
 };
 </script>
 
@@ -109,13 +117,12 @@ img.bg-img {
   width: 100%;
 }
 #font-image {
-	height: 600px;
-	width: 1000px;
-	margin-left: auto;
-	margin-right: auto;
-	display: block;	
+  height: 600px;
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
-.logo{
-		
+.logo {
 }
 </style>

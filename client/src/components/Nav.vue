@@ -1,25 +1,34 @@
 <template>
   <!--https://bootstrapmade.com/demo/Arsha/-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-between" >
+  <nav
+    class="
+      navbar navbar-expand-lg navbar-dark
+      bg-dark
+      d-flex
+      justify-content-between
+    "
+  >
     <a class="navbar-brand" href="/">Main site</a>
 
     <ul class="navbar-nav" display:auto>
-		<li class="nav-item">
-			<a href="/" class="nav-link">Home</a>
-		</li>
-		<li class="nav-item">
-			<a href="/about" class="nav-link">About</a>
-		</li>
-		<li class="dropdown">
-		<button class="dropbtn nav-link">Room detail</button>
-			<div class="dropdown-content">
-				<a href="/FindRoom" class="nav-link">Find a conference room</a>
-				<a href="/createRoom" class="nav-link" >Create a conference room</a>
-				<a href="/createRoom" class="nav-link" v-if="!user">Manage your conference rooms</a>
-			</div>
-		</li>
+      <li class="nav-item">
+        <a href="/" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item">
+        <a href="/about" class="nav-link">About</a>
+      </li>
+      <li class="dropdown">
+        <button class="dropbtn nav-link">Room detail</button>
+        <div class="dropdown-content">
+          <a href="/FindRoom" class="nav-link">Find a conference room</a>
+          <a href="/createRoom" class="nav-link">Create a conference room</a>
+          <a href="/createRoom" class="nav-link" v-if="user"
+            >Manage your conference rooms</a
+          >
+        </div>
+      </li>
     </ul>
-    <ul class="navbar-nav" margin-left=20px v-if="user">
+    <ul class="navbar-nav" margin-left="20px" v-if="!user">
       <li class="nav-item">
         <a href="/signin" class="nav-link">Sign in</a>
       </li>
@@ -27,15 +36,20 @@
         <a href="/signup" class="nav-link">Sign up</a>
       </li>
     </ul>
-    <ul class="navbar-nav" margin-left=20px v-if="!user">
-		<li class="nav-item">
+    <ul class="navbar-nav" margin-left="20px" v-if="user">
+      <li class="nav-item">
+        <!-- <a href="/signup" class="nav-link">Sign up</a> -->
+        <a href="/User" class="nav-link" @click="handleClick"
+          >Hello {{ user.username }}</a
+        >
+      </li>
+      <li class="nav-item">
         <!-- <a href="/signup" class="nav-link">Sign up</a> -->
         <a href="/User" class="nav-link" @click="handleClick">My Account</a>
-		</li>
+      </li>
       <li class="nav-item">
         <a href="/signin" class="nav-link" @click="handleClick">Log out</a>
       </li>
-		
     </ul>
   </nav>
 </template>
@@ -46,8 +60,9 @@ export default {
   name: "Header",
   data() {
     return {
-		//signin.islogged
-		islogged: "0",
+      //signin.islogged
+      //islogged: "0",
+      user: null,
     };
   },
   components: {
@@ -55,16 +70,12 @@ export default {
   },
   methods: {
     handleClick() {
-      localStorage.removeItem("token");
+      localStorage.removeItem("accessToken");
       this.$router.push("/");
     },
   },
   async created() {
-    const response = await axios.get("user", {
-      header: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
+    const response = await axios.get("user");
     console.log(response);
   },
 };
@@ -77,7 +88,7 @@ export default {
 }
 
 .navbar-nav {
-  margin-top:10px;
+  margin-top: 10px;
   padding-left: 150px;
   margin-left: 50px;
   position: relative;
@@ -121,14 +132,20 @@ export default {
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #2F4F4F;}
+.dropdown-content a:hover {
+  background-color: #2f4f4f;
+}
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #778899;}
-nav{
-	z-index: 1;
+.dropdown:hover .dropbtn {
+  background-color: #778899;
+}
+nav {
+  z-index: 1;
 }
 </style>

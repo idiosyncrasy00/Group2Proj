@@ -6,28 +6,36 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="row">
-              <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+				<div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                <input
+					type="text"
+					class="form-control search-slt border-2 bg-light"
+					placeholder="Enter Room ID"
+					v-model="searchValues.roomid"
+                />
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                <input
+					type="text"
+					class="form-control search-slt border-2 bg-light"
+					placeholder="Enter Host Name"
+					v-model="searchValues.roomname"
+                />
+				</div>
+              <div class="col-lg-2 col-md-2 col-sm-8 p-0">
                 <input
                   type="text"
-                  class="form-control search-slt"
+                  class="form-control search-slt border-2 bg-light"
                   placeholder="Enter City"
                   v-model="searchValues.city"
                 />
               </div>
-              <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+              <div class="col-lg-2 col-md-2 col-sm-8 p-0">
                 <input
                   type="text"
-                  class="form-control search-slt"
+                  class="form-control search-slt border-2 bg-light"
                   placeholder="Enter District"
                   v-model="searchValues.district"
-                />
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                <input
-                  type="text"
-                  class="form-control search-slt"
-                  placeholder="Enter Room name"
-                  v-model="searchValues.roomname"
                 />
               </div>
             </div>
@@ -39,25 +47,28 @@
       <div class="row">
         <h1>Search Result:</h1>
         <div
-          class="col-sm-3"
-          v-for="room in searchRooms.slice(0, 9)"
+          class="col-sm-5"
+          v-for="room in searchRooms.slice(0, 10)"
           :key="room.ID"
         >
-          <router-link :to="{ name: 'roomdetails', params: { id: room.id } }">
-            <div class="card">
-              <div class="card-body" style="width: 18rem">
-                <div class="card-title">
-                  <h1>{{ room.id }}</h1>
+            <div class="card" style="width: 24rem; height: 8rem;">
+              <div class="card-body bg-gradient row" style=" background-color: var(--bg-color);">
+				<router-link :to="{ name: 'roomdetails', params: { id: room.id } }">
+                <h5 class="card-title">
+                  {{ room.id }}
+                </h5>
+				</router-link>
+                <div class="card-text col-sm-6">
+					<h6>Name: {{ room.name }}      </h6>
+					<h6> City: {{ room.city }}	  </h6>
                 </div>
-                <div class="card-text">
-                  <h6>Name: {{ room.name }}</h6>
-                  <h6>City: {{ room.city }}</h6>
-                  <h6>District: {{ room.district }}</h6>
-                  <h6>Status: {{ room.status }}</h6>
-                </div>
+				<div class="card-text col-sm-6">
+					<h6>Status: {{ room.status }}</h6>
+					<h6>District: {{ room.district }}</h6>
+				</div>
               </div>
             </div>
-          </router-link>
+          
         </div>
       </div>
     </section>
@@ -73,14 +84,15 @@ export default {
   data() {
     return {
       searchValues: {
+		roomname: "",
         city: "",
         district: "",
-        roomname: "",
+        roomid: "",
         status: "",
       },
       rooms: [
-        { id: 1, name: "a", city: "c", district: "abcc", status: "active" },
-        { id: 2, name: "b", city: "rwe", district: "abccc", status: "active" },
+        { id: 123456, name: "Nguyen Van A", city: "ha noi", district: "Ha Noi", status: "active" },
+        { id: 234456, name: "Tran Nguyen Thi Ngoc Quynh", city: "New Yord", district: "Ca Mau", status: "active" },
         {
           id: 3,
           name: "c",
@@ -159,9 +171,10 @@ export default {
     searchRooms() {
       return this.rooms.filter(
         (rooms) =>
-          rooms.city.startsWith(this.searchValues.city) &&
-          rooms.district.startsWith(this.searchValues.district) &&
-          rooms.name.startsWith(this.searchValues.roomname)
+			rooms.city.startsWith(this.searchValues.city) &&
+			rooms.district.startsWith(this.searchValues.district) &&
+			rooms.name.startsWith(this.searchValues.roomname)&&
+			rooms.id.toString().startsWith(this.searchValues.roomid)
       );
     },
   },
@@ -175,4 +188,5 @@ export default {
 #search-res {
   padding: 50px 100px 100px 200px;
 }
+.tab { margin-right: 5px; }
 </style>

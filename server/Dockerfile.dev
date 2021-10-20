@@ -1,6 +1,7 @@
 FROM node:14-alpine
 RUN mkdir -p /server
 WORKDIR /server
+COPY . .
 ARG PORT=3000
 ENV PORT ${PORT}
 EXPOSE ${PORT}
