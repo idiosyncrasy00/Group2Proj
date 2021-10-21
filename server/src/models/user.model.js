@@ -1,4 +1,3 @@
-const moment = require('moment');
 
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('User', {
@@ -16,13 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         dob: {
             type: DataTypes.DATEONLY,
-            allowNull: false,
-            get() {
-                return moment(this.getDataValue('dob')).format('DD/MM/YYYY');  // API format
-            },
-            set(value) {
-                this.setDataValue('dob', moment(value, 'DD/MM/YYYY').format('YYYY-MM-DD'));  // Database format
-            }
+            allowNull: false
         },
         phone: {
             type: DataTypes.STRING(15)
