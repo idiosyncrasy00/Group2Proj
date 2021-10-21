@@ -11,7 +11,7 @@
           height="100"
         />
         <h4 class="mb-3 fw-normal" style="padding-bottom:10px;">Sign in to Meeting Manage</h4>
-				<div class="card" style="background-color:var(--bg-color)">
+				<div class="card border-top border-5 rounded" style="background-color:var(--bg-color)">
 					<div class="form-floating" style="padding-top:8px;padding-left:8px;padding-right:8px;padding-bottom:5px;">
 						<input
 							type="username"
@@ -48,7 +48,6 @@
 </template>
 
 <script>
-//import Nav from "../components/Nav.vue";
 import axios from "axios";
 export default {
   name: "signin",
@@ -84,7 +83,6 @@ export default {
     },
   },
   components: {
-    //Nav,
     axios,
   },
 };

@@ -45,30 +45,31 @@
     </div>
     <section id="search-res">
       <div class="row">
-        <h1>Search Result:</h1>
+        <h3>Search Result:</h3>
         <div
-          class="col-sm-5"
+          class="col-sm-6"
           v-for="room in searchRooms.slice(0, 10)"
           :key="room.ID"
         >
-            <div class="card" style="width: 24rem; height: 8rem;">
-              <div class="card-body bg-gradient row" style=" background-color: var(--bg-color);">
-				<router-link :to="{ name: 'roomdetails', params: { id: room.id } }">
-                <h5 class="card-title">
-                  {{ room.id }}
-                </h5>
-				</router-link>
-                <div class="card-text col-sm-6">
-					<h6>Name: {{ room.name }}      </h6>
-					<h6> City: {{ room.city }}	  </h6>
-                </div>
-				<div class="card-text col-sm-6">
-					<h6>Status: {{ room.status }}</h6>
-					<h6>District: {{ room.district }}</h6>
-				</div>
-              </div>
-            </div>
-          
+					<div class="card mb-2 mt-1" style="width:85%; height:95%">
+						<div class="card-body bg-gradient row" style=" background-color: var(--bg-color);">
+			<router-link :to="{ name: 'roomdetails', params: { id: room.id } }">
+							<h5 class="card-title text-center">
+								{{ room.id }}
+							</h5>
+			</router-link>
+							<div class="row">
+								<div class="card-text col-sm-7">
+									<h6>Name: {{ room.name }}      </h6>
+									<h6> City: {{ room.city }}	  </h6>
+								</div>
+								<div class="card-text col-sm-5">
+									<h6>Status: {{ room.status }}</h6>
+									<h6>District: {{ room.district }}</h6>
+								</div>
+							</div>
+						</div>
+					</div>	
         </div>
       </div>
     </section>

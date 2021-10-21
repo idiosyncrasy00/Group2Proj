@@ -8,7 +8,6 @@
 <script>
 import Nav from "@/components/Nav.vue";
 
-//import Signin from "@/views/Signin.vue";
 export default {
   name: "App",
   props: ["user"],
@@ -25,11 +24,6 @@ export default {
   },
   components: {
     Nav,
-    //Signin,
-    //Home,
-    //signup,
-    // Header,
-    // Footer,
   },
 };
 </script>
