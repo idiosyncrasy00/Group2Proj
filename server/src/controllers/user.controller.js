@@ -17,10 +17,7 @@ const registerUser = async (req, res) => {
             user.password = await bcrypt.hash(user.password, salt);
             await user.save();
             // Generate token
-            const userToken = {
-                user: user.id,
-                isAdmin: true  // WORK: Modify isAdmin later
-            };
+            const userToken = getUserToken(user);
             const token = token_util.generateToken(userToken);
             res.header('accessToken', token).send(_.pick(user, ['id', 'username']));
             console.log('User created!');
@@ -41,23 +38,42 @@ const loginUser = async (req, res) => {
         if (!(await bcrypt.compare(req.body.password, user.password))) {
             res.status(400).send({ error: 'Invalid username or password' });
         } else {
-            const userToken = {
-                user: user.id,
-                isAdmin: true  // WORK: Modify isAdmin later
-            };
+            const userToken = getUserToken(user);
             const token = token_util.generateToken(userToken);
             res.header('accessToken', token).send(_.pick(user, ['id', 'username']));
         }
     }
 };
 
+const getSelfInfo = async (req, res) => {
+    let user = await User.findOne({
+        where: {
+            id: req.user.id
+        }
+    });
+    res.send(_.pick(user, ['id', 'firstname', 'lastname', 'email', 'dob', 'phone', 'address', 'username']));
+};
+
 const getInfo = async (req, res) => {
     let user = await User.findOne({
         where: {
-            username: req.user.user
+            id: req.params.id
         }
     });
-    res.send(_.pick(user, ['name', 'username']));
+    if (!user) {
+        res.status(404).send({ error: "User not found" });
+    } else {
+        res.send(_.pick(user, ['id', 'firstname', 'lastname', 'email', 'dob', 'phone', 'address', 'username']));
+    }
 };
 
-module.exports = { registerUser, loginUser, getInfo };
+
+// Generate user token from user object
+function getUserToken(user) {
+    return {
+        id: user.id,
+        isAdmin: true   // Modify later
+    };
+}
+
+module.exports = { registerUser, loginUser, getSelfInfo, getInfo };
