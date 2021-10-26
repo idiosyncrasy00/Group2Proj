@@ -9,7 +9,7 @@ const registerUser = async (req, res) => {
     try {
         const { error, value } = await validation.registerSchema.validate(req.body);
         if (error) {
-            res.status(400).send({ error: error.message });
+            res.status(403).send({ error: error.message });
         } else {
             // Save user
             const user = await User.build(value);
@@ -67,6 +67,49 @@ const getInfo = async (req, res) => {
     }
 };
 
+const editUser = async (req, res) => {
+    const { error, value } = await validation.editSchema.validate(req.body);
+    if (error) {
+        res.status(403).send({ error: error.message });
+    } else {
+        try {
+            await User.update(value, {
+                where: {
+                    id: req.user.id
+                }
+            });
+            res.send();
+        } catch(error) {
+            res.status(400).send({ error: error.message });
+        }
+    }
+};
+
+const changePassword = async (req, res) => {
+    const { error, value } = await validation.changepwSchema.validate(req.body);
+    if (error) {
+        res.status(403).send({ error: error.message });
+    } else {
+        let user = await User.findOne({
+            where: {
+                id: req.user.id
+            }
+        });
+        if (!(await bcrypt.compare(req.body.oldpassword, user.password))) {
+            res.status(401).send({ error: "Password invalid" });
+        } else {
+            const salt = await bcrypt.genSalt(10);
+            let new_password = await bcrypt.hash(req.body.password, salt);
+            await User.update({ password: new_password }, {
+                where: {
+                    id: req.user.id
+                }
+            });
+            res.send();
+        }
+    }
+};
+
 
 // Generate user token from user object
 function getUserToken(user) {
@@ -76,4 +119,4 @@ function getUserToken(user) {
     };
 }
 
-module.exports = { registerUser, loginUser, getSelfInfo, getInfo };
+module.exports = { registerUser, loginUser, getSelfInfo, getInfo, editUser, changePassword };

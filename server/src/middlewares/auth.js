@@ -7,7 +7,7 @@ module.exports = function (req, res, next) {
     else {
         const decoded = token_util.verifyToken(token);
         if (!decoded) {
-            res.status(400).send('Invalid token');
+            res.status(401).send('Invalid token');
         } else {
             req.user = decoded;
             next();
