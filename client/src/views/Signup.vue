@@ -34,6 +34,22 @@
             <label for="floatingInput">Last name</label>
           </div>
         </div>
+        </div>
+
+        <div class="form-floating">
+          <label for="floatingInput">Date of birth</label>
+          <div class="col-sm-5">
+            <input
+              type="date"
+              ref="date"
+              class="form-control"
+              id="inputDate"
+              v-model="signupValues.dob"
+              v-on:keyup.enter="this.$refs.duration.focus()"
+            />
+          </div>
+        </div>
+
         <div class="form-floating">
           <input
             type="email"
@@ -46,6 +62,26 @@
 
         <div class="form-floating">
           <input
+            type="phonenumber"
+            class="form-control"
+            placeholder="Your Phone number"
+            v-model="signupValues.phone"
+          />
+          <label for="floatingInput">Phone</label>
+        </div>
+
+        <div class="form-floating">
+          <input
+            type="address"
+            class="form-control"
+            placeholder="Your address"
+            v-model="signupValues.address"
+          />
+          <label for="floatingInput">Address</label>
+        </div>
+
+        <div class="form-floating">
+          <input
             type="username"
             class="form-control"
             placeholder="Your Username"
@@ -53,6 +89,7 @@
           />
           <label for="floatingInput">Username</label>
         </div>
+
         <div class="form-floating">
           <input
             type="password"
@@ -84,6 +121,9 @@ export default {
         firstname: "",
         lastname: "",
         email: "",
+        dob: "",
+        phone: "",
+        address: "",
         username: "",
         password: "",
       },
@@ -97,6 +137,9 @@ export default {
         firstname: this.signupValues.firstname,
         lastname: this.signupValues.lastname,
         email: this.signupValues.email,
+        dob: this.signupValues.dob,
+        phone: this.signupValues.phone,
+        address: this.signupValues.address,
         username: this.signupValues.username,
         password: this.signupValues.password,
       };
@@ -116,15 +159,13 @@ export default {
           this.errMsg = err.response.data;
           console.log(err);
         });
-      //const res = await axios.post("api/users/register", data);
-      //console.log(res);
-      this.$router.push("/signin");
       // try {
       //   apiService.register(data);
       //   this.$router.push("/");
       // } catch (e) {
       //   console.log(e);
       // }
+      //this.$router.push("/");
     },
   },
   components: {

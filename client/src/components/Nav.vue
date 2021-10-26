@@ -9,14 +9,12 @@
     "
   >
     <a class="navbar-brand" href="/">
-			<img src="../assets/logo.png" style="height:2rem">
-		</a>
+      <img src="../assets/logo.png" style="height: 2rem" />
+    </a>
 
     <ul class="navbar-nav" display:auto>
       <li class="nav-item">
-        <a href="/" class="nav-link">
-					Home
-				</a>
+        <a href="/" class="nav-link"> Home </a>
       </li>
       <li class="nav-item">
         <a href="/about" class="nav-link">About</a>
@@ -43,14 +41,11 @@
     <ul class="navbar-nav" margin-left="20px" v-if="user">
       <li class="nav-item">
         <!-- <a href="/signup" class="nav-link">Sign up</a> -->
-        <a href="/User" class="nav-link" @click="handleClick"
-          >Hello {{ user.username }}</a
-        >
+        <a href="/User" class="nav-link">Hello {{ user.username }}</a>
       </li>
-      <li class="nav-item">
-        <!-- <a href="/signup" class="nav-link">Sign up</a> -->
-        <a href="/User" class="nav-link" @click="handleClick">My Account</a>
-      </li>
+      <!-- <li class="nav-item">
+        <a href="/User" class="nav-link">My Account</a>
+      </li> -->
       <li class="nav-item">
         <a href="/signin" class="nav-link" @click="handleClick">Log out</a>
       </li>
@@ -71,16 +66,29 @@ export default {
   },
   components: {
     //signin,
+    axios,
   },
   methods: {
     handleClick() {
-      localStorage.removeItem("accessToken");
-      this.$router.push("/");
+      localStorage.removeItem("accesstoken");
+      this.user = null;
+      this.$router.push("/signin");
     },
   },
   async created() {
-    const response = await axios.get("user");
-    console.log(response);
+    axios
+      .get("api/users/me", {
+        headers: {
+          accesstoken: localStorage.getItem("accesstoken"),
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        this.user = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>

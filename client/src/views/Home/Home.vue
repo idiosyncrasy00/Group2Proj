@@ -72,8 +72,8 @@
       </div>
     </div>
   </div>
-  <h3 v-if="user">Hi {{ user.username }}</h3>
-  <h3 v-if="!user">Not logged in!</h3>
+  <h3 v-if="currentUser">Hi {{ currentUser.id }}</h3>
+  <h3 v-else>Not logged in!</h3>
   <Footer />
 </template>
 
@@ -86,7 +86,8 @@ export default {
   //props: ["user"],
   data() {
     return {
-      user: null,
+      currentUser: null,
+      //navKey: 0,
     };
   },
   components: {
@@ -94,14 +95,22 @@ export default {
     axios,
   },
   method: {},
-  // async created() {
-  //   const response = await axios.get("user", {
-  //     headers: {
-  //       Authorization: "Bearer " + localStorage.setItem("accessToken"),
-  //     },
-  //   });
-  //   console.log(response);
-  // },
+  async created() {
+    console.log(localStorage.getItem("accesstoken")); //null
+    axios
+      .get("api/users/auth", {
+        headers: {
+          accesstoken: localStorage.getItem("accesstoken"),
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        this.currentUser = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
 </script>
 

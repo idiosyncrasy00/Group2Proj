@@ -15,6 +15,7 @@ export default {
     return {
       // username: "123",
       // password: "456",
+      //navKey: 0,
     };
   },
   methods: {
@@ -29,5 +30,5 @@ export default {
 </script>
 
 <style>
-  @import './assets/variables.css';
+@import "./assets/variables.css";
 </style>

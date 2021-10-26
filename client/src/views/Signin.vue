@@ -1,9 +1,9 @@
 <template>
   <!-- <slot :getUsername="signinValues.username" /> -->
-	<div id="signin">
+  <div id="signin">
     <form @submit.prevent="handleSubmit" class="mask">
-      <main class="form-signin" >
-				<img
+      <main class="form-signin">
+        <img
           class="mb-4 img-fluid rounded mx-auto d-block"
           src="../assets/logo.png"
           alt=""
@@ -107,7 +107,6 @@ export default {
           this.errorMsg = "Invalid username or password";
           console.log(err);
         });
-      //console.log(res);
     },
   },
   components: {
