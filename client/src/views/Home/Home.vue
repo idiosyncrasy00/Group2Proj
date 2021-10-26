@@ -2,12 +2,17 @@
   <!-- <Container v-if="user">
     {{ user.username }}
   </Container> -->
+
   <div>
-    <img id = "font-image" src="../../assets/phonghop.jpg" class="bg-img" alt="" />
+    <img
+      id="font-image"
+      src="../../assets/phonghop.jpg"
+      class="bg-img"
+      alt=""
+    />
     <div id="container">
       <div
         class="col-lg-6 order-1 order-lg-2 hero-img aos-init aos-animate"
-
         data-aos="zoom-in"
         data-aos-delay="100"
       >
@@ -27,9 +32,7 @@
               <div class="card-title">
                 <h1>Title</h1>
               </div>
-              <div class="card-text">
-                Info
-              </div>
+              <div class="card-text">Info</div>
             </div>
           </div>
         </div>
@@ -39,9 +42,7 @@
               <div class="card-title">
                 <h1>Title</h1>
               </div>
-              <div class="card-text">
-                Info
-              </div>
+              <div class="card-text">Info</div>
             </div>
           </div>
         </div>
@@ -54,9 +55,7 @@
               <div class="card-title">
                 <h1>Title</h1>
               </div>
-              <div class="card-text">
-				Info
-              </div>
+              <div class="card-text">Info</div>
             </div>
           </div>
         </div>
@@ -66,34 +65,52 @@
               <div class="card-title">
                 <h1>Title</h1>
               </div>
-              <div class="card-text">
-				Info
-              </div>
+              <div class="card-text">Info</div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <h3 v-if="currentUser">Hi {{ currentUser.id }}</h3>
+  <h3 v-else>Not logged in!</h3>
   <Footer />
 </template>
 
 <script>
 import Footer from "@/components/Footer.vue";
-//import axios from "axios";
+import axios from "axios";
 
 export default {
   name: "home",
   //props: ["user"],
   data() {
     return {
-      user: null,
+      currentUser: null,
+      //navKey: 0,
     };
   },
   components: {
-    Footer
+    Footer,
+    axios,
   },
   method: {},
+  async created() {
+    console.log(localStorage.getItem("accesstoken")); //null
+    axios
+      .get("api/users/auth", {
+        headers: {
+          accesstoken: localStorage.getItem("accesstoken"),
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        this.currentUser = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
 </script>
 
@@ -109,13 +126,12 @@ img.bg-img {
   width: 100%;
 }
 #font-image {
-	height: 600px;
-	width: 1000px;
-	margin-left: auto;
-	margin-right: auto;
-	display: block;	
+  height: 600px;
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
-.logo{
-		
+.logo {
 }
 </style>

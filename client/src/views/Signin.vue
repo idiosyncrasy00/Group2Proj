@@ -1,45 +1,67 @@
 <template>
   <!-- <slot :getUsername="signinValues.username" /> -->
   <div id="signin">
-    <h1>This is the signin page</h1>
-    <form @submit.prevent="handleSubmit">
+    <form @submit.prevent="handleSubmit" class="mask">
       <main class="form-signin">
         <img
-          class="mb-4"
+          class="mb-4 img-fluid rounded mx-auto d-block"
           src="../assets/logo.png"
           alt=""
-          width="72"
-          height="57"
+          width="100"
+          height="100"
         />
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <h4 class="mb-3 fw-normal" style="padding-bottom: 10px">
+          Sign in to Meeting Manage
+        </h4>
+        <div
+          class="card border-top border-5 rounded"
+          style="background-color: var(--bg-color)"
+        >
+          <div
+            class="form-floating"
+            style="
+              padding-top: 8px;
+              padding-left: 8px;
+              padding-right: 8px;
+              padding-bottom: 5px;
+            "
+          >
+            <input
+              type="username"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Username"
+              v-model="signinValues.username"
+            />
+            <label for="floatingInput">Username</label>
+          </div>
+          <div
+            class="form-floating"
+            style="padding-left: 8px; padding-right: 8px; padding-bottom: 5px"
+          >
+            <input
+              type="password"
+              class="form-control"
+              id="floatingPassword"
+              placeholder="Password"
+              v-model="signinValues.password"
+            />
+            <label for="floatingPassword">Password</label>
+          </div>
 
-        <div class="form-floating">
-          <input
-            type="username"
-            class="form-control"
-            id="floatingInput"
-            v-model="signinValues.username"
-          />
-          <label for="floatingInput">Username</label>
+          <div class="checkbox mb-3">
+            <label>
+              <input type="checkbox" value="remember-me" /> Remember me
+            </label>
+          </div>
+          <button
+            class="w-75 btn btn-primary mx-auto"
+            style="background-color: #38c75c; margin-bottom: 5px"
+          >
+            Sign in
+          </button>
         </div>
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control"
-            id="floatingPassword"
-            placeholder="Password"
-            v-model="signinValues.password"
-          />
-          <label for="floatingPassword">Password</label>
-        </div>
-
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me" /> Remember me
-          </label>
-        </div>
-        <button class="w-100 btn btn-lg btn-primary">Sign in</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+        <p class="mt-5 mb-2 text-muted">&copy; 2021–</p>
         <!-- </form> -->
       </main>
     </form>
@@ -47,7 +69,6 @@
 </template>
 
 <script>
-//import Nav from "../components/Nav.vue";
 import axios from "axios";
 export default {
   name: "signin",
@@ -67,14 +88,23 @@ export default {
         username: this.signinValues.username,
         password: this.signinValues.password,
       };
-      const res = await axios.post("signin", data);
-      console.log(res);
-      localStorage.setItem("token", res.data.token);
-      this.$router.push("/");
+      //const res = await axios.post("login", data);
+      axios
+        .post("api/users/login", data)
+        .then((res) => {
+          console.log(res);
+          localStorage.setItem("accesstoken", res.headers.accesstoken);
+          localStorage.setItem("getuserid", res.data);
+          //console.log(localStorage.getItem("accesstoken"));
+          console.log(res.headers.accesstoken);
+          this.$router.push("/");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   components: {
-    //Nav,
     axios,
   },
 };
