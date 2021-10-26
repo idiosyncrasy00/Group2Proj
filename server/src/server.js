@@ -9,7 +9,7 @@ const db = require('./models');
 console.log('Setting middlewares ...');
 app.use(cors({
     origin: "http://localhost:8080",
-    exposedHeaders: ['accessToken']
+    exposedHeaders: ['accesstoken']
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

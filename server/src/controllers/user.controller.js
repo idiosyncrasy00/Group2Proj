@@ -19,7 +19,7 @@ const registerUser = async (req, res) => {
             // Generate token
             const userToken = getUserToken(user);
             const token = token_util.generateToken(userToken);
-            res.header('accessToken', token).send(_.pick(user, ['id', 'username']));
+            res.header('accesstoken', token).send(_.pick(user, ['id', 'username']));
             console.log('User created!');
         }
     } catch(error) {
@@ -40,7 +40,7 @@ const loginUser = async (req, res) => {
         } else {
             const userToken = getUserToken(user);
             const token = token_util.generateToken(userToken);
-            res.header('accessToken', token).send(_.pick(user, ['id', 'username']));
+            res.header('accesstoken', token).send(_.pick(user, ['id', 'username']));
         }
     }
 };
