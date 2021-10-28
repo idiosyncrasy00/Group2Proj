@@ -1,8 +1,8 @@
 const User = require('../models').User;
-const bcrypt = require('bcrypt');
 const validation = require('../validations/user.validation');
 const _ = require('lodash');
 const token_util = require('../utilities/token');
+const encrypt_util = require('../utilities/encrypt');
 
 
 const registerUser = async (req, res) => {
@@ -13,8 +13,7 @@ const registerUser = async (req, res) => {
         } else {
             // Save user
             const user = await User.build(value);
-            const salt = await bcrypt.genSalt(10);
-            user.password = await bcrypt.hash(user.password, salt);
+            user.password = await encrypt_util.generate(user.password);
             await user.save();
             // Generate token
             const userToken = getUserToken(user);
@@ -35,7 +34,7 @@ const loginUser = async (req, res) => {
     });
     if (!user) res.status(400).send({ error: 'Invalid username or password' });
     else {
-        if (!(await bcrypt.compare(req.body.password, user.password))) {
+        if (!(await encrypt_util.verify(req.body.password, user.password))) {
             res.status(400).send({ error: 'Invalid username or password' });
         } else {
             const userToken = getUserToken(user);
@@ -95,11 +94,10 @@ const changePassword = async (req, res) => {
                 id: req.user.id
             }
         });
-        if (!(await bcrypt.compare(req.body.oldpassword, user.password))) {
+        if (!(await encrypt_util.verify(req.body.oldpassword, user.password))) {
             res.status(401).send({ error: "Password invalid" });
         } else {
-            const salt = await bcrypt.genSalt(10);
-            let new_password = await bcrypt.hash(req.body.password, salt);
+            let new_password = await encrypt_util.generate(req.body.password);
             await User.update({ password: new_password }, {
                 where: {
                     id: req.user.id
