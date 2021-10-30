@@ -16,7 +16,7 @@ services:
       context: server
       dockerfile: ./Dockerfile.dev
     environment:
-      NODE_ENV: "test"
+      NODE_ENV: "development"
     ports:
       - 3000:3000
     volumes:
