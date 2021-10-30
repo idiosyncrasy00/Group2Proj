@@ -34,7 +34,6 @@
             <label for="floatingInput">Last name</label>
           </div>
         </div>
-        </div>
 
         <div class="form-floating">
           <label for="floatingInput">Date of birth</label>
@@ -151,21 +150,16 @@ export default {
           console.log(res);
           if (res.status < 400) {
             localStorage.setItem("accesstoken", res.headers.accesstoken);
+            //this.$store.dispatch("user", res.data.username);
             alert(res.headers.accesstoken);
-            this.$router.push("/");
+            window.location.href = "/";
+            //this.$router.push("/");
           }
         })
         .catch((err) => {
           this.errMsg = err.response.data;
           console.log(err);
         });
-      // try {
-      //   apiService.register(data);
-      //   this.$router.push("/");
-      // } catch (e) {
-      //   console.log(e);
-      // }
-      //this.$router.push("/");
     },
   },
   components: {

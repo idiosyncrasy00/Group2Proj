@@ -5,9 +5,13 @@
 </template>
 
 <script>
+//import Nav from "@/components/Nav.vue";
+
 export default {
   name: "about",
-  components: {},
+  components: {
+    //Nav,
+  },
 };
 </script>
 

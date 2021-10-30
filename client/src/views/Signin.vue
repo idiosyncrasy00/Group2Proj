@@ -62,7 +62,7 @@
           </button>
         </div>
         <!--Do some css with err msg-->
-        <p>{{ errorMsg }}</p>
+        <p>{{ errMsg }}</p>
         <p class="mt-5 mb-2 text-muted">&copy; 2021–</p>
         <!-- </form> -->
       </main>
@@ -72,7 +72,7 @@
 
 <script>
 import axios from "axios";
-//import apiService from "@/services/apiServices";
+//import dataService from "@/services/DataServices";
 
 export default {
   name: "signin",
@@ -82,7 +82,7 @@ export default {
         username: "",
         password: "",
       },
-      errorMsg: "",
+      errMsg: null,
     };
   },
   methods: {
@@ -91,7 +91,6 @@ export default {
         username: this.signinValues.username,
         password: this.signinValues.password,
       };
-      //const res = await axios.post("login", data);
       //AXIOS
       axios
         .post("api/users/login", data)
@@ -99,12 +98,13 @@ export default {
           console.log(res);
           if (res.status != 400) {
             localStorage.setItem("accesstoken", res.headers.accesstoken);
-            console.log(res.headers.accesstoken);
-            this.$router.push("/");
+            //alert(res.headers.accesstoken);
+            window.location.href = "/";
           }
         })
         .catch((err) => {
-          this.errorMsg = "Invalid username or password";
+          this.errMsg = "Invalid username or password";
+          //console.log(this.errMsg);
           console.log(err);
         });
     },

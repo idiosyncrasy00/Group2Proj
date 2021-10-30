@@ -7,7 +7,7 @@ const getRoomList = async (req, res) => {
             attributes: ['roomName', 'status']
         });
         res.send(rooms);
-    } catch(error) {
+    } catch (error) {
         res.status(400).send({ error: error.message });
     }
 };
@@ -20,7 +20,7 @@ const createRoom = async (req, res) => {
             let room = await Room.create(req.body);
             res.send(_.pick(room, ['roomName', 'status']));
             console.log('Room created');
-        } catch(error) {
+        } catch (error) {
             res.status(400).send({ error: error.message });
         }
     }

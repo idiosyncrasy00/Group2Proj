@@ -1,4 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
+//import axios from 'axios';
+
+//const getToken = localStorage.getItem('accesstoken');
 
 const routes = [
   {
@@ -15,21 +18,57 @@ const routes = [
     path: '/signin',
     name: 'signin',
     component: () => import('../views/Signin.vue'),
+    // component: () => {
+    //   if (getToken == null) {
+    //     return import('../views/Signin.vue');
+    //   } else {
+    //     return import('../views/Home/Home.vue');
+    //   }
+    // },
+    meta: {
+      // requiresVisitor: true,
+      // layout: 'landing',
+      //conditionalRoute: false,
+      //requiresAuth: false,
+      //requiresAuth: false,
+      requiresAuth: 0,
+    }
   },
   {
     path: '/signup',
     name: 'signup',
     component: () => import('../views/Signup.vue'),
+    // component: () => {
+    //   if (getToken == null) {
+    //     return import('../views/Signup.vue');
+    //   } else {
+    //     return import('../views/Home/Home.vue');
+    //   }
+    // },
+    meta: {
+      // requiresVisitor: true,
+      // layout: 'landing',
+      //conditionalRoute: false,
+      //requiresAuth: false,
+      //requiresAuth: false,
+      requiresAuth: 0,
+    }
   },
   {
     path: '/user',
     name: 'user',
     component: () => import('../views/Users/User.vue'),
+    meta: {
+      requiresAuth: 1,
+    }
   },
   {
     path: '/createRoom',
     name: 'createRoom',
     component: () => import('../views/Rooms/createRoom.vue'),
+    meta: {
+      requiresAuth: 1,
+    }
   },
   {
     path: '/findRoom',
