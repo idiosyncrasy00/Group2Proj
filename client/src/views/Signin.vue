@@ -19,6 +19,7 @@
 							id="floatingInput"
 							placeholder="Username"
 							v-model="signinValues.username"
+							v-on:keyup.enter="this.$refs.password.focus()"
 						/>
 						<label for="floatingInput">Username</label>
 					</div>
@@ -28,14 +29,16 @@
 							class="form-control"
 							id="floatingPassword"
 							placeholder="Password"
+							ref="password"
 							v-model="signinValues.password"
+							v-on:keyup.enter="this.$refs.remember.focus()"
 						/>
 						<label for="floatingPassword">Password</label>
 					</div>
 				
 					<div class="checkbox mb-3">
 						<label>
-							<input type="checkbox" value="remember-me" /> Remember me
+							<input type="checkbox" value="remember-me" ref="remember"/> Remember me
 						</label>
 					</div>
 					<button class="w-75 btn btn-primary mx-auto" style="background-color:#38C75C;margin-bottom:5px;">Sign in</button>
