@@ -27,9 +27,24 @@ Object.keys(db).forEach(modelName => {
     if (db[modelName].associate) {
         db[modelName].associate(db);
     }
-    // Development only
-    // db[modelName].sync({ force: true });
 });
+
+// Development only
+(async () => {
+    if (env === 'development') {
+        // Object.keys(db).forEach(modelName => db[modelName].sync({ force: true }));  // Rebuild model
+        try {
+            const initdb_env = process.env.INIT_DB || "yes";
+            if (initdb_env === "yes") {
+                let seeder = require('../seeders/seeder.dev');
+                await seeder.down(db);
+                await seeder.up(db);
+            }
+        } catch(error) {
+            console.log(error.message);
+        }
+    }
+})();
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

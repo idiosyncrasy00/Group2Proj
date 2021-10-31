@@ -1,8 +1,5 @@
 <template>
-  <!-- <Container v-if="user">
-    {{ user.username }}
-  </Container> -->
-
+  <!-- <Nav /> -->
   <div>
     <img
       id="font-image"
@@ -72,35 +69,43 @@
       </div>
     </div>
   </div>
-  <h3 v-if="user">Hi {{ user.username }}</h3>
-  <h3 v-if="!user">Not logged in!</h3>
   <Footer />
 </template>
 
 <script>
 import Footer from "@/components/Footer.vue";
 import axios from "axios";
+import Nav from "@/components/Nav.vue";
+//import dataService from "@/services/DataServices";
 
 export default {
   name: "home",
   //props: ["user"],
   data() {
     return {
-      user: null,
+      currentUser: null,
+      //navKey: 0,
     };
   },
   components: {
     Footer,
     axios,
+    Nav,
   },
   method: {},
   // async created() {
-  //   const response = await axios.get("user", {
-  //     headers: {
-  //       Authorization: "Bearer " + localStorage.setItem("accessToken"),
-  //     },
-  //   });
-  //   console.log(response);
+  //   axios
+  //     .get("api/users/auth", {
+  //       headers: {
+  //         accesstoken: dataService.getToken,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
   // },
 };
 </script>

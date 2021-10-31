@@ -8,7 +8,8 @@ const db = require('./models');
 // Middlewares
 console.log('Setting middlewares ...');
 app.use(cors({
-    origin: "http://localhost:8080"
+    origin: "http://localhost:8080",
+    exposedHeaders: ['accesstoken']
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,7 +19,7 @@ db.sequelize.sync();
 // Routes
 console.log('Setting routes ...');
 app.use('/api/users', require('./routes/user.route'));
-app.use('/api/room', require('./routes/room.route'));
+app.use('/api/rooms', require('./routes/room.route'));
 
 // Server test
 app.get('/', (req, res) => {

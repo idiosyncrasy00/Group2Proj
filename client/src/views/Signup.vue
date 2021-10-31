@@ -2,7 +2,7 @@
   <div>
     <form @submit="handleSubmit" action="/signup">
       <!--<h1>This is the signup page</h1>-->
-      <main class="form-signup card" style="background-color:var(--bg-color)">
+      <main class="form-signup card" style="background-color: var(--bg-color)">
         <!-- <form action="/"> -->
         <img
           class="mb-4 img-fluid rounded mx-auto d-block"
@@ -12,33 +12,48 @@
           height="120"
         />
         <h1 class="h3 mb-3 fw-normal mx-auto">Please sign up here</h1>
-				
-				<div class="row">
-        <div class="form-floating col-sm-6">
-          <input
-            type="firstname"
-            class="form-control"
-						placeholder="Your first name"
-            v-model="signupValues.firstname"
-          />
-          <label for="floatingInput">First name</label>
+
+        <div class="row">
+          <div class="form-floating col-sm-6">
+            <input
+              type="firstname"
+              class="form-control"
+              placeholder="Your first name"
+              v-model="signupValues.firstname"
+            />
+            <label for="floatingInput">First name</label>
+          </div>
+
+          <div class="form-floating col-sm-6">
+            <input
+              type="lastname"
+              class="form-control"
+              placeholder="Your last name"
+              v-model="signupValues.lastname"
+            />
+            <label for="floatingInput">Last name</label>
+          </div>
         </div>
-				
-        <div class="form-floating col-sm-6">
-          <input
-            type="lastname"
-            class="form-control"
-						placeholder="Your last name"
-            v-model="signupValues.lastname"
-          />
-          <label for="floatingInput">Last name</label>
+
+        <div class="form-floating">
+          <label for="floatingInput">Date of birth</label>
+          <div class="col-sm-5">
+            <input
+              type="date"
+              ref="date"
+              class="form-control"
+              id="inputDate"
+              v-model="signupValues.dob"
+              v-on:keyup.enter="this.$refs.duration.focus()"
+            />
+          </div>
         </div>
-				</div>
+
         <div class="form-floating">
           <input
             type="email"
             class="form-control"
-						placeholder="Your email"
+            placeholder="Your email"
             v-model="signupValues.email"
           />
           <label for="floatingInput">Email</label>
@@ -46,13 +61,34 @@
 
         <div class="form-floating">
           <input
+            type="phonenumber"
+            class="form-control"
+            placeholder="Your Phone number"
+            v-model="signupValues.phone"
+          />
+          <label for="floatingInput">Phone</label>
+        </div>
+
+        <div class="form-floating">
+          <input
+            type="address"
+            class="form-control"
+            placeholder="Your address"
+            v-model="signupValues.address"
+          />
+          <label for="floatingInput">Address</label>
+        </div>
+
+        <div class="form-floating">
+          <input
             type="username"
             class="form-control"
-						placeholder="Your Username"
+            placeholder="Your Username"
             v-model="signupValues.username"
           />
           <label for="floatingInput">Username</label>
         </div>
+
         <div class="form-floating">
           <input
             type="password"
@@ -67,12 +103,15 @@
         <!-- </form> -->
       </main>
     </form>
+    <p>{{ errMsg }}</p>
   </div>
 </template>
 
 <script>
 import Nav from "../components/Nav.vue";
 import axios from "axios";
+//import apiService from "@/services/apiServices";
+
 export default {
   name: "signup",
   data() {
@@ -81,10 +120,13 @@ export default {
         firstname: "",
         lastname: "",
         email: "",
+        dob: "",
+        phone: "",
+        address: "",
         username: "",
         password: "",
       },
-      SignUpData: "",
+      errMsg: "",
     };
   },
   methods: {
@@ -94,26 +136,34 @@ export default {
         firstname: this.signupValues.firstname,
         lastname: this.signupValues.lastname,
         email: this.signupValues.email,
+        dob: this.signupValues.dob,
+        phone: this.signupValues.phone,
+        address: this.signupValues.address,
         username: this.signupValues.username,
         password: this.signupValues.password,
       };
       //console.log(data);
+      //AXIOS
       axios
         .post("api/users/register", data)
         .then((res) => {
           console.log(res);
+          if (res.status < 400) {
+            localStorage.setItem("accesstoken", res.headers.accesstoken);
+            //this.$store.dispatch("user", res.data.username);
+            alert(res.headers.accesstoken);
+            window.location.href = "/";
+            //this.$router.push("/");
+          }
         })
         .catch((err) => {
+          this.errMsg = err.response.data;
           console.log(err);
         });
-      //const res = await axios.post("api/users/register", data);
-      //console.log(res);
-      this.$router.push("/signin");
     },
   },
   components: {
     Nav,
-    axios,
   },
 };
 </script>
@@ -189,7 +239,7 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-.form-floating{
-	margin-bottom: 10px;
+.form-floating {
+  margin-bottom: 10px;
 }
 </style>

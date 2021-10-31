@@ -9,48 +9,49 @@
     "
   >
     <a class="navbar-brand" href="/">
-			<img src="../assets/logo.png" style="height:2rem">
-		</a>
+      <img src="../assets/logo.png" style="height: 2rem" />
+    </a>
 
     <ul class="navbar-nav" display:auto>
       <li class="nav-item">
-        <a href="/" class="nav-link">
-					Home
-				</a>
+        <router-link to="/" class="nav-link"> Home </router-link>
       </li>
       <li class="nav-item">
-        <a href="/about" class="nav-link">About</a>
+        <router-link to="/about" class="nav-link">About</router-link>
       </li>
       <li class="dropdown nav-item">
         <button class="dropbtn nav-link">Room detail</button>
         <div class="dropdown-content">
-          <a href="/FindRoom" class="nav-link">Find a conference room</a>
-          <a href="/createRoom" class="nav-link">Create a conference room</a>
-          <a href="/createRoom" class="nav-link" v-if="user"
-            >Manage your conference rooms</a
+          <router-link to="/FindRoom" class="nav-link"
+            >Find a conference room</router-link
+          >
+          <router-link to="/createRoom" class="nav-link"
+            >Create a conference room</router-link
+          >
+          <router-link to="/createRoom" class="nav-link" v-if="user"
+            >Manage your conference rooms</router-link
           >
         </div>
       </li>
     </ul>
     <ul class="navbar-nav" margin-left="20px" v-if="!user">
       <li class="nav-item">
-        <a href="/signin" class="nav-link">Sign in</a>
+        <router-link to="/signin" class="nav-link">Sign in</router-link>
       </li>
       <li class="nav-item">
-        <a href="/signup" class="nav-link">Sign up</a>
+        <router-link to="/signup" class="nav-link">Sign up</router-link>
       </li>
     </ul>
     <ul class="navbar-nav" margin-left="20px" v-if="user">
       <li class="nav-item">
         <!-- <a href="/signup" class="nav-link">Sign up</a> -->
-        <a href="/User" class="nav-link" @click="handleClick"
-          >Hello {{ user.username }}</a
+        <router-link to="/User" class="nav-link"
+          >Hello {{ user.username }}</router-link
         >
       </li>
-      <li class="nav-item">
-        <!-- <a href="/signup" class="nav-link">Sign up</a> -->
-        <a href="/User" class="nav-link" @click="handleClick">My Account</a>
-      </li>
+      <!-- <li class="nav-item">
+        <a href="/User" class="nav-link">My Account</a>
+      </li> -->
       <li class="nav-item">
         <a href="/signin" class="nav-link" @click="handleClick">Log out</a>
       </li>
@@ -60,27 +61,44 @@
 
 <script>
 import axios from "axios";
+
 export default {
   name: "Header",
   data() {
     return {
-      //signin.islogged
-      //islogged: "0",
       user: null,
     };
   },
   components: {
     //signin,
+    axios,
   },
   methods: {
     handleClick() {
-      localStorage.removeItem("accessToken");
-      this.$router.push("/");
+      localStorage.removeItem("accesstoken");
+      this.user = null;
+      this.$router.push("/signin");
     },
   },
+
   async created() {
-    const response = await axios.get("user");
-    console.log(response);
+    axios
+      .get("api/users/me", {
+        headers: {
+          accesstoken: localStorage.getItem("accesstoken"),
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        this.user = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  computed: {
+    //...mapGetters(["isloggedin"]),
   },
 };
 </script>

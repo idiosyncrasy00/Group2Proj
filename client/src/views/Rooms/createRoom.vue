@@ -1,13 +1,9 @@
 <template>
   <div>
-		<div class="row mt-2">
-			<div class="h3 mx-auto col-sm-4 text-center">Schedule your meeting</div>
-		</div>
-    <div
-      class="container form "
-      style="width: 600px;"
-      onsubmit="return false"
-    >
+    <div class="row mt-2">
+      <div class="h3 mx-auto col-sm-4 text-center">Schedule your meeting</div>
+    </div>
+    <div class="container form" style="width: 600px" onsubmit="return false">
       <div class="form-group row d-flex mt-3">
         <label for="inputRoomId" class="col-sm-3 col-form-label">Room ID</label>
         <div class="col-sm-8">
@@ -92,16 +88,16 @@
           />
         </div>
       </div>
-			<div class="row mt-2 pb-1">
-				<button
-					ref="submit"
-					type="submit"
-					class="btn btn-primary mx-auto col-sm-3"
-					@click="addMeeting"
-				>
-					Submit
-				</button>
-			</div>
+      <div class="row mt-2 pb-1">
+        <button
+          ref="submit"
+          type="submit"
+          class="btn btn-primary mx-auto col-sm-3"
+          @click="addMeeting"
+        >
+          Submit
+        </button>
+      </div>
     </div>
     <div
       class="position-absolute top-50 end-0 translate-middle-y"
@@ -195,8 +191,8 @@ export default {
   padding-bottom: 5px;
   padding-left: 10px;
 }
-.col-form-label{
-		font-family: "Lucida Console", "Courier New", monospace;
-		font-weight: bold;
+.col-form-label {
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-weight: bold;
 }
 </style>

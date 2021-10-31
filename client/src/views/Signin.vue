@@ -1,48 +1,68 @@
 <template>
   <!-- <slot :getUsername="signinValues.username" /> -->
-	<div id="signin">
+  <div id="signin">
     <form @submit.prevent="handleSubmit" class="mask">
-      <main class="form-signin" >
-				<img
+      <main class="form-signin">
+        <img
           class="mb-4 img-fluid rounded mx-auto d-block"
           src="../assets/logo.png"
           alt=""
           width="100"
           height="100"
         />
-        <h4 class="mb-3 fw-normal" style="padding-bottom:10px;">Sign in to Meeting Manage</h4>
-				<div class="card border-top border-5 rounded" style="background-color:var(--bg-color)">
-					<div class="form-floating" style="padding-top:8px;padding-left:8px;padding-right:8px;padding-bottom:5px;">
-						<input
-							type="username"
-							class="form-control"
-							id="floatingInput"
-							placeholder="Username"
-							v-model="signinValues.username"
-							v-on:keyup.enter="this.$refs.password.focus()"
-						/>
-						<label for="floatingInput">Username</label>
-					</div>
-					<div class="form-floating" style="padding-left:8px;padding-right:8px;padding-bottom:5px;">
-						<input
-							type="password"
-							class="form-control"
-							id="floatingPassword"
-							placeholder="Password"
-							ref="password"
-							v-model="signinValues.password"
-							v-on:keyup.enter="this.$refs.remember.focus()"
-						/>
-						<label for="floatingPassword">Password</label>
-					</div>
-				
-					<div class="checkbox mb-3">
-						<label>
-							<input type="checkbox" value="remember-me" ref="remember"/> Remember me
-						</label>
-					</div>
-					<button class="w-75 btn btn-primary mx-auto" style="background-color:#38C75C;margin-bottom:5px;">Sign in</button>
-				</div>
+        <h4 class="mb-3 fw-normal" style="padding-bottom: 10px">
+          Sign in to Meeting Manage
+        </h4>
+        <div
+          class="card border-top border-5 rounded"
+          style="background-color: var(--bg-color)"
+        >
+          <div
+            class="form-floating"
+            style="
+              padding-top: 8px;
+              padding-left: 8px;
+              padding-right: 8px;
+              padding-bottom: 5px;
+            "
+          >
+            <input
+              type="username"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Username"
+              v-model="signinValues.username"
+            />
+            <label for="floatingInput">Username</label>
+          </div>
+          <div
+            class="form-floating"
+            style="padding-left: 8px; padding-right: 8px; padding-bottom: 5px"
+          >
+            <input
+              type="password"
+              class="form-control"
+              id="floatingPassword"
+              placeholder="Password"
+              v-model="signinValues.password"
+            />
+            <label for="floatingPassword">Password</label>
+          </div>
+
+          <div class="checkbox mb-3">
+            <label>
+              <input type="checkbox" value="remember-me" /> Remember me
+            </label>
+          </div>
+          <button
+            class="w-75 btn btn-primary mx-auto"
+            style="background-color: #38c75c; margin-bottom: 5px"
+          >
+            Sign in
+          </button>
+        </div>
+        <!--Do some css with err msg-->
+        <p>{{ errMsg }}</p>
         <p class="mt-5 mb-2 text-muted">&copy; 2021–</p>
         <!-- </form> -->
       </main>
@@ -52,6 +72,8 @@
 
 <script>
 import axios from "axios";
+//import dataService from "@/services/DataServices";
+
 export default {
   name: "signin",
   data() {
@@ -60,29 +82,31 @@ export default {
         username: "",
         password: "",
       },
-      SigninData: "",
+      errMsg: null,
     };
   },
   methods: {
-    async handleSubmit(e) {
-      e.preventDefault();
+    async handleSubmit() {
       const data = {
         username: this.signinValues.username,
         password: this.signinValues.password,
       };
-      //const res = await axios.post("login", data);
+      //AXIOS
       axios
         .post("api/users/login", data)
         .then((res) => {
           console.log(res);
-          localStorage.setItem("accessToken", res.data.token);
-          console.log(res.data.token);
-          this.$router.push("/");
+          if (res.status != 400) {
+            localStorage.setItem("accesstoken", res.headers.accesstoken);
+            //alert(res.headers.accesstoken);
+            window.location.href = "/";
+          }
         })
         .catch((err) => {
+          this.errMsg = "Invalid username or password";
+          //console.log(this.errMsg);
           console.log(err);
         });
-      //console.log(res);
     },
   },
   components: {
