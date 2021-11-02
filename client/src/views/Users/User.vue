@@ -199,7 +199,6 @@
 
 <script>
 import axios from "axios";
-//import Nav from "@/components/Nav.vue";
 
 export default {
   name: "user",
@@ -215,13 +214,6 @@ export default {
       //   phoneNumber: "0983983983",
       //   userName: "nthhvjpro123",
       // },
-      updateFirstName: "",
-      updateLastName: "",
-      updateDob: "",
-      updateAddress: "",
-      updateUsername: "",
-      updatePhoneNumber: "",
-      updateEmail: "",
       userInfo: null,
       updateInfo: {
         firstName: "",
@@ -267,37 +259,9 @@ export default {
       if (this.updateUsername != null && this.updateUsername != "")
         this.updateInfo.userName = this.userName;
       //POST
-      axios
-        .put(
-          "api/users/edit",
-          {
-            firstname: this.updateFirstName,
-            lastname: this.updateLastName,
-            email: this.updateEmail,
-            dob: this.updateDob,
-            phone: this.updatePhoneNumber, // not required
-            address: this.updateAddress, // not required
-          },
-          {
-            headers: {
-              accesstoken: localStorage.getItem("accesstoken"),
-            },
-          }
-        )
-        .then((res) => {
-          console.log(res);
-          this.userInfo = res.data;
-          window.location.href = "/User";
-          //this.switchToUpdate();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     },
   },
-  component: {
-    //Nav,
-  },
+  component: {},
   async created() {
     axios
       .get("api/users/me", {
