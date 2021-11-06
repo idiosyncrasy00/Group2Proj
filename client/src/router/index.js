@@ -42,9 +42,9 @@ const routes = [
     component: () => import('../views/Rooms/RoomDetails.vue'),
   },
   {
-    path: '/findRoom/:city',
-    name: 'SearchResults',
-    component: () => import('../views/SearchResults.vue'),
+    path: '/manageRoom',
+    name: 'manageRoom',
+    component: () => import('../views/Rooms/manageRoom.vue'),
   },
 ]
 

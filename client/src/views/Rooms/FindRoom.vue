@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="search-sec">
+    <div id="search-sec mx-auto">
       <div class="container">
         <form action="#" method="post" novalidate="novalidate" @submit.enter.prevent=""	>
 					<div class = "row mb-5 mt-5">
@@ -128,7 +128,7 @@ export default {
   },
   computed: {
     searchRooms() {
-			if (this.searchValues.roomid.length < 6)
+			if (this.searchValues.roomid.length < 5)
 				return this.rooms.filter(
         (rooms) =>
 			rooms.id.toString().startsWith("#")

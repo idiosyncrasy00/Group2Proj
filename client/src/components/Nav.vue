@@ -24,7 +24,7 @@
         <div class="dropdown-content">
           <a href="/FindRoom" class="nav-link">Find a conference room</a>
           <a href="/createRoom" class="nav-link">Create a conference room</a>
-          <a href="/createRoom" class="nav-link" v-if="user"
+          <a href="/manageRoom" class="nav-link"
             >Manage your conference rooms</a
           >
         </div>
