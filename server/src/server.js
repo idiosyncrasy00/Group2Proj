@@ -20,6 +20,7 @@ db.sequelize.sync();
 console.log('Setting routes ...');
 app.use('/api/users', require('./routes/user.route'));
 app.use('/api/rooms', require('./routes/room.route'));
+app.use('/api/meetings', require('./routes/meeting.route'));
 
 // Server test
 app.get('/', (req, res) => {

@@ -38,5 +38,8 @@ module.exports = (sequelize, DataTypes) => {
                 is: /^\$2[ayb]\$.{56}$/i
             }
         }
+    }, {
+        charset: "utf8",
+        collate: "utf8_unicode_ci"
     });
 }
