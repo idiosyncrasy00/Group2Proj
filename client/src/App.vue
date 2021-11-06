@@ -1,18 +1,16 @@
 <template>
+  <Nav :user="user" />
   <div>
-    <Nav />
-    <router-view />
+    <router-view :user="user" />
   </div>
 </template>
 
 <script>
 import Nav from "@/components/Nav.vue";
-import axios from "axios";
-//import { mapGetters } from "vuex";
 
 export default {
   name: "App",
-  //props: ["user"],
+  props: ["user"],
   data() {
     return {
       // username: "123",
@@ -20,23 +18,13 @@ export default {
       //navKey: 0,
     };
   },
-  methods: {},
+  methods: {
+    registered() {
+      alert(this.username + " " + this.password);
+    },
+  },
   components: {
     Nav,
-  },
-  async created() {
-    axios
-      .get("api/users/auth", {
-        headers: {
-          accesstoken: localStorage.getItem("accesstoken"),
-        },
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   },
 };
 </script>

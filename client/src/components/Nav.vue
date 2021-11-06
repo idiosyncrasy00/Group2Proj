@@ -14,40 +14,34 @@
 
     <ul class="navbar-nav" display:auto>
       <li class="nav-item">
-        <router-link to="/" class="nav-link"> Home </router-link>
+        <a href="/" class="nav-link"> Home </a>
       </li>
       <li class="nav-item">
-        <router-link to="/about" class="nav-link">About</router-link>
+        <a href="/about" class="nav-link">About</a>
       </li>
       <li class="dropdown nav-item">
         <button class="dropbtn nav-link">Room detail</button>
         <div class="dropdown-content">
-          <router-link to="/FindRoom" class="nav-link"
-            >Find a conference room</router-link
-          >
-          <router-link to="/createRoom" class="nav-link"
-            >Create a conference room</router-link
-          >
-          <router-link to="/createRoom" class="nav-link" v-if="user"
-            >Manage your conference rooms</router-link
+          <a href="/FindRoom" class="nav-link">Find a conference room</a>
+          <a href="/createRoom" class="nav-link">Create a conference room</a>
+          <a href="/createRoom" class="nav-link" v-if="user"
+            >Manage your conference rooms</a
           >
         </div>
       </li>
     </ul>
     <ul class="navbar-nav" margin-left="20px" v-if="!user">
       <li class="nav-item">
-        <router-link to="/signin" class="nav-link">Sign in</router-link>
+        <a href="/signin" class="nav-link">Sign in</a>
       </li>
       <li class="nav-item">
-        <router-link to="/signup" class="nav-link">Sign up</router-link>
+        <a href="/signup" class="nav-link">Sign up</a>
       </li>
     </ul>
     <ul class="navbar-nav" margin-left="20px" v-if="user">
       <li class="nav-item">
         <!-- <a href="/signup" class="nav-link">Sign up</a> -->
-        <router-link to="/User" class="nav-link"
-          >Hello {{ user.username }}</router-link
-        >
+        <a href="/User" class="nav-link">Hello {{ user.username }}</a>
       </li>
       <!-- <li class="nav-item">
         <a href="/User" class="nav-link">My Account</a>
@@ -61,11 +55,12 @@
 
 <script>
 import axios from "axios";
-
 export default {
   name: "Header",
   data() {
     return {
+      //signin.islogged
+      //islogged: "0",
       user: null,
     };
   },
@@ -80,7 +75,6 @@ export default {
       this.$router.push("/signin");
     },
   },
-
   async created() {
     axios
       .get("api/users/me", {
@@ -95,10 +89,6 @@ export default {
       .catch((err) => {
         console.log(err);
       });
-  },
-
-  computed: {
-    //...mapGetters(["isloggedin"]),
   },
 };
 </script>
