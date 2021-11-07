@@ -9,7 +9,7 @@ services:
     build:
       context: server
     environment:
-      NODE_ENV: "test"
+      NODE_ENV: "production"
     ports:
       - 3000:3000
     command: >

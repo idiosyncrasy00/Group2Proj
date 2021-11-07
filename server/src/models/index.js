@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'development-local';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
@@ -31,7 +31,7 @@ Object.keys(db).forEach(modelName => {
 
 // Development only
 (async () => {
-    if (env === 'development') {
+    if (env === 'development' || env === 'development-local') {
         // Object.keys(db).forEach(modelName => db[modelName].sync({ force: true }));  // Rebuild model
         try {
             const initdb_env = process.env.INIT_DB || "yes";
