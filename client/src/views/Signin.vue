@@ -61,6 +61,8 @@
             Sign in
           </button>
         </div>
+        <!--Do some css with err msg-->
+        <p>{{ errorMsg }}</p>
         <p class="mt-5 mb-2 text-muted">&copy; 2021–</p>
         <!-- </form> -->
       </main>
@@ -70,6 +72,8 @@
 
 <script>
 import axios from "axios";
+//import apiService from "@/services/apiServices";
+
 export default {
   name: "signin",
   data() {
@@ -78,28 +82,29 @@ export default {
         username: "",
         password: "",
       },
-      SigninData: "",
+      errorMsg: "",
     };
   },
   methods: {
-    async handleSubmit(e) {
-      e.preventDefault();
+    async handleSubmit() {
       const data = {
         username: this.signinValues.username,
         password: this.signinValues.password,
       };
       //const res = await axios.post("login", data);
+      //AXIOS
       axios
         .post("api/users/login", data)
         .then((res) => {
           console.log(res);
-          localStorage.setItem("accesstoken", res.headers.accesstoken);
-          localStorage.setItem("getuserid", res.data);
-          //console.log(localStorage.getItem("accesstoken"));
-          console.log(res.headers.accesstoken);
-          this.$router.push("/");
+          if (res.status != 400) {
+            localStorage.setItem("accesstoken", res.headers.accesstoken);
+            console.log(res.headers.accesstoken);
+            this.$router.push("/");
+          }
         })
         .catch((err) => {
+          this.errorMsg = "Invalid username or password";
           console.log(err);
         });
     },

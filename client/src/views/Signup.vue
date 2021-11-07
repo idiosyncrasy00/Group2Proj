@@ -34,6 +34,7 @@
             <label for="floatingInput">Last name</label>
           </div>
         </div>
+        </div>
 
         <div class="form-floating">
           <label for="floatingInput">Date of birth</label>
@@ -83,7 +84,7 @@
           <input
             type="username"
             class="form-control"
-            placeholder="Username"
+            placeholder="Your Username"
             v-model="signupValues.username"
           />
           <label for="floatingInput">Username</label>
@@ -103,12 +104,15 @@
         <!-- </form> -->
       </main>
     </form>
+    <p>{{ errMsg }}</p>
   </div>
 </template>
 
 <script>
 import Nav from "../components/Nav.vue";
 import axios from "axios";
+//import apiService from "@/services/apiServices";
+
 export default {
   name: "signup",
   data() {
@@ -123,7 +127,7 @@ export default {
         username: "",
         password: "",
       },
-      SignUpData: "",
+      errMsg: "",
     };
   },
   methods: {
@@ -139,24 +143,33 @@ export default {
         username: this.signupValues.username,
         password: this.signupValues.password,
       };
-      //alert(this.signupValues.dob);
+      //console.log(data);
+      //AXIOS
       axios
         .post("api/users/register", data)
         .then((res) => {
           console.log(res);
-          localStorage.setItem("accesstoken", res.headers.accesstoken);
-          alert(res.headers.accesstoken);
-          this.$router.push("/");
+          if (res.status < 400) {
+            localStorage.setItem("accesstoken", res.headers.accesstoken);
+            alert(res.headers.accesstoken);
+            this.$router.push("/");
+          }
         })
         .catch((err) => {
+          this.errMsg = err.response.data;
           console.log(err);
         });
+      // try {
+      //   apiService.register(data);
+      //   this.$router.push("/");
+      // } catch (e) {
+      //   console.log(e);
+      // }
       //this.$router.push("/");
     },
   },
   components: {
     Nav,
-    axios,
   },
 };
 </script>
