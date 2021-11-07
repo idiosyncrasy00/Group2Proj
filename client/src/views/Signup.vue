@@ -34,7 +34,6 @@
             <label for="floatingInput">Last name</label>
           </div>
         </div>
-        </div>
 
         <div class="form-floating">
           <label for="floatingInput">Date of birth</label>
