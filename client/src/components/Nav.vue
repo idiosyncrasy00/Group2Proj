@@ -29,6 +29,9 @@
           >
         </div>
       </li>
+      <li class="nav-item">
+        <a href="/UserList" class="nav-link">Show list of users</a>
+      </li>
     </ul>
     <ul class="navbar-nav" margin-left="20px" v-if="!user">
       <li class="nav-item">
