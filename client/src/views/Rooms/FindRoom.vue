@@ -56,19 +56,19 @@
           v-for="room in searchRooms.slice(0, 10)"
           :key="room.ID"
         >
-					<div class="card mb-2 mt-1" style="width:85%; height:95%">
-						<div style="padding-left:1rem;">
-							<router-link :to="{ name: 'roomdetails', params: { id: room.id } }">
-											<h5 class="card-title text-center text-dark">
+					<div class="card mb-2 mt-1 border border-2" style="width:85%; height:95%">
+						<div style="">
+							<router-link :to="{ name: 'roomdetails', params: { id: room.id } }" style="text-decoration: none;">
+											<h5 class="card-header text-center bg-success text-dark" >
 												{{ room.id }}
 											</h5>
 							</router-link>
 							<div class="row">
-								<div class="card-text col-sm-7">
+								<div class="card-text col-sm-7 text-center">
 									<h6>Date: {{ room.reservedDate }}      </h6>
 									<h6> Start time: {{ room.startingTime }}	  </h6>
 								</div>
-								<div class="card-text col-sm-5">
+								<div class="card-text col-sm-5 text-center">
 									<h6>Status: {{ room.status }}</h6>
 									<h6>Duration: {{ room.during }}</h6>
 								</div>
@@ -158,8 +158,7 @@ export default {
 	-o-transition: all .2s ease-out;
 	transition: all .2s ease-out;
 	border-radius:15px;
-	border:none;
-	background-color:var(--bg-color);
+	border:none;	
 }
 .card:hover .btn
 {
@@ -170,7 +169,6 @@ top: 100%;
 
 .card:hover
 {
-box-shadow: 0 4px 18px 0 rgba(0,0,0,0.7);
-
+	box-shadow: 0 4px 18px 0 rgba(0,0,0,0.7);
 }
 </style>

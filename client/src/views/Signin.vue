@@ -1,21 +1,23 @@
 <template>
   <!-- <slot :getUsername="signinValues.username" /> -->
-  <div id="signin">
+  <div id="signin" style="background-color:#ccccff">
     <form @submit.prevent="handleSubmit" class="mask">
       <main class="form-signin">
         <img
-          class="mb-4 img-fluid rounded mx-auto d-block"
+          class="mb-4 pt-5 img-fluid rounded mx-auto d-block"
           src="../assets/logo.png"
           alt=""
-          width="100"
-          height="100"
+          width="80"
+          height="80"
         />
-        <h4 class="mb-3 fw-normal" style="padding-bottom: 10px">
-          Sign in to Meeting Manage
-        </h4>
+				<div class = "row">
+					<h4 class=" col-sm-12 mb-3 fw-normal mx-auto text-center" style="padding-bottom: 10px">
+						Sign in to Meeting Manage
+					</h4>
+				</div>
         <div
-          class="card border-top border-5 rounded"
-          style="background-color: var(--bg-color)"
+          class="card login-card"
+          style="border"
         >
           <div
             class="form-floating"
@@ -55,14 +57,14 @@
             </label>
           </div>
           <button
-            class="w-75 btn btn-primary mx-auto"
+            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white"
             style="background-color: #38c75c; margin-bottom: 5px"
           >
             Sign in
           </button>
         </div>
         <!--Do some css with err msg-->
-        <p>{{ errorMsg }}</p>
+        <p  style="color:red;">{{ errorMsg }}</p>
         <p class="mt-5 mb-2 text-muted">&copy; 2021–</p>
         <!-- </form> -->
       </main>
@@ -166,5 +168,26 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+.login-card {
+	padding: 10px;
+  width: 100%;
+  background-color: #F7F7F7;
+  margin: 0 auto 10px;
+  border-radius: 2px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+.form-signin h4 {
+  font-weight: 100;
+  text-align: center;
+  font-size: 1.7em;
+}
+.login-card input[type=username]:hover, input[type=password]:hover {
+  border: 2px solid #b9b9b9;
+  border-top: 1px solid #a0a0a0;
+  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
 }
 </style>

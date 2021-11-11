@@ -1,17 +1,14 @@
 <template>
   <div>
     <div class="row mt-2">
-      <div class="h3 mx-auto col-sm-4 text-center">Schedule your meeting</div>
+      <div class="h3 mx-auto col-sm-4 text-center mb-5 mt-3">Schedule your meeting</div>
     </div>
-    <div class="container form" style="width: 600px" onsubmit="return false">
+    <div class="container card border border-3" style="width: 600px; background-color:#E3E5E7;" onsubmit="return false">
       <div class="form-group row d-flex mt-3">
         <label for="inputRoomId" class="col-sm-3 col-form-label">Room ID</label>
         <div class="col-sm-8">
-          <input
+          <UiInput
             type="number"
-            min="10000000"
-            max="999999999"
-            class="form-control"
             id="meetingIdInput"
             aria-describedby="meetidHelp"
             placeholder="Enter Meeting room ID"
@@ -29,7 +26,7 @@
           >Password</label
         >
         <div class="col-sm-8">
-          <input
+          <UiInput
             ref="pass"
             type="password"
             class="form-control"
@@ -45,7 +42,7 @@
           >Start time</label
         >
         <div class="col-sm-5">
-          <input
+          <UiInput
             ref="time"
             type="time"
             class="form-control"
@@ -60,7 +57,7 @@
           >Start date</label
         >
         <div class="col-sm-5">
-          <input
+          <UiInput
             type="date"
             ref="date"
             class="form-control"
@@ -75,7 +72,7 @@
           >Duration
         </label>
         <div class="col-sm-5">
-          <input
+          <UiInput
             ref="duration"
             type="number"
             min="0"
@@ -95,7 +92,7 @@
           class="btn btn-primary mx-auto col-sm-3"
           @click="addMeeting"
         >
-          Submit
+          Create
         </button>
       </div>
     </div>
@@ -133,8 +130,7 @@
 
 <script>
 import Nav from "../../components/Nav.vue";
-
-//import DataServices from "../services/DataServices";
+import UiInput from "@/components/UiInput";
 
 export default {
   name: "createRoom",
@@ -158,6 +154,9 @@ export default {
         show_toast: 1,
       });
       this.meeting = "";
+			this.meetingId = "";
+			this.password = "";
+			console.log(this.meetingId);
     },
     // DataServices.create(data).then(res => {
     //   this.meeting = res.data.meeting;
@@ -178,13 +177,14 @@ export default {
   },
   components: {
     Nav,
+		UiInput,
   },
 };
 </script>
 
 <style>
 .form {
-  background-color: var(--bg-color);
+  background-color: white var(--bg-color);
 }
 .form-group {
   padding-top: 5px;
@@ -192,7 +192,7 @@ export default {
   padding-left: 10px;
 }
 .col-form-label {
-  font-family: "Lucida Console", "Courier New", monospace;
+  font-family: $font-family-sans-serif;
   font-weight: bold;
 }
 </style>
