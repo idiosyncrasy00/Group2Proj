@@ -5,6 +5,7 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development-local';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
+db.db_list = [];
 
 let sequelize;
 if (config.use_env_variable) {
@@ -21,18 +22,16 @@ fs
     .forEach(file => {
         const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
         db[model.name] = model;
+        db.db_list.push(model.name);
     });
 
-Object.keys(db).forEach(modelName => {
-    if (db[modelName].associate) {
-        db[modelName].associate(db);
-    }
-});
+//
+// Function
+//
 
-// Development only
-(async () => {
+async function db_init() {
+    await db.sequelize.sync();
     if (env === 'development' || env === 'development-local') {
-        // Object.keys(db).forEach(modelName => db[modelName].sync({ force: true }));  // Rebuild model
         try {
             const initdb_env = process.env.INIT_DB || "yes";
             if (initdb_env === "yes") {
@@ -44,9 +43,19 @@ Object.keys(db).forEach(modelName => {
             console.log(error.message);
         }
     }
-})();
+}
+
+async function db_reset() {
+    for await (const modelName of db.db_list) {
+        await db[modelName].sync({ force: true });
+    }
+    let seeder = require('../seeders/seeder.dev');
+    await seeder.up(db);
+}
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+db.db_init = db_init;
+db.db_reset = db_reset;
 
 module.exports = db;

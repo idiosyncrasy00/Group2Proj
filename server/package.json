@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/server.js"
+    "start": "nodemon src/server.js",
+    "db_reset": "node src/db_reset.js"
   },
   "keywords": [],
   "author": "",

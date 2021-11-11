@@ -14,7 +14,9 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
-db.sequelize.sync();
+
+// Database
+(async () => await db.db_init())();
 
 // Routes
 console.log('Setting routes ...');
