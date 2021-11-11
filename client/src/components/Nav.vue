@@ -11,10 +11,9 @@
     <a class="navbar-brand" href="/">
       <img src="../assets/logo.png" style="height: 2rem" />
     </a>
-
     <ul class="navbar-nav" display:auto>
       <li class="nav-item">
-        <a href="/" class="nav-link"> Home </a>
+        <a href="/" class="nav-link"> Home {{ user }}</a>
       </li>
       <li class="nav-item">
         <a href="/about" class="nav-link">About</a>
@@ -48,6 +47,17 @@
       <li class="nav-item">
         <!-- <a href="/signup" class="nav-link">Sign up</a> -->
         <a href="/User" class="nav-link">Hello {{ user.username }}</a>
+        <!-- <router-link
+          :to="{
+            name: 'user',
+            params: {
+              getUser: user,
+            },
+          }"
+          class="nav-link"
+        >
+          Hello {{ user.username }}</router-link
+        > -->
       </li>
       <!-- <li class="nav-item">
         <a href="/User" class="nav-link">My Account</a>
@@ -67,7 +77,7 @@ export default {
     return {
       //signin.islogged
       //islogged: "0",
-      user: null,
+      user: "",
     };
   },
   components: {
