@@ -46,6 +46,11 @@ const routes = [
     name: 'manageRoom',
     component: () => import('../views/Rooms/manageRoom.vue'),
   },
+  {
+    path: '/UserList',
+    name: 'UserList',
+    component: () => import('../views/UserList.vue'),
+  }
 ]
 
 const router = createRouter({

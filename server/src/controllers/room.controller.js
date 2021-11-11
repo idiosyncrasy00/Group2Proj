@@ -43,6 +43,25 @@ const editRoom = async (req, res) => {
     }
 };
 
+const deleteRoom = async (req, res) => {
+    if (!req.user.isAdmin) {
+        res.status(401).send({ error: "User has no right to edit room" });
+    } else if (!req.body.id) {
+        res.status(403).send({ error: "User ID required" });
+    } else {
+        try {
+            await Room.destroy({
+                where: {
+                    id: req.body.id
+                }
+            });
+            res.send();
+        } catch (error) {
+            res.status(400).send({ error: error.message });
+        }
+    }
+}
+
 const getRoomList = async (req, res) => {
     try {
         const rooms = await Room.findAll({
@@ -54,4 +73,4 @@ const getRoomList = async (req, res) => {
     }
 };
 
-module.exports = { createRoom, getRoomList, editRoom };
+module.exports = { createRoom, getRoomList, editRoom, deleteRoom };
