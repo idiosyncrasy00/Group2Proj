@@ -18,4 +18,8 @@ const editSchema = Joi.object({
     status: Joi.string().max(30)
 });
 
-module.exports = { createSchema, editSchema };
+const deleteSchema = Joi.object({
+    id: Joi.number().integer().required()
+});
+
+module.exports = { createSchema, editSchema, deleteSchema };

@@ -3,22 +3,26 @@ const encrypt = require('../utilities/encrypt');
 module.exports = {
     up: async (db) => {
         await db.Room.bulkCreate([{
+            id: 1,
             roomname: "Room 1",
             capacity: 100,
             facilities: "Air conditioner, projector",
             status: "WORKING"
         }, {
+            id: 2,
             roomname: "Room 2",
             capacity: 50,
             facilities: "Nothing",
             status: "FIXING"
         }, {
+            id: 3,
             roomname: "Room 3",
             capacity: 150,
             facilities: "Projector",
             status: "WORKING"
         }]);
         await db.User.bulkCreate([{
+            id: 11,
             firstname: "Polly",
             lastname: "Hastings",
             email: "j25eudq6bgi@temporary-mail.net",
@@ -28,6 +32,7 @@ module.exports = {
             username: "rahsaan",
             password: await encrypt.generate("rahsaan")
         }, {
+            id: 12,
             firstname: "Daniel",
             lastname: "Olsa",
             email: "randomemail@gmail.com",
@@ -36,19 +41,59 @@ module.exports = {
             address: "164 Manchester",
             username: "test1234",
             password: await encrypt.generate("test1234")
-        }])
+        }, {
+            id: 13,
+            firstname: "Larry",
+            lastname: "South",
+            email: "randomemail2@gmail.com",
+            dob: "2001-05-11",
+            phone: "1325484212",
+            address: "4712 Joy Lane",
+            username: "test12345",
+            password: await encrypt.generate("test12345")
+        }]);
+        await db.Meeting.bulkCreate([{
+            id: 101,
+            adminid: 12,
+            roomid: 1,
+            reserveddate: "2021-01-01",
+            startingtime: 7,
+            during: 2,
+            status: "WAITING"
+        }, {
+            id: 102,
+            adminid: 11,
+            roomid: 3,
+            reserveddate: "2021-01-01",
+            startingtime: 11,
+            during: 3,
+            status: "WAITING"
+        }, {
+            id: 103,
+            adminid: 13,
+            roomid: 3,
+            reserveddate: "2021-01-02",
+            startingtime: 11,
+            during: 3,
+            status: "WAITING"
+        }]);
     },
 
     down: async (db) => {
         await db.Room.destroy({
             where: {
-                roomname: ["Room 1", "Room 2", "Room 3"]
+                id: [1, 2, 3]
             }
         });
         await db.User.destroy({
             where: {
-                username: ["rahsaan", "test1234"]
+                id: [11, 12, 13]
             }
-        })
+        });
+        await db.Meeting.destroy({
+            where: {
+                id: [101, 102, 103]
+            }
+        });
     }
 };
