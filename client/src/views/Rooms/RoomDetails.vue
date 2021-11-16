@@ -2,25 +2,27 @@
   <div>
     <!--h1>Room details page</h1-->
     <div
-      class="card col-sm-5 mx-auto mt-5 border-top border-5 rounded"
-      style="background-color: var(--bg-color)"
+      class="card col-sm-7 mx-auto mt-5 rounded"
+			style="background-color: var(--bg-color)"
     >
-      {{ this.id }}
-      {{ this.roomname }}
-      {{ this.capacity }}
-      {{ this.facilities }}
-      {{ this.status }}
-      <h3 class="mt-1 mx-auto">{{ info.meetingID }}</h3>
+      
+      <div class="card-body mb-2">
+				<h3 class="title-text mt-1 mx-auto">ID : {{ this.id }}</h3>
+				<p class="card-text note small">Room details, you can create a meeting in this room if it's status is empty</p>
+			</div>
+      
       <div class="row mt-2">
-        <div class="col-sm-5 mx-auto">
-          <p class="info-text">Host name:</p>
-          <p class="info-text">Start time: {{ info.startingTime }}</p>
-          <p class="info-text">Duration : {{ info.during }}</p>
+        <div class="col-sm-6 mx-0 info-list">
+          <p class="head-text">Room name: <span	class="info-text">{{ this.roomname }}</span></p>
+          <p class="head-text">Start time: <span	class="info-text"> {{ this.startingTime }}</span></p>
+          <p class="head-text">Duration : <span	class="info-text"> {{ this.during }}</span></p>
+					<p class="head-text">Facilities : <span	class="info-text"> {{ this.facilities }}</span></p>
         </div>
-        <div class="col-sm-5 mx-auto">
-          <p class="info-text">Group:</p>
-          <p class="info-text">Date : {{ info.reseverDate }}</p>
-          <p class="info-text">Status: {{ info.status }}</p>
+        <div class="col-sm-6 mx-0 info-list">
+					<p class="head-text">Capacity: <span	class="info-text"> {{ this.capacity }}</span></p>
+          <p class="head-text">Group:</p>
+          <p class="head-text">Date : <span	class="info-text"> {{ this.reseverDate }}</span></p>
+          <p class="head-text">Status: <span	class="info-text"> {{ this.status }}</span></p>
         </div>
       </div>
       <div class="row mt-2 mb-2">
@@ -75,9 +77,29 @@ export default {
 </script>
 
 <style>
-.info-text {
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Open+Sans:wght@300;400&display=swap');
+.head-text {
   font-size: 1.15em;
-  font-family: "Lucida Console", "Courier New", monospace;
+	font-family: 'Nanum Gothic', sans-serif;
   font-weight: bold;
+}
+.title-text {
+  font-size: 1.5em;
+	font-family: 'Nanum Gothic', sans-serif;
+  font-weight: normal;
+}
+.info-text {
+  font-size: 1em;
+	font-family: 'Nanum Gothic', sans-serif;
+  font-weight: normal;
+}
+.card-body{
+	border-bottom: 2px gray solid;
+}
+.note{
+	color : gray;
+}
+div.info-list>p:nth-of-type(odd) {
+  background: #e0e0e0	;
 }
 </style>

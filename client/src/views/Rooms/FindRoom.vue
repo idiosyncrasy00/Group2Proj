@@ -71,19 +71,20 @@
                     status: room.status,
                   },
                 }"
+								style="text-decoration: none;"
               >
                 <h5 class="card-title text-center text-dark">
-                  {{ room.id }}
+                  ID : {{ room.id }}
                 </h5>
               </router-link>
               <div class="row">
                 <div class="card-text col-sm-7">
                   <h6>Date: {{ room.roomname }}</h6>
-                  <h6>Start time: {{ room.capacity }}</h6>
+                  <h6>Capacity: {{ room.capacity }}</h6>
                 </div>
                 <div class="card-text col-sm-5">
-                  <h6>Status: {{ room.facilities }}</h6>
-                  <h6>Duration: {{ room.status }}</h6>
+                  <h6>Facility: {{ room.facilities }}</h6>
+                  <h6>Status: {{ room.status }}</h6>
                 </div>
               </div>
             </div>
@@ -113,20 +114,21 @@ export default {
       },
       //roomlist: "",
       rooms: [
-        // {
-        //   id: this.roomlist.id,
-        //   roomname: this.roomlist.roomname,
-        //   capacity: this.roomlist.capacity,
-        //   facilities: this.roomlist.facilities,
-        //   status: this.roomlist.status,
-        // },
-        // {
-        //   id: 123456789,
-        //   roomname: "",
-        //   capacity: "",
-        //   facilities: "",
-        //   status: "active",
-        // },
+					{
+           id: this.roomlist.id,
+           roomname: this.roomlist.roomname,
+           capacity: this.roomlist.capacity,
+           facilities: this.roomlist.facilities,
+           status: this.roomlist.status,
+					},
+				/*
+         {
+           id: 45454545,
+           roomname: "hop thuong niens",
+           capacity: "15 p",
+           facilities: "1 ban 2 ghr",
+           status: "active",
+         },*/
         // {
         //   id: 453452123,
         //   roomname: "",
