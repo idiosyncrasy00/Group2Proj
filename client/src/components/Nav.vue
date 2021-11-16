@@ -34,6 +34,9 @@
       <li class="nav-item">
         <a href="/Feedback" class="nav-link">Send feedback to manager</a>
       </li>
+      <li class="nav-item">
+        <a href="/Room" class="nav-link">Manage Room(v2 Test)</a>
+      </li>
     </ul>
     <ul class="navbar-nav" margin-left="20px" v-if="!user">
       <li class="nav-item">
