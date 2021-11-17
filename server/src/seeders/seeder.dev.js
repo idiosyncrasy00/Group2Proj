@@ -59,6 +59,9 @@ module.exports = {
             reserveddate: "2021-01-01",
             startingtime: 7,
             during: 2,
+            title: "Friendly meeting",
+            content: "Birthday",
+            password: "",
             status: "WAITING"
         }, {
             id: 102,
@@ -67,6 +70,9 @@ module.exports = {
             reserveddate: "2021-01-01",
             startingtime: 11,
             during: 3,
+            title: "Family meeting",
+            content: "Gender reveal",
+            password: "family",
             status: "WAITING"
         }, {
             id: 103,
@@ -75,6 +81,9 @@ module.exports = {
             reserveddate: "2021-01-02",
             startingtime: 11,
             during: 3,
+            title: "Old class meeting",
+            content: "",
+            password: "123",
             status: "WAITING"
         }]);
     },

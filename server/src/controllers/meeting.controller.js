@@ -29,6 +29,9 @@ const createMeeting = async (req, res) => {
                     }
                 }
                 if (check) {
+                    if (!value.password) {
+                        value.password = ""
+                    }
                     let meeting = await Meeting.create(value);
                     res.send(_.pick(meeting, ['id', 'status']));
                 } else {
