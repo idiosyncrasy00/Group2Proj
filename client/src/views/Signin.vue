@@ -1,6 +1,6 @@
 <template>
   <!-- <slot :getUsername="signinValues.username" /> -->
-  <div id="signin" style="background-color:#ccccff">
+  <div id="signin" style="background-color: #ccccff">
     <form @submit.prevent="handleSubmit" class="mask">
       <main class="form-signin">
         <img
@@ -10,15 +10,15 @@
           width="80"
           height="80"
         />
-				<div class = "row">
-					<h4 class=" col-sm-12 mb-3 fw-normal mx-auto text-center" style="padding-bottom: 10px">
-						Sign in to Meeting Manage
-					</h4>
-				</div>
-        <div
-          class="card login-card"
-          style="border"
-        >
+        <div class="row">
+          <h4
+            class="col-sm-12 mb-3 fw-normal mx-auto text-center"
+            style="padding-bottom: 10px"
+          >
+            Sign in to Meeting Manage
+          </h4>
+        </div>
+        <div class="card login-card" style="border">
           <div
             class="form-floating"
             style="
@@ -57,14 +57,27 @@
             </label>
           </div>
           <button
-            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white"
+            class="
+              group
+              relative
+              w-full
+              flex
+              justify-center
+              py-2
+              px-4
+              border border-transparent
+              text-sm
+              font-medium
+              rounded-md
+              text-white
+            "
             style="background-color: #38c75c; margin-bottom: 5px"
           >
             Sign in
           </button>
         </div>
         <!--Do some css with err msg-->
-        <p  style="color:red;">{{ errorMsg }}</p>
+        <p style="color: red">{{ errorMsg }}</p>
         <p class="mt-5 mb-2 text-muted">&copy; 2021–</p>
         <!-- </form> -->
       </main>
@@ -102,7 +115,8 @@ export default {
           if (res.status != 400) {
             localStorage.setItem("accesstoken", res.headers.accesstoken);
             console.log(res.headers.accesstoken);
-            this.$router.push("/");
+            window.location.href = "/";
+            //this.$router.push("/");
           }
         })
         .catch((err) => {
@@ -170,9 +184,9 @@ body {
   border-top-right-radius: 0;
 }
 .login-card {
-	padding: 10px;
+  padding: 10px;
   width: 100%;
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
   margin: 0 auto 10px;
   border-radius: 2px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
@@ -183,11 +197,12 @@ body {
   text-align: center;
   font-size: 1.7em;
 }
-.login-card input[type=username]:hover, input[type=password]:hover {
+.login-card input[type="username"]:hover,
+input[type="password"]:hover {
   border: 2px solid #b9b9b9;
   border-top: 1px solid #a0a0a0;
-  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 </style>
