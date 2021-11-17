@@ -40,8 +40,6 @@ app.AOS = new AOS.init({
 	duration: 500, // values from 0 to 3000, with step 50ms
 });
 app.use(AOS).mount('#app')
-
-createApp(App).use(store).use(router).mount('#app');
 /*
 import Vue from 'vue'
 import AppLayout from './components/index.vue'

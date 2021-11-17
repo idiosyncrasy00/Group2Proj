@@ -11,8 +11,8 @@
           width="70"
           height="70"
         />
-        <h1 class="h3 mb-5 fw-normal mx-auto">Please sign up here</h1>
-
+        <h1 class="h3 fw-normal mx-auto">Please sign up here</h1>
+				<a class = "mx-auto mb-5" href="/signin" style="text-decoration:none;">Already have an account? Sign in now</a>
         <div class="row">
           <div class="col-sm-6">
             <p class="form-header">First name</p>
