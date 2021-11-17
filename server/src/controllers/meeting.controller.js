@@ -2,7 +2,6 @@ const Meeting = require('../models').Meeting;
 const validation = require('../validations/meeting.validation');
 const _ = require('lodash');
 
-
 const createMeeting = async (req, res) => {
     const {error, value} = await validation.createSchema.validate(req.body);
     if (error) {
@@ -133,6 +132,29 @@ const deleteMeeting = async (req, res) => {
             }
         }
     }
+};
+
+const getMeetingInfo = async (req, res) => {
+    const {error, value} = await validation.infoSchema.validate(req.body);
+    if (error) {
+        res.status(403).send({error: error.message});
+    } else {
+        try {
+            let meeting = await Meeting.findOne({
+                where: {
+                    id: value.id
+                }
+            });
+            if (!meeting) {
+                res.status(404).send({error: "Meeting not found"});
+            } else {
+                res.send(_.pick(meeting, 
+                    ['adminid', 'roomid', 'reserveddate', 'startingtime', 'during', 'status']));
+            }
+        } catch (error) {
+            res.status(400).send({error: error.message});
+        }
+    }
 }
 
-module.exports = { createMeeting, editMeeting, deleteMeeting };
+module.exports = { createMeeting, editMeeting, deleteMeeting, getMeetingInfo };

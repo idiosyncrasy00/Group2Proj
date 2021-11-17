@@ -22,4 +22,8 @@ const deleteSchema = Joi.object({
     id: Joi.number().integer().required()
 });
 
-module.exports = { createSchema, editSchema, deleteSchema };
+const infoSchema = Joi.object({
+    id: Joi.number().integer().required()
+});
+
+module.exports = { createSchema, editSchema, deleteSchema, infoSchema };
