@@ -6,6 +6,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        roomid: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
         reserveddate: {
             type: DataTypes.DATEONLY,
             allowNull: false

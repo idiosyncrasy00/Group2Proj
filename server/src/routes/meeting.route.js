@@ -4,5 +4,7 @@ const auth = require('../middlewares/auth');
 
 router.post('/create', auth, Meeting.createMeeting);
 router.put('/edit', auth, Meeting.editMeeting);
+router.delete('/delete', auth, Meeting.deleteMeeting);
+router.get('/info', auth, Meeting.getMeetingInfo);
 
 module.exports = router;

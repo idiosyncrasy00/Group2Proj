@@ -20,6 +20,7 @@
               </div>
               <h5 class="user-name text-center mt-3">
                 <!-- {{ userInfo.userName }} -->
+                <!-- {{ getUser }} -->
                 {{ userInfo.username }}
               </h5>
               <h6 class="user-email text-center mt-3">{{ userInfo.email }}</h6>
@@ -204,16 +205,15 @@ export default {
   name: "user",
   data() {
     return {
+      // getUser: this.$route.params.getUser,
       showInfo: true,
-      // userInfo: {
-      //   firstName: "Nguyen Thi Hoa",
-      //   lastName: "Hue",
-      //   dateOfBirth: "01/01/2000",
-      //   address: "so 05,ngo 05,duong Pham Ngu Lao,tp Nam Dinh",
-      //   email: "qwerty@yahoo.com",
-      //   phoneNumber: "0983983983",
-      //   userName: "nthhvjpro123",
-      // },
+      updateFirstName: "",
+      updateLastName: "",
+      updateDob: "",
+      updateAddress: "",
+      updateUsername: "",
+      updatePhoneNumber: "",
+      updateEmail: "",
       userInfo: null,
       updateInfo: {
         firstName: "",
@@ -259,6 +259,33 @@ export default {
       if (this.updateUsername != null && this.updateUsername != "")
         this.updateInfo.userName = this.userName;
       //POST
+      //POST
+      axios
+        .put(
+          "api/users/edit",
+          {
+            firstname: this.updateFirstName,
+            lastname: this.updateLastName,
+            email: this.updateEmail,
+            dob: this.updateDob,
+            phone: this.updatePhoneNumber, // not required
+            address: this.updateAddress, // not required
+          },
+          {
+            headers: {
+              accesstoken: localStorage.getItem("accesstoken"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          this.userInfo = res.data;
+          window.location.href = "/User";
+          //this.switchToUpdate();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   component: {},

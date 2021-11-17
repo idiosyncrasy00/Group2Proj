@@ -50,6 +50,11 @@ const routes = [
     path: '/UserList',
     name: 'UserList',
     component: () => import('../views/UserList.vue'),
+  },
+  {
+    path: '/Feedback',
+    name: 'Feedback',
+    component: () => import('../views/Feedback.vue'),
   }
 ]
 
