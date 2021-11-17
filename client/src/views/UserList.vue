@@ -15,6 +15,7 @@
                       <th scope="col" class="border-0 text-uppercase font-medium">Address</th>
                       <th scope="col" class="border-0 text-uppercase font-medium">Email</th>
                       <th scope="col" class="border-0 text-uppercase font-medium">Phone</th>
+                      <th scope="col" class="border-0 text-uppercase font-medium">Room ID</th>
                       <th scope="col" class="border-0 text-uppercase font-medium">Category</th>
                     </tr>
                   </thead>
@@ -22,25 +23,24 @@
                     <tr>
                       <td class="pl-4">1</td>
                       <td>
-                          <h5 class="font-medium mb-0">Daniel Kristeen</h5>
+                          <h5 class="font-medium mb-0">{{info.name}}</h5>
                           
                       </td>
                       <td>
-                          <span class="text-muted">Texas, Unitedd states</span>
+                          <span class="text-muted">{{info.address}}</span>
                       </td>
                       <td>
-                          <span class="text-muted">daniel@website.com</span><br>
+                          <span class="text-muted">{{info.email}}</span><br>
                           
                       </td>
                       <td>
-                          <span class="text-muted">999 - 444 - 555</span>
+                          <span class="text-muted">{{info.phone}}</span>
                       </td>
                       <td>
-                        <select class="form-control category-select" id="exampleFormControlSelect1">
-                          <option>Room Master</option>
-                          <option>Participant</option>
-                          
-                        </select>
+                          <span class="text-muted">{{info.roomID}}</span>
+                      </td>
+                      <td>
+                          <span class="text-muted">{{info.category}}</span>
                       </td>
                       
                     </tr>
@@ -57,7 +57,19 @@
 
 <script>
 export default {
-name: "UserList"
+name: "UserList",
+data(){
+    return{
+        info:{
+            name:"Nguyen Van Anh",
+            address:"Hanoi",
+            email:"abc12@gmail.com",
+            phone:"0219238291",
+            roomID:"1234567",
+            category:"Room Master"
+        }
+    }
+}
 }
 </script>
 

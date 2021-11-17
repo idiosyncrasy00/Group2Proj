@@ -4,72 +4,62 @@
   </Container> -->
 
   <div>
-    <img
-      id="font-image"
-      src="../../assets/phonghop.jpg"
-      class="bg-img"
-      alt=""
-    />
     <div id="container">
-      <div
-        class="col-lg-6 order-1 order-lg-2 hero-img aos-init aos-animate"
-        data-aos="zoom-in"
-        data-aos-delay="100"
-      >
-        <div id="text-area">
-          <img src="../../assets/logo.png" class="img-fluid animated" alt="" />
-          <h1>Better Solutions For Your Meeting Rooms</h1>
-          <h2>We are team of talented team meeting rooms management</h2>
-          <div class="d-flex justify-content-center justify-content-lg-start">
-            <!-- <a href="#about" class="btn-get-started scrollto">Get Started</a> -->
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="card">
-            <div class="card-body" style="width: 18rem">
-              <div class="card-title">
-                <h1>Title</h1>
-              </div>
-              <div class="card-text">Info</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="card">
-            <div class="card-body" style="width: 18rem">
-              <div class="card-title">
-                <h1>Title</h1>
-              </div>
-              <div class="card-text">Info</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="card">
-            <div class="card-body" style="width: 18rem">
-              <div class="card-title">
-                <h1>Title</h1>
-              </div>
-              <div class="card-text">Info</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="card">
-            <div class="card-body" style="width: 18rem">
-              <div class="card-title">
-                <h1>Title</h1>
-              </div>
-              <div class="card-text">Info</div>
-            </div>
-          </div>
-        </div>
-      </div>
+			<div class = "d-flex flex-row justify-content-center mt-5 mx-auto" id="slider">
+				<div class="btn btn-prev col-sm-1" aria-label="Previous slide" @click="slide(-1)">
+						&#10094;
+				</div>
+				<div class= "col-sm-10">	
+					<transition-group tag="div" :name="transitionName" class="slides-group">
+						<img v-if="show" :key="current" class="slide" :src="slides[current].name">
+					</transition-group>
+				</div>
+				<div class="btn btn-next col-sm-1" aria-label="Next slide" @click="slide(1)">
+						&#10095; 
+					</div>
+			</div>
+			<div class = "row mt-4">
+				<div class = "card col-sm-7" >
+					<h3> Card title </h3>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+					Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+					when an unknown printer took a galley of type and scrambled it to make a type 
+					specimen book. It has survived not only five centuries, but also the leap into 
+					electronic typesetting, remaining essentially unchanged. It was popularised in 
+					the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+					and more recently with desktop publishing software like Aldus PageMaker including 
+					versions of Lorem Ipsum.
+					</p>
+				</div>
+			</div>
+			<div class = "d-flex flex-row-reverse mt-3">
+				<div class = "card col-sm-7 end-0" >
+					<h3> Card title </h3>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+					Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+					when an unknown printer took a galley of type and scrambled it to make a type 
+					specimen book. It has survived not only five centuries, but also the leap into 
+					electronic typesetting, remaining essentially unchanged. It was popularised in 
+					the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+					and more recently with desktop publishing software like Aldus PageMaker including 
+					versions of Lorem Ipsum.
+					</p>
+				</div>
+			</div>
+			<div class = "row mt-4">
+				<div class = "card col-sm-7" >
+					<h3> Card title </h3>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+					Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+					when an unknown printer took a galley of type and scrambled it to make a type 
+					specimen book. It has survived not only five centuries, but also the leap into 
+					electronic typesetting, remaining essentially unchanged. It was popularised in 
+					the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+					and more recently with desktop publishing software like Aldus PageMaker including 
+					versions of Lorem Ipsum.
+					</p>
+				</div>
+			</div>
     </div>
   </div>
   <h3 v-if="currentUser">Hi {{ currentUser.id }}</h3>
@@ -87,14 +77,41 @@ export default {
   data() {
     return {
       currentUser: null,
-      //navKey: 0,
+			//slider variable
+      current: 0,
+			direction: 1,
+			transitionName: "fade",
+			show: false,
+			slides: [
+				{name: 'https://dbijapkm3o6fj.cloudfront.net/resources/23954,1004,1,6,4,0,600,450/-4601-/20191018171420/meeting-rooms.jpeg'},
+				{name: 'https://thehive.com.vn/wp-content/uploads/2019/07/DSC_9987-1-1.jpg'},
+				{name: 'https://image.freepik.com/free-photo/office-chair-meeting-room-asian_1262-2280.jpg'},
+				{name: 'https://st.focusedcollection.com/3839757/i/650/focused_178412772-stock-photo-asian-business-people-talking-meeting.jpg'},
+				{name: 'http://halioshotelhalong.com/images/upload/nha-hang/phonghop-1.jpg'}, 
+			]
     };
   },
   components: {
     Footer,
     axios,
   },
-  method: {},
+  methods: {
+    slide(dir) {
+      this.direction = dir;
+      dir === 1
+        ? (this.transitionName = "slide-next")
+        : (this.transitionName = "slide-prev");
+      var len = this.slides.length;
+      this.current = (this.current + dir % len + len) % len;
+    }
+  },
+	mounted() {
+    this.show = true;
+
+		setInterval(() => {
+				this.current = (this.current + 1) % this.slides.length;
+		}, 3000);
+  },
   async created() {
     console.log(localStorage.getItem("accesstoken")); //null
     axios
@@ -115,23 +132,41 @@ export default {
 </script>
 
 <style>
-#bgimg {
-  background-image: url("../../assets/phonghop.jpg");
-}
-#container {
-  margin-left: 500px;
+.container{
+	overflow: hidden;
 }
 
-img.bg-img {
-  width: 100%;
+
+
+/* SLIDER STYLES */
+#slider {
+	width: 80%;
+  height: 70vh;
+	position: relative;
 }
-#font-image {
-  height: 600px;
-  width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
+slides-group{
 }
-.logo {
+.slide {
+  width: 83.5%;
+  height: 100%;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+	overflow: hidden;
 }
+
+.btn {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+  user-select: none;
+}
+
+.btn:hover{
+	background: #e6f3ff
+}
+
 </style>

@@ -8,35 +8,57 @@
           class="mb-4 img-fluid rounded mx-auto d-block"
           src="../assets/logo.png"
           alt=""
-          width="120"
-          height="120"
+          width="70"
+          height="70"
         />
-        <h1 class="h3 mb-3 fw-normal mx-auto">Please sign up here</h1>
+        <h1 class="h3 mb-5 fw-normal mx-auto">Please sign up here</h1>
 
         <div class="row">
-          <div class="form-floating col-sm-6">
+          <div class="col-sm-6">
+						<p class="form-header">First name</p>
             <input
               type="firstname"
               class="form-control"
               placeholder="Your first name"
               v-model="signupValues.firstname"
             />
-            <label for="floatingInput">First name</label>
+            
           </div>
 
-          <div class="form-floating col-sm-6">
+          <div class="col-sm-6">
+						<p class="form-header">Last name</p>
             <input
               type="lastname"
               class="form-control"
               placeholder="Your last name"
               v-model="signupValues.lastname"
             />
-            <label for="floatingInput">Last name</label>
+           
           </div>
         </div>
+				<div class="">
+					<p class="form-header">Username</p>
+          <input
+            type="username"
+            class="form-control"
+            placeholder="Your Username"
+            v-model="signupValues.username"
+          />
 
-        <div class="form-floating">
-          <label for="floatingInput">Date of birth</label>
+        </div>
+
+        <div class="">
+					<p class="form-header">Password</p>
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+            v-model="signupValues.password"
+          />
+					
+        <div class="">
+					<p class="form-header">Date of birth</p>
           <div class="col-sm-5">
             <input
               type="date"
@@ -49,58 +71,44 @@
           </div>
         </div>
 
-        <div class="form-floating">
+        <div class="">
+					<p class="form-header">Email</p>
           <input
             type="email"
             class="form-control"
             placeholder="Your email"
             v-model="signupValues.email"
           />
-          <label for="floatingInput">Email</label>
-        </div>
 
-        <div class="form-floating">
+        </div>
+				<p class="form-header">Phone number</p>
+        <div class="">
           <input
             type="phonenumber"
             class="form-control"
             placeholder="Your Phone number"
             v-model="signupValues.phone"
           />
-          <label for="floatingInput">Phone</label>
+
         </div>
 
-        <div class="form-floating">
+        <div class="">
+					<p class="form-header">Address</p>
           <input
             type="address"
             class="form-control"
             placeholder="Your address"
             v-model="signupValues.address"
           />
-          <label for="floatingInput">Address</label>
+
         </div>
 
-        <div class="form-floating">
-          <input
-            type="username"
-            class="form-control"
-            placeholder="Your Username"
-            v-model="signupValues.username"
-          />
-          <label for="floatingInput">Username</label>
+				
         </div>
-
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control"
-            id="floatingPassword"
-            placeholder="Password"
-            v-model="signupValues.password"
-          />
-          <label for="floatingPassword">Password</label>
+				<div class="row">
+					<button class="w-25 btn btn-lg btn-primary mt-3 mx-auto">Sign up</button>
         </div>
-        <button class="w-100 btn btn-lg btn-primary">Sign up</button>
-        <!-- </form> -->
+				<!-- </form> -->
       </main>
     </form>
     <p>{{ errMsg }}</p>
@@ -174,21 +182,6 @@ export default {
 </script>
 
 <style>
-/* Styles */
-.bd-placeholder-img {
-  font-size: 1.125rem;
-  text-anchor: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
-
-@media (min-width: 768px) {
-  .bd-placeholder-img-lg {
-    font-size: 3.5rem;
-  }
-}
-
 body {
   display: center;
   align-items: center;
@@ -199,52 +192,20 @@ body {
 }
 
 .form-signup {
-  width: 100%;
-  max-width: 1000px;
-  padding: 70px;
+  width: 50%;
+  padding: 20px;
   margin: auto;
-}
-
-.form-signup .checkbox {
-  font-weight: 400;
 }
 
 .form-signup .form-floating:focus-within {
   z-index: 2;
 }
-
-.form-signup input[type="firstname"] {
-  width: 80%;
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+.form-header{
+	font-weight: bold;
+	font-family: $font-family-sans-serif;
 }
-
-.form-signup input[type="lastname"] {
-  width: 80%;
-  margin-bottom: 1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-signup input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-signup input[type="username"] {
-  margin-bottom: 5px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-signup input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-.form-floating {
-  margin-bottom: 10px;
+input{
+	height:  2.5rem;
+	margin-bottom: 0.5rem;
 }
 </style>
