@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit="handleSubmit" action="/signup">
+    <form class="mt-5" @submit="handleSubmit" action="/signup">
       <!--<h1>This is the signup page</h1>-->
       <main class="form-signup card" style="background-color: var(--bg-color)">
         <!-- <form action="/"> -->
@@ -203,6 +203,7 @@ body {
 .form-header{
 	font-weight: bold;
 	font-family: $font-family-sans-serif;
+	margin-bottom: 0;
 }
 input{
 	height:  2.5rem;

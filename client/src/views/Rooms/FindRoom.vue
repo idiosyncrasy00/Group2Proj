@@ -114,6 +114,7 @@ export default {
       },
       //roomlist: "",
       rooms: [
+
 					{
            id: this.roomlist.id,
            roomname: this.roomlist.roomname,
@@ -121,7 +122,7 @@ export default {
            facilities: this.roomlist.facilities,
            status: this.roomlist.status,
 					},
-				/*
+			/*
          {
            id: 45454545,
            roomname: "hop thuong niens",
@@ -180,6 +181,7 @@ export default {
       );
     },
   },
+
   async created() {
     axios
       .get("/api/rooms/list", {

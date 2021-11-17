@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row mt-2">
-      <div class="h3 mx-auto col-sm-4 text-center mb-5 mt-3">Schedule your meeting</div>
+      <div class="h3 mx-auto col-sm-4 text-center mb-5 mt-3">Create your room</div>
     </div>
     <div class="container card border border-3" style="width: 600px; background-color:#E3E5E7;" onsubmit="return false">
       <div class="form-group row d-flex mt-3">
