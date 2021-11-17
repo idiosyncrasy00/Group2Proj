@@ -1,13 +1,13 @@
 <template>
-  <div id="about">
-    <h1>This is an about page</h1>
-  </div>
+<h1>This is an about page.</h1>
 </template>
-
 <script>
 export default {
   name: "about",
-  components: {},
-};
+  components: {}
+}
 </script>
 
+<style>
+
+</style>

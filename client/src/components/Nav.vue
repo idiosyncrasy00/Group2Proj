@@ -13,7 +13,7 @@
     </a>
     <ul class="navbar-nav" display:auto>
       <li class="nav-item">
-        <a href="/" class="nav-link"> Home {{ user }}</a>
+        <a href="/" class="nav-link"> Home </a>
       </li>
       <li class="nav-item">
         <a href="/about" class="nav-link">About</a>
@@ -37,6 +37,9 @@
       <li class="nav-item">
         <a href="/Feedback" class="nav-link">Send feedback to manager</a>
       </li>
+      <li class="nav-item">
+        <a href="/Room" class="nav-link">Manage Room(v2 Test)</a>
+      </li>
     </ul>
     <ul class="navbar-nav" margin-left="20px" v-if="!user">
       <li class="nav-item">
@@ -55,7 +58,7 @@
       </li>
       <li class="nav-item">
         <!-- <a href="/signup" class="nav-link">Sign up</a> -->
-        <a href="/User" class="nav-link">Hello {{ user.username }}</a>
+        <a href="/user" class="nav-link">Hello {{ user.username }}</a>
         <!-- <router-link
           :to="{
             name: 'user',
@@ -96,6 +99,7 @@ export default {
   methods: {
     handleClick() {
       localStorage.removeItem("accesstoken");
+      localStorage.removeItem("userinfo");
       this.user = null;
       this.$router.push("/signin");
     },
@@ -109,6 +113,7 @@ export default {
       })
       .then((res) => {
         console.log(res);
+        localStorage.setItem("userinfo", JSON.stringify(res.data));
         this.user = res.data;
       })
       .catch((err) => {

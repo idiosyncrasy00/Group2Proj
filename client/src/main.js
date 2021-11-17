@@ -9,6 +9,28 @@ import './services/axios.js';
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth == true)
+    && to.matched.some(record => record.meta.notrequiresAuth == false)) {
+    //if not logged in, redirect to login page
+    if (localStorage.getItem("accesstoken") == null) {
+      next({ name: 'signin' })
+    } else {
+      next() // go to whatever
+    }
+  } else if (to.matched.some(record => record.meta.requiresAuth == false)
+    && to.matched.some(record => record.meta.notrequiresAuth == true)) {
+    if (localStorage.getItem("accesstoken") == null) {
+      next()
+    } else {
+      next({ name: 'home' });
+    }
+  } else if (to.matched.some(record => record.meta.requiresAuth == true)
+    && to.matched.some(record => record.meta.notrequiresAuth == true)) {
+    next();
+  }
+})
+
 export const app = createApp(App).use(store).use(router);
 
 app.AOS = new AOS.init({ 
@@ -19,6 +41,7 @@ app.AOS = new AOS.init({
 });
 app.use(AOS).mount('#app')
 
+createApp(App).use(store).use(router).mount('#app');
 /*
 import Vue from 'vue'
 import AppLayout from './components/index.vue'

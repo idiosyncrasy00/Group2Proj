@@ -3,13 +3,16 @@
     <!--h1>Room details page</h1-->
     <div
       class="card col-sm-7 mx-auto mt-5 rounded"
-			style="background-color: var(--bg-color)"
+      style="background-color: var(--bg-color)"
     >
       <div class="card-body mb-2">
-				<h3 class="title-text mt-1 mx-auto">ID : {{ this.id }}</h3>
-				<p class="card-text note small">Room details, you can create a meeting in this room if it's status is empty</p>
-			</div>
-      
+        <h3 class="title-text mt-1 mx-auto">ID : {{ this.id }}</h3>
+        <p class="card-text note small">
+          Room details, you can create a meeting in this room if it's status is
+          empty
+        </p>
+      </div>
+
       <div class="row mt-2">
         <div class="col-sm-6 mx-0 info-list">
           <p class="head-text">Room name: <span	class="info-text">{{ this.roomname }}</span></p>
@@ -161,6 +164,8 @@ export default {
       capacity: this.$route.params.capacity,
       facilities: this.$route.params.facilities,
       status: this.$route.params.status,
+      roominfo: this.$route.params.roomdetails,
+
       info: {
         meetingID: 123456789,
         adminID: 2345,
@@ -196,30 +201,30 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Open+Sans:wght@300;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Open+Sans:wght@300;400&display=swap");
 .head-text {
   font-size: 1.15em;
-	font-family: 'Nanum Gothic', sans-serif;
+  font-family: "Nanum Gothic", sans-serif;
   font-weight: bold;
 }
 .title-text {
   font-size: 1.5em;
-	font-family: 'Nanum Gothic', sans-serif;
+  font-family: "Nanum Gothic", sans-serif;
   font-weight: normal;
 }
 .info-text {
   font-size: 1em;
-	font-family: 'Nanum Gothic', sans-serif;
+  font-family: "Nanum Gothic", sans-serif;
   font-weight: normal;
 }
-.card-body{
-	border-bottom: 2px gray solid;
+.card-body {
+  border-bottom: 2px gray solid;
 }
-.note{
-	color : gray;
+.note {
+  color: gray;
 }
-div.info-list>p:nth-of-type(odd) {
-  background: #e0e0e0	;
+div.info-list > p:nth-of-type(odd) {
+  background: #e0e0e0;
 }
 div.info-list-right>p:nth-of-type(even) {
   background: #e0e0e0	;

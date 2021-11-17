@@ -15,40 +15,37 @@
 
         <div class="row">
           <div class="col-sm-6">
-						<p class="form-header">First name</p>
+            <p class="form-header">First name</p>
             <input
               type="firstname"
               class="form-control"
               placeholder="Your first name"
               v-model="signupValues.firstname"
             />
-            
           </div>
 
           <div class="col-sm-6">
-						<p class="form-header">Last name</p>
+            <p class="form-header">Last name</p>
             <input
               type="lastname"
               class="form-control"
               placeholder="Your last name"
               v-model="signupValues.lastname"
             />
-           
           </div>
         </div>
-				<div class="">
-					<p class="form-header">Username</p>
+        <div class="">
+          <p class="form-header">Username</p>
           <input
             type="username"
             class="form-control"
             placeholder="Your Username"
             v-model="signupValues.username"
           />
-
         </div>
 
         <div class="">
-					<p class="form-header">Password</p>
+          <p class="form-header">Password</p>
           <input
             type="password"
             class="form-control"
@@ -56,59 +53,56 @@
             placeholder="Password"
             v-model="signupValues.password"
           />
-					
-        <div class="">
-					<p class="form-header">Date of birth</p>
-          <div class="col-sm-5">
+
+          <div class="">
+            <p class="form-header">Date of birth</p>
+            <div class="col-sm-5">
+              <input
+                type="date"
+                ref="date"
+                class="form-control"
+                id="inputDate"
+                v-model="signupValues.dob"
+                v-on:keyup.enter="this.$refs.duration.focus()"
+              />
+            </div>
+          </div>
+
+          <div class="">
+            <p class="form-header">Email</p>
             <input
-              type="date"
-              ref="date"
+              type="email"
               class="form-control"
-              id="inputDate"
-              v-model="signupValues.dob"
-              v-on:keyup.enter="this.$refs.duration.focus()"
+              placeholder="Your email"
+              v-model="signupValues.email"
+            />
+          </div>
+          <p class="form-header">Phone number</p>
+          <div class="">
+            <input
+              type="phonenumber"
+              class="form-control"
+              placeholder="Your Phone number"
+              v-model="signupValues.phone"
+            />
+          </div>
+
+          <div class="">
+            <p class="form-header">Address</p>
+            <input
+              type="address"
+              class="form-control"
+              placeholder="Your address"
+              v-model="signupValues.address"
             />
           </div>
         </div>
-
-        <div class="">
-					<p class="form-header">Email</p>
-          <input
-            type="email"
-            class="form-control"
-            placeholder="Your email"
-            v-model="signupValues.email"
-          />
-
+        <div class="row">
+          <button class="w-25 btn btn-lg btn-primary mt-3 mx-auto">
+            Sign up
+          </button>
         </div>
-				<p class="form-header">Phone number</p>
-        <div class="">
-          <input
-            type="phonenumber"
-            class="form-control"
-            placeholder="Your Phone number"
-            v-model="signupValues.phone"
-          />
-
-        </div>
-
-        <div class="">
-					<p class="form-header">Address</p>
-          <input
-            type="address"
-            class="form-control"
-            placeholder="Your address"
-            v-model="signupValues.address"
-          />
-
-        </div>
-
-				
-        </div>
-				<div class="row">
-					<button class="w-25 btn btn-lg btn-primary mt-3 mx-auto">Sign up</button>
-        </div>
-				<!-- </form> -->
+        <!-- </form> -->
       </main>
     </form>
     <p>{{ errMsg }}</p>
@@ -158,8 +152,9 @@ export default {
           console.log(res);
           if (res.status < 400) {
             localStorage.setItem("accesstoken", res.headers.accesstoken);
-            alert(res.headers.accesstoken);
-            this.$router.push("/");
+            //alert(res.headers.accesstoken);
+            //this.$router.push("/");
+            window.location.href = "/";
           }
         })
         .catch((err) => {
@@ -200,13 +195,13 @@ body {
 .form-signup .form-floating:focus-within {
   z-index: 2;
 }
-.form-header{
-	font-weight: bold;
-	font-family: $font-family-sans-serif;
-	margin-bottom: 0;
+
+.form-header {
+  font-weight: bold;
+  font-family: $font-family-sans-serif;
 }
-input{
-	height:  2.5rem;
-	margin-bottom: 0.5rem;
+input {
+  height: 2.5rem;
+  margin-bottom: 0.5rem;
 }
 </style>

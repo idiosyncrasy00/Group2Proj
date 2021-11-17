@@ -1,7 +1,6 @@
 
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('Participant', {
-        // id is auto-generated
         meetingid: {
             type: DataTypes.INTEGER,
             allowNull: false
