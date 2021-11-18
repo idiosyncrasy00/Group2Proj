@@ -24,6 +24,7 @@ app.use('/api/users', require('./routes/user.route'));
 app.use('/api/rooms', require('./routes/room.route'));
 app.use('/api/meetings', require('./routes/meeting.route'));
 app.use('/api/participants', require('./routes/participant.route'));
+app.use('/api/util', require('./routes/util.route'));
 
 // Server test
 app.get('/', (req, res) => {
