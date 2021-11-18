@@ -71,7 +71,7 @@
                     status: room.status,
                   },
                 }"
-								style="text-decoration: none;"
+                style="text-decoration: none"
               >
                 <h5 class="card-title text-center text-dark">
                   ID : {{ room.id }}
@@ -114,14 +114,14 @@ export default {
       },
       //roomlist: "",
       rooms: [
-					{
-           id: this.roomlist.id,
-           roomname: this.roomlist.roomname,
-           capacity: this.roomlist.capacity,
-           facilities: this.roomlist.facilities,
-           status: this.roomlist.status,
-					},
-				/*
+        // {
+        //  id: this.roomlist.id,
+        //  roomname: this.roomlist.roomname,
+        //  capacity: this.roomlist.capacity,
+        //  facilities: this.roomlist.facilities,
+        //  status: this.roomlist.status,
+        // },
+        /*
          {
            id: 45454545,
            roomname: "hop thuong niens",
@@ -180,6 +180,7 @@ export default {
       );
     },
   },
+
   async created() {
     axios
       .get("/api/rooms/list", {

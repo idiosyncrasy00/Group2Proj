@@ -50,26 +50,51 @@
 										</router-link>
                   </button>
                   </span>
+                </div>
 
-                </tr>
-               
-              </tbody></table>
+                <!-- END SEARCH INPUT -->
+
+                <br />
+
+                <!-- BEGIN TABLE RESULT -->
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr v-for="room in this.rooms" :key="room.ID">
+                        <td class="image">
+                          <img src="../assets/logo.png" alt="" />
+                        </td>
+                        <td class="product">
+                          <strong>{{ room.id }}</strong>
+                          <br />In use from {{ room.startingTime }}
+                        </td>
+                        <span class="input-group-btn">
+                          <button class="btn btn-primary" type="button">
+                            <router-link to="/meeting">
+                              <h5 class="card-title text-center text-dark">
+                                Book
+                              </h5>
+                            </router-link>
+                          </button>
+                        </span>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- END TABLE RESULT -->
+              </div>
+              <!-- END RESULT -->
             </div>
-            <!-- END TABLE RESULT -->
-            
-          
           </div>
-          <!-- END RESULT -->
         </div>
       </div>
+      <!-- END SEARCH RESULT -->
     </div>
   </div>
-  <!-- END SEARCH RESULT -->
-</div>
-</div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "room",
   components: {},
@@ -84,7 +109,6 @@ export default {
 				{ id: 2, roomName:"Nha bep",capacity: 13,facilities:"Có đồ A,B,C", status: "Bảo trì" },
         { id: 4, roomName:"Phong V",capacity: 12,facilities:"Có đồ A,B,C", status: "Bình thường" },
       ],
-			
     };
   },
   method: {
@@ -101,67 +125,83 @@ export default {
       );
     },
   },
-};
+  
+  async created() {
+    axios
+      .get("/api/rooms/list", {
+        headers: {
+          accesstoken: localStorage.getItem("accesstoken"),
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        this.rooms = res.data;
+        //this.userInfo = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+}
 </script>
 
 <style scoped>
-body{margin-top:20px;
-background:#eee;
+body {
+  margin-top: 20px;
+  background: #eee;
 }
 
 .btn {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .grid {
-    position: relative;
-    width: 100%;
-    background: #fff;
-    color: #666666;
-    border-radius: 2px;
-    margin-bottom: 25px;
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  width: 100%;
+  background: #fff;
+  color: #666666;
+  border-radius: 2px;
+  margin-bottom: 25px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .grid .grid-body {
-    padding: 15px 20px 15px 20px;
-    font-size: 0.9em;
-    line-height: 1.9em;
+  padding: 15px 20px 15px 20px;
+  font-size: 0.9em;
+  line-height: 1.9em;
 }
 
 .search table tr td.rate {
-    color: #f39c12;
-    line-height: 50px;
+  color: #f39c12;
+  line-height: 50px;
 }
 
 .search table tr:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .search table tr td.image {
-	width: 50px;
+  width: 50px;
 }
 
 .search table tr td img {
-	width: 50px;
-	height: 50px;
+  width: 50px;
+  height: 50px;
 }
 
 .search table tr td.rate {
-	color: #f39c12;
-	line-height: 50px;
+  color: #f39c12;
+  line-height: 50px;
 }
 
 .search table tr td.price {
-	font-size: 1.5em;
-	line-height: 50px;
+  font-size: 1.5em;
+  line-height: 50px;
 }
 
 .search #price1,
 .search #price2 {
-	display: inline;
-	font-weight: 600;
+  display: inline;
+  font-weight: 600;
 }
-
-
 </style>

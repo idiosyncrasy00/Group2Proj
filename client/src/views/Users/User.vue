@@ -214,7 +214,7 @@ export default {
       updateUsername: "",
       updatePhoneNumber: "",
       updateEmail: "",
-      userInfo: null,
+      userInfo: JSON.parse(localStorage.getItem("userinfo")),
       updateInfo: {
         firstName: "",
         lastName: "",
@@ -289,21 +289,21 @@ export default {
     },
   },
   component: {},
-  async created() {
-    axios
-      .get("api/users/me", {
-        headers: {
-          accesstoken: localStorage.getItem("accesstoken"),
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        this.userInfo = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
+  // async created() {
+  //   axios
+  //     .get("api/users/me", {
+  //       headers: {
+  //         accesstoken: localStorage.getItem("accesstoken"),
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(res);
+  //       this.userInfo = res.data;
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // },
 };
 </script>
 
