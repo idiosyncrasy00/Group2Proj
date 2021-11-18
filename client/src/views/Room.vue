@@ -14,7 +14,7 @@
             <!-- BEGIN SEARCH INPUT -->
             
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Room Name" v-model="searchValues.roomName">
+              <input type="text" class="form-control" placeholder="Danh sách phòng" v-model="searchValues.roomName">
               <span class="input-group-btn">
                 
               </span>
@@ -33,18 +33,17 @@
               <table class="table table-hover">
                 <tbody>
                 <tr v-for="room in searchRooms"
-									:key="room.ID">
+									:key="room.roomName">
                   <td class="image"><img src="../assets/logo.png" alt=""></td>
                   <td class="product">
                     <strong>{{room.roomName}}</strong>
-                    <br>Thể tích:{{room.capacity}}
+                    <br>Sức chứa: {{room.capacity}} người
                     <br>Trang thiết bị:{{room.facilities}}
                     <br>Trạng thái:{{room.status}}
-                    <br>{{searchValues.roomName}}
                   </td>
                   <span class="input-group-btn">
                   <button class="btn btn-primary" type="button" v-if="room.status != 'Bảo trì'" > 
-                    <router-link to="/createMeeting">
+											<router-link :to="{ name: 'createMeeting', params: {id: room.roomName} }">
 															<h5 class="card-title text-center text-dark">
 																Đặt phòng
 															</h5>
@@ -71,7 +70,7 @@
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
 export default {
   name: "room",
   components: {},
@@ -83,7 +82,7 @@ export default {
       },
       rooms: [
         { id: 1, roomName:"Phong A",capacity: 11,facilities:"Có đồ A,B,C", status: "Bảo trì" },
-				{ id: 2, roomName:"Nha bep",capacity: 13,facilities:"Có đồ A,B,C", status: "Bảo trì" },
+				{ id: 2, roomName:"Nha bep",capacity: 13,facilities:"Có đồ A,B,C", status: "Bình thường" },
         { id: 4, roomName:"Phong V",capacity: 12,facilities:"Có đồ A,B,C", status: "Bình thường" },
       ],
     };
@@ -103,7 +102,7 @@ export default {
     },
   },
   
-  async created() {
+  /*async created() {
     axios
       .get("/api/rooms/list", {
         headers: {
@@ -118,7 +117,7 @@ export default {
       .catch((err) => {
         console.log(err);
       });
-  },
+  },*/
 };
 </script>
 
