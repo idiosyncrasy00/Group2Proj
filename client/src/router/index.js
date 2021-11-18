@@ -127,6 +127,33 @@ const routes = [
       requiresAuth: true,
       notrequiresAuth: false,
     }
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: () => import('../views/Meetings/admin.vue'),
+    meta: {
+      requiresAuth: true,
+      notrequiresAuth: false,
+    }
+  },
+  {
+    path: '/participant',
+    name: 'participant',
+    component: () => import('../views/Meetings/participant.vue'),
+    meta: {
+      requiresAuth: true,
+      notrequiresAuth: false,
+    }
+  },
+  {
+    path: '/editMeeting',
+    name: 'editMeeting',
+    component: () => import('../views/Meetings/editMeeting.vue'),
+    meta: {
+      requiresAuth: true,
+      notrequiresAuth: false,
+    }
   }
 ]
 

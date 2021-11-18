@@ -15,7 +15,7 @@
 									<form>
 										<div class="form-group">
 											<label>Tên phòng</label>
-											<label  class="form-control form-control-lg">{{id}}</label>
+											<label  class="form-control form-control-lg" readonlyy>{{id}}</label>
 										</div>
 										<div class="form-group">
 											<label>Mật khẩu phòng</label>
