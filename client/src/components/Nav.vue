@@ -13,7 +13,7 @@
     </a>
     <ul class="navbar-nav" display:auto>
       <li class="nav-item">
-        <a href="/" class="nav-link"> Home {{ user }}</a>
+        <a href="/" class="nav-link"> Home </a>
       </li>
       <li class="nav-item">
         <a href="/about" class="nav-link">About</a>

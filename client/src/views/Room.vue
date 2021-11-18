@@ -6,55 +6,17 @@
     <div class="grid search">
       <div class="grid-body">
         <div class="row">
-          <!-- BEGIN FILTERS -->
-          <div class="col-md-3">
-            <h2 class="grid-title"><i class="fa fa-filter"></i> Filters</h2>
-            <hr>
-      
-            <!-- BEGIN FILTER BY CATEGORY -->
-            <h4>By category:</h4>
-            <div class="checkbox">
-              <label><input type="checkbox" class="icheck"> Free</label>
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" class="icheck"> In use</label>
-            </div>
-           
-            <!-- END FILTER BY CATEGORY -->
-            
-            <div class="padding"></div>
-            
-            <!-- BEGIN FILTER BY DATE -->
-            <h4>By date:</h4>
-            From
-            <div class="input-group date form_date" data-date="2014-06-14T05:25:07Z" data-date-format="dd-mm-yyyy" data-link-field="dtp_input1">
-              <input type="datetime-local" class="form-control">
-              <span class="input-group-addon bg-blue"><i class="fa fa-th"></i></span>
-            </div>
-            <input type="hidden" id="dtp_input1" value="">
-            
-            To
-            <div class="input-group date form_date" data-date="2014-06-14T05:25:07Z" data-date-format="dd-mm-yyyy" data-link-field="dtp_input2">
-              <input type="datetime-local" class="form-control">
-              <span class="input-group-addon bg-blue"><i class="fa fa-th"></i></span>
-            </div>
-            <input type="hidden" id="dtp_input2" value="">
-            <!-- END FILTER BY DATE -->
-            
-            <div class="padding"></div>
-            
-      
-          </div>
-          <!-- END FILTERS -->
+          
           <!-- BEGIN RESULT -->
           <div class="col-md-9">
-            <h2><i class="fa fa-file-o"></i> Rooms</h2> 
+            <h2><i class="fa fa-file-o"></i> Danh sách phòng</h2> 
             <hr>
             <!-- BEGIN SEARCH INPUT -->
+            
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Room ID">
+              <input type="text" class="form-control" placeholder="Room Name" v-model="searchValues.roomName">
               <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">Search</button>
+                
               </span>
               
             </div>
@@ -67,21 +29,23 @@
             
             
             <!-- BEGIN TABLE RESULT -->
-            <div class="table-responsive">
+            <div class="table-responsive" >
               <table class="table table-hover">
                 <tbody>
-                <tr v-for="room in this.rooms"
+                <tr v-for="room in searchRooms"
 									:key="room.ID">
                   <td class="image"><img src="../assets/logo.png" alt=""></td>
                   <td class="product">
-                    <strong>{{room.id}}</strong>
-                    <br>In use from {{room.startingTime}}
+                    <strong>{{room.roomName}}</strong>
+                    <br>Thể tích:{{room.capacity}}
+                    <br>Trang thiết bị:{{room.facilities}}
+                    <br>Trạng thái:{{room.status}}
                   </td>
                   <span class="input-group-btn">
-                  <button class="btn btn-primary" type="button"> 
-                    <router-link to="/meeting">
+                  <button class="btn btn-primary" type="button" v-if="room.status != 'Bảo trì'" > 
+                    <router-link to="/createMeeting">
 															<h5 class="card-title text-center text-dark">
-																Book
+																Đặt phòng
 															</h5>
 										</router-link>
                   </button>
@@ -112,19 +76,30 @@ export default {
   data() {
     return {
       searchValues: {
-		roomname: "",
-        city: "",
-        district: "",
-        roomid: "",
-        status: "",
+		roomName: "",
+    
       },
       rooms: [
-        { id: 123456789, reservedDate: "01/01/1999", startingTime: "15:45 CH", during: "5", status: "active" },
-				{ id: 123456789, reservedDate: "01/01/1999", startingTime: "15:45 CH", during: "5", status: "active" },
-        { id: 453452123, reservedDate: "01/01/2000", startingTime: "15:45 CH", during: "5", status: "active" },
+        { id: 1, roomName:"Phong A",capacity: 11,facilities:"Có đồ A,B,C", status: "Bảo trì" },
+				{ id: 2, roomName:"Nha bep",capacity: 13,facilities:"Có đồ A,B,C", status: "Bảo trì" },
+        { id: 4, roomName:"Phong V",capacity: 12,facilities:"Có đồ A,B,C", status: "Bình thường" },
       ],
 			
     };
+  },
+  method: {
+    searchResult() {
+      return this.searchRooms;
+    },
+  },
+  computed: {
+    searchRooms() {
+      return this.rooms.filter((rooms) =>
+        rooms.roomName.toLowerCase().search(this.searchValues.roomName) != -1
+      /*return this.rooms.filter((rooms) =>
+        rooms.roomName.startsWith(this.searchValues.roomName)*/
+      );
+    },
   },
 };
 </script>
