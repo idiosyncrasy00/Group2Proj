@@ -83,6 +83,15 @@ const routes = [
       notrequiresAuth: false,
     }
   },
+	{
+    path: '/manageMeeting',
+    name: 'manageMeeting',
+    component: () => import('../views/Rooms/manageMeeting.vue'),
+    meta: {
+      requiresAuth: true,
+      notrequiresAuth: false,
+    }
+  },
   {
     path: '/UserList',
     name: 'UserList',
