@@ -40,6 +40,7 @@
                     <br>Thể tích:{{room.capacity}}
                     <br>Trang thiết bị:{{room.facilities}}
                     <br>Trạng thái:{{room.status}}
+                    <br>{{searchValues.roomName}}
                   </td>
                   <span class="input-group-btn">
                   <button class="btn btn-primary" type="button" v-if="room.status != 'Bảo trì'" > 
@@ -50,47 +51,23 @@
 										</router-link>
                   </button>
                   </span>
-                </div>
 
-                <!-- END SEARCH INPUT -->
-
-                <br />
-
-                <!-- BEGIN TABLE RESULT -->
-                <div class="table-responsive">
-                  <table class="table table-hover">
-                    <tbody>
-                      <tr v-for="room in this.rooms" :key="room.ID">
-                        <td class="image">
-                          <img src="../assets/logo.png" alt="" />
-                        </td>
-                        <td class="product">
-                          <strong>{{ room.id }}</strong>
-                          <br />In use from {{ room.startingTime }}
-                        </td>
-                        <span class="input-group-btn">
-                          <button class="btn btn-primary" type="button">
-                            <router-link to="/meeting">
-                              <h5 class="card-title text-center text-dark">
-                                Book
-                              </h5>
-                            </router-link>
-                          </button>
-                        </span>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <!-- END TABLE RESULT -->
-              </div>
-              <!-- END RESULT -->
+                </tr>
+               
+              </tbody></table>
             </div>
+            <!-- END TABLE RESULT -->
+            
+          
           </div>
+          <!-- END RESULT -->
         </div>
       </div>
-      <!-- END SEARCH RESULT -->
     </div>
   </div>
+  <!-- END SEARCH RESULT -->
+</div>
+</div>
 </template>
 
 <script>
@@ -142,7 +119,7 @@ export default {
         console.log(err);
       });
   },
-}
+};
 </script>
 
 <style scoped>

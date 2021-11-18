@@ -113,7 +113,11 @@ const routes = [
   {
     path: '/createMeeting',
     name: 'createMeeting',
-    component: () => import('../views/createMeeting.vue')
+    component: () => import('../views/createMeeting.vue'),
+    meta: {
+      requiresAuth: true,
+      notrequiresAuth: false,
+    }
   },
   {
     path: '/Meeting',
