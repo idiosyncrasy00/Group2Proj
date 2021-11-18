@@ -22,12 +22,7 @@
             </div>
             
             <!-- END SEARCH INPUT -->
-            
-            
-            <br>
-            
-            
-            
+            <br> 
             <!-- BEGIN TABLE RESULT -->
             <div class="table-responsive" >
               <table class="table table-hover">
