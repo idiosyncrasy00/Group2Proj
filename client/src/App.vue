@@ -1,8 +1,8 @@
 <template>
   <Nav :user="user" />
-  <div>
+  <body>
     <router-view :user="user" />
-  </div>
+  </body>
 </template>
 
 <script>

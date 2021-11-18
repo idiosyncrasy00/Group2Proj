@@ -7,7 +7,8 @@
       d-flex
       justify-content-between
     "
-  >
+		v-if="this.$route.path==='/signin'||this.$route.path==='/signup' ? false : true"
+  >	
     <a class="navbar-brand" href="/">
       <img src="../assets/logo.png" style="height: 2rem" />
     </a>

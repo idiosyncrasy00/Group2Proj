@@ -1,9 +1,12 @@
 <template>
   <!-- <slot :getUsername="signinValues.username" /> -->
-	<div class="container mx-auto my-auto mt-2" style="height: 70%; width: 80%;">
+	<div class="container mx-auto my-auto mt-4" style="height: 70%; width: 80%; box-shadow: 0 30px 40px rgba(0,0,0,.4);">
 		<div class="row" style="padding:0;">
 			<div class = "col-sm-6" style="background-color:#b3ccff;padding:0;margin:0;">
-				alsdmslkm
+				<img 
+				src="../assets/meeting-signin.jpg"
+				style="height:100%;
+				width:100%;">
 			</div>
 			<div class = "col-sm-6" style="background-color:#b3ccff;padding:0;margin:0;">
 				<div id="signin" style="background-color: #ccccff;padding:0;margin:0;">
