@@ -7,7 +7,8 @@
       d-flex
       justify-content-between
     "
-  >
+		v-if="this.$route.path==='/signin'||this.$route.path==='/signup' ? false : true"
+  >	
     <a class="navbar-brand" href="/">
       <img src="../assets/logo.png" style="height: 2rem" />
     </a>
@@ -24,7 +25,10 @@
           <a href="/FindRoom" class="nav-link">Find a conference room</a>
           <a href="/createRoom" class="nav-link">Create a conference room</a>
           <a href="/manageRoom" class="nav-link"
-            >Manage your conference rooms</a
+            >Manage your rooms</a
+          >
+					<a href="/manageMeeting" class="nav-link"
+            >Manage your meetings</a
           >
         </div>
       </li>
@@ -47,6 +51,12 @@
       </li>
     </ul>
     <ul class="navbar-nav" margin-left="20px" v-if="user">
+			<li class="nav-item">
+        <a href="#" class="nav-link notification" style="font-size: 1.2rem">
+					<span>&#128276;	</span>
+					<span class="badge">0</span>
+				</a>
+      </li>
       <li class="nav-item">
         <!-- <a href="/signup" class="nav-link">Sign up</a> -->
         <a href="/user" class="nav-link">Hello {{ user.username }}</a>
@@ -177,6 +187,19 @@ export default {
   background-color: #778899;
 }
 nav {
-  z-index: 1;
+  z-index: 10;
+}
+.notification:hover {
+  background: transparent;
+}
+
+.notification .badge {
+  position: relative;
+  top: -10px;
+  right: 10px;
+  padding: 2px 5px;
+  border-radius: 50%;
+  background: red;
+  color: white;
 }
 </style>

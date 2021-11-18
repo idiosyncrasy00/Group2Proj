@@ -180,6 +180,7 @@ export default {
       );
     },
   },
+
   async created() {
     axios
       .get("/api/rooms/list", {
