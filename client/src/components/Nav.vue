@@ -7,36 +7,68 @@
       d-flex
       justify-content-between
     "
-		v-if="this.$route.path==='/signin'||this.$route.path==='/signup' ? false : true"
-  >	
+    v-if="
+      this.$route.path === '/signin' || this.$route.path === '/signup'
+        ? false
+        : true
+    "
+  >
     <a class="navbar-brand" href="/">
       <img src="../assets/logo.png" style="height: 2rem" />
     </a>
     <ul class="navbar-nav" display:auto>
       <li class="nav-item">
         <a href="/" class="nav-link"> Home </a>
+        <!-- <router-link
+          :to="{
+            name: 'home',
+          }"
+          class="nav-link"
+        >
+          Home
+        </router-link> -->
       </li>
       <li class="nav-item">
         <a href="/about" class="nav-link">About</a>
+        <!-- <router-link
+          :to="{
+            name: 'about',
+          }"
+          class="nav-link"
+        >
+          About
+        </router-link> -->
       </li>
       <li class="dropdown nav-item">
         <button class="dropbtn nav-link">Room detail</button>
         <div class="dropdown-content">
           <a href="/FindRoom" class="nav-link">Find a conference room</a>
           <a href="/createRoom" class="nav-link">Create a conference room</a>
-          <a href="/manageRoom" class="nav-link"
-            >Manage your rooms</a
-          >
-					<a href="/manageMeeting" class="nav-link"
-            >Manage your meetings</a
-          >
+          <a href="/manageRoom" class="nav-link">Manage your rooms</a>
+          <a href="/manageMeeting" class="nav-link">Manage your meetings</a>
         </div>
       </li>
       <li class="dropdown nav-item">
         <button class="dropbtn nav-link">Danh sách cuộc họp</button>
         <div class="dropdown-content">
           <a href="/admin" class="nav-link">Chủ phòng</a>
+          <!-- <router-link
+            :to="{
+              name: 'admin',
+            }"
+            class="nav-link"
+          >
+            Chủ phòng
+          </router-link> -->
           <a href="/participant" class="nav-link">Thành viên</a>
+          <!-- <router-link
+            :to="{
+              name: 'participant',
+            }"
+            class="nav-link"
+          >
+            Thành viên
+          </router-link> -->
         </div>
       </li>
       <li class="nav-item">
@@ -58,11 +90,11 @@
       </li>
     </ul>
     <ul class="navbar-nav" margin-left="20px" v-if="user">
-			<li class="nav-item">
+      <li class="nav-item">
         <a href="#" class="nav-link notification" style="font-size: 1.2rem">
-					<span>&#128276;	</span>
-					<span class="badge">0</span>
-				</a>
+          <span>&#128276; </span>
+          <span class="badge">0</span>
+        </a>
       </li>
       <li class="nav-item">
         <!-- <a href="/signup" class="nav-link">Sign up</a> -->
@@ -70,9 +102,6 @@
         <!-- <router-link
           :to="{
             name: 'user',
-            params: {
-              getUser: user,
-            },
           }"
           class="nav-link"
         >
@@ -94,11 +123,7 @@ import axios from "axios";
 export default {
   name: "Header",
   data() {
-    return {
-      //signin.islogged
-      //islogged: "0",
-      user: "",
-    };
+    return {};
   },
   components: {
     //signin,
@@ -113,6 +138,7 @@ export default {
     },
   },
   async created() {
+    //get user info
     axios
       .get("api/users/me", {
         headers: {

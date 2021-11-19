@@ -200,6 +200,7 @@
 
 <script>
 import axios from "axios";
+import store from "@/store/index.js";
 
 export default {
   name: "user",
@@ -214,7 +215,7 @@ export default {
       updateUsername: "",
       updatePhoneNumber: "",
       updateEmail: "",
-      userInfo: JSON.parse(localStorage.getItem("userinfo")),
+      userInfo: store.getUserInfo(),
       updateInfo: {
         firstName: "",
         lastName: "",
@@ -290,19 +291,7 @@ export default {
   },
   component: {},
   // async created() {
-  //   axios
-  //     .get("api/users/me", {
-  //       headers: {
-  //         accesstoken: localStorage.getItem("accesstoken"),
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //       this.userInfo = res.data;
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
+  //   this.userInfo = store.getUserInfo();
   // },
 };
 </script>

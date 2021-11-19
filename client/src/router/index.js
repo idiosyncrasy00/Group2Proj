@@ -83,7 +83,7 @@ const routes = [
       notrequiresAuth: false,
     }
   },
-	{
+  {
     path: '/manageMeeting',
     name: 'manageMeeting',
     component: () => import('../views/Rooms/manageMeeting.vue'),
@@ -116,11 +116,11 @@ const routes = [
     component: () => import('../views/Room.vue'),
     meta: {
       requiresAuth: true,
-      notrequiresAuth: false,
+      notrequiresAuth: true,
     }
   },
   {
-    path: '/createMeeting',
+    path: '/Room/createMeeting/roomid=:id',
     name: 'createMeeting',
     component: () => import('../views/createMeeting.vue'),
     meta: {
@@ -163,7 +163,7 @@ const routes = [
       requiresAuth: true,
       notrequiresAuth: false,
     }
-  }
+  },
 ]
 
 const router = createRouter({

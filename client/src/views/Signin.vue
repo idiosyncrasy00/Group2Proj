@@ -1,105 +1,125 @@
 <template>
   <!-- <slot :getUsername="signinValues.username" /> -->
-	<div class="container mx-auto my-auto mt-4" style="height: 70%; width: 80%; box-shadow: 0 30px 40px rgba(0,0,0,.4);">
-		<div class="row" style="padding:0;">
-			<div class = "col-sm-6" style="background-color:#b3ccff;padding:0;margin:0;">
-				<img 
-				src="../assets/meeting-signin.jpg"
-				style="height:100%;
-				width:100%;">
-			</div>
-			<div class = "col-sm-6" style="background-color:#b3ccff;padding:0;margin:0;">
-				<div id="signin" style="background-color: #ccccff;padding:0;margin:0;">
-					<form @submit.prevent="handleSubmit" class="mask">
-						<main class="form-signin">
-							<img
-								class="mb-4 pt-5 img-fluid rounded mx-auto d-block"
-								src="../assets/logo.png"
-								alt=""
-								width="80"
-								height="80"
-							/>
-							<div class="row">
-								<h4
-									class="col-sm-12 mb-3 fw-normal mx-auto text-center"
-									style="padding-bottom: 10px"
-								>
-									Welcome in to Meeting Manage
-								</h4>
-							</div>
-							<div class="card login-card"	>
-								<div
-									class="form-floating"
-									style="
-										padding-top: 8px;
-										padding-left: 8px;
-										padding-right:8px;
-										padding-bottom: 5px;
-									"
-								>
-									<input
-										type="username"
-										class="form-control"
-										id="floatingInput"
-										placeholder="Username"
-										v-model="signinValues.username"
-									/>
-									<label for="floatingInput">Username</label>
-								</div>
-								<div
-									class="form-floating"
-									style="padding-left: 8px; padding-right: 8px; padding-bottom: 5px"
-								>
-									<input
-										type="password"
-										class="form-control"
-										id="floatingPassword"
-										placeholder="Password"
-										v-model="signinValues.password"
-									/>
-									<label for="floatingPassword">Password</label>
-								</div>
+  <div
+    class="container mx-auto my-auto mt-4"
+    style="height: 70%; width: 80%; box-shadow: 0 30px 40px rgba(0, 0, 0, 0.4)"
+  >
+    <div class="row" style="padding: 0">
+      <div
+        class="col-sm-6"
+        style="background-color: #b3ccff; padding: 0; margin: 0"
+      >
+        <img
+          src="../assets/meeting-signin.jpg"
+          style="height: 100%; width: 100%"
+        />
+      </div>
+      <div
+        class="col-sm-6"
+        style="background-color: #b3ccff; padding: 0; margin: 0"
+      >
+        <div
+          id="signin"
+          style="background-color: #ccccff; padding: 0; margin: 0"
+        >
+          <form @submit.prevent="handleSubmit" class="mask">
+            <main class="form-signin">
+              <img
+                class="mb-4 pt-5 img-fluid rounded mx-auto d-block"
+                src="../assets/logo.png"
+                alt=""
+                width="80"
+                height="80"
+              />
+              <div class="row">
+                <h4
+                  class="col-sm-12 mb-3 fw-normal mx-auto text-center"
+                  style="padding-bottom: 10px"
+                >
+                  Welcome in to Meeting Manage
+                </h4>
+              </div>
+              <div class="card login-card">
+                <div
+                  class="form-floating"
+                  style="
+                    padding-top: 8px;
+                    padding-left: 8px;
+                    padding-right: 8px;
+                    padding-bottom: 5px;
+                  "
+                >
+                  <input
+                    type="username"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="Username"
+                    v-model="signinValues.username"
+                  />
+                  <label for="floatingInput">Username</label>
+                </div>
+                <div
+                  class="form-floating"
+                  style="
+                    padding-left: 8px;
+                    padding-right: 8px;
+                    padding-bottom: 5px;
+                  "
+                >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="floatingPassword"
+                    placeholder="Password"
+                    v-model="signinValues.password"
+                  />
+                  <label for="floatingPassword">Password</label>
+                </div>
 
-								<div class="checkbox mb-3">
-									<label>
-										<input type="checkbox" value="remember-me" /> Remember me
-									</label>
-								</div>
-								<button
-									class="
-										group
-										relative
-										w-full
-										flex
-										justify-center
-										py-2
-										px-4
-										border border-transparent
-										text-sm
-										font-medium
-										rounded-md
-										text-white
-										signin-button
-									"
-									style="background-color: #38c75c; margin-bottom: 5px"
-								>
-									Sign in
-								</button>
-								<div class="row text-center mt-2">
-									<a href="/signup" style="text-decoration:none;">Dont have an account? Sign up here</a>
-								</div>
-							</div>
-							<!--Do some css with err msg-->
-							<p style="color: red">{{ errorMsg }}</p>
-							<p class="mt-5 mb-2 text-muted">&copy; 2021–</p>
-							<!-- </form> -->
-						</main>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	
+                <div class="checkbox mb-3">
+                  <label>
+                    <input type="checkbox" value="remember-me" /> Remember me
+                  </label>
+                </div>
+                <button
+                  class="
+                    group
+                    relative
+                    w-full
+                    flex
+                    justify-center
+                    py-2
+                    px-4
+                    border border-transparent
+                    text-sm
+                    font-medium
+                    rounded-md
+                    text-white
+                    signin-button
+                  "
+                  style="background-color: #38c75c; margin-bottom: 5px"
+                >
+                  Sign in
+                </button>
+                <div class="row text-center mt-2">
+                  <a href="/signup" style="text-decoration: none"
+                    >Dont have an account? Sign up here</a
+                  >
+                  <a href="/" style="text-decoration: none"
+                    >Quay trở về trang chủ</a
+                  >
+                </div>
+              </div>
+              <!--Do some css with err msg-->
+              <p style="color: red">{{ errorMsg }}</p>
+              <p class="mt-5 mb-2 text-muted">&copy; 2021–</p>
+              <!-- </form> -->
+            </main>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -123,7 +143,6 @@ export default {
         username: this.signinValues.username,
         password: this.signinValues.password,
       };
-      //const res = await axios.post("login", data);
       //AXIOS
       axios
         .post("api/users/login", data)
@@ -173,9 +192,9 @@ body {
   align-items: center;
   padding-bottom: 40px;
 }
-#signin{
-	height: 100%;
-	width	: 100%;
+#signin {
+  height: 100%;
+  width: 100%;
 }
 .form-signin {
   width: 100%;
@@ -206,7 +225,7 @@ body {
 .login-card {
   width: 100%;
   background-color: transparent;
-	border: none;
+  border: none;
   overflow: hidden;
 }
 .form-signin h4 {
@@ -222,7 +241,7 @@ input[type="password"]:hover {
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
-.signin-button{
-	border-radius: 4rem;
+.signin-button {
+  border-radius: 4rem;
 }
 </style>
