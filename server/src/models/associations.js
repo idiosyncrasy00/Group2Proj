@@ -4,13 +4,15 @@ module.exports = (db) => {
         foreignKey: 'adminid'
     });
     db.Meeting.belongsTo(db.User, {
-        foreignKey: 'adminid'
+        foreignKey: 'adminid',
+        as: "admin"
     });
     db.Room.hasMany(db.Meeting, {
         foreignKey: 'roomid'
     });
     db.Meeting.belongsTo(db.Room, {
-        foreignKey: 'roomid'
+        foreignKey: 'roomid',
+        as: "room"
     });
     db.User.belongsToMany(db.Meeting, {
         through: db.Participant,
@@ -18,6 +20,7 @@ module.exports = (db) => {
     });
     db.Meeting.belongsToMany(db.User, {
         through: db.Participant,
-        foreignKey: 'meetingid'
+        foreignKey: 'meetingid',
+        as: "participant"
     });
 };

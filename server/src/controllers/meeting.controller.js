@@ -152,12 +152,12 @@ const getMeetingInfo = async (req, res) => {
                 res.status(404).send({error: "Meeting not found"});
             } else {
                 res.send(_.pick(meeting, 
-                    ['adminid', 'roomid', 'reserveddate', 'startingtime', 'during', 'status']));
+                    ['adminid', 'roomid', 'reserveddate', 'startingtime', 'during', 'title', 'content', 'status']));
             }
         } catch (error) {
             res.status(400).send({error: error.message});
         }
     }
-}
+};
 
 module.exports = { createMeeting, editMeeting, deleteMeeting, getMeetingInfo };

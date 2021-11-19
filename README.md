@@ -55,3 +55,9 @@ Username: root
 Password: admin
 Database:
 ```
+
+### - Reset database (for development)
+```
+cd server/
+npm run db_reset
+```

@@ -86,9 +86,37 @@ module.exports = {
             password: "123",
             status: "WAITING"
         }]);
+        await db.Participant.bulkCreate([{
+            meetingid: 101,
+            userid: 11,
+            isaccepting: false
+        }, {
+            meetingid: 101,
+            userid: 13,
+            isaccepting: true
+        }, {
+            meetingid: 102,
+            userid: 12,
+            isaccepting: true,
+            feedback: "Good"
+        }, {
+            meetingid: 103,
+            userid: 12,
+            isaccepting: false
+        }]);
     },
 
     down: async (db) => {
+        await db.Participant.destroy({
+            where: {
+                meetingid: [101, 102, 103]
+            }
+        });
+        await db.Meeting.destroy({
+            where: {
+                id: [101, 102, 103]
+            }
+        });
         await db.Room.destroy({
             where: {
                 id: [1, 2, 3]
@@ -97,11 +125,6 @@ module.exports = {
         await db.User.destroy({
             where: {
                 id: [11, 12, 13]
-            }
-        });
-        await db.Meeting.destroy({
-            where: {
-                id: [101, 102, 103]
             }
         });
     }
