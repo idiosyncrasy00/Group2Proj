@@ -32,6 +32,13 @@
           >
         </div>
       </li>
+      <li class="dropdown nav-item">
+        <button class="dropbtn nav-link">Danh sách cuộc họp</button>
+        <div class="dropdown-content">
+          <a href="/admin" class="nav-link">Chủ phòng</a>
+          <a href="/participant" class="nav-link">Thành viên</a>
+        </div>
+      </li>
       <li class="nav-item">
         <a href="/UserList" class="nav-link">Show list of users</a>
       </li>

@@ -9,6 +9,7 @@ import './services/axios.js';
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
+
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth == true)
     && to.matched.some(record => record.meta.notrequiresAuth == false)) {
