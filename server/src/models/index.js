@@ -58,5 +58,6 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 db.db_init = db_init;
 db.db_reset = db_reset;
+db.Op = sequelize.Op;
 
 module.exports = db;

@@ -4,6 +4,8 @@ const User = models.User;
 const Room = models.Room;
 const Participant = models.Participant;
 const sequelize = models.sequelize;
+const Op = models.Op;
+const validation = require('../validations/util.validation');
 
 
 const getReservedMeetingList = async (req, res) => {
@@ -34,8 +36,6 @@ const getInvitedMeetingList = async (req, res) => {
         include: [{
             model: User,
             as: "participant",
-            // required: false,
-            // right: true,
             attributes: [],
             where: {
                 id: req.user.id
@@ -53,8 +53,48 @@ const getInvitedMeetingList = async (req, res) => {
             attributes: ['id', 'roomname']
         }]
     });
-    res.send(meetings)
+    res.send(meetings);
 };
 
+const queryMeeting = async (req, res) => {
+    const {error, value} = await validation.querySchema.validate(req.body);
+    if (error) {
+        res.status(403).send({ error: error.message });
+    } else {
+        let meetings = await User.findAll({
+            attributes: ['id', 'adminid', 'roomid', 'reserveddate', 'startingtime', 'during', 'title', 'content', 'status'],
+            include: [{
+                model: User,
+                as: "admin",
+                attributes: [
+                    'id',
+                    [sequelize.fn('CONCAT', sequelize.col('admin.firstname'), ' ', sequelize.col('admin.lastname')), 'adminname']
+                ],
+                where: {
+                    adminname: {
+                        [Op.ilike]: "%${value.adminname}%"
+                    }
+                }
+            }, {
+                model: Room,
+                as: "room",
+                attributes: ['id', 'roomname'],
+                where: {
+                    roomname: {
+                        [Op.ilike]: "%${value.roomname}%"
+                    }
+                }
+            }],
+            where: {
+                [Op.and]: [{
+                    title: {
+                        [Op.ilike]: "%${value.title}%"
+                    }
+                }, ((value.reserveddate) ? { reserveddate: value.reserveddate } : {})]
+            }
+        });
+        res.send(meetings);
+    }
+};
 
-module.exports = { getReservedMeetingList, getInvitedMeetingList };
+module.exports = { getReservedMeetingList, getInvitedMeetingList, queryMeeting };
