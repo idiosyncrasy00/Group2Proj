@@ -7,36 +7,68 @@
       d-flex
       justify-content-between
     "
-		v-if="this.$route.path==='/signin'||this.$route.path==='/signup' ? false : true"
-  >	
+    v-if="
+      this.$route.path === '/signin' || this.$route.path === '/signup'
+        ? false
+        : true
+    "
+  >
     <a class="navbar-brand" href="/">
       <img src="../assets/logo.png" style="height: 2rem" />
     </a>
     <ul class="navbar-nav" display:auto>
       <li class="nav-item">
         <a href="/" class="nav-link"> Home </a>
+        <!-- <router-link
+          :to="{
+            name: 'home',
+          }"
+          class="nav-link"
+        >
+          Home
+        </router-link> -->
       </li>
       <li class="nav-item">
         <a href="/about" class="nav-link">About</a>
+        <!-- <router-link
+          :to="{
+            name: 'about',
+          }"
+          class="nav-link"
+        >
+          About
+        </router-link> -->
       </li>
       <li class="dropdown nav-item">
         <button class="dropbtn nav-link">Room detail</button>
         <div class="dropdown-content">
           <a href="/FindRoom" class="nav-link">Find a conference room</a>
           <a href="/createRoom" class="nav-link">Create a conference room</a>
-          <a href="/manageRoom" class="nav-link"
-            >Manage your rooms</a
-          >
-					<a href="/manageMeeting" class="nav-link"
-            >Manage your meetings</a
-          >
+          <a href="/manageRoom" class="nav-link">Manage your rooms</a>
+          <a href="/manageMeeting" class="nav-link">Manage your meetings</a>
         </div>
       </li>
       <li class="dropdown nav-item">
         <button class="dropbtn nav-link">Danh sách cuộc họp</button>
         <div class="dropdown-content">
           <a href="/admin" class="nav-link">Chủ phòng</a>
+          <!-- <router-link
+            :to="{
+              name: 'admin',
+            }"
+            class="nav-link"
+          >
+            Chủ phòng
+          </router-link> -->
           <a href="/participant" class="nav-link">Thành viên</a>
+          <!-- <router-link
+            :to="{
+              name: 'participant',
+            }"
+            class="nav-link"
+          >
+            Thành viên
+          </router-link> -->
         </div>
       </li>
       <li class="nav-item">
@@ -49,7 +81,7 @@
         <a href="/Room" class="nav-link">Manage Room(v2 Test)</a>
       </li>
     </ul>
-    <ul class="navbar-nav" margin-left="20px" v-if="!user">
+    <ul class="navbar-nav" margin-left="20px" v-if="islogged == 0">
       <li class="nav-item">
         <a href="/signin" class="nav-link">Sign in</a>
       </li>
@@ -57,6 +89,7 @@
         <a href="/signup" class="nav-link">Sign up</a>
       </li>
     </ul>
+<<<<<<< HEAD
     <ul class="navbar-nav" margin-left="20px" v-if="user">
 			<div 
 			v-on:mouseover="mouseOverNotify"
@@ -72,24 +105,19 @@
 					</Notify>
 				</div>
 			</div>
+=======
+    <ul class="navbar-nav" margin-left="20px" v-if="islogged == 1">
+      <li class="nav-item">
+        <a href="#" class="nav-link notification" style="font-size: 1.2rem">
+          <span>&#128276; </span>
+          <span class="badge">0</span>
+        </a>
+      </li>
+>>>>>>> 476e3f269538ac6236e82325d183605999452107
       <li class="nav-item">
         <!-- <a href="/signup" class="nav-link">Sign up</a> -->
         <a href="/user" class="nav-link">Hello {{ user.username }}</a>
-        <!-- <router-link
-          :to="{
-            name: 'user',
-            params: {
-              getUser: user,
-            },
-          }"
-          class="nav-link"
-        >
-          Hello {{ user.username }}</router-link
-        > -->
       </li>
-      <!-- <li class="nav-item">
-        <a href="/User" class="nav-link">My Account</a>
-      </li> -->
       <li class="nav-item">
         <a href="/signin" class="nav-link" @click="handleClick">Log out</a>
       </li>
@@ -98,22 +126,32 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import Notify from "@/components/Notify.vue"
 import axios from "axios";
+=======
+//import axios from "axios";
+//import store from "@/store/index.js";
+import { getUserInfoAPI } from "@/services/user.apiServices.js";
+//import { getUserInfoAPI } from "@/services/user.apiServices.js";
+>>>>>>> 476e3f269538ac6236e82325d183605999452107
 export default {
   name: "Header",
   data() {
     return {
-      //signin.islogged
-      //islogged: "0",
+      islogged: "0",
       user: "",
 			showNotify: false,
     };
   },
   components: {
     //signin,
+<<<<<<< HEAD
     axios,
 		Notify,
+=======
+    //axios,
+>>>>>>> 476e3f269538ac6236e82325d183605999452107
   },
   methods: {
     handleClick() {
@@ -130,20 +168,23 @@ export default {
 		}
   },
   async created() {
-    axios
-      .get("api/users/me", {
-        headers: {
-          accesstoken: localStorage.getItem("accesstoken"),
-        },
-      })
+    //user info
+    getUserInfoAPI()
       .then((res) => {
         console.log(res);
         localStorage.setItem("userinfo", JSON.stringify(res.data));
+        this.islogged = 1;
         this.user = res.data;
       })
       .catch((err) => {
         console.log(err);
       });
+    // this.user = store.getUserInfo();
+    // if (this.user != null) {
+    //   this.islogged = 1;
+    // } else {
+    //   this.islogged = 0;
+    // }
   },
 };
 </script>

@@ -151,7 +151,7 @@
 
 <script>
 //import { defineComponent } from '@vue/composition-api'
-import DataServices from "@/services/DataServices.js";
+//import DataServices from "@/services/user.apiServices.js";
 import UiInput from "@/components/UiInput";
 
 export default {
@@ -184,7 +184,7 @@ export default {
     },
   },
   components: {
-    DataServices,
+    //DataServices,
 		UiInput,
   },
   /* 

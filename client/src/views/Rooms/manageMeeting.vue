@@ -94,7 +94,7 @@
 <script>
 import Nav from "@/components/Nav.vue";
 import ModifyMeeting from "@/components/ModifyMeeting.vue";
-import DataServices from "@/services/DataServices.js";
+//import DataServices from "@/services/DataServices.js";
 
 export default {
   name: "FindRoom",
@@ -124,18 +124,18 @@ export default {
     };
   },
   created() {
-    DataServices.getRoom()
-      .then((res) => {
-        this.event = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // DataServices.getRoom()
+    //   .then((res) => {
+    //     this.event = res.data;
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   },
   components: {
     Nav,
 		ModifyMeeting,
-    DataServices,
+    //DataServices,
   },
   methods: {
     searchResult() {

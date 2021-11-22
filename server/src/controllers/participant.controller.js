@@ -1,5 +1,6 @@
-const Participant = require('../models').Participant;
-const Meeting = require('../models').Meeting;
+const models = require('../models');
+const Participant = models.Participant;
+const Meeting = models.Meeting;
 const validation = require('../validations/participant.validation');
 const _ = require('lodash');
 

@@ -199,7 +199,12 @@
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
+import store from "@/store/index.js";
+import {
+  updateUserInfoAPI,
+  //getUserInfoAPI,
+} from "@/services/user.apiServices.js";
 
 export default {
   name: "user",
@@ -214,7 +219,7 @@ export default {
       updateUsername: "",
       updatePhoneNumber: "",
       updateEmail: "",
-      userInfo: JSON.parse(localStorage.getItem("userinfo")),
+      userInfo: "",
       updateInfo: {
         firstName: "",
         lastName: "",
@@ -258,52 +263,53 @@ export default {
 
       if (this.updateUsername != null && this.updateUsername != "")
         this.updateInfo.userName = this.userName;
-      //POST
-      //POST
-      axios
-        .put(
-          "api/users/edit",
-          {
-            firstname: this.updateFirstName,
-            lastname: this.updateLastName,
-            email: this.updateEmail,
-            dob: this.updateDob,
-            phone: this.updatePhoneNumber, // not required
-            address: this.updateAddress, // not required
-          },
-          {
-            headers: {
-              accesstoken: localStorage.getItem("accesstoken"),
-            },
-          }
-        )
+      //PUT
+      var updatedData = {
+        firstname: this.updateFirstName,
+        lastname: this.updateLastName,
+        email: this.updateEmail,
+        dob: this.updateDob,
+        phone: this.updatePhoneNumber, // not required
+        address: this.updateAddress, // not required
+      };
+      updateUserInfoAPI(updatedData)
         .then((res) => {
           console.log(res);
-          this.userInfo = res.data;
-          window.location.href = "/User";
-          //this.switchToUpdate();
+          //this.$swal.fire("Good job!", "Cập nhật thông tin cá nhân thành công", "success");
+          this.$swal.fire({
+            icon: "success",
+            title: "YAY!...",
+            text: "Cập nhật thông tin cá nhân thành công",
+            // footer: '<a href="">Why do I have this issue?</a>',
+          });
+          window.setTimeout(function () {
+            location.reload();
+          }, 5000);
         })
         .catch((err) => {
           console.log(err);
+          this.$swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Cập nhật thông tin cá nhân thất bại :(",
+            // footer: '<a href="">Why do I have this issue?</a>',
+          });
         });
     },
   },
   component: {},
   // async created() {
-  //   axios
-  //     .get("api/users/me", {
-  //       headers: {
-  //         accesstoken: localStorage.getItem("accesstoken"),
-  //       },
-  //     })
+  //   getUserInfoAPI()
   //     .then((res) => {
-  //       console.log(res);
   //       this.userInfo = res.data;
   //     })
   //     .catch((err) => {
   //       console.log(err);
   //     });
   // },
+  async created() {
+    this.userInfo = store.getUserInfo();
+  },
 };
 </script>
 
