@@ -89,8 +89,7 @@
         <a href="/signup" class="nav-link">Sign up</a>
       </li>
     </ul>
-<<<<<<< HEAD
-    <ul class="navbar-nav" margin-left="20px" v-if="user">
+    <ul class="navbar-nav" margin-left="20px" v-if="islogged == 1">
 			<div 
 			v-on:mouseover="mouseOverNotify"
 			v-on:mouseleave="mouseLeaveNotify">
@@ -105,15 +104,6 @@
 					</Notify>
 				</div>
 			</div>
-=======
-    <ul class="navbar-nav" margin-left="20px" v-if="islogged == 1">
-      <li class="nav-item">
-        <a href="#" class="nav-link notification" style="font-size: 1.2rem">
-          <span>&#128276; </span>
-          <span class="badge">0</span>
-        </a>
-      </li>
->>>>>>> 476e3f269538ac6236e82325d183605999452107
       <li class="nav-item">
         <!-- <a href="/signup" class="nav-link">Sign up</a> -->
         <a href="/user" class="nav-link">Hello {{ user.username }}</a>
@@ -126,15 +116,12 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import Notify from "@/components/Notify.vue"
-import axios from "axios";
-=======
 //import axios from "axios";
 //import store from "@/store/index.js";
 import { getUserInfoAPI } from "@/services/user.apiServices.js";
 //import { getUserInfoAPI } from "@/services/user.apiServices.js";
->>>>>>> 476e3f269538ac6236e82325d183605999452107
+
 export default {
   name: "Header",
   data() {
@@ -146,12 +133,8 @@ export default {
   },
   components: {
     //signin,
-<<<<<<< HEAD
-    axios,
-		Notify,
-=======
     //axios,
->>>>>>> 476e3f269538ac6236e82325d183605999452107
+		Notify,
   },
   methods: {
     handleClick() {
