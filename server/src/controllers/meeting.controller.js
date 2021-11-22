@@ -2,6 +2,7 @@ const Meeting = require('../models').Meeting;
 const validation = require('../validations/meeting.validation');
 const _ = require('lodash');
 
+
 const createMeeting = async (req, res) => {
     const {error, value} = await validation.createSchema.validate(req.body);
     if (error) {

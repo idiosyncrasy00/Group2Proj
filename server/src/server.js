@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const db = require('./models');
-const mailer = require('./utilities/email');
+// const mailer = require('./utilities/email');
 
 // Middlewares
 console.log('Setting middlewares ...');

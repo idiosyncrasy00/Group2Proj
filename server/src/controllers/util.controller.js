@@ -61,7 +61,7 @@ const queryMeeting = async (req, res) => {
     if (error) {
         res.status(403).send({ error: error.message });
     } else {
-        let meetings = await User.findAll({
+        let meetings = await Meeting.findAll({
             attributes: ['id', 'adminid', 'roomid', 'reserveddate', 'startingtime', 'during', 'title', 'content', 'status'],
             include: [{
                 model: User,
@@ -69,28 +69,26 @@ const queryMeeting = async (req, res) => {
                 attributes: [
                     'id',
                     [sequelize.fn('CONCAT', sequelize.col('admin.firstname'), ' ', sequelize.col('admin.lastname')), 'adminname']
-                ],
-                where: {
-                    adminname: {
-                        [Op.ilike]: "%${value.adminname}%"
-                    }
-                }
+                ]
             }, {
                 model: Room,
                 as: "room",
-                attributes: ['id', 'roomname'],
-                where: {
-                    roomname: {
-                        [Op.ilike]: "%${value.roomname}%"
-                    }
-                }
+                attributes: ['id', 'roomname']
             }],
             where: {
                 [Op.and]: [{
                     title: {
-                        [Op.ilike]: "%${value.title}%"
+                        [Op.substring]: value.title
                     }
-                }, ((value.reserveddate) ? { reserveddate: value.reserveddate } : {})]
+                }, (
+                    (value.reserveddate != "") ? { reserveddate: value.reserveddate } : {}
+                ), (
+                    sequelize.where(sequelize.fn('CONCAT', sequelize.col('admin.firstname'), ' ', sequelize.col('admin.lastname')), Op.like, `%${value.adminname}%`)
+                ), {
+                    '$room.roomname$': {
+                        [Op.substring]: value.roomname
+                    } 
+                }]
             }
         });
         res.send(meetings);
