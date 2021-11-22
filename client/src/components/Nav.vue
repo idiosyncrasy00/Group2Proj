@@ -58,12 +58,20 @@
       </li>
     </ul>
     <ul class="navbar-nav" margin-left="20px" v-if="user">
-			<li class="nav-item">
-        <a href="#" class="nav-link notification" style="font-size: 1.2rem">
-					<span>&#128276;	</span>
-					<span class="badge">0</span>
-				</a>
-      </li>
+			<div 
+			v-on:mouseover="mouseOverNotify"
+			v-on:mouseleave="mouseLeaveNotify">
+				<li class="nav-item">
+					<a href="#" class="nav-link notification" style="font-size: 1.2rem">
+						<span>&#128276;	</span>
+						<span class="badge">0</span>
+					</a>
+				</li>
+				<div v-if="this.showNotify">
+					<Notify>
+					</Notify>
+				</div>
+			</div>
       <li class="nav-item">
         <!-- <a href="/signup" class="nav-link">Sign up</a> -->
         <a href="/user" class="nav-link">Hello {{ user.username }}</a>
@@ -90,6 +98,7 @@
 </template>
 
 <script>
+import Notify from "@/components/Notify.vue"
 import axios from "axios";
 export default {
   name: "Header",
@@ -98,11 +107,13 @@ export default {
       //signin.islogged
       //islogged: "0",
       user: "",
+			showNotify: false,
     };
   },
   components: {
     //signin,
     axios,
+		Notify,
   },
   methods: {
     handleClick() {
@@ -111,6 +122,12 @@ export default {
       this.user = null;
       this.$router.push("/signin");
     },
+		mouseOverNotify(){
+			this.showNotify = true;
+		},
+		mouseLeaveNotify(){
+			this.showNotify = false;
+		}
   },
   async created() {
     axios
@@ -202,8 +219,8 @@ nav {
 
 .notification .badge {
   position: relative;
-  top: -10px;
-  right: 10px;
+  top: -45px;
+  right: -7px;
   padding: 2px 5px;
   border-radius: 50%;
   background: red;

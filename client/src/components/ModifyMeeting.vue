@@ -130,7 +130,7 @@ export default {
 	},
 	methods: {
 		sendData(){
-			console.log(this.new_start_time);
+			console.log(this.meetingid);
 		},
 	},
 	components: {
