@@ -1,10 +1,11 @@
-export default function authHeader() {
-  let user = JSON.parse(localStorage.getItem('user'));
-  if (user && user.accesstoken) {
-    return {
-      Authorization: 'Bearer ' + user.accesstoken
-    };
-  } else {
-    return {};
-  }
-}
+import axios from "axios";
+
+const baseURL = "http://localhost:3000/";
+
+const getHeaders = {
+  headers: {
+    accesstoken: localStorage.getItem("accesstoken"),
+  },
+};
+
+export {axios, baseURL, getHeaders}

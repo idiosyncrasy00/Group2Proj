@@ -11,27 +11,27 @@
 //   }
 // })
 var roomlist = [];
-var meetingListAsHost = [];
-var meetingListAsParticipant = [];
+//var meetingListAsHost = [];
+//var meetingListAsParticipant = [];
 roomlist = JSON.parse(localStorage.getItem('roomlist'));
-var userInfo = JSON.parse(localStorage.getItem('userinfo'));
-meetingListAsHost = JSON.parse(localStorage.getItem('meetingsInfoAsHost'));
-meetingListAsParticipant = JSON.parse(localStorage.getItem('meetingsInfoAsParticipant'));
+//let userInfo = JSON.parse(localStorage.getItem('userinfo'));  
+//meetingListAsHost = JSON.parse(localStorage.getItem('meetingsInfoAsHost'));
+//meetingListAsParticipant = JSON.parse(localStorage.getItem('meetingsInfoAsParticipant'));
 function getRoom(index) {
   return roomlist[index - 1];
 }
 
 function getUserInfo() {
-  return userInfo;
+  return JSON.parse(localStorage.getItem('userinfo'));
 }
 
 //manage meetings
 function getMeetingsAsParticipant() {
-  return meetingListAsParticipant;
+  return JSON.parse(localStorage.getItem('meetingsInfoAsParticipant'));
 }
 
 function getMeetingsAsHost() {
-  return meetingListAsHost;
+  return JSON.parse(localStorage.getItem('meetingsInfoAsHost'));
 }
 
 module.exports = { getRoom, getUserInfo, getMeetingsAsParticipant, getMeetingsAsHost };

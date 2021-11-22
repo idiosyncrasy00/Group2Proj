@@ -53,7 +53,7 @@
 
 <script>
 import Nav from "@/components/Nav.vue";
-import DataServices from "@/services/DataServices.js";
+//import DataServices from "@/services/user.apiServices.js";
 
 export default {
   name: "FindRoom",
@@ -84,17 +84,17 @@ export default {
     };
   },
   created() {
-    DataServices.getRoom()
-      .then((res) => {
-        this.event = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // DataServices.getRoom()
+    //   .then((res) => {
+    //     this.event = res.data;
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   },
   components: {
     Nav,
-    DataServices,
+    //DataServices,
   },
   method: {
     searchResult() {

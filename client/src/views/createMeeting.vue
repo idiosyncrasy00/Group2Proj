@@ -1,7 +1,13 @@
 <template>
   <div class="container h-100">
     <div class="row h-100">
-      <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+      <div
+        class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100"
+        v-if="this.meetingInfo.roomid >= 4"
+      >
+        <roomNotFound />
+      </div>
+      <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100" v-else>
         <div class="d-table-cell align-middle">
           <div class="text-center mt-4">
             <h1 class="h2">Tạo cuộc họp</h1>
@@ -100,13 +106,17 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+//import axios from "axios";
+import { createMeetingAPI } from "@/services/meeting.apiServices.js";
 import store from "@/store/index.js";
+import roomNotFound from "@/components/roomNotFound.vue";
 
 export default {
   name: "createMeeting",
   //props: ["roomlist1"],
-  components: {},
+  components: {
+    roomNotFound,
+  },
   data() {
     return {
       //roominfo: this.$route.params.roominfo.id,
@@ -146,21 +156,23 @@ export default {
         parseInt(this.meetingInfo.startingtime) >= 8 &&
         parseInt(this.meetingInfo.startingtime) <= 22
       ) {
-        axios
-          .post("/api/meetings/create", meetingInfo, {
-            headers: {
-              accesstoken: localStorage.getItem("accesstoken"),
-            },
-          })
+        createMeetingAPI(meetingInfo)
           .then((res) => {
             console.log(res);
-            alert("Tạo cuộc họp thành công");
-            //this.rooms = res.data;
-            //this.userInfo = res.data;
+            this.$swal.fire("Good job!", "Tạo cuộc họp thành công", "success");
+            window.setTimeout(function () {
+              location.href = "/Room";
+            }, 5000);
+            //window.location.href = "/Room";
           })
           .catch((err) => {
             console.log(err);
-            alert("Tạo cuộc họp thất bại");
+            this.$swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Tạo cuộc họp thất bại :(((",
+              // footer: '<a href="">Why do I have this issue?</a>',
+            });
           });
       } else {
         this.errMsg = "Giờ đặt họp chỉ cho phép từ 8:00 AM đến 22:00 PM";

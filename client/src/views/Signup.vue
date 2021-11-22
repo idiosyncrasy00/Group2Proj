@@ -133,8 +133,7 @@
 
 <script>
 import Nav from "../components/Nav.vue";
-import axios from "axios";
-//import apiService from "@/services/apiServices";
+import { registerAPI } from "@/services/user.apiServices.js";
 
 export default {
   name: "signup",
@@ -168,14 +167,11 @@ export default {
       };
       //console.log(data);
       //AXIOS
-      axios
-        .post("api/users/register", data)
+      registerAPI(data)
         .then((res) => {
           console.log(res);
           if (res.status < 400) {
             localStorage.setItem("accesstoken", res.headers.accesstoken);
-            //alert(res.headers.accesstoken);
-            //this.$router.push("/");
             window.location.href = "/";
           }
         })
@@ -183,13 +179,6 @@ export default {
           this.errMsg = err.response.data;
           console.log(err);
         });
-      // try {
-      //   apiService.register(data);
-      //   this.$router.push("/");
-      // } catch (e) {
-      //   console.log(e);
-      // }
-      //this.$router.push("/");
     },
   },
   components: {

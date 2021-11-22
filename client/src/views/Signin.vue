@@ -123,7 +123,8 @@
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
+import { loginAPI } from "@/services/user.apiServices.js";
 //import apiService from "@/services/apiServices";
 
 export default {
@@ -144,8 +145,7 @@ export default {
         password: this.signinValues.password,
       };
       //AXIOS
-      axios
-        .post("api/users/login", data)
+      loginAPI(data)
         .then((res) => {
           console.log(res);
           if (res.status != 400) {
@@ -159,10 +159,25 @@ export default {
           this.errorMsg = "Invalid username or password";
           console.log(err);
         });
+      // axios
+      //   .post("api/users/login", data)
+      //   .then((res) => {
+      //     console.log(res);
+      //     if (res.status != 400) {
+      //       localStorage.setItem("accesstoken", res.headers.accesstoken);
+      //       console.log(res.headers.accesstoken);
+      //       window.location.href = "/";
+      //       //this.$router.push("/");
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     this.errorMsg = "Invalid username or password";
+      //     console.log(err);
+      //   });
     },
   },
   components: {
-    axios,
+    //axios,
   },
 };
 </script>

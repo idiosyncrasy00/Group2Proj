@@ -82,6 +82,8 @@
 <script>
 //import axios from "axios";
 //import store from "@/store/index.js";
+import { getRoomListAPI } from "@/services/room.apiServices.js";
+
 export default {
   name: "room",
   components: {},
@@ -114,7 +116,17 @@ export default {
   },
 
   async created() {
-    this.rooms = JSON.parse(localStorage.getItem("roomlist"));
+    // get room list
+    getRoomListAPI()
+      .then((res) => {
+        console.log(res.data);
+        //localStorage.setItem("roomlist", JSON.stringify(res.data));
+        this.rooms = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    //this.rooms = JSON.parse(localStorage.getItem("roomlist"));
     //this.room =
   },
 };

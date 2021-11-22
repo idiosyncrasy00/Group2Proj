@@ -156,7 +156,7 @@ const routes = [
     }
   },
   {
-    path: '/editMeeting',
+    path: '/admin/editMeeting/roomid=:roomid/meetingid=:meetingid',
     name: 'editMeeting',
     component: () => import('../views/Meetings/editMeeting.vue'),
     meta: {

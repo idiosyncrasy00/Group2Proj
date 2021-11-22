@@ -81,7 +81,7 @@
         <a href="/Room" class="nav-link">Manage Room(v2 Test)</a>
       </li>
     </ul>
-    <ul class="navbar-nav" margin-left="20px" v-if="!user">
+    <ul class="navbar-nav" margin-left="20px" v-if="islogged == 0">
       <li class="nav-item">
         <a href="/signin" class="nav-link">Sign in</a>
       </li>
@@ -89,7 +89,7 @@
         <a href="/signup" class="nav-link">Sign up</a>
       </li>
     </ul>
-    <ul class="navbar-nav" margin-left="20px" v-if="user">
+    <ul class="navbar-nav" margin-left="20px" v-if="islogged == 1">
       <li class="nav-item">
         <a href="#" class="nav-link notification" style="font-size: 1.2rem">
           <span>&#128276; </span>
@@ -99,18 +99,7 @@
       <li class="nav-item">
         <!-- <a href="/signup" class="nav-link">Sign up</a> -->
         <a href="/user" class="nav-link">Hello {{ user.username }}</a>
-        <!-- <router-link
-          :to="{
-            name: 'user',
-          }"
-          class="nav-link"
-        >
-          Hello {{ user.username }}</router-link
-        > -->
       </li>
-      <!-- <li class="nav-item">
-        <a href="/User" class="nav-link">My Account</a>
-      </li> -->
       <li class="nav-item">
         <a href="/signin" class="nav-link" @click="handleClick">Log out</a>
       </li>
@@ -119,15 +108,21 @@
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
+//import store from "@/store/index.js";
+import { getUserInfoAPI } from "@/services/user.apiServices.js";
+//import { getUserInfoAPI } from "@/services/user.apiServices.js";
 export default {
   name: "Header",
   data() {
-    return {};
+    return {
+      islogged: "0",
+      user: "",
+    };
   },
   components: {
     //signin,
-    axios,
+    //axios,
   },
   methods: {
     handleClick() {
@@ -138,21 +133,23 @@ export default {
     },
   },
   async created() {
-    //get user info
-    axios
-      .get("api/users/me", {
-        headers: {
-          accesstoken: localStorage.getItem("accesstoken"),
-        },
-      })
+    //user info
+    getUserInfoAPI()
       .then((res) => {
         console.log(res);
         localStorage.setItem("userinfo", JSON.stringify(res.data));
+        this.islogged = 1;
         this.user = res.data;
       })
       .catch((err) => {
         console.log(err);
       });
+    // this.user = store.getUserInfo();
+    // if (this.user != null) {
+    //   this.islogged = 1;
+    // } else {
+    //   this.islogged = 0;
+    // }
   },
 };
 </script>
