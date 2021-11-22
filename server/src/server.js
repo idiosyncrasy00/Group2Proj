@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const db = require('./models');
+const mailer = require('./utilities/email');
 
 // Middlewares
 console.log('Setting middlewares ...');
@@ -17,6 +18,9 @@ app.use(helmet());
 
 // Database
 (async () => await db.db_init())();
+
+// Email
+// (async () => await mailer.init_mailer())();
 
 // Routes
 console.log('Setting routes ...');

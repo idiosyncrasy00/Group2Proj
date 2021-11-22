@@ -8,7 +8,7 @@ const createMeeting = async (req, res) => {
         res.status(403).send({error: error.message})
     } else {
         if (!req.user.isAdmin) {
-            res.status(401).send({error: "User has no right to create  meeting"})
+            res.status(401).send({error: "User has no right to create meeting"})
         } else {
             try {
                 let available_meetings = await Meeting.findAll({
