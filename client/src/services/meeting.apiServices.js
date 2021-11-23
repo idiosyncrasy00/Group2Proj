@@ -19,8 +19,13 @@ function editMeetingAPI(data) {
     );
 }
 
-function deleteMeetingAPI(meetingID) {
-  return axios.delete(baseURL + "/api/meetings/delete", meetingID, getHeaders);
+function deleteMeetingAPI(id) {
+  return axios.delete(baseURL + "api/meetings/delete", getHeaders, {
+    data: {
+      id: id
+    }
+  });
+  //axios.delete()
 }
 
 function inviteParticipants() {

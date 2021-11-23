@@ -105,7 +105,14 @@
                             ></textarea>
                           </div>
                           <div class="text-center mt-3">
-                            <button @click.prevent="updateMeeting">
+                            <!-- <button @click.prevent="updateMeeting">
+                              Xác nhận
+                            </button> -->
+                            <button
+                              type="button"
+                              class="btn btn-primary"
+                              @click.prevent="updateMeeting"
+                            >
                               Xác nhận
                             </button>
                             <!-- <button type="submit" class="btn btn-lg btn-primary">Sign up</button> -->

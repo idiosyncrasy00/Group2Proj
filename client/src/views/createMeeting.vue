@@ -61,7 +61,7 @@
                     />
                   </div>
                   <div class="form-group">
-                    <label>Thời gian họp</label>
+                    <label>Thời gian họp (Giờ)</label>
                     <input
                       class="form-control form-control-lg"
                       type="number"

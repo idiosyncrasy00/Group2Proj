@@ -28,4 +28,8 @@ function getUserAuthAPI() {
     .get(baseURL + "api/users/auth", getHeaders);
 }
 
-export { loginAPI, registerAPI, getUserInfoAPI, updateUserInfoAPI, getUserAuthAPI };
+function feedBackAPI(message) {
+  return axios.post(baseURL + "api/system/feedback", message, getHeaders);
+}
+
+export { loginAPI, registerAPI, getUserInfoAPI, updateUserInfoAPI, getUserAuthAPI, feedBackAPI, };
