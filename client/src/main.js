@@ -15,7 +15,6 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 
 //window.Swal = Swal;
 
-
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth == true)
     && to.matched.some(record => record.meta.notrequiresAuth == false)) {

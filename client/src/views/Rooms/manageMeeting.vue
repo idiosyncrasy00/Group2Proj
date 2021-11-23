@@ -20,9 +20,9 @@
 									<div class="card mb-2 mt-2" style="width:85%; height:95%">
 										<div style="padding-left:1rem;">
 											<router-link :to="{ name: 'roomdetails', params: { id: room.id } }">
-															<h5 class="card-title text-center text-dark">
-																{{ room.id }}
-															</h5>
+												<h5 class="card-title text-center text-dark">
+													{{ room.id }}
+												</h5>
 											</router-link>
 											<div class="row">
 												<div class="card-text col-sm-7">
@@ -82,6 +82,11 @@
 			v-show="room.id === this.showModifyForm"
 			>
 			</ModifyMeeting>
+			<p
+			v-show="room.id === this.showModifyForm">
+			{{this.showModifyForm}}
+			{{room.id}}
+			</p>
 		</div>
 	</div>
 </template>
@@ -105,7 +110,7 @@ export default {
         status: "",
       },
       rooms: [[
-        { id: 123456789, reservedDate: "01/01/1999", startingTime: "15:45", during: "5", status: "active" },
+        { id: 898989898, reservedDate: "01/01/1999", startingTime: "15:45", during: "5", status: "active" },
 				{ id: 123456780, reservedDate: "01/01/1999", startingTime: "15:45", during: "5", status: "active" },
         { id: 453452123, reservedDate: "01/01/2000", startingTime: "15:45", during: "5", status: "active" },
       ],[
@@ -113,7 +118,7 @@ export default {
 				{ id: 25252525, reservedDate: "01/01/2002", startingTime: "15:45", during: "24", status: "active" },
 				{ id: 25252525, reservedDate: "01/01/2003", startingTime: "15:45", during: "5", status: "ended" },
 			], [
-				{ id: 98654565, reservedDate: "01/01/2001", startingTime: "15:45", during: "5", status: "comming" },
+				{ id: 98654565, reservedDate: "01/01/2001", startingTime: "15:44", during: "7", status: "comming" },
 
 			]]
     };
