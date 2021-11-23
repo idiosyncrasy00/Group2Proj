@@ -1,5 +1,6 @@
-const Participant = require('../models').Participant;
-const Meeting = require('../models').Meeting;
+const models = require('../models');
+const Participant = models.Participant;
+const Meeting = models.Meeting;
 const validation = require('../validations/participant.validation');
 const _ = require('lodash');
 
@@ -42,5 +43,27 @@ const inviteParticipant = async (req, res) => {
     }
 };
 
+const feedbackMeeting = async (req, res) => {
+    const {error, value} = await validation.feedbackSchema.validate(req.body);
+    if (error) {
+        res.status(403).send({ error: error.message });
+    } else {
+        let participant = await Participant.findOne({
+            where: {
+                meetingid: value.meetingid,
+                userid: req.user.id
+            }
+        });
+        if (!participant) {
+            res.status(400).send({ error: "Meeting not found or user is not in meeting" });
+        } else {
+            await participant.update({
+                feedback: value.message
+            });
+            res.send();
+        }
+    }
+};
 
-module.exports = { inviteParticipant };
+
+module.exports = { inviteParticipant, feedbackMeeting };

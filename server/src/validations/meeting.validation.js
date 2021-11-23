@@ -6,15 +6,21 @@ const createSchema = Joi.object({
     reserveddate: Joi.date().format('YYYY-MM-DD').raw().required(),
     startingtime: Joi.number().integer().min(7).max(21).required(),
     during: Joi.number().integer().min(1).max(100).required(),
+    title: Joi.string().required(),
+    content: Joi.string(),
+    password: Joi.string(),
     status: Joi.string().max(30)
 });
 
 const editSchema = Joi.object({
     id: Joi.number().integer().required(),
-    roomid: Joi.number().integer().required(),
+    roomid: Joi.number().integer(),
     reserveddate: Joi.date().format('YYYY-MM-DD').raw(),
     startingtime: Joi.number().integer().min(7).max(21),
     during: Joi.number().integer().min(1).max(100),
+    title: Joi.string(),
+    content: Joi.string(),
+    password: Joi.string(),
     status: Joi.string().max(30)
 });
 

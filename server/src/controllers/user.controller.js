@@ -27,20 +27,24 @@ const registerUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
-    let user = await User.findOne({
-        where: {
-            username: req.body.username
+    try {
+        let user = await User.findOne({
+            where: {
+                username: req.body.username
+            }
+        });
+        if (!user) res.status(400).send({ error: 'Invalid username or password' });
+        else {
+            if (!(await encrypt_util.verify(req.body.password, user.password))) {
+                res.status(400).send({ error: 'Invalid username or password' });
+            } else {
+                const userToken = getUserToken(user);
+                const token = token_util.generateToken(userToken);
+                res.header('accesstoken', token).send(_.pick(user, ['id', 'username']));
+            }
         }
-    });
-    if (!user) res.status(400).send({ error: 'Invalid username or password' });
-    else {
-        if (!(await encrypt_util.verify(req.body.password, user.password))) {
-            res.status(400).send({ error: 'Invalid username or password' });
-        } else {
-            const userToken = getUserToken(user);
-            const token = token_util.generateToken(userToken);
-            res.header('accesstoken', token).send(_.pick(user, ['id', 'username']));
-        }
+    } catch(error) {
+        res.status(400).send({ error: error.message });
     }
 };
 

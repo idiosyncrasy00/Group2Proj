@@ -48,9 +48,8 @@ async function db_init() {
 }
 
 async function db_reset() {
-    for await (const modelName of db.db_list) {
-        await db[modelName].sync({ force: true });
-    }
+    await sequelize.drop();
+    await sequelize.sync();
     let seeder = require('../seeders/seeder.dev');
     await seeder.up(db);
 }
@@ -59,5 +58,6 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 db.db_init = db_init;
 db.db_reset = db_reset;
+db.Op = Sequelize.Op;
 
 module.exports = db;

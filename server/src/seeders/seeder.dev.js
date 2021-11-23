@@ -59,6 +59,9 @@ module.exports = {
             reserveddate: "2021-01-01",
             startingtime: 7,
             during: 2,
+            title: "Friendly meeting",
+            content: "Birthday",
+            password: "",
             status: "WAITING"
         }, {
             id: 102,
@@ -67,6 +70,9 @@ module.exports = {
             reserveddate: "2021-01-01",
             startingtime: 11,
             during: 3,
+            title: "Family meeting",
+            content: "Gender reveal",
+            password: "family",
             status: "WAITING"
         }, {
             id: 103,
@@ -75,11 +81,53 @@ module.exports = {
             reserveddate: "2021-01-02",
             startingtime: 11,
             during: 3,
+            title: "Old class meeting",
+            content: "",
+            password: "123",
             status: "WAITING"
+        }]);
+        await db.Participant.bulkCreate([{
+            meetingid: 101,
+            userid: 11,
+            isaccepting: false
+        }, {
+            meetingid: 101,
+            userid: 13,
+            isaccepting: true
+        }, {
+            meetingid: 102,
+            userid: 12,
+            isaccepting: true,
+            feedback: "Good"
+        }, {
+            meetingid: 103,
+            userid: 12,
+            isaccepting: false
+        }]);
+        await db.Feedback.bulkCreate([{
+            id: 21,
+            userid: 12,
+            message: "This program sucks",
+            time: "2021-11-23 09:50:18"
         }]);
     },
 
     down: async (db) => {
+        await db.Participant.destroy({
+            where: {
+                meetingid: [101, 102, 103]
+            }
+        });
+        await db.Meeting.destroy({
+            where: {
+                id: [101, 102, 103]
+            }
+        });
+        await db.Feedback.destroy({
+            where: {
+                id: [21]
+            }
+        });
         await db.Room.destroy({
             where: {
                 id: [1, 2, 3]
@@ -88,11 +136,6 @@ module.exports = {
         await db.User.destroy({
             where: {
                 id: [11, 12, 13]
-            }
-        });
-        await db.Meeting.destroy({
-            where: {
-                id: [101, 102, 103]
             }
         });
     }
