@@ -1,42 +1,41 @@
 const nodemailer = require('nodemailer');
+// require('dotenv').config({ path: ".env.local" });  // For testing only
 
-
-const sender = '"Daniel Fred" <danielfred@tech.com>';
-var account = null;
 var transporter = null;
+const sender = "Daniel Fred <danielfred@gmail.com>";
 
 // Init mailer
-async function init_mailer() {
+function init_mailer() {
     console.log("Init mailer ...");
-    account = await nodemailer.createTestAccount();
     transporter = nodemailer.createTransport({
-        name: "127.0.0.1",
-        host: "smtp.ethereal.email",
-        port: 587,
-        secure: false,
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
         auth: {
-            user: account.user,
-            pass: account.pass
+            type: "OAuth2",
+            user: process.env.NODEMAILER_USER,
+            clientId: process.env.NODEMAILER_CLIENTID,
+            clientSecret: process.env.NODEMAILER_CLIENTSECRET,
+            refreshToken: process.env.NODEMAILER_REFRESHTOKEN,
+            accessToken: process.env.NODEMAILER_ACCESSTOKEN
         }
     });
 }
 
-async function send_email(receiver, subject="Empty", text="Empty") {
-    let info = await transporter.sendMail({
+function send_email(receiver, subject="Empty", html="Empty") {
+    transporter.sendMail({
         from: sender,
         to: receiver,
         subject: subject,
-        text: text
+        html: html
+    }, (error, s) => {
+        if (error) {
+            console.log("Cannot sent email. Credential invalid");
+        } else {
+            console.log("Email sent");
+        }
     });
-    console.log("Message sent: ", info.messageId);
-    console.log("Preview URL: ", nodemailer.getTestMessageUrl(info));
 }
 
 
-(async () => {
-    await init_mailer();
-    await send_email("gmxancrazy24114@gmail.com", "Test email", "Prometheous is here");
-})();
-
-
-module.exports = { send_email };
+module.exports = { init_mailer, send_email };
