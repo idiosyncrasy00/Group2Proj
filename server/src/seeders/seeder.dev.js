@@ -104,6 +104,12 @@ module.exports = {
             userid: 12,
             isaccepting: false
         }]);
+        await db.Feedback.bulkCreate([{
+            id: 21,
+            userid: 12,
+            message: "This program sucks",
+            time: "2021-11-23 09:50:18"
+        }]);
     },
 
     down: async (db) => {
@@ -115,6 +121,11 @@ module.exports = {
         await db.Meeting.destroy({
             where: {
                 id: [101, 102, 103]
+            }
+        });
+        await db.Feedback.destroy({
+            where: {
+                id: [21]
             }
         });
         await db.Room.destroy({
