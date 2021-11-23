@@ -23,4 +23,11 @@ module.exports = (db) => {
         foreignKey: 'meetingid',
         as: "participant"
     });
+    db.User.hasMany(db.Feedback, {
+        foreignKey: "userid"
+    });
+    db.Feedback.belongsTo(db.User, {
+        foreignKey: "userid",
+        as: "user"
+    });
 };
