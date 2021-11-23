@@ -12,8 +12,10 @@ export default {
 
 <style>
 #footer {
-  background-color: #DEB887;
+  background-color: #000d1a;
   text-align: left;
   height: 50px;
+	width:100%;
+	color: #000d1a;
 }
 </style>

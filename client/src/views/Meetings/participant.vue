@@ -4,37 +4,40 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title text-uppercase mb-0">Manage Users</h5>
+                <h5 class="card-title text-uppercase mb-0">Danh sách cuộc họp</h5>
             </div>
             <div class="table-responsive">
                 <table class="table no-wrap user-table mb-0">
                   <thead>
                     <tr>
-                      <th scope="col" class="border-0 text-uppercase font-medium pl-4">#</th>
-                      <th scope="col" class="border-0 text-uppercase font-medium">Name</th>
-                      <th scope="col" class="border-0 text-uppercase font-medium">Address</th>
-                      <th scope="col" class="border-0 text-uppercase font-medium">Email</th>
-                      <th scope="col" class="border-0 text-uppercase font-medium">Phone</th>
+                      <th scope="col" class="border-0 text-uppercase font-medium">Mã phòng</th>
+                      <th scope="col" class="border-0 text-uppercase font-medium">Mã cuộc họp</th>
+                      <th scope="col" class="border-0 text-uppercase font-medium">Ngày tổ chức</th>
+                      <th scope="col" class="border-0 text-uppercase font-medium">Thời gian bắt đầu</th>
+                      <th scope="col" class="border-0 text-uppercase font-medium">Thời gian họp</th>
+                      <th scope="col" class="border-0 text-uppercase font-medium">Tên cuộc họp</th>
                     </tr>
                   </thead>
                 <tbody>
-                    <tr>
-                      <td class="pl-4">1</td>
+                    <tr v-for="meeting in meetings" 
+                            :key="meeting.id">
+                      <td class="pl-4">{{meeting.roomid}}</td>
                       <td>
-                          <h5 class="font-medium mb-0">{{info.name}}</h5>
+                        <span class="text-muted">{{meeting.id}}</span>
+                      </td>
+                      <td>
+                          <span class="text-muted">{{meeting.reserveddate}}</span>
+                      </td>
+                      <td>
+                          <span class="text-muted">{{meeting.startingtime}} giờ</span><br>
                           
                       </td>
                       <td>
-                          <span class="text-muted">{{info.address}}</span>
+                          <span class="text-muted">{{meeting.during}} giờ</span>
                       </td>
                       <td>
-                          <span class="text-muted">{{info.email}}</span><br>
-                          
+                          <span class="text-muted">{{meeting.title}}</span>
                       </td>
-                      <td>
-                          <span class="text-muted">{{info.phone}}</span>
-                      </td>
-                     
                       
                     </tr>
                    
@@ -50,17 +53,13 @@
 
 <script>
 export default {
-name: "UserList",
+name: "participant",
 data(){
     return{
-        info:{
-            name:"Nguyen Van Anh",
-            address:"Hanoi",
-            email:"abc12@gmail.com",
-            phone:"0219238291",
-            roomID:"1234567",
-            category:"Room Master"
-        }
+        meetings:[
+            {roomid:1,id:1,reserveddate: "2021-01-01",startingtime: 7, during: 2, title: "Họp cuối năm"},
+            {roomid:3,id:4,reserveddate: "2021-02-01",startingtime: 6, during: 2, title: "Họp tổ dân phố"}
+        ]
     }
 }
 }
