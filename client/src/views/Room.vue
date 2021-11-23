@@ -46,12 +46,13 @@
                             class="btn btn-primary"
                             type="button"
                             v-if="room.status != 'Bảo trì'"
+                            @click.prevent="roomBooking(room)"
                           >
                             <router-link
                               :to="{
                                 name: 'createMeeting',
                                 params: {
-                                  //roomname: room.roomname,
+                                  roomname: room.roomname,
                                   id: room.id,
                                   //roominfo: JSON.parse(JSON.stringify(rooms)),
                                 },
@@ -99,7 +100,12 @@ export default {
       ],
     };
   },
-  method: {
+  methods: {
+    roomBooking(room) {
+      //get the specific room
+      //console.log("4123");
+      localStorage.setItem("roominfo", JSON.stringify(room));
+    },
     searchResult() {
       return this.searchRooms;
     },

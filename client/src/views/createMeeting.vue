@@ -19,7 +19,7 @@
                 <form>
                   <div class="form-group">
                     <label>Tên phòng</label>
-                    <label class="form-control form-control-lg">
+                    <label class="form-control form-control-lg" readonly>
                       <!-- {{ roomlist[this.meetingInfo.roomid - 1].roomname }} with
                       room id is
                       {{ roomlist[this.meetingInfo.roomid - 1].id }} andddd
@@ -65,6 +65,8 @@
                     <input
                       class="form-control form-control-lg"
                       type="number"
+                      min="1"
+                      max="10"
                       name="during"
                       placeholder="Nhập thời gian họp"
                       v-model="this.meetingInfo.during"
@@ -124,7 +126,7 @@ export default {
       roominfo: "",
       meetingInfo: {
         adminid: "",
-        roomid: this.$route.params.id,
+        roomid: "",
         roomname: "",
         reserveddate: "",
         startingtime: "",
@@ -179,9 +181,13 @@ export default {
       }
     },
   },
-  async created() {
-    this.roominfo = store.getRoom(this.meetingInfo.roomid);
-    this.meetingInfo.roomname = store.getRoom(this.meetingInfo.roomid).roomname;
+  mounted() {
+    //this.roominfo = store.getRoom(this.meetingInfo.roomid);
+    //this.meetingInfo.roomname = store.getRoom(this.meetingInfo.roomid).roomname;
+    //this.meetingInfo.adminid = store.getUserInfo().id;
+    //console.log(JSON.parse(localStorage.getItem("roominfo")));
+    this.meetingInfo.roomid = store.getARoomInfo().id;
+    this.meetingInfo.roomname = store.getARoomInfo().roomname;
     this.meetingInfo.adminid = store.getUserInfo().id;
   },
 };
