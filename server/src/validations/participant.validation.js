@@ -5,4 +5,9 @@ const inviteSchema = Joi.object({
     participants: Joi.array().items(Joi.number().integer()).required()
 });
 
-module.exports = { inviteSchema };
+const feedbackSchema = Joi.object({
+    meetingid: Joi.number().required(),
+    message: Joi.string().required()
+});
+
+module.exports = { inviteSchema, feedbackSchema };
