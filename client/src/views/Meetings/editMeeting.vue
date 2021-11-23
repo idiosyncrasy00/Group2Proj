@@ -32,7 +32,15 @@
                             <label
                               class="form-control form-control-lg"
                               readonlyy
-                              >{{ this.roomid }} and meeting id is
+                              >{{ this.roomid }}
+                            </label>
+                          </div>
+                          <div class="form-group">
+                            <label>Tên meeting</label>
+                            <label
+                              class="form-control form-control-lg"
+                              readonlyy
+                            >
                               {{ this.meetingid }}</label
                             >
                           </div>
@@ -42,6 +50,7 @@
                               class="form-control form-control-lg"
                               type="password"
                               name="password"
+                              v-model="this.updateMeetingInfo.password"
                             />
                           </div>
                           <div class="form-group">
@@ -51,6 +60,7 @@
                               type="date"
                               name="date"
                               placeholder="Nhập ngày đặt phòng"
+                              v-model="this.updateMeetingInfo.reserveddate"
                             />
                           </div>
                           <div class="form-group">
@@ -60,6 +70,7 @@
                               type="time"
                               name="startTime"
                               placeholder="Nhập thời gian bắt đầu"
+                              v-model="this.updateMeetingInfo.startingtime"
                             />
                           </div>
                           <div class="form-group">
@@ -69,6 +80,7 @@
                               type="number"
                               name="during"
                               placeholder="Nhập thời gian họp"
+                              v-model="this.updateMeetingInfo.during"
                             />
                           </div>
                           <div class="form-group">
@@ -78,6 +90,7 @@
                               type="text"
                               name="title"
                               placeholder="Nhập tên cuộc họp"
+                              v-model="this.updateMeetingInfo.title"
                             />
                           </div>
                           <div class="form-group">
@@ -88,10 +101,13 @@
                               name="content"
                               placeholder="Nhập nội dung họp"
                               rows="5"
+                              v-model="this.updateMeetingInfo.content"
                             ></textarea>
                           </div>
                           <div class="text-center mt-3">
-                            <button @click="updateMeeting">Xác nhận</button>
+                            <button @click.prevent="updateMeeting">
+                              Xác nhận
+                            </button>
                             <!-- <button type="submit" class="btn btn-lg btn-primary">Sign up</button> -->
                           </div>
                         </form>
@@ -169,9 +185,7 @@
 
 <script>
 import Nav from "@/components/Nav.vue";
-// import {
-//   editMeetingAPI,
-// } from "@/services/meeting.apiServices.js";
+import { editMeetingAPI } from "@/services/meeting.apiServices.js";
 
 export default {
   name: "editMeeting",
@@ -181,18 +195,58 @@ export default {
       activetab: 1,
       roomid: this.$route.params.roomid,
       meetingid: this.$route.params.meetingid,
+      updateMeetingInfo: {
+        id: this.$route.params.meetingid,
+        roomid: this.$route.params.roomid, // Not required
+        reserveddate: "", // Not required
+        startingtime: "", // Not required
+        during: "", // Not required
+        title: "", // Not required
+        content: "", // Not required
+        password: "1", // Not required
+        status: "ok", // Not required
+      },
     };
   },
 
   methods: {
-    // editMeeting() {
-    //   //PUT
-    //   editMeetingAPI()
-    //   .then(res => {
-    //   })
-    //   .catch(err => {
-    //   })
-    // },
+    updateMeeting() {
+      const data = {
+        id: this.updateMeetingInfo.id,
+        roomid: this.updateMeetingInfo.roomid, // Not required
+        reserveddate: this.updateMeetingInfo.reserveddate, // Not required
+        startingtime: this.updateMeetingInfo.startingtime.substring(0, 2), // Not required
+        during: this.updateMeetingInfo.during, // Not required
+        title: this.updateMeetingInfo.title, // Not required
+        content: this.updateMeetingInfo.content, // Not required
+        password: this.updateMeetingInfo.password, // Not required
+        status: this.updateMeetingInfo.status, // Not required
+      };
+      console.log(data);
+      //PUT
+      editMeetingAPI(data)
+        .then((res) => {
+          console.log(res);
+          this.$swal.fire(
+            "Good job!",
+            "Cập nhật cuộc họp thành công",
+            "success"
+          );
+          window.setTimeout(function () {
+            location.href = "/admin";
+          }, 5000);
+          //window.location.href = "/admin";
+        })
+        .catch((err) => {
+          this.$swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Cập nhật cuộc họp thất bại :(((",
+            // footer: '<a href="">Why do I have this issue?</a>',
+          });
+          console.log(err);
+        });
+    },
   },
 };
 </script>
