@@ -45,6 +45,7 @@ export default {
           this.$swal.fire("Good job!", "gui feedback thanh cong", "success");
         })
         .catch((err) => {
+          this.$swal.fire("No!", "gui feedback ko thanh cong", "error");
           console.log(err);
         });
     },

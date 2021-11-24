@@ -115,7 +115,6 @@ import roomNotFound from "@/components/roomNotFound.vue";
 
 export default {
   name: "createMeeting",
-  //props: ["roomlist1"],
   components: {
     roomNotFound,
   },
@@ -164,8 +163,7 @@ export default {
             this.$swal.fire("Good job!", "Tạo cuộc họp thành công", "success");
             window.setTimeout(function () {
               location.href = "/Room";
-            }, 5000);
-            //window.location.href = "/Room";
+            }, 3000);
           })
           .catch((err) => {
             console.log(err);

@@ -19,8 +19,6 @@
                 />
               </div>
               <h5 class="user-name text-center mt-3">
-                <!-- {{ userInfo.userName }} -->
-                <!-- {{ getUser }} -->
                 {{ userInfo.username }}
               </h5>
               <h6 class="user-email text-center mt-3">{{ userInfo.email }}</h6>
@@ -199,7 +197,6 @@
 </template>
 
 <script>
-//import axios from "axios";
 import store from "@/store/index.js";
 import {
   updateUserInfoAPI,
@@ -284,7 +281,7 @@ export default {
           });
           window.setTimeout(function () {
             location.reload();
-          }, 5000);
+          }, 3000);
         })
         .catch((err) => {
           console.log(err);
@@ -298,15 +295,6 @@ export default {
     },
   },
   component: {},
-  // async created() {
-  //   getUserInfoAPI()
-  //     .then((res) => {
-  //       this.userInfo = res.data;
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // },
   async created() {
     this.userInfo = store.getUserInfo();
   },

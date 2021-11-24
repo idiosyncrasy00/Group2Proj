@@ -4,7 +4,9 @@ module.exports = function (req, res, next) {
     // Decode accesstoken into req.user
     const token = req.header('accesstoken');
     if (!token) res.status(401).send('Access denied. No token provided.');
+
     else {
+        console.log(req.body);
         const decoded = token_util.verifyToken(token);
         if (!decoded) {
             res.status(401).send('Invalid token');

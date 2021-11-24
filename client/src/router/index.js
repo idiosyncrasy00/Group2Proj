@@ -164,6 +164,15 @@ const routes = [
       notrequiresAuth: false,
     }
   },
+  {
+    path: '/user/id=:id',
+    name: 'profile',
+    component: () => import('../views/Users/Profile.vue'),
+    meta: {
+      requiresAuth: true,
+      notrequiresAuth: false,
+    }
+  },
 ]
 
 const router = createRouter({

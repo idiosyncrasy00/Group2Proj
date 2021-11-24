@@ -20,10 +20,14 @@ function editMeetingAPI(data) {
 }
 
 function deleteMeetingAPI(id) {
-  return axios.delete(baseURL + "api/meetings/delete", getHeaders, {
-    data: {
-      id: id
-    }
+  //console.log(id);
+  const headers = getHeaders.headers;
+  const data = {
+    id: id,
+  };
+  return axios.delete(baseURL + "api/meetings/delete", {
+    headers,
+    data
   });
   //axios.delete()
 }
