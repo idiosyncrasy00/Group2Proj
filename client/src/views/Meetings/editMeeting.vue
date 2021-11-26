@@ -1,5 +1,6 @@
 <template>
   <div>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <div id="tabs" class="container">
       <div class="tabs">
         <a
@@ -11,6 +12,11 @@
           v-on:click="activetab = 2"
           v-bind:class="[activetab === 2 ? 'active' : '']"
           >Danh sách thành viên</a
+        >
+        <a
+          v-on:click="activetab = 3"
+          v-bind:class="[activetab === 3 ? 'active' : '']"
+          >Danh sách người đang mời</a
         >
       </div>
       <div class="content">
@@ -149,9 +155,7 @@
                   <th scope="col" class="border-0 text-uppercase font-medium">
                     SĐT
                   </th>
-                  <th scope="col" class="border-0 text-uppercase font-medium">
-                    Gửi lời mời
-                  </th>
+                  
                 </tr>
               </thead>
               <tbody>
@@ -161,28 +165,67 @@
                   <td><h5 class="text-muted">Hà Nội</h5></td>
                   <td><h5 class="text-muted">19022102@gmail.com</h5></td>
                   <td><h5 class="text-muted">09129129212</h5></td>
-                  <td>
-                    <button class="btn btn-primary" type="button">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="32"
-                        height="32"
-                        fill="currentColor"
-                        class="bi bi-check2-square"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z"
-                        />
-                        <path
-                          d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"
-                        />
-                      </svg>
-                    </button>
-                  </td>
+                  
                 </tr>
               </tbody>
             </table>
+          </div>
+        </div>
+        <div v-if="activetab === 3" class="tabcontent">
+          <div class="table-responsive">
+            <div class="example"  style="max-width:500px">
+                <input type="text"  placeholder="Nhập tên người cần mời" v-model="searchTerm">
+                <button class="btn btn-primary"> Mời</button>
+            </div>
+            <ul v-if="searchUsers.length < users.length" style="max-width:400px" >
+            <li v-for="user in searchUsers" :key="user.email" @click="selectUser(user.name)" 
+                class="cursor-pointer hover:bg-gray-100 p-1 ">
+              {{user.name}}
+              <br>
+              Email:{{user.email}} 
+              <label> &emsp;&emsp;  </label>
+              SĐT:{{user.phone}}
+              <br>
+              
+            </li>
+            </ul>
+            
+            <table class="table no-wrap user-table mb-0">
+              <thead>
+                <tr>
+                  <th
+                    scope="col"
+                    class="border-0 text-uppercase font-medium pl-4"
+                  >
+                    ID
+                  </th>
+                  <th scope="col" class="border-0 text-uppercase font-medium">
+                    Tên
+                  </th>
+                  <th scope="col" class="border-0 text-uppercase font-medium">
+                    Địa chỉ
+                  </th>
+                  <th scope="col" class="border-0 text-uppercase font-medium">
+                    Email
+                  </th>
+                  <th scope="col" class="border-0 text-uppercase font-medium">
+                    SĐT
+                  </th>
+                
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="pl-4"><h5>1</h5></td>
+                  <td><h5 class="font-medium mb-0">Nguyễn Văn Anh</h5></td>
+                  <td><h5 class="text-muted">Hà Nội</h5></td>
+                  <td><h5 class="text-muted">19022102@gmail.com</h5></td>
+                  <td><h5 class="text-muted">09129129212</h5></td>
+                  
+                </tr>
+              </tbody>
+            </table>
+             
           </div>
         </div>
       </div>
@@ -199,6 +242,17 @@ export default {
   components: Nav,
   data() {
     return {
+      searchTerm:'',
+      users: [
+        {name:"Nguyen Thi A",email:"abc",phone:"03172182"},
+        {name:"Nguyen Thi B",email:"xyz",phone:"12121212"},
+        {name:"Pham Vn",email:"xyz",phone:"1223212"},
+      ],
+      invitedUsers:{
+        name:'',
+        email:'',
+        phone:''
+      },
       activetab: 1,
       roomid: this.$route.params.roomid,
       meetingid: this.$route.params.meetingid,
@@ -217,6 +271,9 @@ export default {
   },
 
   methods: {
+    selectUser(name){
+      this.searchTerm = name
+    },
     updateMeeting() {
       const data = {
         id: this.updateMeetingInfo.id,
@@ -253,6 +310,15 @@ export default {
           });
           console.log(err);
         });
+    },
+  },
+  computed: {
+    searchUsers() {
+      return this.users.filter(
+        (users) =>
+          users.name.toLowerCase().search(this.searchTerm) != -1
+        
+      );
     },
   },
 };
@@ -366,5 +432,42 @@ button:not(:disabled) {
 .user-table tbody tr .category-select {
   max-width: 150px;
   border-radius: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+div.example input[type=text] {
+  padding: 8px;
+  font-size: 14px;
+  border: 2px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+div.example button {
+  padding: 8px;
+  font-size: 14px;
+  border: 2px solid grey;
+  
+  background: blue;
+}
+div.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: white;
+  padding: 12px;
 }
 </style>
