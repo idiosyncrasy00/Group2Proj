@@ -18,6 +18,37 @@ const inviteParticipant = async (req, res) => {
         if (meeting === null) {
             res.status(404).send({ error: "Meeting not found" });
         } else if (req.user.id !== meeting.adminid) {
+            console.log("userid: ", req.user);
+            console.log("meeting admin: ", meeting.adminid);
+            res.status(401).send({ error: "User is not meeting admin" });
+        } else {
+            try {
+                await Participant.create({
+                    meetingid: value.meetingid,
+                    userid: value.userid,
+                    isaccepting: false
+                });
+                res.send();
+            } catch(error) {
+                res.status(400).send({ error: error.message });
+            }
+        }
+    }
+};
+
+const inviteManyParticipant = async (req, res) => {
+    const {error, value} = await validation.inviteManySchema.validate(req.body);
+    if (error) {
+        res.status(403).send({ error: error.message });
+    } else {
+        let meeting = await Meeting.findOne({
+            where: {
+                id: value.meetingid
+            }
+        });
+        if (meeting === null) {
+            res.status(404).send({ error: "Meeting not found" });
+        } else if (req.user.id !== meeting.adminid) {
             res.status(401).send({ error: "User is not meeting admin" });
         } else {
             // Create participant row
@@ -39,6 +70,36 @@ const inviteParticipant = async (req, res) => {
                 success: success,
                 failed: failed
             });
+        }
+    }
+};
+
+const deleteParticipant = async (req, res) => {
+    const {error, value} = await validation.deleteSchema.validate(req.body);
+    if (error) {
+        res.status(403).send({ error: error.message });
+    } else {
+        let meeting = await Meeting.findOne({
+            where: {
+                id: value.meetingid
+            }
+        });
+        if (meeting === null) {
+            res.status(404).send({ error: "Meeting not found" });
+        } else if (req.user.id !== meeting.adminid) {
+            res.status(401).send({ error: "User is not meeting admin" });
+        } else {
+            try {
+                await Participant.destroy({
+                    where: {
+                        meetingid: value.meetingid,
+                        userid: value.userid
+                    }
+                });
+                res.send();
+            } catch(error) {
+                res.status(400).send({ error: error.message });
+            }
         }
     }
 };
@@ -66,4 +127,4 @@ const feedbackMeeting = async (req, res) => {
 };
 
 
-module.exports = { inviteParticipant, feedbackMeeting };
+module.exports = { inviteParticipant, inviteManyParticipant, deleteParticipant, feedbackMeeting };

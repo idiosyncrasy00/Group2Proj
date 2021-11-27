@@ -2,7 +2,17 @@ const Joi = require('joi');
 
 const inviteSchema = Joi.object({
     meetingid: Joi.number().integer().required(),
+    userid: Joi.number().integer().required()
+});
+
+const inviteManySchema = Joi.object({
+    meetingid: Joi.number().integer().required(),
     participants: Joi.array().items(Joi.number().integer()).required()
+});
+
+const deleteSchema = Joi.object({
+    meetingid: Joi.number().integer().required(),
+    userid: Joi.number().integer().required()
 });
 
 const feedbackSchema = Joi.object({
@@ -10,4 +20,4 @@ const feedbackSchema = Joi.object({
     message: Joi.string().required()
 });
 
-module.exports = { inviteSchema, feedbackSchema };
+module.exports = { inviteSchema, inviteManySchema, deleteSchema, feedbackSchema };
