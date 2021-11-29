@@ -116,14 +116,14 @@ const queryMeeting = async (req, res) => {
     }
 };
 
-const listAllUsers = (req, res) => {
+const listAllUsers = async (req, res) => {
     let userList = await User.findAll({
-        attributes: [sequelize.fn('CONCAT', sequelize.col('firstname'), ' ', sequelize.col('lastname')), 'email', 'dob', 'phone', 'address', 'username'],
+        attributes: ['id', sequelize.fn('CONCAT', sequelize.col('firstname'), ' ', sequelize.col('lastname')), 'email', 'dob', 'phone', 'address', 'username'],
     });
     res.send(userList);
 }
 
-const listUsersInMeeting = (req, res) => {
+const listUsersInMeeting = async (req, res) => {
     let meetid = req.meetingid;
     let userList = await User.findAll({
         attributes: [sequelize.fn('CONCAT', sequelize.col('firstname'), ' ', sequelize.col('lastname')), 'email', 'dob', 'phone', 'address', 'username'],
@@ -148,10 +148,10 @@ const listUsersInMeeting = (req, res) => {
     res.send(userList);
 }
 
-const listUsersNotInMeeting = (req, res) => {
+const listUsersNotInMeeting = async (req, res) => {
     let meetid = req.meetingid;
     let userList = await User.findAll({
-        attributes: [sequelize.fn('CONCAT', sequelize.col('firstname'), ' ', sequelize.col('lastname')), 'email', 'dob', 'phone', 'address', 'username'],
+        attributes: ['id', sequelize.fn('CONCAT', sequelize.col('firstname'), ' ', sequelize.col('lastname')), 'email', 'dob', 'phone', 'address', 'username'],
         include: [{
             model: Participant,
             as: 'participant',

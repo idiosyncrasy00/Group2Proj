@@ -33,6 +33,7 @@ app.use('/api/meetings', require('./routes/meeting.route'));
 app.use('/api/participants', require('./routes/participant.route'));
 app.use('/api/util', require('./routes/util.route'));
 app.use('/api/system', require('./routes/system.route'));
+app.use('/api/reviews', require('./routes/review.route'));
 
 // Server test
 app.get('/', (req, res) => {

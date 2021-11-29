@@ -30,4 +30,18 @@ module.exports = (db) => {
         foreignKey: "userid",
         as: "user"
     });
+    db.User.hasMany(db.Review, {
+        foreignKey: "userid"
+    });
+    db.Review.belongsTo(db.User, {
+        foreignKey: "userid",
+        as: "user"
+    });
+    db.Room.hasMany(db.Review, {
+        foreignKey: "roomid"
+    });
+    db.Review.belongsTo(db.Room, {
+        foreignKey: "roomid",
+        as: "room"
+    });
 };

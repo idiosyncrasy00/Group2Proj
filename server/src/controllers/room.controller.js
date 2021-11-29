@@ -1,6 +1,8 @@
 const Room = require('../models').Room;
+const Review = require('../models').Review;
 const _ = require('lodash');
 const validation = require('../validations/room.validation');
+
 
 const createRoom = async (req, res) => {
     const { error, value } = await validation.createSchema.validate(req.body);
@@ -73,4 +75,19 @@ const getRoomList = async (req, res) => {
     }
 };
 
-module.exports = { createRoom, getRoomList, editRoom, deleteRoom };
+const getReviewList = async (req, res) => {
+    const {error, value} = await validation.getReviewSchema.validate(req.body);
+    if (error) {
+        res.status(403).send({ error: error.message });
+    } else {
+        let reviews = await Review.findAll({
+            attributes: ['id', 'userid', 'roomid', 'rating', 'message', 'time'],
+            where: {
+                roomid: value.id
+            }
+        });
+        res.send(reviews);
+    }
+};
+
+module.exports = { createRoom, getRoomList, editRoom, deleteRoom, getReviewList };

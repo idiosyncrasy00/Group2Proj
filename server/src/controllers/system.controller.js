@@ -8,12 +8,16 @@ const sendFeedback = async (req, res) => {
     if (error) {
         res.status(403).send({error: error.message});
     } else {
-        await Feedback.create({
-            userid: req.user.id,
-            message: value.message,
-            time: sequelize.fn('NOW')
-        });
-        res.send();
+        try {
+            await Feedback.create({
+                userid: req.user.id,
+                message: value.message,
+                time: sequelize.fn('NOW')
+            });
+            res.send();
+        } catch(error) {
+            res.status(400).send({ error: error.message });
+        }
     }
 };
 

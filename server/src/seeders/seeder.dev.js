@@ -110,6 +110,28 @@ module.exports = {
             message: "This program sucks",
             time: "2021-11-23 09:50:18"
         }]);
+        await db.Review.bulkCreate([{
+            id: 31,
+            userid: 11,
+            roomid: 1,
+            rating: 7,
+            message: "This room is so dirty",
+            time: "2021-11-23 09:50:18"
+        }, {
+            id: 32,
+            userid: 12,
+            roomid: 3,
+            rating: 10,
+            message: "So satisied",
+            time: "2021-11-24 09:50:18"
+        }, {
+            id: 33,
+            userid: 13,
+            roomid: 1,
+            rating: 3,
+            message: "Unusable",
+            time: "2021-11-25 09:50:18"
+        }]);
     },
 
     down: async (db) => {
@@ -126,6 +148,11 @@ module.exports = {
         await db.Feedback.destroy({
             where: {
                 id: [21]
+            }
+        });
+        await db.Review.destroy({
+            where: {
+                id: [31, 32, 33]
             }
         });
         await db.Room.destroy({
