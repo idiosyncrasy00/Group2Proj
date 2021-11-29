@@ -49,7 +49,7 @@
         </div>
       </li>
       <li class="dropdown nav-item">
-        <button class="dropbtn nav-link">Danh sách cuộc họp</button>
+        <button class="dropbtn nav-link">Meetings</button>
         <div class="dropdown-content">
           <a href="/admin" class="nav-link">Chủ phòng</a>
           <!-- <router-link
@@ -72,13 +72,13 @@
         </div>
       </li>
       <li class="nav-item">
-        <a href="/UserList" class="nav-link">Show list of users</a>
+        <a href="/UserList" class="nav-link">User list</a>
       </li>
       <li class="nav-item">
-        <a href="/Feedback" class="nav-link">Send feedback to manager</a>
+        <a href="/Feedback" class="nav-link">Feedback</a>
       </li>
       <li class="nav-item">
-        <a href="/Room" class="nav-link">Manage Room(v2 Test)</a>
+        <a href="/Room" class="nav-link">Manage Room2</a>
       </li>
     </ul>
     <ul class="navbar-nav" margin-left="20px" v-if="islogged == 0">
@@ -96,7 +96,7 @@
 				<li class="nav-item">
 					<a href="#" class="nav-link notification" style="font-size: 1.2rem">
 						<span>&#128276;	</span>
-						<span class="badge">0</span>
+						<span class="badge">N</span>
 					</a>
 				</li>
 				<div v-if="this.showNotify">
@@ -246,7 +246,7 @@ nav {
   top: -45px;
   right: -7px;
   padding: 2px 5px;
-  border-radius: 50%;
+  border-radius: 75%;
   background: red;
   color: white;
 }

@@ -2,7 +2,6 @@
   <!-- <Container v-if="user">
     {{ user.username }}
   </Container> -->
-
   <div>
     <div id="container">
       <div
@@ -39,15 +38,8 @@
         </div>
         <div class="bg-text">
           <h1>Meeting Manage Assistance</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-            ullamcorper, felis et pulvinar volutpat, neque nulla viverra neque,
-            id pellentesque nisl nulla ac quam. Vivamus eleifend tortor ac leo
-            varius lobortis. Aliquam vitae dictum massa. Pellentesque habitant
-            morbi tristique senectus et netus et malesuada fames ac turpis
-            egestas. Etiam fermentum pharetra dictum. Nam tristique, tortor non
-            sollicitudin euismod, neque velit luctus felis, at venenatis neque
-            tellus at lorem
+          <p class="bg-text-under">
+						A web appication help you with operating your organization's meetings
           </p>
         </div>
         <div class="intro-button">
@@ -55,53 +47,37 @@
         </div>
       </div>
       <div class="row mt-4 justify-content-between">
-        <div class="card col-sm-7" data-aos="fade-right">
-          <h3>Card title</h3>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
-          </p>
+        <div class="card col-sm-7 info-card" data-aos="fade-right">
+          <h3>We are always ready to help you connect</h3>
+          <ul style="list-style-type: none;">
+						<li>&#187; Easy to ship your company's meetings</li>
+						<li>&#187; Easy to control your own meetings</li>
+						<li>&#187; Easy to find a room that fulfill your need</li>
+						<li>&#187; Easy to get in touch with every body in your organization</li>  	
+          </ul>
         </div>
         <div class="card col-sm-4 bg-secondary" data-aos="fade-left"></div>
       </div>
       <div class="d-flex flex-row-reverse mt-5 justify-content-between">
-        <div class="card col-sm-7 end-0" data-aos="fade-left">
-          <h3>Card title</h3>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
-          </p>
+        <div class="card col-sm-7 end-0 info-card" data-aos="fade-left">
+          <h3>Modernize your meeting solution</h3>
+          <ul style="list-style-type: square;">
+						<li>Create a meeting and invite your colleagues constantly</li>
+						<li>Your meeting calendar is always here</li>
+						<li>Schedule your room efficiently</li>
+          </ul>
         </div>
         <div class="card col-sm-4 bg-primary" data-aos="fade-right"></div>
       </div>
       <div class="row mt-5 justify-content-between">
-        <div class="card col-sm-7" data-aos="fade-right">
-          <h3>Card title</h3>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
-          </p>
+        <div class="card col-sm-7 info-card" data-aos="fade-right">
+          <h3>Free, simple and fast</h3>
+          <ul>
+						<li>Zero-time create your account </li>
+						<li>Zero-time to learn to use</li>
+						<li>Zero-time to level up your company's meeting solution</li>
+						<li>Free for everything</li>  	
+          </ul>
         </div>
         <div class="card col-sm-4 bg-danger" data-aos="fade-left"></div>
       </div>
@@ -186,6 +162,7 @@ export default {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
 .container {
   overflow: hidden;
 }
@@ -229,10 +206,10 @@ slides-group {
   font-weight: bold;
   position: absolute;
   top: 50%;
-  left: 30%;
+  left: 35%;
   transform: translate(-50%, -50%);
   z-index: 1;
-  width: 40%;
+  width: 50%;
   height: 90%;
   padding: 20px;
   text-align: left;
@@ -242,13 +219,18 @@ slides-group {
   font-weight: 900;
   font-family: "Roboto", sans-serif;
 }
+.bg-text-under{
+		font-size: 2.1rem;
+		font-weight: 200;
+		font-family: 'Comfortaa', cursive;
+	}
 .intro-button {
   color: white;
   font-weight: bold;
   font-size: 1.5em;
   position: absolute;
   top: 89%;
-  left: 50%;
+  left: 60%;
   width: 8em;
   height: 1.5em;
   text-align: center;
@@ -257,5 +239,8 @@ slides-group {
 .intro-button a {
   text-decoration: none;
   color: white;
+}
+.info-card{
+	padding: 2rem;
 }
 </style>

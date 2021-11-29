@@ -15,6 +15,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 
 //window.Swal = Swal;
 
+
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth == true)
     && to.matched.some(record => record.meta.notrequiresAuth == false)) {
@@ -41,7 +42,7 @@ export const app = createApp(App).use(store).use(router).use(VueSweetalert2);
 
 app.AOS = new AOS.init({
   disable: "phone",
-  offset: 300, // offset (in px) from the original trigger point
+  offset: 200, // offset (in px) from the original trigger point
   delay: 500, // values from 0 to 3000, with step 50ms
   duration: 500, // values from 0 to 3000, with step 50ms
 });

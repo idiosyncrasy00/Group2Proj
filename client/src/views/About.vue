@@ -15,36 +15,36 @@
 <div class="row mt-5 text-section-left text-left" data-aos="fade-up">
 	<h5> OUR TEAM </h5>
 	<p style="font-size:1.5rem;">
-		The best web application for managing your rooms and meetings, focus on your experience
-		The best web application for managing your rooms and meetings, focus on your experience
-		The best web application for managing your rooms and meetings, focus on your experience
-		The best web application for managing your rooms and meetings, focus on your experiencev
-		The best web application for managing your rooms and meetings, focus on your experience
+		Group 2, four members: ....
 	</p>
 </div>
 <div class="row mt-5 text-section-right text-right" data-aos="fade-up">
 	<h5> OUR VISION </h5>
 	<p style="font-size:1.5rem;">
-		The best web application for managing your rooms and meetings, focus on your experience
-		The best web application for managing your rooms and meetings, focus on your experience
-		The best web application for managing your rooms and meetings, focus on your experience
-		The best web application for managing your rooms and meetings, focus on your experiencev
-		The best web application for managing your rooms and meetings, focus on your experience
+		Prioritizing simplicity in solving meeting room’s problems, 
+		we work on a web application that can serve your basical needs in managing meeting
+		in company/school's enviroment. It hopefully can have some uses in real world's situation.
 	</p>
 </div>
 <div class="row mt-5" data-aos="fade-up">
 	<h5> THE PROJECT </h5>
 	<p style="font-size:1.5rem;">
-		The best web application for managing your rooms and meetings, focus on your experience
-		The best web application for managing your rooms and meetings, focus on your experience
-		The best web application for managing your rooms and meetings, focus on your experience
-		The best web application for managing your rooms and meetings, focus on your experiencev
-		The best web application for managing your rooms and meetings, focus on your experience
+		Project framework
+	</p>
+	<p style="font-size:1.5rem;">
+		- Building:
+		Bootstrap + VueJS + Axios + ExpressJS + NodeJS + Sequelize + MySQL
+	</p>
+	<p style="font-size:1.5rem;">
+		- Deployment:
+		Nginx + Docker	
 	</p>
 </div>
 <div class="row mt-5" data-aos="fade-up" style="height: 25vh;">
 
 </div>
+<Footer>
+</Footer>
 </template>
 <script>
 
@@ -53,7 +53,6 @@ export default {
   name: "about",
   components: {
 		Footer,
-
 	},
 };
 </script>
