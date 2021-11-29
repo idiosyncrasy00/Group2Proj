@@ -1,4 +1,5 @@
 const User = require('../models').User;
+const sequelize = require('../models').sequelize;
 const validation = require('../validations/user.validation');
 const _ = require('lodash');
 const token_util = require('../utilities/token');
@@ -112,6 +113,13 @@ const changePassword = async (req, res) => {
     }
 };
 
+const listAllUsers = async (req, res) => {
+    let userList = await User.findAll({
+        attributes: ['id', [sequelize.fn('CONCAT', sequelize.col('firstname'), ' ', sequelize.col('lastname')), 'fullname'], 'email', 'dob', 'phone', 'address'],
+    });
+    res.send(userList);
+};
+
 
 // Generate user token from user object
 function getUserToken(user) {
@@ -121,4 +129,4 @@ function getUserToken(user) {
     };
 }
 
-module.exports = { registerUser, loginUser, getSelfInfo, getInfo, editUser, changePassword };
+module.exports = { registerUser, loginUser, getSelfInfo, getInfo, editUser, changePassword, listAllUsers };

@@ -116,63 +116,40 @@ const queryMeeting = async (req, res) => {
     }
 };
 
-const listAllUsers = async (req, res) => {
-    let userList = await User.findAll({
-        attributes: ['id', sequelize.fn('CONCAT', sequelize.col('firstname'), ' ', sequelize.col('lastname')), 'email', 'dob', 'phone', 'address', 'username'],
-    });
-    res.send(userList);
-}
-
-const listUsersInMeeting = async (req, res) => {
-    let meetid = req.meetingid;
-    let userList = await User.findAll({
-        attributes: [sequelize.fn('CONCAT', sequelize.col('firstname'), ' ', sequelize.col('lastname')), 'email', 'dob', 'phone', 'address', 'username'],
-        include: [{
-            model: Participant,
-            as: 'participant',
-            require: true,
+const listParticipant = async (req, res) => {
+    const {error, value} = await validation.listParticipantSchema.validate(req.body);
+    if (error) {
+        res.status(403).send({ error: error.message });
+    } else {
+        let meeting = await Meeting.findOne({
             where: {
-                userid: {
-                    userid: Sequelize.col('User.userid')
+                id: value.meetingid
+            }
+        });
+        if (!meeting) {
+            res.status(404).send({ error: "Meeting not found" });
+        } else if (meeting.adminid != req.user.id) {
+            res.status(403).send({ error: "User is not allowed to view participants of this meeting" });
+        } else {
+            let equation = (value.outside == "no") ? {
+                id: value.meetingid
+            } : {
+                id: {
+                    [Op.ne]: value.meetingid
                 }
-            }
-        }, {
-            model: Meeting,
-            as: 'meeting',
-            require: true,
-            where: {
-                meetingid: meetid
-            }
-        }]
-    });
-    res.send(userList);
-}
+            };
+            let users = await User.findAll({
+                attributes: ['id', [sequelize.fn('CONCAT', sequelize.col('firstname'), ' ', sequelize.col('lastname')), 'fullname'], 'email', 'dob', 'phone', 'address'],
+                include: [{
+                    attributes: [],
+                    model: Meeting,
+                    as: "meeting",
+                    where: equation
+                }]
+            });
+            res.send(users);
+        }
+    }
+};
 
-const listUsersNotInMeeting = async (req, res) => {
-    let meetid = req.meetingid;
-    let userList = await User.findAll({
-        attributes: ['id', sequelize.fn('CONCAT', sequelize.col('firstname'), ' ', sequelize.col('lastname')), 'email', 'dob', 'phone', 'address', 'username'],
-        include: [{
-            model: Participant,
-            as: 'participant',
-            require: true,
-            where: {
-                userid: {
-                    userid: Sequelize.col('User.userid')
-                }
-            }
-        }, {
-            model: Meeting,
-            as: 'meeting',
-            require: true,
-            where: {
-                meetingid: {
-                    [Op.ne]: meetid
-                }
-            }
-        }]
-    });
-    res.send(userList);
-}
-
-module.exports = { getReservedMeetingList, getInvitedMeetingList, queryMeeting, listAllUsers, listUsersInMeeting, listUsersNotInMeeting };
+module.exports = { getReservedMeetingList, getInvitedMeetingList, queryMeeting, listParticipant };

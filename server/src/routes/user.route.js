@@ -9,5 +9,6 @@ router.get('/me', auth, User.getSelfInfo);
 router.get('/info/:id', auth, User.getInfo);
 router.put('/edit', auth, User.editUser);
 router.put('/changepw', auth, User.changePassword);
+router.get('/listall', auth, User.listAllUsers);
 
 module.exports = router;

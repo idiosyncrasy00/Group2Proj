@@ -9,5 +9,10 @@ const querySchema = Joi.object({
     title: Joi.string().empty(null).default("")
 });
 
+const listParticipantSchema = Joi.object({
+    meetingid: Joi.number().integer().required(),
+    outside: Joi.string().empty(Joi.not('yes', 'no')).default('no')
+});
 
-module.exports = { querySchema };
+
+module.exports = { querySchema, listParticipantSchema };

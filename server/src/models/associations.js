@@ -16,7 +16,8 @@ module.exports = (db) => {
     });
     db.User.belongsToMany(db.Meeting, {
         through: db.Participant,
-        foreignKey: 'userid'
+        foreignKey: 'userid',
+        as: "meeting"
     });
     db.Meeting.belongsToMany(db.User, {
         through: db.Participant,
