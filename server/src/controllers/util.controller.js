@@ -1,3 +1,4 @@
+const { Sequelize } = require('../models');
 const models = require('../models');
 const Meeting = models.Meeting;
 const User = models.User;
@@ -115,4 +116,63 @@ const queryMeeting = async (req, res) => {
     }
 };
 
-module.exports = { getReservedMeetingList, getInvitedMeetingList, queryMeeting };
+const listAllUsers = (req, res) => {
+    let userList = await User.findAll({
+        attributes: [sequelize.fn('CONCAT', sequelize.col('firstname'), ' ', sequelize.col('lastname')), 'email', 'dob', 'phone', 'address', 'username'],
+    });
+    res.send(userList);
+}
+
+const listUsersInMeeting = (req, res) => {
+    let meetid = req.meetingid;
+    let userList = await User.findAll({
+        attributes: [sequelize.fn('CONCAT', sequelize.col('firstname'), ' ', sequelize.col('lastname')), 'email', 'dob', 'phone', 'address', 'username'],
+        include: [{
+            model: Participant,
+            as: 'participant',
+            require: true,
+            where: {
+                userid: {
+                    userid: Sequelize.col('User.userid')
+                }
+            }
+        }, {
+            model: Meeting,
+            as: 'meeting',
+            require: true,
+            where: {
+                meetingid: meetid
+            }
+        }]
+    });
+    res.send(userList);
+}
+
+const listUsersNotInMeeting = (req, res) => {
+    let meetid = req.meetingid;
+    let userList = await User.findAll({
+        attributes: [sequelize.fn('CONCAT', sequelize.col('firstname'), ' ', sequelize.col('lastname')), 'email', 'dob', 'phone', 'address', 'username'],
+        include: [{
+            model: Participant,
+            as: 'participant',
+            require: true,
+            where: {
+                userid: {
+                    userid: Sequelize.col('User.userid')
+                }
+            }
+        }, {
+            model: Meeting,
+            as: 'meeting',
+            require: true,
+            where: {
+                meetingid: {
+                    [Op.ne]: meetid
+                }
+            }
+        }]
+    });
+    res.send(userList);
+}
+
+module.exports = { getReservedMeetingList, getInvitedMeetingList, queryMeeting, listAllUsers, listUsersInMeeting, listUsersNotInMeeting };
