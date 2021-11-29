@@ -28,4 +28,20 @@ function getUserAuthAPI() {
     .get(baseURL + "api/users/auth", getHeaders);
 }
 
-export { loginAPI, registerAPI, getUserInfoAPI, updateUserInfoAPI, getUserAuthAPI };
+function feedBackAPI(message) {
+  const headers = getHeaders;
+  const data = {
+    message: message,
+  };
+  return axios.post(baseURL + "api/system/feedback",
+    data,
+    headers
+  );
+}
+
+//get another user info
+function getAnotherUserInfoAPI(id) {
+  return axios.get(baseURL + "api/users/info/" + id, getHeaders);
+}
+
+export { loginAPI, registerAPI, getUserInfoAPI, updateUserInfoAPI, getUserAuthAPI, feedBackAPI, getAnotherUserInfoAPI };

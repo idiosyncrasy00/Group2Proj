@@ -19,7 +19,7 @@
                 <form>
                   <div class="form-group">
                     <label>Tên phòng</label>
-                    <label class="form-control form-control-lg">
+                    <label class="form-control form-control-lg" readonly>
                       <!-- {{ roomlist[this.meetingInfo.roomid - 1].roomname }} with
                       room id is
                       {{ roomlist[this.meetingInfo.roomid - 1].id }} andddd
@@ -61,10 +61,12 @@
                     />
                   </div>
                   <div class="form-group">
-                    <label>Thời gian họp</label>
+                    <label>Thời gian họp (Giờ)</label>
                     <input
                       class="form-control form-control-lg"
                       type="number"
+                      min="1"
+                      max="10"
                       name="during"
                       placeholder="Nhập thời gian họp"
                       v-model="this.meetingInfo.during"
@@ -113,7 +115,6 @@ import roomNotFound from "@/components/roomNotFound.vue";
 
 export default {
   name: "createMeeting",
-  //props: ["roomlist1"],
   components: {
     roomNotFound,
   },
@@ -124,7 +125,7 @@ export default {
       roominfo: "",
       meetingInfo: {
         adminid: "",
-        roomid: this.$route.params.id,
+        roomid: "",
         roomname: "",
         reserveddate: "",
         startingtime: "",
@@ -162,8 +163,7 @@ export default {
             this.$swal.fire("Good job!", "Tạo cuộc họp thành công", "success");
             window.setTimeout(function () {
               location.href = "/Room";
-            }, 5000);
-            //window.location.href = "/Room";
+            }, 3000);
           })
           .catch((err) => {
             console.log(err);
@@ -179,9 +179,13 @@ export default {
       }
     },
   },
-  async created() {
-    this.roominfo = store.getRoom(this.meetingInfo.roomid);
-    this.meetingInfo.roomname = store.getRoom(this.meetingInfo.roomid).roomname;
+  mounted() {
+    //this.roominfo = store.getRoom(this.meetingInfo.roomid);
+    //this.meetingInfo.roomname = store.getRoom(this.meetingInfo.roomid).roomname;
+    //this.meetingInfo.adminid = store.getUserInfo().id;
+    //console.log(JSON.parse(localStorage.getItem("roominfo")));
+    this.meetingInfo.roomid = store.getARoomInfo().id;
+    this.meetingInfo.roomname = store.getARoomInfo().roomname;
     this.meetingInfo.adminid = store.getUserInfo().id;
   },
 };

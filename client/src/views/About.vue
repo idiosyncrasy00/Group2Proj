@@ -47,7 +47,6 @@
 </Footer>
 </template>
 <script>
-
 import Footer from "@/components/Footer.vue";
 export default {
   name: "about",
@@ -59,20 +58,20 @@ export default {
 
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap');
-.banner{
-	height: 50vh;
-	-webkit-filter: blur(15px);
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap");
+.banner {
+  height: 50vh;
+  -webkit-filter: blur(15px);
 }
-.banner-text{
-	font-family: 'Raleway', sans-serif;
+.banner-text {
+  font-family: "Raleway", sans-serif;
 }
-.text-section-left{
-	border-bottom: 2px solid;
-	border-image: linear-gradient(to left, purple 70%, #FFF 30%) 100% 1;
+.text-section-left {
+  border-bottom: 2px solid;
+  border-image: linear-gradient(to left, purple 70%, #fff 30%) 100% 1;
 }
-.text-section-right{
-	border-bottom: 2px solid;
-	border-image: linear-gradient(to right, red 70%, #FFF 30%) 100% 1;
+.text-section-right {
+  border-bottom: 2px solid;
+  border-image: linear-gradient(to right, red 70%, #fff 30%) 100% 1;
 }
 </style>

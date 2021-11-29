@@ -84,8 +84,7 @@
                   <button
                     class="btn btn-danger"
                     type="button"
-                    @click="deleteMeeting()"
-                    v-bind:id="`${meeting.id}`"
+                    @click="deleteMeeting(meeting.id)"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +118,10 @@
 //import store from "@/store/index.js";
 //import axios from "axios";
 //deleteMeetingAPI
-import { getMeetingListAPI, } from "@/services/meeting.apiServices.js";
+import {
+  getMeetingListAPI,
+  deleteMeetingAPI,
+} from "@/services/meeting.apiServices.js";
 export default {
   name: "admin",
   data() {
@@ -146,11 +148,46 @@ export default {
     };
   },
   methods: {
-    deleteMeeting() {
+    deleteMeeting(id) {
       this.$swal.fire("Good job!", "Huy cuoc hop thanh cong", "success");
-      //deleteMeetingAPI()
-      //this.$refs.`${meeting.id}`.innerText = 12'
-      //alert(this.$refs.`${meeting.id}`.innerText);
+      //const _meetingID = meetingID;
+      alert(id);
+      // const _meetingID = {
+      //   meetingID: meetingID,
+      // };
+      //this.getMeetingID = id;
+      //alert(this.getMeetingID);
+      deleteMeetingAPI(id)
+        .then((res) => {
+          this.$swal.fire("Good job!", "Huy cuoc hop thanh cong", "success");
+          console.log(res);
+          window.setTimeout(function () {
+            location.reload();
+          }, 3000);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      // axios
+      //   .delete(
+      //     "http://localhost:3000/api/meetings/delete",
+      //     {
+      //       headers: {
+      //         accesstoken: localStorage.getItem("accesstoken"),
+      //       },
+      //     },
+      //     116
+      //   )
+      //   .then((res) => {
+      //     this.$swal.fire("Good job!", "Huy cuoc hop thanh cong", "success");
+      //     console.log(res);
+      //     window.setTimeout(function () {
+      //       location.reload();
+      //     }, 3000);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
     },
   },
   async created() {
