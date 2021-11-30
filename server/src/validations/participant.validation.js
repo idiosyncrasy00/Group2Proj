@@ -20,4 +20,8 @@ const feedbackSchema = Joi.object({
     message: Joi.string().required()
 });
 
-module.exports = { inviteSchema, inviteManySchema, deleteSchema, feedbackSchema };
+const leaveSchema = Joi.object({
+    meetingid: Joi.number().integer().required()
+});
+
+module.exports = { inviteSchema, inviteManySchema, deleteSchema, feedbackSchema, leaveSchema };

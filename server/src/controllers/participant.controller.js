@@ -126,5 +126,19 @@ const feedbackMeeting = async (req, res) => {
     }
 };
 
+const leaveMeeting = async (req, res) => {
+    const {error, value} = await validation.leaveSchema.validate(req.body);
+    if (error) {
+        res.status(403).send({ error: error.message });
+    } else {
+        await Participant.destroy({
+            where: {
+                meetingid: value.meetingid,
+                userid: req.user.id
+            }
+        });
+        res.send();
+    }
+};
 
-module.exports = { inviteParticipant, inviteManyParticipant, deleteParticipant, feedbackMeeting };
+module.exports = { inviteParticipant, inviteManyParticipant, deleteParticipant, feedbackMeeting, leaveMeeting };
