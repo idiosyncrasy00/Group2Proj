@@ -1,5 +1,9 @@
 const Meeting = require('../models').Meeting;
+const User = require('../models').User;
+const Room = require('../models').Room;
+const sequelize = require('../models').sequelize;
 const validation = require('../validations/meeting.validation');
+const email_util = require('../utilities/email');
 const _ = require('lodash');
 
 
@@ -161,4 +165,53 @@ const getMeetingInfo = async (req, res) => {
     }
 };
 
-module.exports = { createMeeting, editMeeting, deleteMeeting, getMeetingInfo };
+const sendEmail = async (req, res) => {
+    const {error, value} = await validation.sendEmailSchema.validate(req.body);
+    if (error) {
+        res.status(403).send({error: error.message});
+    } else {
+        let meeting = await Meeting.findOne({
+            include: [{
+                model: Room,
+                as: "room"
+            }],
+            where: {
+                id: value.id,
+                adminid: req.user.id
+            }
+        });
+        if (!meeting) {
+            res.status(400).send({ error: "Meeting not found" });
+        } else {
+            let users = await User.findAll({
+                attributes: ['email', 
+                    [sequelize.fn('CONCAT', sequelize.col('firstname'), ' ', sequelize.col('lastname')), 'fullname']],
+                include: [{
+                    model: Meeting,
+                    as: "meeting",
+                    attributes: [],
+                    where: {
+                        id: value.id
+                    }
+                }],
+                raw: true
+            });
+            res.send();
+            // Sending email
+            users.forEach(i => {
+                let receiver = i['email'];
+                let fullname = i['fullname'];
+                let date = meeting['reserveddate'];
+                let title = meeting['title'];
+                let content = meeting['content'];
+                let roomname = meeting['room']['roomname'];
+                let during = meeting['during'];
+                let startingtime = meeting['startingtime'];
+                email_util.send_invite_email(receiver, fullname, roomname, date, startingtime, during, title, content);
+            });
+            console.log(`Invite email sent to ${users.length} people`);
+        }
+    }
+};
+
+module.exports = { createMeeting, editMeeting, deleteMeeting, getMeetingInfo, sendEmail };
