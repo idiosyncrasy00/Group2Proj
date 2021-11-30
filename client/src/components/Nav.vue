@@ -316,7 +316,7 @@ nav {
   top: -45px;
   right: -7px;
   padding: 2px 5px;
-  border-radius: 50%;
+  border-radius: 75%;
   background: red;
   color: white;
 }
