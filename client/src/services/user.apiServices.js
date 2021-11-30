@@ -44,4 +44,10 @@ function getAnotherUserInfoAPI(id) {
   return axios.get(baseURL + "api/users/info/" + id, getHeaders);
 }
 
-export { loginAPI, registerAPI, getUserInfoAPI, updateUserInfoAPI, getUserAuthAPI, feedBackAPI, getAnotherUserInfoAPI };
+function updatePasswordAPI(data) {
+  return axios.put(baseURL + "api/users/changepw", data, getHeaders);
+}
+
+export {
+  loginAPI, registerAPI, getUserInfoAPI, updateUserInfoAPI, getUserAuthAPI, feedBackAPI, getAnotherUserInfoAPI, updatePasswordAPI
+};

@@ -1,6 +1,9 @@
 <template>
   <div>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
     <div id="tabs" class="container">
       <div class="tabs">
         <a
@@ -155,7 +158,6 @@
                   <th scope="col" class="border-0 text-uppercase font-medium">
                     SĐT
                   </th>
-                  
                 </tr>
               </thead>
               <tbody>
@@ -165,7 +167,6 @@
                   <td><h5 class="text-muted">Hà Nội</h5></td>
                   <td><h5 class="text-muted">19022102@gmail.com</h5></td>
                   <td><h5 class="text-muted">09129129212</h5></td>
-                  
                 </tr>
               </tbody>
             </table>
@@ -173,23 +174,35 @@
         </div>
         <div v-if="activetab === 3" class="tabcontent">
           <div class="table-responsive">
-            <div class="example"  style="max-width:500px">
-                <input type="text"  placeholder="Nhập tên người cần mời" v-model="searchTerm">
-                <button class="btn btn-primary"> Mời</button>
+            <div class="example" style="max-width: 500px">
+              <input
+                type="text"
+                placeholder="Nhập tên người cần mời"
+                v-model="searchTerm"
+              />
+              <button class="btn btn-primary" @click="inviteperson()">
+                Mời
+              </button>
             </div>
-            <ul v-if="searchUsers.length < users.length" style="max-width:400px" >
-            <li v-for="user in searchUsers" :key="user.email" @click="selectUser(user.name)" 
-                class="cursor-pointer hover:bg-gray-100 p-1 ">
-              {{user.name}}
-              <br>
-              Email:{{user.email}} 
-              <label> &emsp;&emsp;  </label>
-              SĐT:{{user.phone}}
-              <br>
-              
-            </li>
+            <ul
+              v-if="searchUsers.length < users.length"
+              style="max-width: 400px"
+            >
+              <li
+                v-for="user in searchUsers"
+                :key="user.email"
+                @click="selectUser(user.name)"
+                class="cursor-pointer hover:bg-gray-100 p-1"
+              >
+                {{ user.name }}
+                <br />
+                Email:{{ user.email }}
+                <label> &emsp;&emsp; </label>
+                SĐT:{{ user.phone }}
+                <br />
+              </li>
             </ul>
-            
+
             <table class="table no-wrap user-table mb-0">
               <thead>
                 <tr>
@@ -211,21 +224,50 @@
                   <th scope="col" class="border-0 text-uppercase font-medium">
                     SĐT
                   </th>
-                
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr v-for="invitedUser in invitedUsers" :key="invitedUser.id">
                   <td class="pl-4"><h5>1</h5></td>
-                  <td><h5 class="font-medium mb-0">Nguyễn Văn Anh</h5></td>
-                  <td><h5 class="text-muted">Hà Nội</h5></td>
-                  <td><h5 class="text-muted">19022102@gmail.com</h5></td>
-                  <td><h5 class="text-muted">09129129212</h5></td>
-                  
+                  <td>
+                    <h5 class="font-medium mb-0">{{ invitedUser.id }}</h5>
+                  </td>
+                  <td>
+                    <h5 class="text-muted">{{ invitedUser.id }}</h5>
+                  </td>
+                  <td>
+                    <h5 class="text-muted">{{ invitedUser.id }}</h5>
+                  </td>
+                  <td>
+                    <h5 class="text-muted">{{ invitedUser.id }}</h5>
+                  </td>
+                  <td>
+                    <button
+                      class="btn btn-danger"
+                      type="button"
+                      @click="deleteParticipant(invitedUser.id)"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-trash"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                        />
+                      </svg>
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             </table>
-             
           </div>
         </div>
       </div>
@@ -235,24 +277,22 @@
 
 <script>
 import Nav from "@/components/Nav.vue";
-import { editMeetingAPI } from "@/services/meeting.apiServices.js";
+import {
+  editMeetingAPI,
+  adminDeletesParticipantAPI,
+  invitePerson,
+  listparticipantAPI,
+  getAllUsersAPI,
+} from "@/services/meeting.apiServices.js";
 
 export default {
   name: "editMeeting",
   components: Nav,
   data() {
     return {
-      searchTerm:'',
-      users: [
-        {name:"Nguyen Thi A",email:"abc",phone:"03172182"},
-        {name:"Nguyen Thi B",email:"xyz",phone:"12121212"},
-        {name:"Pham Vn",email:"xyz",phone:"1223212"},
-      ],
-      invitedUsers:{
-        name:'',
-        email:'',
-        phone:''
-      },
+      searchTerm: "",
+      users: [],
+      invitedUsers: [],
       activetab: 1,
       roomid: this.$route.params.roomid,
       meetingid: this.$route.params.meetingid,
@@ -271,8 +311,29 @@ export default {
   },
 
   methods: {
-    selectUser(name){
-      this.searchTerm = name
+    selectUser(name) {
+      this.searchTerm = name;
+    },
+    deleteParticipant(userid) {
+      adminDeletesParticipantAPI(userid, this.meetingid)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    inviteperson() {
+      invitePerson(this.searchTerm, this.meetingid)
+        .then((res) => {
+          console.log(res);
+          this.invitedUsers.push({
+            id: this.searchTerm,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     updateMeeting() {
       const data = {
@@ -312,12 +373,28 @@ export default {
         });
     },
   },
+  async created() {
+    listparticipantAPI(this.meetingid)
+      .then((res) => {
+        this.invitedUsers = res.data;
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    //error not found
+    getAllUsersAPI()
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
   computed: {
     searchUsers() {
       return this.users.filter(
-        (users) =>
-          users.name.toLowerCase().search(this.searchTerm) != -1
-        
+        (users) => users.name.toLowerCase().search(this.searchTerm) != -1
       );
     },
   },
@@ -438,7 +515,7 @@ button:not(:disabled) {
   box-sizing: border-box;
 }
 
-div.example input[type=text] {
+div.example input[type="text"] {
   padding: 8px;
   font-size: 14px;
   border: 2px solid grey;
@@ -450,7 +527,7 @@ div.example button {
   padding: 8px;
   font-size: 14px;
   border: 2px solid grey;
-  
+
   background: blue;
 }
 div.example::after {

@@ -3,16 +3,21 @@
     <div class="row h-100">
       <div
         class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100"
-        v-if="this.meetingInfo.roomid >= 4"
+        v-if="this.meetingInfo.roomid > 4"
       >
         <roomNotFound />
       </div>
       <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100" v-else>
         <div class="d-table-cell align-middle">
           <div class="text-center mt-4">
+            <h1>Thông tin phòng họp</h1>
+            {{ this.roominfo.id }}
+            {{ this.roominfo.roomname }}
+            {{ this.roominfo.capacity }}
+            {{ this.roominfo.facilities }}
+            {{ this.roominfo.status }}
             <h1 class="h2">Tạo cuộc họp</h1>
           </div>
-
           <div class="card">
             <div class="card-body">
               <div class="m-sm-4">
@@ -20,14 +25,6 @@
                   <div class="form-group">
                     <label>Tên phòng</label>
                     <label class="form-control form-control-lg" readonly>
-                      <!-- {{ roomlist[this.meetingInfo.roomid - 1].roomname }} with
-                      room id is
-                      {{ roomlist[this.meetingInfo.roomid - 1].id }} andddd
-                      {{ this.meetingInfo.roomid }} -->
-
-                      <!-- The room id is {{ this.meetingInfo.roomid }} and the
-                      roomname is {{ this.meetingInfo.roomname }} managed by
-                      user with ID {{ this.meetingInfo.adminid }} -->
                       {{ this.meetingInfo.roomname }}
                     </label>
                   </div>
@@ -102,6 +99,7 @@
               </div>
             </div>
           </div>
+          <h1>Reviews tu nguoi dung</h1>
         </div>
       </div>
     </div>
@@ -110,6 +108,7 @@
 <script>
 //import axios from "axios";
 import { createMeetingAPI } from "@/services/meeting.apiServices.js";
+import { getRoomReviewAPI } from "@/services/room.apiServices.js";
 import store from "@/store/index.js";
 import roomNotFound from "@/components/roomNotFound.vue";
 
@@ -120,13 +119,21 @@ export default {
   },
   data() {
     return {
-      //roominfo: this.$route.params.roominfo.id,
-      roomlist: [],
-      roominfo: "",
+      // roomid: {
+      //   id: store.getARoomInfo().id,
+      // },
+      roomid: store.getARoomInfo().id,
+      roominfo: {
+        id: store.getARoomInfo().id,
+        roomname: store.getARoomInfo().roomname,
+        capacity: store.getARoomInfo().capacity,
+        facilities: store.getARoomInfo().facilities,
+        status: store.getARoomInfo().status,
+      },
       meetingInfo: {
         adminid: "",
-        roomid: "",
-        roomname: "",
+        roomid: this.$route.params.roomid,
+        roomname: this.$route.params.roomname,
         reserveddate: "",
         startingtime: "",
         during: "",
@@ -141,7 +148,7 @@ export default {
   methods: {
     createMeeting() {
       const meetingInfo = {
-        adminid: this.meetingInfo.adminid,
+        adminid: store.getUserInfo().id,
         roomid: this.meetingInfo.roomid,
         reserveddate: this.meetingInfo.reserveddate,
         startingtime: this.meetingInfo.startingtime.substring(0, 2),
@@ -179,14 +186,17 @@ export default {
       }
     },
   },
-  mounted() {
-    //this.roominfo = store.getRoom(this.meetingInfo.roomid);
-    //this.meetingInfo.roomname = store.getRoom(this.meetingInfo.roomid).roomname;
-    //this.meetingInfo.adminid = store.getUserInfo().id;
-    //console.log(JSON.parse(localStorage.getItem("roominfo")));
-    this.meetingInfo.roomid = store.getARoomInfo().id;
+  async created() {
+    //this.meetingInfo.roomid = this.$route.params.roomid;
     this.meetingInfo.roomname = store.getARoomInfo().roomname;
-    this.meetingInfo.adminid = store.getUserInfo().id;
+
+    getRoomReviewAPI(this.roomid)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>

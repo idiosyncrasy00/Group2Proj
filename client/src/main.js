@@ -10,10 +10,8 @@ import AOS from 'aos'
 import 'aos/dist/aos.css'
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-// import Swal from 'sweetalert2';
-//import VueSimpleAlert from "vue-simple-alert";
+import BootstrapVue3 from 'bootstrap-vue-3';
 
-//window.Swal = Swal;
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth == true)
@@ -45,7 +43,7 @@ app.AOS = new AOS.init({
   delay: 500, // values from 0 to 3000, with step 50ms
   duration: 500, // values from 0 to 3000, with step 50ms
 });
-app.use(AOS).mount('#app');
+app.use(AOS).use(BootstrapVue3).mount('#app');
 /*
 import Vue from 'vue'
 import AppLayout from './components/index.vue'

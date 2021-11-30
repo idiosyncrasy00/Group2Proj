@@ -7,7 +7,6 @@
 
 <script>
 import Nav from "@/components/Nav.vue";
-//import { getRoomListAPI } from "@/services/room.apiServices.js";
 import { getUserAuthAPI } from "@/services/user.apiServices.js";
 
 export default {
@@ -20,9 +19,8 @@ export default {
     };
   },
   methods: {
-    registered() {
-      //alert(this.username + " " + this.password);
-      console.log(this.roomlist1);
+    setShowDate(d) {
+      this.showDate = d;
     },
   },
   components: {

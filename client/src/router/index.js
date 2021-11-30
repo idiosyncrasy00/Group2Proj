@@ -120,7 +120,7 @@ const routes = [
     }
   },
   {
-    path: '/Room/createMeeting/roomid=:id',
+    path: '/Room/createMeeting/roomid=:roomid',
     name: 'createMeeting',
     component: () => import('../views/createMeeting.vue'),
     meta: {
@@ -168,6 +168,15 @@ const routes = [
     path: '/user/id=:id',
     name: 'profile',
     component: () => import('../views/Users/Profile.vue'),
+    meta: {
+      requiresAuth: true,
+      notrequiresAuth: false,
+    }
+  },
+  {
+    path: '/user/changePassword',
+    name: 'changePassword',
+    component: () => import('../views/Users/passwordUpdate.vue'),
     meta: {
       requiresAuth: true,
       notrequiresAuth: false,

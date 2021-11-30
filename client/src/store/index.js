@@ -10,21 +10,24 @@
 //   modules: {
 //   }
 // })
-var roomlist = [];
-//var meetingListAsHost = [];
-//var meetingListAsParticipant = [];
-roomlist = JSON.parse(localStorage.getItem('roomlist'));
-//let userInfo = JSON.parse(localStorage.getItem('userinfo'));  
-//meetingListAsHost = JSON.parse(localStorage.getItem('meetingsInfoAsHost'));
-//meetingListAsParticipant = JSON.parse(localStorage.getItem('meetingsInfoAsParticipant'));
-//roominfo = 
-function getRoom(index) {
-  return roomlist[index - 1];
+// var roomlist = [];
+
+// //roominfo = 
+// function getRoom(index) {
+//   return roomlist[index - 1];
+// }
+
+function roomlist() {
+  return JSON.parse(localStorage.getItem('roomlist'));
 }
 
 function getUserInfo() {
   return JSON.parse(localStorage.getItem('userinfo'));
 }
+
+// function getAnotherUserInfo() {
+//   return JSON.parse(localStorage.getItem('profileInfo'));
+// }
 
 function getARoomInfo() {
   return JSON.parse(localStorage.getItem('roominfo'));
@@ -39,6 +42,6 @@ function getMeetingsAsHost() {
   return JSON.parse(localStorage.getItem('meetingsInfoAsHost'));
 }
 
-module.exports = { getRoom, getUserInfo, getMeetingsAsParticipant, getMeetingsAsHost, getARoomInfo };
+module.exports = { getUserInfo, getMeetingsAsParticipant, getMeetingsAsHost, getARoomInfo, roomlist };
 
 //console.log(roomlist);

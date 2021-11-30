@@ -32,8 +32,64 @@ function deleteMeetingAPI(id) {
   //axios.delete()
 }
 
-function inviteParticipants() {
-  return 0;
+function getInvitedMeetingsListAPI() {
+  return axios.get(baseURL + "api/util/invited", getHeaders);
 }
 
-export { createMeetingAPI, getMeetingListAPI, editMeetingAPI, deleteMeetingAPI, inviteParticipants };
+//invite people to meeting 
+function invitePeople(userID, meetingID) {
+  const data = {
+    meetingid: meetingID,
+    participants: userID,    // Participant ID list
+  };
+  return axios.post(baseURL + "api/participants/invite", data, getHeaders);
+}
+
+//invite a person to meeting 
+function invitePerson(userID, meetingID) {
+  const data = {
+    meetingid: meetingID,
+    userid: userID,
+  };
+  return axios.post(baseURL + "api/participants/invite", data, getHeaders);
+}
+
+//delete a participant/participant leaves the meeting
+function adminDeletesParticipantAPI(userID, meetingID) {
+  const data = {
+    meetingid: meetingID,
+    userid: userID,
+  };
+  const headers = getHeaders.headers;
+  return axios.delete(baseURL + "api/participants/delete", {
+    headers,
+    data
+  });
+}
+
+function participantLeavesMeetingAPI(meetingID) {
+  const data = {
+    meetingid: meetingID,
+  };
+  return axios.post(baseURL + "api/participants/leave", data, getHeaders);
+}
+
+//Get user list who's in/outside meeting API:
+function listparticipantAPI(meetingid) {
+  //POST
+  //const headers = getHeaders.headers;
+  const data = {
+    "meetingid": meetingid,
+    "outside": "",
+  };
+  return axios.post(baseURL + "api/util/listparticipant", data, getHeaders);
+}
+
+function getAllUsersAPI() {
+  return axios.get(baseURL + "api/users/listall", getHeaders);
+}
+
+export {
+  createMeetingAPI, getMeetingListAPI, editMeetingAPI, deleteMeetingAPI, getInvitedMeetingsListAPI,
+  invitePeople, invitePerson, adminDeletesParticipantAPI, participantLeavesMeetingAPI, listparticipantAPI, getAllUsersAPI
+};

@@ -12,6 +12,28 @@
                 <hr />
                 <!-- BEGIN SEARCH INPUT -->
 
+                <!-- <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Danh sách phòng"
+                    v-model="searchValues.roomName"
+                  />
+                  <span class="input-group-append">
+                    <button
+                      class="
+                        btn btn-outline-secondary
+                        bg-white
+                        border-start-0 border
+                        rounded-pill
+                        ms-n3
+                      "
+                      type="button"
+                    >
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </span>
+                </div> -->
                 <div class="input-group">
                   <input
                     type="text"
@@ -19,7 +41,7 @@
                     placeholder="Danh sách phòng"
                     v-model="searchValues.roomName"
                   />
-                  <span class="input-group-btn"> </span>
+                  <b-button>Tìm kiếm</b-button>
                 </div>
 
                 <!-- END SEARCH INPUT -->
@@ -46,22 +68,11 @@
                             class="btn btn-primary"
                             type="button"
                             v-if="room.status != 'Bảo trì'"
-                            @click.prevent="roomBooking(room)"
+                            @click="roomBooking(room)"
                           >
-                            <router-link
-                              :to="{
-                                name: 'createMeeting',
-                                params: {
-                                  roomname: room.roomname,
-                                  id: room.id,
-                                  //roominfo: JSON.parse(JSON.stringify(rooms)),
-                                },
-                              }"
-                            >
-                              <h5 class="card-title text-center text-dark">
-                                Đặt phòng
-                              </h5>
-                            </router-link>
+                            <h5 class="card-title text-center text-dark">
+                              Đặt phòng
+                            </h5>
                           </button>
                         </span>
                       </tr>
@@ -102,8 +113,13 @@ export default {
   },
   methods: {
     roomBooking(room) {
-      //get the specific room
-      //console.log("4123");
+      this.$router.push({
+        name: "createMeeting",
+        params: {
+          roomid: room.id,
+          roomname: room.roomname,
+        },
+      });
       localStorage.setItem("roominfo", JSON.stringify(room));
     },
     searchResult() {
@@ -126,7 +142,7 @@ export default {
     getRoomListAPI()
       .then((res) => {
         console.log(res.data);
-        //localStorage.setItem("roomlist", JSON.stringify(res.data));
+        localStorage.setItem("roomlist", JSON.stringify(res.data));
         this.rooms = res.data;
       })
       .catch((err) => {

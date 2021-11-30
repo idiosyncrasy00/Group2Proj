@@ -111,13 +111,30 @@
       </div>
     </div>
     <!-- </div> -->
+    <div id="calendar">
+      <h1>My Calendar</h1>
+      <calendar-view
+        :show-date="showDate"
+        :selection-start="selectionStart"
+        :selection-end="selectionEnd"
+        :items="events"
+        :showTimes="true"
+      >
+        <template #header="{ headerProps }">
+          <calendar-view-header
+            :header-props="headerProps"
+            @input="setShowDate"
+          />
+        </template>
+      </calendar-view>
+    </div>
   </div>
 </template>
 
 <script>
-//import store from "@/store/index.js";
-//import axios from "axios";
-//deleteMeetingAPI
+import { CalendarView, CalendarViewHeader } from "vue-simple-calendar";
+import "../../../node_modules/vue-simple-calendar/dist/style.css";
+
 import {
   getMeetingListAPI,
   deleteMeetingAPI,
@@ -127,36 +144,28 @@ export default {
   data() {
     return {
       getMeetingID: "",
-      meetings: [
-        // {
-        //   roomid: 1,
-        //   id: 1,
-        //   reserveddate: "2021-01-01",
-        //   startingtime: 7,
-        //   during: 2,
-        //   title: "Họp cuối năm",
-        // },
-        // {
-        //   roomid: 3,
-        //   id: 4,
-        //   reserveddate: "2021-02-01",
-        //   startingtime: 6,
-        //   during: 2,
-        //   title: "Họp tổ dân phố",
-        // },
+      meetings: [],
+      //calendar
+      showDate: new Date(),
+      events: [
+        {
+          id: "",
+          startDate: "",
+          endDate: "",
+          title: "",
+        },
       ],
     };
   },
+  components: {
+    CalendarView,
+    CalendarViewHeader,
+  },
   methods: {
+    setShowDate(d) {
+      this.showDate = d;
+    },
     deleteMeeting(id) {
-      this.$swal.fire("Good job!", "Huy cuoc hop thanh cong", "success");
-      //const _meetingID = meetingID;
-      alert(id);
-      // const _meetingID = {
-      //   meetingID: meetingID,
-      // };
-      //this.getMeetingID = id;
-      //alert(this.getMeetingID);
       deleteMeetingAPI(id)
         .then((res) => {
           this.$swal.fire("Good job!", "Huy cuoc hop thanh cong", "success");
@@ -168,41 +177,28 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-      // axios
-      //   .delete(
-      //     "http://localhost:3000/api/meetings/delete",
-      //     {
-      //       headers: {
-      //         accesstoken: localStorage.getItem("accesstoken"),
-      //       },
-      //     },
-      //     116
-      //   )
-      //   .then((res) => {
-      //     this.$swal.fire("Good job!", "Huy cuoc hop thanh cong", "success");
-      //     console.log(res);
-      //     window.setTimeout(function () {
-      //       location.reload();
-      //     }, 3000);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
     },
   },
   async created() {
-    //this.meeting = store.getMeetingsAsHost();
     getMeetingListAPI()
       .then((res) => {
         console.log(res);
         this.meetings = res.data;
-        //localStorage.setItem("meetingsInfoAsHost", res.data);
-        //this.rooms = res.data;
-        //this.userInfo = res.data;
+        console.log(this.meetings.length);
+        //console.log(this.events.length);
+        for (var i = 0; i < this.meetings.length; i++) {
+          this.events.push({
+            id: this.meetings[i].id,
+            startDate:
+              this.meetings[i].reserveddate +
+              " " +
+              this.meetings[i].startingtime,
+            title: this.meetings[i].title + " " + "Room name is " + this.meetings[i].roomid + " and meeting id is " + this.meetings[i].id,
+          });
+        }
       })
       .catch((err) => {
         console.log(err);
-        //alert("Tạo cuộc họp thất bại");
       });
   },
 };
@@ -250,5 +246,14 @@ button:not(:disabled) {
 .user-table tbody tr .category-select {
   max-width: 150px;
   border-radius: 20px;
+}
+
+#calendar {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  color: #2c3e50;
+  height: 67vh;
+  width: 90vw;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

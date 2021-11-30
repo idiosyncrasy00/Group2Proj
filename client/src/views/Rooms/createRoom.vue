@@ -1,73 +1,74 @@
 <template>
   <div>
     <div class="row mt-2">
-      <div class="h3 mx-auto col-sm-4 text-center mb-5 mt-3">Create your room</div>
+      <div class="h3 mx-auto col-sm-4 text-center mb-5 mt-3">
+        Create your room
+      </div>
     </div>
-    <div class="container card border border-3" style="width: 600px; background-color:#E3E5E7;" onsubmit="return false">
+    <div
+      class="container card border border-3"
+      style="width: 600px; background-color: #e3e5e7"
+      onsubmit="return false"
+    >
       <div class="form-group row d-flex mt-3">
         <label for="inputRoomId" class="col-sm-3 col-form-label">Room ID</label>
         <div class="col-sm-8">
           <UiInput
-            type="number"
-            id="meetingIdInput"
+            type="text"
             aria-describedby="meetidHelp"
-            placeholder="Enter Meeting room ID"
-            v-model="meetingId"
+            placeholder="Nhập tên phòng họp"
+            v-model="this.roominfo.roomname"
             v-on:keyup.enter="this.$refs.pass.focus()"
             autofocus
           />
           <small id="meetidHelp" class="form-text text-muted col-sm-8"
-            >Choose your 9-digits room ID</small
+            >Nhập tên phòng của bạn</small
           >
         </div>
       </div>
       <div class="form-group row">
         <label for="inputPassword" class="col-sm-3 col-form-label"
-          >Password</label
+          >Sức chứa</label
         >
         <div class="col-sm-8">
           <UiInput
-            ref="pass"
-            type="password"
+            type="number"
             class="form-control"
             id="inputPassword"
-            placeholder="Password"
-            v-model="password"
+            placeholder="Sức chứa"
+            v-model="this.roominfo.capacity"
             v-on:keyup.enter="this.$refs.time.focus()"
           />
         </div>
       </div>
       <div class="form-group row">
         <label for="inputStartTime" class="col-sm-3 col-form-label"
-          >Start time</label
+          >Trang thiết bị</label
         >
         <div class="col-sm-5">
           <UiInput
-            ref="time"
-            type="time"
+            type="text"
             class="form-control"
             id="inputStartTime"
-            v-model="time"
+            v-model="this.roominfo.facilities"
             v-on:keyup.enter="this.$refs.date.focus()"
           />
         </div>
       </div>
       <div class="form-group row">
         <label for="inputDate" class="col-sm-3 col-form-label"
-          >Start date</label
+          >Trạng thái</label
         >
         <div class="col-sm-5">
           <UiInput
-            type="date"
-            ref="date"
+            type="text"
             class="form-control"
-            id="inputDate"
-            v-model="date"
+            v-model="this.roominfo.status"
             v-on:keyup.enter="this.$refs.duration.focus()"
           />
         </div>
       </div>
-      <div class="form-group row">
+      <!-- <div class="form-group row">
         <label for="inputDuration" class="col-sm-3 col-form-label"
           >Duration
         </label>
@@ -84,15 +85,15 @@
             v-on:keyup.enter="this.$refs.submit.focus()"
           />
         </div>
-      </div>
+      </div> -->
       <div class="row mt-2 pb-1">
         <button
           ref="submit"
           type="submit"
           class="btn btn-primary mx-auto col-sm-3"
-          @click="addMeeting"
+          @click="createRoom"
         >
-          Create
+          Tạo phòng
         </button>
       </div>
     </div>
@@ -129,34 +130,47 @@
 </template>
 
 <script>
-import Nav from "../../components/Nav.vue";
 import UiInput from "@/components/UiInput";
+import { createRoomAPI } from "@/services/room.apiServices.js";
 
 export default {
   name: "createRoom",
   data() {
     return {
-      meeting: "",
-      meetings: [],
+      // meeting: "",
+      // meetings: [],
+      roominfo: {
+        roomname: "",
+        capacity: "",
+        facilities: "", // Not required
+        status: "",
+      },
     };
   },
   create: function () {
     this.addMeeting();
   },
   methods: {
-    addMeeting() {
-      this.meetings.push({
-        meetingId: this.meetingId,
-        password: this.password,
-        time: this.time,
-        date: this.date,
-        duration: this.duration,
-        show_toast: 1,
-      });
-      this.meeting = "";
-			this.meetingId = "";
-			this.password = "";
-			console.log(this.meetingId);
+    createRoom() {
+      // this.meetings.push({
+      //   meetingId: this.meetingId,
+      //   password: this.password,
+      //   time: this.time,
+      //   date: this.date,
+      //   duration: this.duration,
+      //   show_toast: 1,
+      // });
+      // this.meeting = "";
+      // this.meetingId = "";
+      // this.password = "";
+      // console.log(this.meetingId);
+      createRoomAPI(this.roominfo)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     // DataServices.create(data).then(res => {
     //   this.meeting = res.data.meeting;
@@ -170,14 +184,13 @@ export default {
     //     return meeting != item;
     //   });
     // },
-    newRoom() {
-      this.submitted = false;
-      this.rooms = {};
-    },
+    // newRoom() {
+    //   this.submitted = false;
+    //   this.rooms = {};
+    // },
   },
   components: {
-    Nav,
-		UiInput,
+    UiInput,
   },
 };
 </script>

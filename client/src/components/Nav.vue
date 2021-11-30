@@ -1,25 +1,32 @@
 <template>
-  <!--https://bootstrapmade.com/demo/Arsha/-->
   <nav
-    class="
-      navbar navbar-expand-lg navbar-dark
-      bg-dark
-      d-flex
-      justify-content-between
-    "
+    class="navbar navbar-expand-lg navbar-dark bg-dark"
     v-if="
       this.$route.path === '/signin' || this.$route.path === '/signup'
         ? false
         : true
     "
   >
-    <a class="navbar-brand" href="/">
-      <img src="../assets/logo.png" style="height: 2rem" />
-    </a>
-    <ul class="navbar-nav" display:auto>
-      <li class="nav-item">
-        <a href="/" class="nav-link"> Home </a>
-        <!-- <router-link
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img src="../assets/logo.png" style="height: 2rem" />
+      </a>
+      <!-- <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button> -->
+      <div class="navbar-collapse">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-1">
+          <li class="nav-item">
+            <a href="/" class="nav-link"> Trang chu </a>
+            <!-- <router-link
           :to="{
             name: 'home',
           }"
@@ -27,10 +34,10 @@
         >
           Home
         </router-link> -->
-      </li>
-      <li class="nav-item">
-        <a href="/about" class="nav-link">About</a>
-        <!-- <router-link
+          </li>
+          <li class="nav-item">
+            <a href="/about" class="nav-link">About</a>
+            <!-- <router-link
           :to="{
             name: 'about',
           }"
@@ -38,87 +45,137 @@
         >
           About
         </router-link> -->
-      </li>
-      <li class="dropdown nav-item">
-        <button class="dropbtn nav-link">Room detail</button>
-        <div class="dropdown-content">
-          <a href="/FindRoom" class="nav-link">Find a conference room</a>
-          <a href="/createRoom" class="nav-link">Create a conference room</a>
-          <a href="/manageRoom" class="nav-link">Manage your rooms</a>
-          <a href="/manageMeeting" class="nav-link">Manage your meetings</a>
-        </div>
-      </li>
-      <li class="dropdown nav-item">
-        <button class="dropbtn nav-link">Danh sách cuộc họp</button>
-        <div class="dropdown-content">
-          <a href="/admin" class="nav-link">Chủ phòng</a>
-          <!-- <router-link
-            :to="{
-              name: 'admin',
-            }"
-            class="nav-link"
+          </li>
+          <!-- <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Room detail
+            </a>
+            <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+              <li>
+                <a class="dropdown-item text-white" href="/FindRoom"
+                  >Find a conference room</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item text-white" href="/createRoom"
+                  >Create a conference room</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item text-white" href="/manageRoom"
+                  >Manage your rooms</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item text-white" href="#"
+                  >Something else here</a
+                >
+              </li>
+            </ul>
+          </li> -->
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Danh sach phong hop
+            </a>
+            <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+              <li>
+                <a class="dropdown-item text-white" href="/admin">Chu phong</a>
+              </li>
+              <li>
+                <a class="dropdown-item text-white" href="/participant"
+                  >Thanh vien</a
+                >
+              </li>
+            </ul>
+          </li>
+          <!-- <li class="nav-item">
+            <a href="/UserList" class="nav-link">Show list of users</a>
+          </li> -->
+          <li class="nav-item">
+            <a href="/Feedback" class="nav-link">Send feedback to manager</a>
+          </li>
+          <li class="nav-item">
+            <a href="/Room" class="nav-link">Manage Room(v2 Test)</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav" margin-left="20px" v-if="islogged == 0">
+          <li class="nav-item">
+            <a href="/signin" class="nav-link">Sign in</a>
+          </li>
+          <li class="nav-item">
+            <a href="/signup" class="nav-link">Sign up</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav" margin-left="20px" v-if="islogged == 1">
+          <div
+            v-on:mouseover="mouseOverNotify"
+            v-on:mouseleave="mouseLeaveNotify"
           >
-            Chủ phòng
-          </router-link> -->
-          <a href="/participant" class="nav-link">Thành viên</a>
-          <!-- <router-link
-            :to="{
-              name: 'participant',
-            }"
-            class="nav-link"
-          >
-            Thành viên
-          </router-link> -->
-        </div>
-      </li>
-      <li class="nav-item">
-        <a href="/UserList" class="nav-link">Show list of users</a>
-      </li>
-      <li class="nav-item">
-        <a href="/Feedback" class="nav-link">Send feedback to manager</a>
-      </li>
-      <li class="nav-item">
-        <a href="/Room" class="nav-link">Manage Room(v2 Test)</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav" margin-left="20px" v-if="islogged == 0">
-      <li class="nav-item">
-        <a href="/signin" class="nav-link">Sign in</a>
-      </li>
-      <li class="nav-item">
-        <a href="/signup" class="nav-link">Sign up</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav" margin-left="20px" v-if="islogged == 1">
-			<div 
-			v-on:mouseover="mouseOverNotify"
-			v-on:mouseleave="mouseLeaveNotify">
-				<li class="nav-item">
-					<a href="#" class="nav-link notification" style="font-size: 1.2rem">
-						<span>&#128276;	</span>
-						<span class="badge">0</span>
-					</a>
-				</li>
-				<div v-if="this.showNotify">
-					<Notify>
-					</Notify>
-				</div>
-			</div>
-      <li class="nav-item">
-        <!-- <a href="/signup" class="nav-link">Sign up</a> -->
-        <a href="/user" class="nav-link">Hello {{ user.username }}</a>
-      </li>
-      <li class="nav-item">
-        <a href="/signin" class="nav-link" @click="handleClick">Log out</a>
-      </li>
-    </ul>
+            <li class="nav-item">
+              <a
+                href="#"
+                class="nav-link notification"
+                style="font-size: 1.2rem"
+              >
+                <span>&#128276; </span>
+                <span class="badge">0</span>
+              </a>
+            </li>
+            <div v-if="this.showNotify">
+              <Notify> </Notify>
+            </div>
+          </div>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Hello {{ user.username }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <a class="dropdown-item" href="/user">Trang ca nhan</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/user/changePassword"
+                  >Doi mat khau</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="/signin" @click="handleClick"
+                  >Dang xuat</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
   </nav>
 </template>
 
 <script>
-import Notify from "@/components/Notify.vue"
-//import axios from "axios";
-//import store from "@/store/index.js";
+import Notify from "@/components/Notify.vue";
+//import Dropdown from "@/components/Dropdown.vue";
 import { getUserInfoAPI } from "@/services/user.apiServices.js";
 //import { getUserInfoAPI } from "@/services/user.apiServices.js";
 
@@ -128,13 +185,26 @@ export default {
     return {
       islogged: "0",
       user: "",
-			showNotify: false,
+      showNotify: false,
+      dropdownItems: [
+        {
+          title: "Web",
+          link: "#",
+        },
+        {
+          title: "Design",
+          link: "#",
+        },
+        {
+          title: "Videos",
+          link: "#",
+        },
+      ],
     };
   },
   components: {
-    //signin,
-    //axios,
-		Notify,
+    //Dropdown,
+    Notify,
   },
   methods: {
     handleClick() {
@@ -143,12 +213,12 @@ export default {
       this.user = null;
       this.$router.push("/signin");
     },
-		mouseOverNotify(){
-			this.showNotify = true;
-		},
-		mouseLeaveNotify(){
-			this.showNotify = false;
-		}
+    mouseOverNotify() {
+      this.showNotify = true;
+    },
+    mouseLeaveNotify() {
+      this.showNotify = false;
+    },
   },
   async created() {
     //user info
