@@ -25,7 +25,7 @@
       <div class="navbar-collapse">
         <ul class="navbar-nav me-auto mb-2 mb-lg-1">
           <li class="nav-item">
-            <a href="/" class="nav-link"> Trang chu </a>
+            <a href="/" class="nav-link"> Trang chủ </a>
             <!-- <router-link
           :to="{
             name: 'home',
@@ -93,11 +93,11 @@
             </a>
             <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
               <li>
-                <a class="dropdown-item text-white" href="/admin">Chủ phòng</a>
+                <a class="dropdown-item text-white" href="/admin">Chủ trì</a>
               </li>
               <li>
                 <a class="dropdown-item text-white" href="/participant"
-                  >Thành viên</a
+                  >Tham gia</a
                 >
               </li>
             </ul>
@@ -106,18 +106,18 @@
             <a href="/UserList" class="nav-link">Show list of users</a>
           </li> -->
           <li class="nav-item">
-            <a href="/Feedback" class="nav-link">Send feedback to manager</a>
+            <a href="/Feedback" class="nav-link">Gửi phản hồi cho quản lý</a>
           </li>
           <li class="nav-item">
-            <a href="/Room" class="nav-link">Manage Room(v2 Test)</a>
+            <a href="/Room" class="nav-link">Danh sách phòng họp</a>
           </li>
         </ul>
         <ul class="navbar-nav" margin-left="20px" v-if="islogged == 0">
           <li class="nav-item">
-            <a href="/signin" class="nav-link">Sign in</a>
+            <a href="/signin" class="nav-link">Đăng nhập</a>
           </li>
           <li class="nav-item">
-            <a href="/signup" class="nav-link">Sign up</a>
+            <a href="/signup" class="nav-link">Đăng ký</a>
           </li>
         </ul>
         <ul class="navbar-nav" margin-left="20px" v-if="islogged == 1">
@@ -152,17 +152,17 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
-                <a class="dropdown-item" href="/user">Trang ca nhan</a>
+                <a class="dropdown-item" href="/user">Trang cá nhân</a>
               </li>
               <li>
                 <a class="dropdown-item" href="/user/changePassword"
-                  >Doi mat khau</a
+                  >Đổi mật khẩu</a
                 >
               </li>
               <li><hr class="dropdown-divider" /></li>
               <li>
                 <a class="dropdown-item" href="/signin" @click="handleClick"
-                  >Dang xuat</a
+                  >Đăng xuất</a
                 >
               </li>
             </ul>
