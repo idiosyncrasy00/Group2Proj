@@ -100,6 +100,66 @@
             </div>
           </div>
           <h1>Reviews tu nguoi dung</h1>
+          <div>
+            <b-row class="mt-2">
+              <div>
+                Danh gia phong theo thang diem 10
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  v-model="postComment.rating"
+                >
+                  <option selected>Danh gia phong</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+                <label for="textarea-large">Nhap binh luan:</label>
+                <b-form-textarea
+                  id="textarea-rows"
+                  placeholder="Tall textarea"
+                  rows="8"
+                  v-model="postComment.message"
+                ></b-form-textarea>
+              </div>
+            </b-row>
+            <b-button class="mx-1" variant="primary" @click="postAComment"
+              >Binh luan</b-button
+            >
+          </div>
+          <div class="col-sm-5 col-md-6 col-12 pb-4">
+            <h1>Comments</h1>
+            <div
+              class="comment mt-4 text-justify darker float-left"
+              v-for="comment in comments"
+              :key="comment.id"
+            >
+              <img
+                src="https://i.imgur.com/yTFUilP.jpg"
+                alt=""
+                class="rounded-circle"
+                width="40"
+                height="40"
+              />
+              <h4>{{ comment.userid }} - Rating: {{ comment.rating }}/10</h4>
+              <span>{{ comment.time }}</span> <br />
+              <p>
+                {{ comment.message }}
+              </p>
+              <b-button-group v-if="comment.userid === 12">
+                <b-button variant="secondary">Edit</b-button>
+                <b-button variant="danger">Delete</b-button>
+                <!-- <b-button variant="secondary">Warning</b-button> -->
+              </b-button-group>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -108,7 +168,10 @@
 <script>
 //import axios from "axios";
 import { createMeetingAPI } from "@/services/meeting.apiServices.js";
-import { getRoomReviewAPI } from "@/services/room.apiServices.js";
+import {
+  getRoomReviewAPI,
+  postReviewAPI,
+} from "@/services/room.apiServices.js";
 import store from "@/store/index.js";
 import roomNotFound from "@/components/roomNotFound.vue";
 
@@ -119,9 +182,12 @@ export default {
   },
   data() {
     return {
-      // roomid: {
-      //   id: store.getARoomInfo().id,
-      // },
+      comments: [],
+      postComment: {
+        roomid: this.$route.params.roomid,
+        rating: "",
+        message: "",
+      },
       roomid: store.getARoomInfo().id,
       roominfo: {
         id: store.getARoomInfo().id,
@@ -146,6 +212,20 @@ export default {
     };
   },
   methods: {
+    postAComment() {
+      console.log(this.postComment);
+      //POST
+      postReviewAPI(this.postComment)
+        .then((res) => {
+          console.log(res);
+          this.comments.push(res.data);
+          this.postComment.message = "";
+          this.postComment.rating = "";
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     createMeeting() {
       const meetingInfo = {
         adminid: store.getUserInfo().id,
@@ -187,12 +267,12 @@ export default {
     },
   },
   async created() {
-    //this.meetingInfo.roomid = this.$route.params.roomid;
     this.meetingInfo.roomname = store.getARoomInfo().roomname;
-
+    //comment
     getRoomReviewAPI(this.roomid)
       .then((res) => {
         console.log(res);
+        this.comments = res.data;
       })
       .catch((err) => {
         console.log(err);
@@ -202,4 +282,7 @@ export default {
 </script>
 
 <style>
+.form-select {
+  width: 40%;
+}
 </style>

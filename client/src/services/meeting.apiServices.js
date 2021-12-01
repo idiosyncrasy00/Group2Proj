@@ -54,7 +54,7 @@ function invitePerson(userID, meetingID) {
   return axios.post(baseURL + "api/participants/invite", data, getHeaders);
 }
 
-//delete a participant/participant leaves the meeting
+//delete a participant leaves the meeting
 function adminDeletesParticipantAPI(userID, meetingID) {
   const data = {
     meetingid: meetingID,
