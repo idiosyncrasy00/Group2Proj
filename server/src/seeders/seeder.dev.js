@@ -4,87 +4,108 @@ module.exports = {
     up: async (db) => {
         await db.Room.bulkCreate([{
             id: 1,
-            roomname: "Room 1",
+            roomname: "Phòng 101",
             capacity: 100,
-            facilities: "Air conditioner, projector",
-            status: "WORKING"
+            facilities: "Điều hòa, máy chiếu",
+            status: "Đang hoạt động"
         }, {
             id: 2,
-            roomname: "Room 2",
+            roomname: "Phòng 102",
             capacity: 50,
-            facilities: "Nothing",
-            status: "FIXING"
+            facilities: "Máy chiếu",
+            status: "Đang hoạt động"
         }, {
             id: 3,
-            roomname: "Room 3",
+            roomname: "Phòng 103",
             capacity: 150,
-            facilities: "Projector",
-            status: "WORKING"
+            facilities: "Máy chiếu",
+            status: "Đang hoạt động"
         }]);
         await db.User.bulkCreate([{
             id: 11,
-            firstname: "Polly",
-            lastname: "Hastings",
-            email: "j25eudq6bgi@temporary-mail.net",
-            dob: "1989-09-29",
+            firstname: "Đức",
+            lastname: "Hoàng",
+            email: "inconsolable789@gmail.com",
+            dob: "2000-01-01",
             phone: "7605325323",
-            address: "4269 Fincham Road",
+            address: "99 Cầu Giấy",
             username: "rahsaan",
             password: await encrypt.generate("rahsaan")
         }, {
             id: 12,
-            firstname: "Daniel",
-            lastname: "Olsa",
+            firstname: "Quang",
+            lastname: "Anh",
             email: "randomemail@gmail.com",
             dob: "2000-01-20",
             phone: "1325468452",
-            address: "164 Manchester",
+            address: "24 Hoàng Văn Thụ",
             username: "test1234",
             password: await encrypt.generate("test1234")
         }, {
             id: 13,
-            firstname: "Larry",
-            lastname: "South",
-            email: "randomemail2@gmail.com",
+            firstname: "Thanh",
+            lastname: "Phương",
+            email: "19021346@vnu.edu.vn",
             dob: "2001-05-11",
             phone: "1325484212",
-            address: "4712 Joy Lane",
+            address: "15 Xuân Thủy",
             username: "test12345",
             password: await encrypt.generate("test12345")
+        }, {
+            id: 14,
+            firstname: "Xuân",
+            lastname: "Hải",
+            email: "gmxancrazy24114@gmail.com",
+            dob: "2001-01-24",
+            phone: "5462158745",
+            address: "40 Hồ Tùng Mậu",
+            username: "test1111",
+            password: await encrypt.generate("test1111")
         }]);
         await db.Meeting.bulkCreate([{
             id: 101,
             adminid: 12,
             roomid: 1,
-            reserveddate: "2021-01-01",
+            reserveddate: "2021-12-01",
             startingtime: 7,
             during: 2,
-            title: "Friendly meeting",
-            content: "Birthday",
+            title: "Hội nghị tập huấn",
+            content: "Tập huấn kỹ năng phòng chống Covid 19",
             password: "",
-            status: "WAITING"
+            status: "Đang chờ"
         }, {
             id: 102,
             adminid: 11,
             roomid: 3,
-            reserveddate: "2021-01-01",
+            reserveddate: "2021-12-02",
             startingtime: 11,
             during: 3,
-            title: "Family meeting",
-            content: "Gender reveal",
-            password: "family",
-            status: "WAITING"
+            title: "Họp tổng kết năm",
+            content: "Tổng kết năm học",
+            password: "",
+            status: "Đang chờ"
         }, {
             id: 103,
             adminid: 13,
             roomid: 3,
-            reserveddate: "2021-01-02",
+            reserveddate: "2021-12-03",
             startingtime: 11,
             during: 3,
-            title: "Old class meeting",
-            content: "",
-            password: "123",
-            status: "WAITING"
+            title: "Họp lớp cấp 3",
+            content: "Họp lớp cấp 3 khóa 2016-2019",
+            password: "",
+            status: "Đang chờ"
+        }, {
+            id: 104,
+            adminid: 12,
+            roomid: 1,
+            reserveddate: "2021-12-04",
+            startingtime: 9,
+            during: 2,
+            title: "Họp nâng lương",
+            content: "Nâng lương trước thời hạn",
+            password: "",
+            status: "Đang diễn ra"
         }]);
         await db.Participant.bulkCreate([{
             meetingid: 101,
@@ -97,17 +118,28 @@ module.exports = {
         }, {
             meetingid: 102,
             userid: 12,
-            isaccepting: true,
-            feedback: "Good"
+            isaccepting: true
         }, {
             meetingid: 103,
             userid: 12,
             isaccepting: false
+        }, {
+            meetingid: 104,
+            userid: 11,
+            isaccepting: true
+        }, {
+            meetingid: 104,
+            userid: 14,
+            isaccepting: true
+        }, {
+            meetingid: 104,
+            userid: 13,
+            isaccepting: true
         }]);
         await db.Feedback.bulkCreate([{
             id: 21,
             userid: 12,
-            message: "This program sucks",
+            message: "Tính năng tạo cuộc họp vẫn còn nhiều lỗi",
             time: "2021-11-23 09:50:18"
         }]);
         await db.Review.bulkCreate([{
@@ -115,23 +147,25 @@ module.exports = {
             userid: 11,
             roomid: 1,
             rating: 7,
-            message: "This room is so dirty",
+            message: "Phòng họp hơi chật nhưng vẫn đủ để dùng",
             time: "2021-11-23 09:50:18"
         }, {
             id: 32,
             userid: 12,
             roomid: 3,
             rating: 10,
-            message: "So satisied",
+            message: "Phòng họp sạch sẽ, thoáng mát. Cơ sở vật chất tiện nghi",
             time: "2021-11-24 09:50:18"
         }, {
             id: 33,
             userid: 13,
             roomid: 1,
             rating: 3,
-            message: "Unusable",
+            message: "Phòng họp vẫn còn bẩn, không đủ ánh sáng",
             time: "2021-11-25 09:50:18"
         }]);
+        // Run loader
+        await require('./loader').reloadRating();
     },
 
     down: async (db) => {
@@ -162,7 +196,7 @@ module.exports = {
         });
         await db.User.destroy({
             where: {
-                id: [11, 12, 13]
+                id: [11, 12, 13, 14]
             }
         });
     }

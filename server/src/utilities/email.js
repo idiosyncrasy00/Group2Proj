@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 // require('dotenv').config({ path: ".env.local" });  // For testing only
 
 var transporter = null;
-const sender = "Daniel Fred <danielfred@gmail.com>";
+const sender = "Ban tổ chức cuộc họp <danielfred@gmail.com>";
 
 // Init mailer
 function init_mailer() {
@@ -41,20 +41,18 @@ function send_invite_email(receiver, fullname, roomname, date, startingtime, dur
     let subject = `${title} Meeting on ${date}`;
     let html = 
 `<body>
-Hello ${fullname},<br>
+Kính gửi bạn ${fullname},<br>
 <br>
-I hope this email finds you well. I’m writing to invite you to a meeting on ${date} to discuss about ${title}.<br>
+Chúng tôi trân trọng kính mời bạn đến dự cuộc họp ${title} vào ngày ${date}.<br>
 <br>
-The meeting will take place at ${roomname} on ${startingtime}:00 and will last approximately ${during} hours. An agenda for the meeting is attached. The most important topics for discussion include:<br>
+Cuộc họp sẽ diễn ra vào lúc ${startingtime} giờ tại ${roomname}, kéo dài trong ${during} tiếng. Nội dung cuộc họp là như sau:<br>
 <br>
 ${content}<br>
 <br>
-Please click this link to confirm whether or not you will be able to attend so we can plan effectively.<br>
-https://bit.ly/3rjF634<br>
+Rất mong được sự có mặt của bạn tại buổi họp để cuộc họp diễn ra thành công tốt đẹp.<br>
 <br>
-Regard,<br>
-<br>
-Daniel Fred<br>
+Ban tổ chức cuộc họp,<br>
+    Nhóm 2<br>
 <span style="opacity: 0"> ${Date.now()} </span>
 </body>`;
     // console.log('>>>>>>>');

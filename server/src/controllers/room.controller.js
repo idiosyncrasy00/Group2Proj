@@ -1,5 +1,7 @@
 const Room = require('../models').Room;
 const Review = require('../models').Review;
+const User = require('../models').User;
+const sequelize = require('../models').sequelize;
 const _ = require('lodash');
 const validation = require('../validations/room.validation');
 
@@ -67,7 +69,7 @@ const deleteRoom = async (req, res) => {
 const getRoomList = async (req, res) => {
     try {
         const rooms = await Room.findAll({
-            attributes: ['id', 'roomname', 'capacity', 'facilities', 'status']
+            attributes: ['id', 'roomname', 'capacity', 'facilities', 'status', 'rating']
         });
         res.send(rooms);
     } catch(error) {
@@ -81,10 +83,21 @@ const getReviewList = async (req, res) => {
         res.status(403).send({ error: error.message });
     } else {
         let reviews = await Review.findAll({
-            attributes: ['id', 'userid', 'roomid', 'rating', 'message', 'time'],
+            attributes: ['id', 'rating', 'message', 'time'],
             where: {
                 roomid: value.id
-            }
+            },
+            include: [{
+                model: Room,
+                as: "room",
+                attributes: ['id', 'roomname']
+            }, {
+                model: User,
+                as: "user",
+                attributes: ['id',
+                    [sequelize.fn('CONCAT', sequelize.col('firstname'), ' ', sequelize.col('lastname')), 'fullname']
+                ]
+            }]
         });
         res.send(reviews);
     }
