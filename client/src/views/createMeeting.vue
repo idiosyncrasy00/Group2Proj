@@ -10,12 +10,6 @@
       <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100" v-else>
         <div class="d-table-cell align-middle">
           <div class="text-center mt-4">
-            <h1>Thông tin phòng họp</h1>
-            {{ this.roominfo.id }}
-            {{ this.roominfo.roomname }}
-            {{ this.roominfo.capacity }}
-            {{ this.roominfo.facilities }}
-            {{ this.roominfo.status }}
             <h1 class="h2">Tạo cuộc họp</h1>
           </div>
           <div class="card">
@@ -99,67 +93,8 @@
               </div>
             </div>
           </div>
-          <h1>Reviews tu nguoi dung</h1>
-          <div>
-            <b-row class="mt-2">
-              <div>
-                Danh gia phong theo thang diem 10
-                <select
-                  class="form-select"
-                  aria-label="Default select example"
-                  v-model="postComment.rating"
-                >
-                  <option selected>Danh gia phong</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                </select>
-                <label for="textarea-large">Nhap binh luan:</label>
-                <b-form-textarea
-                  id="textarea-rows"
-                  placeholder="Tall textarea"
-                  rows="8"
-                  v-model="postComment.message"
-                ></b-form-textarea>
-              </div>
-            </b-row>
-            <b-button class="mx-1" variant="primary" @click="postAComment"
-              >Binh luan</b-button
-            >
-          </div>
-          <div class="col-sm-5 col-md-6 col-12 pb-4">
-            <h1>Comments</h1>
-            <div
-              class="comment mt-4 text-justify darker float-left"
-              v-for="comment in comments"
-              :key="comment.id"
-            >
-              <img
-                src="https://i.imgur.com/yTFUilP.jpg"
-                alt=""
-                class="rounded-circle"
-                width="40"
-                height="40"
-              />
-              <h4>{{ comment.userid }} - Rating: {{ comment.rating }}/10</h4>
-              <span>{{ comment.time }}</span> <br />
-              <p>
-                {{ comment.message }}
-              </p>
-              <b-button-group v-if="comment.userid === 12">
-                <b-button variant="secondary">Edit</b-button>
-                <b-button variant="danger">Delete</b-button>
-                <!-- <b-button variant="secondary">Warning</b-button> -->
-              </b-button-group>
-            </div>
-          </div>
+          
+          
         </div>
       </div>
     </div>
