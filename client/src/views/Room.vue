@@ -41,7 +41,6 @@
                     placeholder="Danh sách phòng"
                     v-model="searchValues.roomName"
                   />
-                  <b-button>Tìm kiếm</b-button>
                 </div>
 
                 <!-- END SEARCH INPUT -->
@@ -52,7 +51,7 @@
                 <div class="table-responsive">
                   <table class="table table-hover">
                     <tbody>
-                      <tr v-for="room in rooms" :key="room.roomname">
+                      <tr v-for="room in searchRooms" :key="room.roomname">
                         <td class="image">
                           <img src="../assets/logo.png" alt="" />
                         </td>
@@ -130,7 +129,7 @@ export default {
     searchRooms() {
       return this.rooms.filter(
         (rooms) =>
-          rooms.roomName.toLowerCase().search(this.searchValues.roomName) != -1
+          rooms.roomname.toLowerCase().search(this.searchValues.roomName) != -1
         /*return this.rooms.filter((rooms) =>
         rooms.roomName.startsWith(this.searchValues.roomName)*/
       );

@@ -89,15 +89,15 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Danh sach phong hop
+              Danh sách cuộc họp
             </a>
             <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
               <li>
-                <a class="dropdown-item text-white" href="/admin">Chu phong</a>
+                <a class="dropdown-item text-white" href="/admin">Chủ phòng</a>
               </li>
               <li>
                 <a class="dropdown-item text-white" href="/participant"
-                  >Thanh vien</a
+                  >Thành viên</a
                 >
               </li>
             </ul>
