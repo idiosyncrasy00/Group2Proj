@@ -23,7 +23,7 @@
         <span class="navbar-toggler-icon"></span>
       </button> -->
       <div class="navbar-collapse">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-1">
+        <ul class="navbar-nav me-auto mb-2 mb-l g-1">
           <li class="nav-item">
             <a href="/" class="nav-link"> Trang chu </a>
             <!-- <router-link
@@ -37,14 +37,6 @@
           </li>
           <li class="nav-item">
             <a href="/about" class="nav-link">About</a>
-            <!-- <router-link
-          :to="{
-            name: 'about',
-          }"
-          class="nav-link"
-        >
-          About
-        </router-link> -->
           </li>
           <!-- <li class="nav-item dropdown">
             <a
@@ -105,14 +97,14 @@
           <!-- <li class="nav-item">
             <a href="/UserList" class="nav-link">Show list of users</a>
           </li> -->
-          <li class="nav-item">
+          <!--li class="nav-item">
             <a href="/Feedback" class="nav-link">Send feedback to manager</a>
-          </li>
+          </li-->
           <li class="nav-item">
-            <a href="/Room" class="nav-link">Manage Room(v2 Test)</a>
+            <a href="/Room" class="nav-link">Manage Room</a>
           </li>
         </ul>
-        <ul class="navbar-nav" margin-left="20px" v-if="islogged == 0">
+        <ul class="navbar-nav" v-if="islogged == 0">
           <li class="nav-item">
             <a href="/signin" class="nav-link">Sign in</a>
           </li>
@@ -120,7 +112,7 @@
             <a href="/signup" class="nav-link">Sign up</a>
           </li>
         </ul>
-        <ul class="navbar-nav" margin-left="20px" v-if="islogged == 1">
+        <ul class="navbar-nav" margin-left="1rem" v-if="islogged == 1">
           <div
             v-on:mouseover="mouseOverNotify"
             v-on:mouseleave="mouseLeaveNotify"
@@ -132,7 +124,7 @@
                 style="font-size: 1.2rem"
               >
                 <span>&#128276; </span>
-                <span class="badge">0</span>
+                <!--span class="badge">0</span-->
               </a>
             </li>
             <div v-if="this.showNotify">
@@ -244,18 +236,18 @@ export default {
 
 <style scoped>
 .navbar-brand {
-  padding-left: 50px;
+  padding-left: 1rem;
   position: relative;
 }
 
 .navbar-nav {
-  padding-left: 50px;
-  margin-left: 50px;
+  padding-left: 13rem;
+  margin-left: 1rem;
   position: relative;
 }
 
 .nav-item {
-  padding-left: 30px;
+  padding-left: 2rem;
 }
 
 /* Dropdown Button */

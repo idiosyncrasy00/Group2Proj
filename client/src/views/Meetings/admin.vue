@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <!-- <div class="row"> -->
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
@@ -205,10 +204,6 @@ export default {
 </script>
 
 <style>
-body {
-  background: #edf1f5;
-  margin-top: 20px;
-}
 .card {
   position: relative;
   display: flex;

@@ -7,41 +7,20 @@
           <div class="grid-body">
             <div class="row">
               <!-- BEGIN RESULT -->
-              <div class="col-md-9">
-                <h2><i class="fa fa-file-o"></i> Danh sách phòng</h2>
-                <hr />
+              <div class="col-md-9 mx-auto">
+								<div class="row text-center mb-3 mt-1">
+									<h2><i class="fa fa-file-o"></i> Danh sách phòng</h2>
+								</div>
                 <!-- BEGIN SEARCH INPUT -->
-
-                <!-- <div class="input-group">
+                <div class="input-group row mb-5">
+									<p class="mb-0" style="color: gray; font-size: 90%">Please enter room info</p>
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control col-sm-9"
                     placeholder="Danh sách phòng"
                     v-model="searchValues.roomName"
                   />
-                  <span class="input-group-append">
-                    <button
-                      class="
-                        btn btn-outline-secondary
-                        bg-white
-                        border-start-0 border
-                        rounded-pill
-                        ms-n3
-                      "
-                      type="button"
-                    >
-                      <i class="fa fa-search"></i>
-                    </button>
-                  </span>
-                </div> -->
-                <div class="input-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Danh sách phòng"
-                    v-model="searchValues.roomName"
-                  />
-                  <b-button>Tìm kiếm</b-button>
+                  <button class="btn button btn-primary col-sm-3">Tìm kiếm</button>
                 </div>
 
                 <!-- END SEARCH INPUT -->
@@ -155,15 +134,6 @@ export default {
 </script>
 
 <style scoped>
-body {
-  margin-top: 20px;
-  background: #eee;
-}
-
-.btn {
-  margin-bottom: 5px;
-}
-
 .grid {
   position: relative;
   width: 100%;
@@ -212,5 +182,8 @@ body {
 .search #price2 {
   display: inline;
   font-weight: 600;
+}
+.input-group{
+	border-radius: 1rem;
 }
 </style>

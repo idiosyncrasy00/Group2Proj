@@ -4,6 +4,9 @@
       <div id="contacts--contact">
         <p>{{ mail }}</p>
         <p>{{ phone }}</p>
+				<div class="item">
+            <a href="/Feedback" style="text-decoration: none;">Send feedback to us</a>
+        </div>
       </div>
       <div id="contacts--social">
         <div></div>
