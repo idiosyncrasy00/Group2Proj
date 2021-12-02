@@ -120,6 +120,15 @@ const routes = [
     }
   },
   {
+    path: '/manageRoom',
+    name: 'manageRoom',
+    component: () => import('../views/manager/manageRoom'),
+    meta: {
+      requiresAuth: true,
+      notrequiresAuth: true,
+    }
+  },
+  {
     path: '/Room/createMeeting/roomid=:roomid',
     name: 'createMeeting',
     component: () => import('../views/createMeeting.vue'),

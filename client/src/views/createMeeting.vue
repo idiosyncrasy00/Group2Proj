@@ -23,15 +23,6 @@
                     </label>
                   </div>
                   <div class="form-group">
-                    <label>Mật khẩu phòng</label>
-                    <input
-                      class="form-control form-control-lg"
-                      type="password"
-                      name="password"
-                      v-model="this.meetingInfo.password"
-                    />
-                  </div>
-                  <div class="form-group">
                     <label>Ngày họp</label>
                     <input
                       class="form-control form-control-lg"
