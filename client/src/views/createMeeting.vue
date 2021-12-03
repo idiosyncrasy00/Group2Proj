@@ -28,27 +28,29 @@
                       {{ this.meetingInfo.roomname }}
                     </label>
                   </div>
-                  <div class="form-group">
-                    <label>Mật khẩu phòng</label>
-                    <input
-                      class="form-control form-control-lg"
-                      type="password"
-                      name="password"
-                      v-model="this.meetingInfo.password"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label>Ngày họp</label>
-                    <input
-                      class="form-control form-control-lg"
-                      type="date"
-                      name="date"
-                      placeholder="Nhập ngày đặt phòng"
-                      v-model="this.meetingInfo.reserveddate"
-                    />
-                  </div>
 									<div class="row">
 										<div class="form-group col-sm-6">
+											<label>Mật khẩu phòng</label>
+											<input
+												class="form-control form-control-lg"
+												type="password"
+												name="password"
+												v-model="this.meetingInfo.password"
+											/>
+										</div>
+										<div class="form-group col-sm-6">
+											<label>Ngày họp</label>
+											<input
+												class="form-control form-control-lg"
+												type="date"
+												name="date"
+												placeholder="Nhập ngày đặt phòng"
+												v-model="this.meetingInfo.reserveddate"
+											/>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-sm-4">
 											<label>Thời gian bắt đầu</label>
 											<input
 												class="form-control form-control-lg"
@@ -58,7 +60,7 @@
 												v-model="this.meetingInfo.startingtime"
 											/>
 										</div>
-										<div class="form-group col-sm-6">
+										<div class="form-group col-sm-8">
 											<label>Thời gian họp (Giờ)</label>
 											<input
 												class="form-control form-control-lg"
@@ -95,14 +97,16 @@
                   <div class="text-center mt-3">
                     <button class="btn btn-primary" @click.prevent="createMeeting">Tạo phòng</button>
 										<button class="btn btn-secondary mx-2" @click.prevent="cancel">Thoát</button>
-                    <p>{{ errMsg }}</p>
+                    <p style="color:red;">{{ errMsg }}</p>
                     <!-- <button type="submit" class="btn btn-lg btn-primary">Sign up</button> -->
                   </div>
                 </form>
               </div>
             </div>
           </div>
-          <h1>Review tu nguoi dung</h1>
+					<div class="review">
+						<h1>Review tu nguoi dung</h1>
+					</div>
         </div>
       </div>
     </div>
@@ -215,5 +219,8 @@ input{
 .card{
 	border-radius: 2rem;
 	background-color: #d9d9f2;
+}
+.review{
+	margin-top: 3rem;
 }
 </style>

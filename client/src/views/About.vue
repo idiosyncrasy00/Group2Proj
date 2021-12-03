@@ -12,33 +12,42 @@
 	</p>
 	
 </div>
-<div class="row mt-5 text-section-left text-left" data-aos="fade-up">
-	<h5> OUR TEAM </h5>
-	<p style="font-size:1.5rem;">
-		Group 2, four members: ....
-	</p>
+<div class="row mt-5 text-section-left row" data-aos="fade-up">
+	<div class="col-sm-1"></div>
+	<div class="col-sm-9">
+		<h5> OUR TEAM </h5>
+		<p style="font-size:1.5rem;">
+			Group 2, four members: ....
+		</p>
+	</div>
 </div>
-<div class="row mt-5 text-section-right text-right" data-aos="fade-up">
-	<h5> OUR VISION </h5>
-	<p style="font-size:1.5rem;">
-		Prioritizing simplicity in solving meeting room’s problems, 
-		we work on a web application that can serve your basical needs in managing meeting
-		in company/school's enviroment. It hopefully can have some uses in real world's situation.
-	</p>
+<div class="row mt-5 text-section-right row" data-aos="fade-up">
+	<div class="col-sm-6"></div>
+	<div class="col-sm-6">
+		<h5> OUR VISION </h5>
+		<p style="font-size:1.5rem;">
+			Prioritizing simplicity in solving meeting room’s problems, 
+			we work on a web application that can serve your basical needs in managing meeting
+			in company/school's enviroment. It hopefully can have some uses in real world's situation.
+		</p>
+	</div>
 </div>
-<div class="row mt-5" data-aos="fade-up">
-	<h5> THE PROJECT </h5>
-	<p style="font-size:1.5rem;">
-		Project framework
-	</p>
-	<p style="font-size:1.5rem;">
-		- Building:
-		Bootstrap + VueJS + Axios + ExpressJS + NodeJS + Sequelize + MySQL
-	</p>
-	<p style="font-size:1.5rem;">
-		- Deployment:
-		Nginx + Docker	
-	</p>
+<div class="row mt-5 row text-section-end" data-aos="fade-up">
+	<div class="col-sm-1"></div>
+	<div class="col-sm-8">
+		<h5> THE PROJECT </h5>
+		<p style="font-size:1.5rem;">
+			Project framework
+		</p>
+		<p style="font-size:1.5rem;">
+			- Building:
+			Bootstrap + VueJS + Axios + ExpressJS + NodeJS + Sequelize + MySQL
+		</p>
+		<p style="font-size:1.5rem;">
+			- Deployment:
+			Nginx + Docker	
+		</p>
+	</div>
 </div>
 <div class="row mt-5" data-aos="fade-up" style="height: 25vh;">
 
@@ -68,10 +77,14 @@ export default {
 }
 .text-section-left {
   border-bottom: 2px solid;
-  border-image: linear-gradient(to left, purple 70%, #fff 30%) 100% 1;
+  border-image: linear-gradient(to right, purple 60%, #fff 30%) 80% 1;
 }
 .text-section-right {
   border-bottom: 2px solid;
-  border-image: linear-gradient(to right, red 70%, #fff 30%) 100% 1;
+  border-image: linear-gradient(to left, red 60%, #fff 30%) 80% 1;
+}
+.text-section-end {
+  border-bottom: 2px solid;
+  border-image: linear-gradient(to right, yellow 80%, #fff 30%) 80% 1;
 }
 </style>

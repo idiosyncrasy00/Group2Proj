@@ -1,13 +1,13 @@
 <template>
-  <div class="container">
+  <div class="container" style="padding:0;">
     <div class="row">
       <!-- BEGIN SEARCH RESULT -->
-      <div class="col-md-12">
+      <div class="col-sm-12">
         <div class="grid search">
           <div class="grid-body">
             <div class="row">
               <!-- BEGIN RESULT -->
-              <div class="col-md-9 mx-auto">
+              <div class="col-md-11 mx-auto">
 								<div class="row text-center mb-3 mt-1">
 									<h2><i class="fa fa-file-o"></i> Danh sách phòng</h2>
 								</div>
@@ -20,7 +20,7 @@
                     placeholder="Danh sách phòng"
                     v-model="searchValues.roomName"
                   />
-                  <button class="btn button btn-primary col-sm-3">Tìm kiếm</button>
+                  <button class="btn button btn-primary col-sm-2">Tìm kiếm</button>
                 </div>
 
                 <!-- END SEARCH INPUT -->
@@ -32,28 +32,41 @@
                   <table class="table table-hover">
                     <tbody>
                       <tr v-for="room in rooms" :key="room.roomname">
-                        <td class="image">
-                          <img src="../assets/logo.png" alt="" />
-                        </td>
-                        <td class="product">
-                          <strong>{{ room.roomname }}</strong>
-                          <br />Sức chứa: {{ room.capacity }} người <br />Trang
-                          thiết bị:{{ room.facilities }} <br />Trạng thái:{{
-                            room.status
-                          }}
-                        </td>
-                        <span class="input-group-btn">
-                          <button
-                            class="btn btn-primary"
-                            type="button"
-                            v-if="room.status != 'Bảo trì'"
-                            @click="roomBooking(room)"
-                          >
-                            <h5 class="card-title text-center text-dark">
-                              Đặt phòng
-                            </h5>
-                          </button>
-                        </span>
+												<div class="product row">
+													<div class="image col-sm-1">
+														<img 
+														src="../assets/logo.png" 
+														alt="" 
+														style="height: 3rem;width: 3rem;"
+														/>
+													</div>
+													<div class="row col-sm-11">
+														<div class="col-sm-7">
+															<p>{{ room.roomname }}</p>
+															Trang thiết bị: {{ room.facilities }}
+														</div>
+														<div class="col-sm-4">
+															<p>
+																<img src="https://icon-library.com/images/person-icon-png-transparent/person-icon-png-transparent-15.jpg"
+																style="height: 1.9rem;width: 1.9rem;"
+																/> {{ room.capacity }}
+															</p>
+															Trạng thái: {{room.status}}
+														</div>
+														<div class="col-sm-1">
+															<button
+															class="btn btn-primary"
+															type="button"
+															v-if="room.status != 'Bảo trì'"
+															@click="roomBooking(room)"
+														>
+																<h6 class="text-center text-dark">
+																	Đặt phòng
+																</h6>
+															</button>
+														</div>
+													</div>
+												</div>
                       </tr>
                     </tbody>
                   </table>
@@ -133,57 +146,19 @@ export default {
 };
 </script>
 
-<style scoped>
-.grid {
-  position: relative;
-  width: 100%;
-  background: #fff;
-  color: #666666;
-  border-radius: 2px;
-  margin-bottom: 25px;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-}
-
-.grid .grid-body {
-  padding: 15px 20px 15px 20px;
-  font-size: 0.9em;
-  line-height: 1.9em;
-}
-
-.search table tr td.rate {
-  color: #f39c12;
-  line-height: 50px;
-}
-
-.search table tr:hover {
-  cursor: pointer;
-}
-
-.search table tr td.image {
-  width: 50px;
-}
-
-.search table tr td img {
-  width: 50px;
-  height: 50px;
-}
-
-.search table tr td.rate {
-  color: #f39c12;
-  line-height: 50px;
-}
-
-.search table tr td.price {
-  font-size: 1.5em;
-  line-height: 50px;
-}
-
-.search #price1,
-.search #price2 {
-  display: inline;
-  font-weight: 600;
-}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 .input-group{
 	border-radius: 1rem;
+}
+.table-responsive{
+	overflow: hidden;
+	width: 100%;
+	padding: 0;
+	margin:0;
+}
+.product{
+	border-bottom: thin gray solid;
+	font-family: 'Comfortaa', cursive;
 }
 </style>
