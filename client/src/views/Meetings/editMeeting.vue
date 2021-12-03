@@ -65,13 +65,34 @@
                           </div>
                           <div class="form-group">
                             <label>Thời gian bắt đầu</label>
-                            <input
+                            <!-- <input
                               class="form-control form-control-lg"
                               type="time"
                               name="startTime"
                               placeholder="Nhập thời gian bắt đầu"
                               v-model="this.updateMeetingInfo.startingtime"
-                            />
+                            /> -->
+                            <select
+                              class="form-select"
+                              aria-label="Default select example"
+                              v-model="this.updateMeetingInfo.startingtime"
+                            >
+                              <option value="08:00 sáng">08:00 sáng</option>
+                              <option value="09:00 sáng">09:00 sáng</option>
+                              <option value="10:00 sáng">10:00 sáng</option>
+                              <option value="11:00 sáng">11:00 sáng</option>
+                              <option value="12:00 sáng">12:00 sáng</option>
+                              <option value="13:00 chiều">13:00 chiều</option>
+                              <option value="14:00 chiều">14:00 chiều</option>
+                              <option value="15:00 chiều">15:00 chiều</option>
+                              <option value="16:00 chiều">16:00 chiều</option>
+                              <option value="17:00 chiều">17:00 chiều</option>
+                              <option value="18:00 tối">18:00 tối</option>
+                              <option value="19:00 tối">19:00 tối</option>
+                              <option value="20:00 tối">20:00 tối</option>
+                              <option value="21:00 tối">21:00 tối</option>
+                              <option value="22:00 tối">22:00 tối</option>
+                            </select>
                           </div>
                           <div class="form-group">
                             <label>Thời gian họp</label>
@@ -502,6 +523,14 @@ export default {
       editMeetingAPI(data)
         .then((res) => {
           console.log(res);
+          this.$swal.fire(
+            "Good job!",
+            "Cập nhật cuộc họp thành công",
+            "success"
+          );
+          window.setTimeout(function () {
+            location.reload();
+          }, 3000);
         })
         .catch((err) => {
           this.$swal.fire({
@@ -511,10 +540,6 @@ export default {
           });
           console.log(err);
         });
-      this.$swal.fire("Good job!", "Cập nhật cuộc họp thành công", "success");
-      window.setTimeout(function () {
-        location.reload();
-      }, 3000);
     },
     triggerSearchBar() {
       getAllUsersAPI()

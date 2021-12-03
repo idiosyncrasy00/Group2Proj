@@ -38,13 +38,38 @@
               </div>
               <div class="form-group">
                 <label>Thời gian bắt đầu</label>
-                <input
-                  class="form-control form-control-lg"
-                  type="time"
+                <!-- <input
+                  class="form-control form-control-md"
+                  type="number"
+                  min="08"
+                  max="22"
                   name="startTime"
                   placeholder="Nhập thời gian bắt đầu"
                   v-model="this.meetingInfo.startingtime"
                 />
+                {{ this.AMorPM }} -->
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  v-model="this.meetingInfo.startingtime"
+                >
+                  <option value="08:00 sáng">08:00 sáng</option>
+                  <option value="09:00 sáng">09:00 sáng</option>
+                  <option value="10:00 sáng">10:00 sáng</option>
+                  <option value="11:00 sáng">11:00 sáng</option>
+                  <option value="12:00 sáng">12:00 sáng</option>
+                  <option value="13:00 chiều">13:00 chiều</option>
+                  <option value="14:00 chiều">14:00 chiều</option>
+                  <option value="15:00 chiều">15:00 chiều</option>
+                  <option value="16:00 chiều">16:00 chiều</option>
+                  <option value="17:00 chiều">17:00 chiều</option>
+                  <option value="18:00 tối">18:00 tối</option>
+                  <option value="19:00 tối">19:00 tối</option>
+                  <option value="20:00 tối">20:00 tối</option>
+                  <option value="21:00 tối">21:00 tối</option>
+                  <option value="22:00 tối">22:00 tối</option>
+                </select>
+                <!-- <input type="number" min="8" max="22" value="0" /> -->
               </div>
               <div class="form-group">
                 <label>Thời gian họp (Giờ)</label>
@@ -107,11 +132,7 @@ export default {
   components: {},
   data() {
     return {
-      comments: [],
-      postComment: {
-        rating: "",
-        message: "",
-      },
+      // comments: [],
       meetingInfo: {
         adminid: "",
         roomid: "",
@@ -143,7 +164,7 @@ export default {
       //   });
     },
     createMeeting() {
-      const getTime = this.meetingInfo.startingtime.substring(0, 2).toString();
+      const getTime = parseInt(this.meetingInfo.startingtime.substring(0, 2));
       const meetingInfo = {
         adminid: store.getUserInfo().id,
         roomid: this.roomid,
@@ -156,10 +177,7 @@ export default {
       };
       console.log(meetingInfo);
       //axios post
-      if (
-        parseInt(this.meetingInfo.startingtime) >= 8 &&
-        parseInt(this.meetingInfo.startingtime) <= 22
-      ) {
+      if (getTime >= 8 && getTime <= 22) {
         createMeetingAPI(meetingInfo)
           .then((res) => {
             console.log(res);
@@ -181,16 +199,6 @@ export default {
         this.errMsg = "Giờ đặt họp chỉ cho phép từ 8:00 AM đến 22:00 PM";
       }
     },
-  },
-  async created() {
-    // getRoomReviewAPI(this.roomid)
-    //   .then((res) => {
-    //     console.log(res);
-    //     this.comments = res.data;
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   },
 };
 </script>

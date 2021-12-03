@@ -8,48 +8,51 @@
             <div class="row">
               <!-- BEGIN RESULT -->
               <div class="col-md-9 mx-auto">
-								<div class="row text-center mb-3 mt-1">
-									<h2><i class="fa fa-file-o"></i> Danh sách phòng</h2>
-								</div>
+                <div class="row text-center mb-3 mt-1">
+                  <h2><i class="fa fa-file-o"></i> Danh sách phòng</h2>
+                </div>
                 <!-- BEGIN SEARCH INPUT -->
                 <div class="input-group">
-                  <input
+                  <!-- <input
                     type="text"
                     class="form-control"
                     placeholder="Nhập tên phòng"
                     v-model="searchValues.roomName"
-                  />
-                <div class="input-group row mb-5">
-									<p class="mb-0" style="color: gray; font-size: 90%">Please enter room info</p>
-                  <input
-                    type="text"
-                    class="form-control col-sm-9"
-                    placeholder="Danh sách phòng"
-                    v-model="searchValues.roomName"
-                  />
-                  <button class="btn button btn-primary col-sm-3">Tìm kiếm</button>
-                </div>
+                  /> -->
+                  <div class="input-group row mb-5">
+                    <!-- <p class="mb-0" style="color: gray; font-size: 90%">
+                      Please enter room info
+                    </p> -->
+                    <input
+                      type="text"
+                      class="form-control col-sm-9"
+                      placeholder="Danh sách phòng"
+                      v-model="searchValues.roomName"
+                    />
+                    <!-- <button class="btn button btn-primary col-sm-3">
+                      Tìm kiếm
+                    </button> -->
+                  </div>
 
-                <!-- END SEARCH INPUT -->
+                  <!-- END SEARCH INPUT -->
 
-                <br />
+                  <br />
 
-                <!-- BEGIN TABLE RESULT -->
-                <div class="table-responsive">
-                  <table class="table table-hover">
-                    <tbody>
-                      <tr v-for="room in searchRooms" :key="room.roomname">
-                        <td class="image">
-                          <img src="../assets/logo.png" alt="" />
-                        </td>
-                        <td class="product">
-                          <strong>{{ room.roomname }}</strong>
-                          <br />Sức chứa: {{ room.capacity }} người <br />Trang
-                          thiết bị:{{ room.facilities }} <br />Trạng thái:{{
-                            room.status
-                          }}
-                        </td>
-                        <!-- <span class="input-group-btn">
+                  <!-- BEGIN TABLE RESULT -->
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <tbody>
+                        <tr v-for="room in searchRooms" :key="room.roomname">
+                          <td class="image">
+                            <img src="../assets/logo.png" alt="" />
+                          </td>
+                          <td class="product">
+                            <strong>{{ room.roomname }}</strong>
+                            <br />Sức chứa: {{ room.capacity }} người
+                            <br />Trang thiết bị:{{ room.facilities }}
+                            <br />Trạng thái:{{ room.status }}
+                          </td>
+                          <!-- <span class="input-group-btn">
                           <button
                             class="btn btn-primary"
                             type="button"
@@ -61,74 +64,75 @@
                             </h5>
                           </button>
                         </span> -->
-                        <span class="input-group-btn">
-                          <button
-                            type="button"
-                            class="btn btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#exampleModal3"
-                            v-if="room.status != 'Bảo trì'"
-                            @click="roomBooking2(room)"
-                          >
-                            <h5 class="card-title text-center text-dark">
-                              Đặt phòng 
-                            </h5>
-                          </button>
-                        </span>
-                        <!--modal đặt phòng-->
-                        <createMeetingModal
-                          id="exampleModal3"
-                          :roomid="this.getRoomID"
-                          :roomname="this.getRoomName"
-                        />
-                        <span class="input-group-btn">
-                          <button
-                            type="button"
-                            class="btn btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#exampleModal"
-                            @click="getMeetingsInARoom(room)"
-                          >
-                            <h5 class="card-title text-center text-dark">
-                              Lịch đặt phòng
-                            </h5>
-                          </button>
-                        </span>
-                        <!--modal lịch đặt phòng-->
-                        <roomCalendarModal
-                          id="exampleModal"
-                          :roomname="this.getRoomName"
-                        />
-                        <span class="input-group-btn">
-                          <button
-                            type="button"
-                            class="btn btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#exampleModal1"
-                            @click="roomReview(room)"
-                          >
-                            <h5 class="card-title text-center text-dark">
-                              Đánh giá
-                            </h5>
-                          </button>
-                        </span>
-                        <!--modal đánh giá-->
-                        <roomReviewModal
-                          id="#exampleModal1"
-                          :roomid="this.getRoomID"
-                          :commentList="this.getComments"
-                        />
-                      </tr>
-                      <!--end of for loop-->
-                    </tbody>
-                  </table>
+                          <span class="input-group-btn">
+                            <button
+                              type="button"
+                              class="btn btn-primary btn-sm"
+                              data-bs-toggle="modal"
+                              data-bs-target="#exampleModal3"
+                              v-if="room.status != 'Bảo trì'"
+                              @click="roomBooking2(room)"
+                            >
+                              <h5 class="card-title text-center text-dark">
+                                Đặt phòng
+                              </h5>
+                            </button>
+                          </span>
+                          <!--modal đặt phòng-->
+                          <createMeetingModal
+                            id="exampleModal3"
+                            :roomid="this.getRoomID"
+                            :roomname="this.getRoomName"
+                          />
+                          <span class="input-group-btn">
+                            <button
+                              type="button"
+                              class="btn btn-primary btn-sm"
+                              data-bs-toggle="modal"
+                              data-bs-target="#exampleModal"
+                              @click="getMeetingsInARoom(room)"
+                            >
+                              <h5 class="card-title text-center text-dark">
+                                Xem lịch
+                              </h5>
+                            </button>
+                          </span>
+                          <!--modal lịch đặt phòng-->
+                          <roomCalendarModal
+                            id="exampleModal"
+                            :roomname="this.getRoomName"
+                          />
+                          <span class="input-group-btn">
+                            <button
+                              type="button"
+                              class="btn btn-primary btn-sm"
+                              data-bs-toggle="modal"
+                              data-bs-target="#exampleModal1"
+                              @click="roomReview(room)"
+                            >
+                              <h5 class="card-title text-center text-dark">
+                                Đánh giá
+                              </h5>
+                            </button>
+                          </span>
+                          <!--modal đánh giá-->
+                          <roomReviewModal
+                            id="#exampleModal1"
+                            :roomid="this.getRoomID"
+                            :commentList="this.getComments"
+                          />
+                        </tr>
+                        <!--end of for loop-->
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
+                <!-- END RESULT -->
               </div>
-              <!-- END RESULT -->
             </div>
           </div>
+          <!-- END SEARCH RESULT -->
         </div>
-        <!-- END SEARCH RESULT -->
       </div>
     </div>
   </div>
