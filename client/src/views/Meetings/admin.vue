@@ -10,7 +10,10 @@
             <thead>
               <tr>
                 <th scope="col" class="border-0 text-uppercase font-medium">
-                  Mã phòng
+                  Tên phòng
+                </th>
+                <th scope="col" class="border-0 text-uppercase font-medium">
+                  Tên cuộc họp
                 </th>
                 <th scope="col" class="border-0 text-uppercase font-medium">
                   Mã cuộc họp
@@ -25,9 +28,6 @@
                   Thời gian họp
                 </th>
                 <th scope="col" class="border-0 text-uppercase font-medium">
-                  Tên cuộc họp
-                </th>
-                <th scope="col" class="border-0 text-uppercase font-medium">
                   Chỉnh sửa
                 </th>
                 <th scope="col" class="border-0 text-uppercase font-medium">
@@ -37,26 +37,26 @@
             </thead>
             <tbody>
               <tr v-for="meeting in meetings" :key="meeting.id">
-                <td class="pl-4">{{ meeting.roomid }}</td>
-                <td>
-                  <span class="text-muted">{{ meeting.id }}</span>
-                </td>
-                <td>
-                  <span class="text-muted">{{ meeting.reserveddate }}</span>
-                </td>
-                <td>
-                  <span class="text-muted">{{ meeting.startingtime }} giờ</span
-                  ><br />
-                </td>
-                <td>
-                  <span class="text-muted">{{ meeting.during }} giờ</span>
-                </td>
+                <td class="pl-4">{{ meeting.room.roomname }}</td>
                 <td>
                   <span class="text-muted">{{ meeting.title }}</span>
                 </td>
                 <td>
-                  <button class="btn btn-danger" type="button">
-                    <router-link
+                  <span class="text-muted"> {{ meeting.id }}</span>
+                </td>
+                <td>
+                  <span class="text-muted">{{ meeting.reserveddate }}</span
+                  ><br />
+                </td>
+                <td>
+                  <span class="text-muted">{{ meeting.startingtime }} giờ</span>
+                </td>
+                <td>
+                  <span class="text-muted">{{ meeting.during }} tiếng</span>
+                </td>
+                <td>
+                  <button class="btn btn-danger" type="button" @click="editMeeting(meeting)">
+                    <!-- <router-link
                       :to="{
                         name: 'editMeeting',
                         params: {
@@ -64,19 +64,19 @@
                           meetingid: meeting.id,
                         },
                       }"
+                    > -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      class="bi bi-pen"
+                      viewBox="0 0 16 16"
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        class="bi bi-pen"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"
-                        />
-                      </svg>
-                    </router-link>
+                      <path
+                        d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"
+                      />
+                    </svg>
+                    <!-- </router-link> -->
                   </button>
                 </td>
                 <td>
@@ -110,7 +110,7 @@
       </div>
     </div>
     <!-- </div> -->
-    <div id="calendar">
+    <!-- <div id="calendar">
       <h1>My Calendar</h1>
       <calendar-view
         :show-date="showDate"
@@ -126,14 +126,11 @@
           />
         </template>
       </calendar-view>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import { CalendarView, CalendarViewHeader } from "vue-simple-calendar";
-import "../../../node_modules/vue-simple-calendar/dist/style.css";
-
 import {
   getMeetingListAPI,
   deleteMeetingAPI,
@@ -145,36 +142,51 @@ export default {
       getMeetingID: "",
       meetings: [],
       //calendar
-      showDate: new Date(),
-      events: [
-        {
-          id: "",
-          startDate: "",
-          endDate: "",
-          title: "",
-        },
-      ],
+      // showDate: new Date(),
+      // events: [
+      //   {
+      //     id: "",
+      //     startDate: "",
+      //     endDate: "",
+      //     title: "",
+      //   },
+      // ],
     };
   },
-  components: {
-    CalendarView,
-    CalendarViewHeader,
-  },
+  components: {},
   methods: {
-    setShowDate(d) {
-      this.showDate = d;
+    editMeeting(meeting) {
+      this.$router.push({
+        name: "editMeeting",
+        params: {
+          roomid: meeting.roomid,
+          meetingid: meeting.id,
+        },
+      });
+      localStorage.setItem("meetinginfo", JSON.stringify(meeting));
     },
     deleteMeeting(id) {
-      deleteMeetingAPI(id)
-        .then((res) => {
-          this.$swal.fire("Good job!", "Huy cuoc hop thanh cong", "success");
-          console.log(res);
-          window.setTimeout(function () {
-            location.reload();
-          }, 3000);
+      this.$swal
+        .fire({
+          title: "Bạn muốn xóa cuộc họp này chứ?",
+          showDenyButton: true,
+          confirmButtonText: "Có",
+          denyButtonText: `Không`,
         })
-        .catch((err) => {
-          console.log(err);
+        .then((result) => {
+          if (result.isConfirmed) {
+            deleteMeetingAPI(id)
+              .then((res) => {
+                console.log(res);
+                this.$swal.fire("Xóa cuộc họp thành công!", "", "success");
+                window.setTimeout(function () {
+                  location.reload();
+                }, 2000);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
         });
     },
   },
@@ -184,17 +196,22 @@ export default {
         console.log(res);
         this.meetings = res.data;
         console.log(this.meetings.length);
-        //console.log(this.events.length);
-        for (var i = 0; i < this.meetings.length; i++) {
-          this.events.push({
-            id: this.meetings[i].id,
-            startDate:
-              this.meetings[i].reserveddate +
-              " " +
-              this.meetings[i].startingtime,
-            title: this.meetings[i].title + " " + "Room name is " + this.meetings[i].roomid + " and meeting id is " + this.meetings[i].id,
-          });
-        }
+        // for (var i = 0; i < this.meetings.length; i++) {
+        //   this.events.push({
+        //     id: this.meetings[i].id,
+        //     startDate:
+        //       this.meetings[i].reserveddate +
+        //       " " +
+        //       this.meetings[i].startingtime,
+        //     title:
+        //       this.meetings[i].title +
+        //       " " +
+        //       "Room name is " +
+        //       this.meetings[i].roomid +
+        //       " and meeting id is " +
+        //       this.meetings[i].id,
+        //   });
+        // }
       })
       .catch((err) => {
         console.log(err);

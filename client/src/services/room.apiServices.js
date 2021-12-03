@@ -49,4 +49,15 @@ function deleteReviewAPI() {
   return 0;
 }
 
-export { createRoomAPI, getRoomListAPI, editRoomAPI, deleteRoomAPI, getRoomReviewAPI, postReviewAPI, editReviewAPI, deleteReviewAPI }
+function getMeetingsInARoomAPI(roomname, reserveddate) {
+  const data = {
+    roomname: roomname,
+    reserveddate: reserveddate,
+  };
+  return axios.post(baseURL + "api/util/query", data, getHeaders)
+}
+
+export {
+  createRoomAPI, getRoomListAPI, editRoomAPI, deleteRoomAPI, getRoomReviewAPI, postReviewAPI, editReviewAPI,
+  deleteReviewAPI, getMeetingsInARoomAPI
+}

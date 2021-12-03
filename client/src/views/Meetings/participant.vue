@@ -28,7 +28,8 @@
                   <th scope="col" class="border-0 text-uppercase font-medium">
                     Tên cuộc họp
                   </th>
-									<th scope="col" class="border-0 text-uppercase font-medium">
+                  <th scope="col" class="border-0 text-uppercase font-medium">
+                    Rời cuộc họp
                   </th>
                 </tr>
               </thead>
@@ -102,13 +103,28 @@ export default {
   },
   methods: {
     leaveMeeting(id) {
-      participantLeavesMeetingAPI(id)
-        .then((res) => {
-          console.log(res);
-          window.location.reload();
+      this.$swal
+        .fire({
+          title: "Bạn muốn rời cuộc họp này chứ?",
+          showDenyButton: true,
+          confirmButtonText: "Có",
+          denyButtonText: `Không`,
         })
-        .catch((err) => {
-          console.log(err);
+        .then((result) => {
+          if (result.isConfirmed) {
+            participantLeavesMeetingAPI(id)
+              .then((res) => {
+                console.log(res);
+                window.location.reload();
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+            this.$swal.fire("Rời cuộc họp thành công", "", "success");
+            window.setTimeout(function () {
+              location.reload();
+            }, 2000);
+          }
         });
     },
   },

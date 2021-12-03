@@ -41,7 +41,6 @@
               </li>
             </ul>
           </li>
-
           <li class="nav-item">
             <a href="/Feedback" class="nav-link">Phản hồi</a>
           </li>
@@ -50,7 +49,9 @@
           </li>
           <li class="nav-item">
             <a href="/manageRoom" class="nav-link">Quản lý phòng</a>
-
+          </li>
+          <li class="nav-item">
+            <a href="/statistics" class="nav-link">Thống kê</a>
           </li>
         </ul>
         <ul class="navbar-nav" v-if="islogged == 0">
@@ -151,6 +152,7 @@ export default {
     handleClick() {
       localStorage.removeItem("accesstoken");
       localStorage.removeItem("userinfo");
+      localStorage.removeItem("meetinginfo");
       this.user = null;
       this.$router.push("/signin");
     },

@@ -36,15 +36,6 @@ function getInvitedMeetingsListAPI() {
   return axios.get(baseURL + "api/util/invited", getHeaders);
 }
 
-//invite people to meeting 
-function invitePeople(userID, meetingID) {
-  const data = {
-    meetingid: meetingID,
-    participants: userID,    // Participant ID list
-  };
-  return axios.post(baseURL + "api/participants/invite", data, getHeaders);
-}
-
 //invite a person to meeting 
 function invitePerson(userID, meetingID) {
   const data = {
@@ -52,6 +43,15 @@ function invitePerson(userID, meetingID) {
     userid: userID,
   };
   return axios.post(baseURL + "api/participants/invite", data, getHeaders);
+}
+
+//invite many people to the meeting
+function invitePeopleAPI(meetingid, participants) {
+  const data = {
+    meetingid: meetingid,
+    participants: participants,
+  };
+  return axios.post(baseURL + "api/participants/invitemany", data, getHeaders);
 }
 
 //delete a participant leaves the meeting
@@ -89,7 +89,15 @@ function getAllUsersAPI() {
   return axios.get(baseURL + "api/users/listall", getHeaders);
 }
 
+function sendEmailAPI(meetingid) {
+  const data = {
+    "id": meetingid,
+  };
+  return axios.post(baseURL + "api/meetings/sendemail", data, getHeaders);
+}
+
 export {
   createMeetingAPI, getMeetingListAPI, editMeetingAPI, deleteMeetingAPI, getInvitedMeetingsListAPI,
-  invitePeople, invitePerson, adminDeletesParticipantAPI, participantLeavesMeetingAPI, listparticipantAPI, getAllUsersAPI
+  invitePeopleAPI, invitePerson, adminDeletesParticipantAPI, participantLeavesMeetingAPI, listparticipantAPI, getAllUsersAPI,
+  sendEmailAPI
 };
