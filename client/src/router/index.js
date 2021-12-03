@@ -129,6 +129,15 @@ const routes = [
     }
   },
   {
+    path: '/statistics',
+    name: 'statistics',
+    component: () => import('../views/manager/statistics'),
+    meta: {
+      requiresAuth: true,
+      notrequiresAuth: true,
+    }
+  },
+  {
     path: '/Room/createMeeting/roomid=:roomid',
     name: 'createMeeting',
     component: () => import('../views/createMeeting.vue'),

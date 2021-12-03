@@ -114,6 +114,9 @@
           <li class="nav-item">
             <a href="/manageRoom" class="nav-link">Quản lý phòng họp(chỉ dành cho quản lý)</a>
           </li>
+          <li class="nav-item">
+            <a href="/statistics" class="nav-link">Thống kê</a>
+          </li>
         </ul>
         <ul class="navbar-nav" margin-left="20px" v-if="islogged == 0">
           <li class="nav-item">
