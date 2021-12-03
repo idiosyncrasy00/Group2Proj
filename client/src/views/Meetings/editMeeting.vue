@@ -19,7 +19,7 @@
         <a
           v-on:click="activetab = 3"
           v-bind:class="[activetab === 3 ? 'active' : '']"
-          >Danh sách người đang mời</a
+          >Lên danh sách người tham gia</a
         >
       </div>
       <div class="content">
@@ -41,26 +41,17 @@
                             <label
                               class="form-control form-control-lg"
                               readonlyy
-                              >{{ this.roomid }}
+                              >{{ this.defaultMeetingInfo.room.roomname }}
                             </label>
                           </div>
                           <div class="form-group">
-                            <label>Tên meeting</label>
+                            <label>Mã cuộc họp</label>
                             <label
                               class="form-control form-control-lg"
                               readonlyy
                             >
-                              {{ this.meetingid }}</label
+                              {{ this.defaultMeetingInfo.id }}</label
                             >
-                          </div>
-                          <div class="form-group">
-                            <label>Mật khẩu phòng</label>
-                            <input
-                              class="form-control form-control-lg"
-                              type="password"
-                              name="password"
-                              v-model="this.updateMeetingInfo.password"
-                            />
                           </div>
                           <div class="form-group">
                             <label>Ngày họp</label>
@@ -136,54 +127,10 @@
           </div>
         </div>
         <div v-if="activetab === 2" class="tabcontent">
+          <button class="btn btn-primary" @click="SendEmail()">
+            Gửi email
+          </button>
           <div class="table-responsive">
-            <table class="table no-wrap user-table mb-0">
-              <thead>
-                <tr>
-                  <th
-                    scope="col"
-                    class="border-0 text-uppercase font-medium pl-4"
-                  >
-                    ID
-                  </th>
-                  <th scope="col" class="border-0 text-uppercase font-medium">
-                    Tên
-                  </th>
-                  <th scope="col" class="border-0 text-uppercase font-medium">
-                    Địa chỉ
-                  </th>
-                  <th scope="col" class="border-0 text-uppercase font-medium">
-                    Email
-                  </th>
-                  <th scope="col" class="border-0 text-uppercase font-medium">
-                    SĐT
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="pl-4"><h5>1</h5></td>
-                  <td><h5 class="font-medium mb-0">Nguyễn Văn Anh</h5></td>
-                  <td><h5 class="text-muted">Hà Nội</h5></td>
-                  <td><h5 class="text-muted">19022102@gmail.com</h5></td>
-                  <td><h5 class="text-muted">09129129212</h5></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div v-if="activetab === 3" class="tabcontent">
-          <div class="table-responsive">
-            <div class="example" style="max-width: 500px">
-              <input
-                type="text"
-                placeholder="Nhập tên người cần mời"
-                v-model="searchTerm"
-              />
-              <button class="btn btn-primary" @click="inviteperson()">
-                Mời
-              </button>
-            </div>
             <ul
               v-if="searchUsers.length < users.length"
               style="max-width: 400px"
@@ -191,10 +138,18 @@
               <li
                 v-for="user in searchUsers"
                 :key="user.email"
-                @click="selectUser(user.name)"
+                @click="
+                  selectUser(
+                    user.fullname,
+                    user.id,
+                    user.email,
+                    user.phone,
+                    user.address
+                  )
+                "
                 class="cursor-pointer hover:bg-gray-100 p-1"
               >
-                {{ user.name }}
+                {{ user.fullname }}
                 <br />
                 Email:{{ user.email }}
                 <label> &emsp;&emsp; </label>
@@ -224,22 +179,27 @@
                   <th scope="col" class="border-0 text-uppercase font-medium">
                     SĐT
                   </th>
+                  <th scope="col" class="border-0 text-uppercase font-medium">
+                    Xóa
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="invitedUser in invitedUsers" :key="invitedUser.id">
-                  <td class="pl-4"><h5>1</h5></td>
-                  <td>
-                    <h5 class="font-medium mb-0">{{ invitedUser.id }}</h5>
+                  <td class="pl-4">
+                    <h5>{{ invitedUser.id }}</h5>
                   </td>
                   <td>
-                    <h5 class="text-muted">{{ invitedUser.id }}</h5>
+                    <h5 class="font-medium mb-0">{{ invitedUser.fullname }}</h5>
                   </td>
                   <td>
-                    <h5 class="text-muted">{{ invitedUser.id }}</h5>
+                    <h5 class="text-muted">{{ invitedUser.address }}</h5>
                   </td>
                   <td>
-                    <h5 class="text-muted">{{ invitedUser.id }}</h5>
+                    <h5 class="text-muted">{{ invitedUser.email }}</h5>
+                  </td>
+                  <td>
+                    <h5 class="text-muted">{{ invitedUser.phone }}</h5>
                   </td>
                   <td>
                     <button
@@ -271,120 +231,307 @@
           </div>
         </div>
       </div>
+      <div v-if="activetab === 3" class="tabcontent">
+        <div class="table-responsive">
+          <div class="example" style="max-width: 500px">
+            <input
+              type="text"
+              placeholder="Nhập tên người cần mời"
+              v-model="searchTerm"
+              @click="triggerSearchBar"
+            />
+            <button class="btn btn-success" @click="addPerson()">
+              Thêm người
+            </button>
+            <button class="btn btn-success" @click="InvitePeople()">
+              Mời người
+            </button>
+            <!-- <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#userList"
+              >
+                <invitingPeopleModal />
+                <h5 class="card-title text-center text-dark">
+                  Lên danh sách người tham dự
+                </h5>
+              </button> -->
+          </div>
+          <ul v-if="searchUsers.length < users.length" style="max-width: 400px">
+            <li
+              v-for="user in searchUsers"
+              :key="user.email"
+              @click="
+                selectUser(
+                  user.fullname,
+                  user.id,
+                  user.email,
+                  user.phone,
+                  user.address
+                )
+              "
+              class="cursor-pointer hover:bg-gray-100 p-1"
+            >
+              {{ user.fullname }}
+              <br />
+              Email:{{ user.email }}
+              <label> &emsp;&emsp; </label>
+              SĐT:{{ user.phone }}
+              <br />
+            </li>
+          </ul>
+
+          <table class="table no-wrap user-table mb-0">
+            <thead>
+              <tr>
+                <th
+                  scope="col"
+                  class="border-0 text-uppercase font-medium pl-4"
+                >
+                  ID
+                </th>
+                <th scope="col" class="border-0 text-uppercase font-medium">
+                  Tên
+                </th>
+                <th scope="col" class="border-0 text-uppercase font-medium">
+                  Địa chỉ
+                </th>
+                <th scope="col" class="border-0 text-uppercase font-medium">
+                  Email
+                </th>
+                <th scope="col" class="border-0 text-uppercase font-medium">
+                  SĐT
+                </th>
+                <th scope="col" class="border-0 text-uppercase font-medium">
+                  Xóa
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(invitingUser, index) in invitingUsers"
+                :key="invitingUser.id"
+              >
+                <td class="pl-4">
+                  <h5>{{ invitingUser.id }}</h5>
+                </td>
+                <td>
+                  <h5 class="font-medium mb-0">
+                    {{ invitingUser.fullname }}
+                  </h5>
+                </td>
+                <td>
+                  <h5 class="text-muted">{{ invitingUser.address }}</h5>
+                </td>
+                <td>
+                  <h5 class="text-muted">{{ invitingUser.email }}</h5>
+                </td>
+                <td>
+                  <h5 class="text-muted">{{ invitingUser.phone }}</h5>
+                </td>
+                <td>
+                  <button
+                    class="btn btn-danger"
+                    type="button"
+                    @click="removeUserItem(index)"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-trash"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                      />
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Nav from "@/components/Nav.vue";
+import invitingPeopleModal from "@/components/invitingPeopleModal.vue";
 import {
   editMeetingAPI,
   adminDeletesParticipantAPI,
-  invitePerson,
+  //invitePerson,
   listparticipantAPI,
   getAllUsersAPI,
+  invitePeopleAPI,
+  sendEmailAPI,
 } from "@/services/meeting.apiServices.js";
 
 export default {
   name: "editMeeting",
-  components: Nav,
+  components: { invitingPeopleModal },
   data() {
     return {
       searchTerm: "",
+      getUsersIdList: [],
+      getUserEmail: "",
+      getUserPhone: "",
+      getUserAddress: "",
       users: [],
       invitedUsers: [],
-      activetab: 1,
+      invitingUsers: [],
+      activetab: 2,
       roomid: this.$route.params.roomid,
       meetingid: this.$route.params.meetingid,
+      defaultMeetingInfo: JSON.parse(localStorage.getItem("meetinginfo")),
       updateMeetingInfo: {
-        id: this.$route.params.meetingid,
-        roomid: this.$route.params.roomid, // Not required
         reserveddate: "", // Not required
         startingtime: "", // Not required
         during: "", // Not required
         title: "", // Not required
         content: "", // Not required
-        password: "1", // Not required
-        status: "ok", // Not required
+        status: "", // Not required
       },
     };
   },
 
   methods: {
-    selectUser(name) {
+    selectUser(name, userid, email, phone, address) {
       this.searchTerm = name;
+      this.getUserId = userid;
+      this.getUserEmail = email;
+      this.getUserPhone = phone;
+      this.getUserAddress = address;
     },
     deleteParticipant(userid) {
-      adminDeletesParticipantAPI(userid, this.meetingid)
+      this.$swal
+        .fire({
+          title: "Bạn muốn xóa người này chứ?",
+          showDenyButton: true,
+          confirmButtonText: "Có",
+          denyButtonText: `Không`,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            adminDeletesParticipantAPI(userid, this.meetingid)
+              .then((res) => {
+                console.log(res);
+                this.$swal.fire(
+                  "Xóa người tham gia thành công!",
+                  "",
+                  "success"
+                );
+                window.setTimeout(function () {
+                  location.reload();
+                }, 2000);
+                //this.activetab = 3;
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
+        });
+    },
+    addPerson() {
+      this.invitingUsers.push({
+        id: this.getUserId,
+        fullname: this.searchTerm,
+        email: this.getUserEmail,
+        phone: this.getUserPhone,
+        address: this.getUserAddress,
+      });
+      this.getUsersIdList.push(this.getUserId);
+      this.searchTerm = "";
+    },
+    InvitePeople() {
+      invitePeopleAPI(this.meetingid, this.getUsersIdList)
         .then((res) => {
           console.log(res);
+          this.$swal.fire("Mời người tham gia thành công!", "", "success");
+          window.setTimeout(function () {
+            location.reload();
+          }, 2000);
         })
         .catch((err) => {
           console.log(err);
         });
     },
-    inviteperson() {
-      invitePerson(this.searchTerm, this.meetingid)
+    SendEmail() {
+      sendEmailAPI(this.meetingid)
         .then((res) => {
           console.log(res);
-          this.invitedUsers.push({
-            id: this.searchTerm,
-          });
+          this.$swal.fire(
+            "Gửi email đến người tham gia thành công!",
+            "",
+            "success"
+          );
+          window.setTimeout(function () {
+            location.reload();
+          }, 2000);
         })
         .catch((err) => {
           console.log(err);
         });
+    },
+    removeUserItem(index) {
+      console.log(index);
+      this.invitingUsers.splice(index, 1);
+      this.getUsersIdList.splice(index, 1);
     },
     updateMeeting() {
       const data = {
-        id: this.updateMeetingInfo.id,
-        roomid: this.updateMeetingInfo.roomid, // Not required
-        reserveddate: this.updateMeetingInfo.reserveddate, // Not required
-        startingtime: this.updateMeetingInfo.startingtime.substring(0, 2), // Not required
-        during: this.updateMeetingInfo.during, // Not required
-        title: this.updateMeetingInfo.title, // Not required
-        content: this.updateMeetingInfo.content, // Not required
-        password: this.updateMeetingInfo.password, // Not required
-        status: this.updateMeetingInfo.status, // Not required
+        id: this.$route.params.meetingid,
+        roomid: this.$route.params.roomid,
+        reserveddate: this.updateMeetingInfo.reserveddate,
+        startingtime: this.updateMeetingInfo.startingtime.substring(0, 2),
+        during: this.updateMeetingInfo.during,
+        title: this.updateMeetingInfo.title,
+        content: this.updateMeetingInfo.content,
+        status: "ok",
       };
       console.log(data);
       //PUT
       editMeetingAPI(data)
         .then((res) => {
           console.log(res);
-          this.$swal.fire(
-            "Good job!",
-            "Cập nhật cuộc họp thành công",
-            "success"
-          );
-          window.setTimeout(function () {
-            location.href = "/admin";
-          }, 5000);
-          //window.location.href = "/admin";
         })
         .catch((err) => {
           this.$swal.fire({
             icon: "error",
             title: "Oops...",
             text: "Cập nhật cuộc họp thất bại :(((",
-            // footer: '<a href="">Why do I have this issue?</a>',
           });
+          console.log(err);
+        });
+      this.$swal.fire("Good job!", "Cập nhật cuộc họp thành công", "success");
+      window.setTimeout(function () {
+        location.reload();
+      }, 3000);
+    },
+    triggerSearchBar() {
+      getAllUsersAPI()
+        .then((res) => {
+          console.log(res);
+          this.users = res.data;
+        })
+        .catch((err) => {
           console.log(err);
         });
     },
   },
   async created() {
+    //console.log(this.updateMeetingInfo.id);
     listparticipantAPI(this.meetingid)
       .then((res) => {
         this.invitedUsers = res.data;
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    //error not found
-    getAllUsersAPI()
-      .then((res) => {
         console.log(res);
       })
       .catch((err) => {
@@ -394,7 +541,7 @@ export default {
   computed: {
     searchUsers() {
       return this.users.filter(
-        (users) => users.name.toLowerCase().search(this.searchTerm) != -1
+        (users) => users.fullname.toLowerCase().search(this.searchTerm) != -1
       );
     },
   },

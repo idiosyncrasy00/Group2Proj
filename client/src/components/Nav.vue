@@ -213,6 +213,7 @@ export default {
     handleClick() {
       localStorage.removeItem("accesstoken");
       localStorage.removeItem("userinfo");
+      localStorage.removeItem("meetinginfo");
       this.user = null;
       this.$router.push("/signin");
     },
