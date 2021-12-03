@@ -3,8 +3,8 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-body">
-            <h5 class="card-title text-uppercase mb-0">Danh sách cuộc họp</h5>
+          <div class="card-body text-center">
+            <h5 class="card-title text-uppercase mb-2 mt-1">Danh sách cuộc họp</h5>
           </div>
           <div class="table-responsive">
             <table class="table no-wrap user-table mb-0">
@@ -141,11 +141,8 @@ export default {
 };
 </script>
 
-<style>
-body {
-  background: #edf1f5;
-  margin-top: 20px;
-}
+<style lang="scss" scoped>
+$table-bg-color:#600080;
 .card {
   position: relative;
   display: flex;
@@ -183,5 +180,29 @@ button:not(:disabled) {
 .user-table tbody tr .category-select {
   max-width: 150px;
   border-radius: 20px;
+}
+
+.table-responsive{
+	border-radius: 1rem;
+	border-collapse: collapse;
+	font-size: 0.9em;
+	font-family: sans-serif;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.table-responsive thead tr {
+	background-color: $table-bg-color;
+	color: #ffffff;
+	text-align: left;
+}
+.table-responsive tbody tr {
+    border-bottom: thin solid #dddddd;
+}
+
+.table-responsive tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.table-responsive tbody tr:last-of-type {
+    border-bottom: 2px solid $table-bg-color;
 }
 </style>

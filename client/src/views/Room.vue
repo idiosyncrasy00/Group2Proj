@@ -7,9 +7,10 @@
           <div class="grid-body">
             <div class="row">
               <!-- BEGIN RESULT -->
-              <div class="col-md-9">
-                <h2><i class="fa fa-file-o"></i> Danh sách phòng</h2>
-                <hr />
+              <div class="col-md-9 mx-auto">
+								<div class="row text-center mb-3 mt-1">
+									<h2><i class="fa fa-file-o"></i> Danh sách phòng</h2>
+								</div>
                 <!-- BEGIN SEARCH INPUT -->
                 <div class="input-group">
                   <input
@@ -18,6 +19,15 @@
                     placeholder="Nhập tên phòng"
                     v-model="searchValues.roomName"
                   />
+                <div class="input-group row mb-5">
+									<p class="mb-0" style="color: gray; font-size: 90%">Please enter room info</p>
+                  <input
+                    type="text"
+                    class="form-control col-sm-9"
+                    placeholder="Danh sách phòng"
+                    v-model="searchValues.roomName"
+                  />
+                  <button class="btn button btn-primary col-sm-3">Tìm kiếm</button>
                 </div>
 
                 <!-- END SEARCH INPUT -->
@@ -229,15 +239,6 @@ export default {
 </script>
 
 <style scoped>
-body {
-  margin-top: 20px;
-  background: #eee;
-}
-
-.btn {
-  margin-bottom: 5px;
-}
-
 .grid {
   position: relative;
   width: 100%;
@@ -367,5 +368,8 @@ body {
 }
 .font-size13 {
   font-size: 13px;
+}
+.input-group {
+  border-radius: 1rem;
 }
 </style>

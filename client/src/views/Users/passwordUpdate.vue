@@ -1,16 +1,16 @@
 <template>
-  <div class="col-md-6 offset-md-3">
+  <div class="col-md-4 mx-auto">
     <span class="anchor" id="formChangePassword"></span>
     <hr class="mb-5" />
 
     <!-- form card change password -->
     <div class="card card-outline-secondary">
-      <div class="card-header">
-        <h3 class="mb-0">Doi mat khau</h3>
+      <div class="card-header text-center">
+        <h3 class="mb-0">Đổi mật khẩu</h3>
       </div>
       <div class="card-body">
         <div class="form-group">
-          <label for="inputPasswordOld">Mat khau hien tai</label>
+          <label for="inputPasswordOld">Mật khẩu hiện tại</label>
           <input
             type="password"
             class="form-control"
@@ -20,7 +20,7 @@
           />
         </div>
         <div class="form-group">
-          <label for="inputPasswordNew">Mat khau moi</label>
+          <label for="inputPasswordNew">Mật khẩu mới</label>
           <input
             type="password"
             class="form-control"
@@ -34,7 +34,7 @@
             </span> -->
         </div>
         <div class="form-group">
-          <label for="inputPasswordNewVerify">Xac nhan mat khau moi</label>
+          <label for="inputPasswordNewVerify">Xác nhận mật khẩu mới</label>
           <input
             type="password"
             class="form-control"
@@ -46,19 +46,18 @@
             Nhap mat khau moi de xac nhan lai
           </span>
         </div>
-        <div class="form-group">
+        <div class="form-group text-center">
           <button
             type="submit"
-            class="btn btn-success btn-lg float-right"
+            class="btn btn-primary float-right"
             @click="updatePassword"
           >
-            Luu thong tin
+            Lưu thông tin
           </button>
         </div>
         {{ errMsg }}
       </div>
     </div>
-    <!-- /form card change password -->
   </div>
 </template>
 
@@ -108,5 +107,13 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+input{
+	margin-bottom: 1rem;
+}
+label{
+	font-size: 1em;
+  font-family: sans-serif;
+  font-weight: bold;
+}
 </style>
