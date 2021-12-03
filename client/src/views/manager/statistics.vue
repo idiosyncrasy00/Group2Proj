@@ -4,11 +4,8 @@
     <vue3-chart-js v-bind="{ ...barChart }" />
   </div>
   -->
-    <div>
-    <link
-      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
+  <div>
+    
     <div id="tabs" class="container">
       <div class="tabs">
         <a
@@ -19,37 +16,57 @@
         <a
           v-on:click="activetab = 2"
           v-bind:class="[activetab === 2 ? 'active' : '']"
-          >Tuần</a
+          >Tháng</a
         >
         <a
           v-on:click="activetab = 3"
           v-bind:class="[activetab === 3 ? 'active' : '']"
-          >Tháng</a
+          >Năm</a
         >
       </div>
       <div class="content">
         <div v-if="activetab === 1" class="tabcontent">
+          <h1>Bảng thống kê</h1> 
           <div class="container h-100"> 
             <div style="max-width: 600px">
+             
+            <b>Chọn ngày bạn muốn tra cứu</b> <br> 
+            <input type="date">
+            <br> <br>
+            <hr>
             <vue3-chart-js v-bind="{ ...barChart }" />
           </div>
         </div>
         </div>
+        
         <div v-if="activetab === 2" class="tabcontent">
+          <h1>Bảng thống kê</h1> 
           <div class="container h-100"> 
             <div style="max-width: 600px">
+             
+            <b>Chọn tháng bạn muốn tra cứu</b> <br> 
+            <input type="month">
+            <br> <br>
+            <hr>
             <vue3-chart-js v-bind="{ ...barChart }" />
           </div>
-        </div>          
         </div>
+        </div>
+
         <div v-if="activetab === 3" class="tabcontent">
+          <h1>Bảng thống kê</h1> 
           <div class="container h-100"> 
             <div style="max-width: 600px">
+             
+            <b>Chọn năm bạn muốn tra cứu</b> <br> 
+            <input type="number" value="2021">
+            <br> <br>
+            <hr>
             <vue3-chart-js v-bind="{ ...barChart }" />
           </div>
         </div>
-          
         </div>
+
       </div>
     </div>
   </div>
@@ -129,8 +146,6 @@ a {
   max-width: 80%;
   min-width: 80%;
   margin: 40px auto;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.9em;
 }
 
 .tabs {
@@ -178,24 +193,12 @@ a {
   box-shadow: 3px 3px 6px #e1e1e1;
 }
 
-.card {
-  background-color: var(--bg-color);
-}
+
 body {
   background: #edf1f5;
   margin-top: 20px;
 }
-.card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: #fff;
-  background-clip: border-box;
-  border: 0 solid transparent;
-  border-radius: 0;
-}
+
 .btn-circle.btn-lg,
 .btn-group-lg > .btn-circle.btn {
   width: 50px;
