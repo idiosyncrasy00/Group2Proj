@@ -1,10 +1,10 @@
 <template>
-<!--
+  <!--
 <div style="max-width: 600px">
     <vue3-chart-js v-bind="{ ...barChart }" />
   </div>
   -->
-    <div>
+  <div>
     <link
       href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
       rel="stylesheet"
@@ -29,26 +29,25 @@
       </div>
       <div class="content">
         <div v-if="activetab === 1" class="tabcontent">
-          <div class="container h-100"> 
+          <div class="container h-100">
             <div style="max-width: 600px">
-            <vue3-chart-js v-bind="{ ...barChart }" />
+              <vue3-chart-js v-bind="{ ...barChart }" />
+            </div>
           </div>
-        </div>
         </div>
         <div v-if="activetab === 2" class="tabcontent">
-          <div class="container h-100"> 
+          <div class="container h-100">
             <div style="max-width: 600px">
-            <vue3-chart-js v-bind="{ ...barChart }" />
+              <vue3-chart-js v-bind="{ ...barChart }" />
+            </div>
           </div>
-        </div>          
         </div>
         <div v-if="activetab === 3" class="tabcontent">
-          <div class="container h-100"> 
+          <div class="container h-100">
             <div style="max-width: 600px">
-            <vue3-chart-js v-bind="{ ...barChart }" />
+              <vue3-chart-js v-bind="{ ...barChart }" />
+            </div>
           </div>
-        </div>
-          
         </div>
       </div>
     </div>
@@ -56,16 +55,41 @@
 </template>
 
 <script>
-import Vue3ChartJs from "../../../node_modules/@j-t-mcc/vue3-chartjs"
+import Vue3ChartJs from "../../../node_modules/@j-t-mcc/vue3-chartjs";
+import { getRoomStatsAPI } from "@/services/room.apiServices.js";
+
 export default {
-name:"statistics",
-components: {
+  name: "statistics",
+  components: {
     Vue3ChartJs,
   },
-  data(){
-    return{
-      activetab:1
-    }
+  data() {
+    return {
+      activetab: 1,
+    };
+  },
+  async created() {
+    getRoomStatsAPI("day")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getRoomStatsAPI("month")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getRoomStatsAPI("year")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
   setup() {
     const barChart = {
@@ -79,9 +103,9 @@ components: {
             position: "bottom",
           },
           title: {
-             display: true,
-             text: 'Bảng thống kê số lượt đặt phòng',
-          }
+            display: true,
+            text: "Bảng thống kê số lượt đặt phòng",
+          },
         },
         scales: {
           y: {
@@ -111,7 +135,7 @@ components: {
       barChart,
     };
   },
-}
+};
 </script>
 
 <style>

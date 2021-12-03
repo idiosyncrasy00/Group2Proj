@@ -11,7 +11,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            Đánh giá cho phòng {{ roomid }}
+            Đánh giá cho {{ roomname }}
           </h5>
           <button
             type="button"
@@ -44,6 +44,11 @@
                               <small class="text-muted">{{
                                 comment.time
                               }}</small>
+                              - Chấm điểm:
+                              <small class="text-muted">{{
+                                comment.rating
+                              }}</small>
+                              / 10
                             </span>
 
                             <!-- <p>{{ comment.message }}</p> -->
@@ -66,7 +71,7 @@
             class="btn btn-secondary"
             data-bs-dismiss="modal"
           >
-            Close
+            Đóng
           </button>
         </div>
 
@@ -79,7 +84,7 @@
 //import { defineComponent } from '@vue/composition-api'
 
 export default {
-  props: ["roomid", "commentList"],
+  props: ["roomid", "roomname", "commentList"],
   inheritAttrs: false,
   data() {
     // return {
