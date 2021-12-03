@@ -64,53 +64,104 @@
                         </td>
                         <!-- chỉnh sửa -->
                         <span class="input-group-btn">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                <h5 class="card-title text-center text-dark"> Chỉnh sửa </h5>
-                            </button>
+                          <button
+                            type="button"
+                            class="btn btn-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop"
+                          >
+                            <h5 class="card-title text-center text-dark">
+                              Chỉnh sửa
+                            </h5>
+                          </button>
                         </span>
                         <!-- Modal -->
-                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
+                        <div
+                          class="modal fade"
+                          id="staticBackdrop"
+                          data-bs-backdrop="static"
+                          data-bs-keyboard="false"
+                          tabindex="-1"
+                          aria-labelledby="staticBackdropLabel"
+                          aria-hidden="true"
+                        >
+                          <div class="modal-dialog">
                             <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Thông tin phòng họp</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
+                              <div class="modal-header">
+                                <h5
+                                  class="modal-title"
+                                  id="staticBackdropLabel"
+                                >
+                                  Thông tin phòng họp
+                                </h5>
+                                <button
+                                  type="button"
+                                  class="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"
+                                ></button>
+                              </div>
+                              <div class="modal-body">
                                 <!-- modal body -->
                                 <div class="form-group">
-                                    <label>Tên phòng</label>
-                                    <label class="form-control form-control-lg" readonly>
-                                        {{room.roomname}}
-                                    </label>
+                                  <label>Tên phòng</label>
+                                  <label
+                                    class="form-control form-control-lg"
+                                    readonly
+                                  >
+                                    {{ room.roomname }}
+                                  </label>
                                 </div>
                                 <div class="form-group">
-                                    <label>Sức chứa</label>
-                                    <input class="form-control form-control-lg" type="number" min="1" v-model="room.capacity"/>
-                                </div>  
+                                  <label>Sức chứa</label>
+                                  <input
+                                    class="form-control form-control-lg"
+                                    type="number"
+                                    min="1"
+                                    v-model="room.capacity"
+                                  />
+                                </div>
                                 <div class="form-group">
-                                    <label>Trang thiết bị</label>
-                                    <textarea class="form-control form-control-lg" type="textarea" v-model="room.facilities"/>
-                                </div> 
+                                  <label>Trang thiết bị</label>
+                                  <textarea
+                                    class="form-control form-control-lg"
+                                    type="textarea"
+                                    v-model="room.facilities"
+                                  />
+                                </div>
                                 <div class="form-group">
-                                    <label>Trạng thái</label>
-                                    <input class="form-control form-control-lg" type="text" v-model="room.status"/>
-                                </div>       
+                                  <label>Trạng thái</label>
+                                  <input
+                                    class="form-control form-control-lg"
+                                    type="text"
+                                    v-model="room.status"
+                                  />
+                                </div>
                                 <!-- end modal body -->
+                              </div>
+                              <div class="modal-footer">
+                                <button
+                                  type="button"
+                                  class="btn btn-secondary"
+                                  data-bs-dismiss="modal"
+                                >
+                                  Hủy bỏ
+                                </button>
+                                <button type="button" class="btn btn-primary">
+                                  Xác nhận
+                                </button>
+                              </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
-                                <button type="button" class="btn btn-primary">Xác nhận</button>
-                            </div>
-                            </div>
-                        </div>
+                          </div>
                         </div>
                         <!-- End Modal -->
                         <!-- end chỉnh sửa -->
                         <span class="input-group-btn">
-                            <button type="button" class="btn btn-danger">
-                                <h5 class="card-title text-center text-dark"> Xóa </h5>
-                            </button>
+                          <button type="button" class="btn btn-danger">
+                            <h5 class="card-title text-center text-dark">
+                              Xóa
+                            </h5>
+                          </button>
                         </span>
                       </tr>
                     </tbody>
@@ -119,62 +170,101 @@
                 <!-- END TABLE RESULT -->
               </div>
               <!-- thêm phòng -->
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
-                        <h5 class="card-title text-center text-dark"> Thêm phòng </h5>
-                    </button>
-                </span>
-                <!-- Modal -->
-                <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <span class="input-group-btn">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#staticBackdrop1"
+                >
+                  <h5 class="card-title text-center text-dark">Thêm phòng</h5>
+                </button>
+              </span>
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                id="staticBackdrop1"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+              >
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                  <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Thông tin phòng họp</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <h5 class="modal-title" id="staticBackdropLabel">
+                        Thông tin phòng họp
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
                     </div>
                     <div class="modal-body">
-                        <!-- modal body -->
-                        <div class="form-group">
-                            <label>Tên phòng</label>
-                            <input class="form-control form-control-lg" type="text">
-                        </div>
-                        <div class="form-group">
-                            <label>Sức chứa</label>
-                            <input class="form-control form-control-lg" type="number" min="1" />
-                        </div>  
-                        <div class="form-group">
-                            <label>Trang thiết bị</label>
-                            <textarea class="form-control form-control-lg" type="textarea" />
-                        </div> 
-                        <div class="form-group">
-                            <label>Trạng thái</label>
-                            <input class="form-control form-control-lg" type="text" />
-                        </div>       
-                        <!-- end modal body -->
+                      <!-- modal body -->
+                      <div class="form-group">
+                        <label>Tên phòng</label>
+                        <input
+                          class="form-control form-control-lg"
+                          type="text"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>Sức chứa</label>
+                        <input
+                          class="form-control form-control-lg"
+                          type="number"
+                          min="1"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>Trang thiết bị</label>
+                        <textarea
+                          class="form-control form-control-lg"
+                          type="textarea"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>Trạng thái</label>
+                        <input
+                          class="form-control form-control-lg"
+                          type="text"
+                        />
+                      </div>
+                      <!-- end modal body -->
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
-                        <button type="button" class="btn btn-primary">Xác nhận</button>
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Hủy bỏ
+                      </button>
+                      <button type="button" class="btn btn-primary">
+                        Xác nhận
+                      </button>
                     </div>
-                    </div>
+                  </div>
                 </div>
-                </div>
-                        <!-- End Modal -->
+              </div>
+              <!-- End Modal -->
               <!-- end thêm phòng -->
               <!-- END RESULT -->
             </div>
           </div>
         </div>
       </div>
-      
+
       <!-- END SEARCH RESULT -->
     </div>
   </div>
 </template>
 
 <script>
-//import axios from "axios";
-//import store from "@/store/index.js";
 import { getRoomListAPI } from "@/services/room.apiServices.js";
 
 export default {
@@ -192,12 +282,14 @@ export default {
       ],
     };
   },
-  
+
   computed: {
     searchRooms() {
       return this.rooms.filter(
         (rooms) =>
-          rooms.roomname.toLowerCase().search(this.searchValues.roomName.toLowerCase()) != -1
+          rooms.roomname
+            .toLowerCase()
+            .search(this.searchValues.roomName.toLowerCase()) != -1
         /*return this.rooms.filter((rooms) =>
         rooms.roomName.startsWith(this.searchValues.roomName)*/
       );
