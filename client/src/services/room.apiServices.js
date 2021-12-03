@@ -31,10 +31,22 @@ function getRoomReviewAPI(id) {
   const data = {
     id: id,
   };
-  console.log(typeof id);
+  //console.log(typeof id);
   console.log(id);
   //console.log(data.id);
   return axios.post(baseURL + "api/rooms/review", data, getHeaders);
 }
 
-export { createRoomAPI, getRoomListAPI, editRoomAPI, deleteRoomAPI, getRoomReviewAPI }
+function postReviewAPI(comment) {
+  return axios.post(baseURL + "api/reviews/add", comment, getHeaders);
+}
+
+function editReviewAPI() {
+  return 0;
+}
+
+function deleteReviewAPI() {
+  return 0;
+}
+
+export { createRoomAPI, getRoomListAPI, editRoomAPI, deleteRoomAPI, getRoomReviewAPI, postReviewAPI, editReviewAPI, deleteReviewAPI }

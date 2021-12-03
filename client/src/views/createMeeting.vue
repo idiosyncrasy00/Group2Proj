@@ -10,13 +10,7 @@
       <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100" v-else>
         <div class="d-table-cell align-middle">
           <div class="text-center mt-4">
-            <!--h1>Thông tin phòng họp</h1-->
-            <!--{{ this.roominfo.id }}
-            {{ this.roominfo.roomname }}
-            {{ this.roominfo.capacity }}
-            {{ this.roominfo.facilities }}
-            {{ this.roominfo.status }}-->
-            <h1 class="h2 mb-5">Tạo cuộc họp</h1>
+            <h1 class="h2">Tạo cuộc họp</h1>
           </div>
           <div class="card">
             <div class="card-body">
@@ -28,51 +22,38 @@
                       {{ this.meetingInfo.roomname }}
                     </label>
                   </div>
-									<div class="row">
-										<div class="form-group col-sm-6">
-											<label>Mật khẩu phòng</label>
-											<input
-												class="form-control form-control-lg"
-												type="password"
-												name="password"
-												v-model="this.meetingInfo.password"
-											/>
-										</div>
-										<div class="form-group col-sm-6">
-											<label>Ngày họp</label>
-											<input
-												class="form-control form-control-lg"
-												type="date"
-												name="date"
-												placeholder="Nhập ngày đặt phòng"
-												v-model="this.meetingInfo.reserveddate"
-											/>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group col-sm-4">
-											<label>Thời gian bắt đầu</label>
-											<input
-												class="form-control form-control-lg"
-												type="time"
-												name="startTime"
-												placeholder="Nhập thời gian bắt đầu"
-												v-model="this.meetingInfo.startingtime"
-											/>
-										</div>
-										<div class="form-group col-sm-8">
-											<label>Thời gian họp (Giờ)</label>
-											<input
-												class="form-control form-control-lg"
-												type="number"
-												min="1"
-												max="10"
-												name="during"
-												placeholder="Nhập thời gian họp"
-												v-model="this.meetingInfo.during"
-											/>
-										</div>
-									</div>
+                  <div class="form-group">
+                    <label>Ngày họp</label>
+                    <input
+                      class="form-control form-control-lg"
+                      type="date"
+                      name="date"
+                      placeholder="Nhập ngày đặt phòng"
+                      v-model="this.meetingInfo.reserveddate"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Thời gian bắt đầu</label>
+                    <input
+                      class="form-control form-control-lg"
+                      type="time"
+                      name="startTime"
+                      placeholder="Nhập thời gian bắt đầu"
+                      v-model="this.meetingInfo.startingtime"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Thời gian họp (Giờ)</label>
+                    <input
+                      class="form-control form-control-lg"
+                      type="number"
+                      min="1"
+                      max="10"
+                      name="during"
+                      placeholder="Nhập thời gian họp"
+                      v-model="this.meetingInfo.during"
+                    />
+                  </div>
                   <div class="form-group">
                     <label>Tên cuộc họp</label>
                     <input
@@ -104,9 +85,6 @@
               </div>
             </div>
           </div>
-					<div class="review">
-						<h1>Review tu nguoi dung</h1>
-					</div>
         </div>
       </div>
     </div>
@@ -115,7 +93,10 @@
 <script>
 //import axios from "axios";
 import { createMeetingAPI } from "@/services/meeting.apiServices.js";
-import { getRoomReviewAPI } from "@/services/room.apiServices.js";
+import {
+  getRoomReviewAPI,
+  postReviewAPI,
+} from "@/services/room.apiServices.js";
 import store from "@/store/index.js";
 import roomNotFound from "@/components/roomNotFound.vue";
 
@@ -126,9 +107,12 @@ export default {
   },
   data() {
     return {
-      // roomid: {
-      //   id: store.getARoomInfo().id,
-      // },
+      comments: [],
+      postComment: {
+        roomid: this.$route.params.roomid,
+        rating: "",
+        message: "",
+      },
       roomid: store.getARoomInfo().id,
       roominfo: {
         id: store.getARoomInfo().id,
@@ -153,6 +137,20 @@ export default {
     };
   },
   methods: {
+    postAComment() {
+      console.log(this.postComment);
+      //POST
+      postReviewAPI(this.postComment)
+        .then((res) => {
+          console.log(res);
+          this.comments.push(res.data);
+          this.postComment.message = "";
+          this.postComment.rating = "";
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     createMeeting() {
       const meetingInfo = {
         adminid: store.getUserInfo().id,
@@ -194,12 +192,12 @@ export default {
     },
   },
   async created() {
-    //this.meetingInfo.roomid = this.$route.params.roomid;
     this.meetingInfo.roomname = store.getARoomInfo().roomname;
-
+    //comment
     getRoomReviewAPI(this.roomid)
       .then((res) => {
         console.log(res);
+        this.comments = res.data;
       })
       .catch((err) => {
         console.log(err);
@@ -222,5 +220,8 @@ input{
 }
 .review{
 	margin-top: 3rem;
+}
+.form-select {
+  width: 40%;
 }
 </style>

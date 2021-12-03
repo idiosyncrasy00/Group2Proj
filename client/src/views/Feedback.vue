@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mt-5">
     <form>
       <label>Name</label>
       <input type="text" v-model="name" name="name" placeholder="Your Name" />
@@ -42,10 +42,10 @@ export default {
       feedBackAPI(this.message)
         .then((res) => {
           console.log(res);
-          this.$swal.fire("Good job!", "gui feedback thanh cong", "success");
+          this.$swal.fire("Good job!", "Gửi feedback thành công", "success");
         })
         .catch((err) => {
-          this.$swal.fire("No!", "gui feedback ko thanh cong", "error");
+          this.$swal.fire("No!", "Gửi feedback không thành công", "error");
           console.log(err);
         });
     },

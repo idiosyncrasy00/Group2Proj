@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 const addSchema = Joi.object({
     roomid: Joi.number().integer().required(),
-    rating: Joi.number().integer().min(0).max(10),
+    rating: Joi.number().integer().min(0).max(10).required(),
     message: Joi.string().required()
 });
 

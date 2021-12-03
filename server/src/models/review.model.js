@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         rating: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            allowNull: false
         },
         message: {
             type: DataTypes.STRING,

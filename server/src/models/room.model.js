@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         status: {
             type: DataTypes.STRING
+        },
+        rating: {
+            type: DataTypes.INTEGER,
+            defaultValue: 10
         }
     }, {
         charset: "utf8",

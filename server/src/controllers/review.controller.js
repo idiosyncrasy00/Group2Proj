@@ -1,5 +1,7 @@
 const Review = require('../models').Review;
+const Room = require('../models').Room;
 const sequelize = require('../models').sequelize;
+const controller = require('./controller');
 const validation = require('../validations/review.validation');
 const _ = require('lodash');
 
@@ -18,6 +20,7 @@ const addReview = async (req, res) => {
                 time: sequelize.fn('NOW')
             });
             res.send(_.pick(review, ['id', 'userid', 'roomid', 'rating', 'message']));
+            await controller.calculateRating(value.roomid);
         } catch(error) {
             res.status(400).send({ error: error.message });
         }
@@ -46,6 +49,7 @@ const editReview = async (req, res) => {
                     }
                 });
                 res.send();
+                await controller.calculateRating(review.roomid);
             } catch(error) {
                 res.status(400).send({ error: error.message });
             }
@@ -75,6 +79,7 @@ const deleteReview = async (req, res) => {
                     }
                 });
                 res.send();
+                await controller.calculateRating(review.roomid);
             } catch(error) {
                 res.status(400).send({ error: error.message });
             }
@@ -84,10 +89,15 @@ const deleteReview = async (req, res) => {
 
 const getReview = async (req, res) => {
     let reviews = await Review.findAll({
-        attributes: ['id', 'roomid', 'rating', 'message', 'time'],
+        attributes: ['id', 'rating', 'message', 'time'],
         where: {
             userid: req.user.id
-        }
+        },
+        include: [{
+            model: Room,
+            as: "room",
+            attributes: ['id', 'roomname']
+        }]
     });
     res.send(reviews);
 };
