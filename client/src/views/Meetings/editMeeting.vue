@@ -28,7 +28,7 @@
             <div class="row h-100">
               <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
                 <div class="d-table-cell align-middle">
-                  <div class="text-center mt-4">
+                  <div class="text-center mt-0">
                     <h1 class="h2">Chỉnh sửa cuộc họp</h1>
                   </div>
 
@@ -39,24 +39,15 @@
                           <div class="form-group">
                             <label>Tên phòng</label>
                             <label
-                              class="form-control form-control-lg"
-                              readonlyy
+                              class="form-control input-field"
+                              readonly
                               >{{ this.defaultMeetingInfo.room.roomname }}
                             </label>
                           </div>
                           <div class="form-group">
-                            <label>Mã cuộc họp</label>
-                            <label
-                              class="form-control form-control-lg"
-                              readonlyy
-                            >
-                              {{ this.defaultMeetingInfo.id }}</label
-                            >
-                          </div>
-                          <div class="form-group">
                             <label>Ngày họp</label>
                             <input
-                              class="form-control form-control-lg"
+                              class="form-control input-field"
                               type="date"
                               name="date"
                               placeholder="Nhập ngày đặt phòng"
@@ -65,18 +56,39 @@
                           </div>
                           <div class="form-group">
                             <label>Thời gian bắt đầu</label>
-                            <input
+                            <!-- <input
                               class="form-control form-control-lg"
                               type="time"
                               name="startTime"
                               placeholder="Nhập thời gian bắt đầu"
                               v-model="this.updateMeetingInfo.startingtime"
-                            />
+                            /> -->
+                            <select
+                              class="form-select input-field"
+                              aria-label="Default select example"
+                              v-model="this.updateMeetingInfo.startingtime"
+                            >
+                              <option value="08:00 sáng">08:00 sáng</option>
+                              <option value="09:00 sáng">09:00 sáng</option>
+                              <option value="10:00 sáng">10:00 sáng</option>
+                              <option value="11:00 sáng">11:00 sáng</option>
+                              <option value="12:00 sáng">12:00 sáng</option>
+                              <option value="13:00 chiều">13:00 chiều</option>
+                              <option value="14:00 chiều">14:00 chiều</option>
+                              <option value="15:00 chiều">15:00 chiều</option>
+                              <option value="16:00 chiều">16:00 chiều</option>
+                              <option value="17:00 chiều">17:00 chiều</option>
+                              <option value="18:00 tối">18:00 tối</option>
+                              <option value="19:00 tối">19:00 tối</option>
+                              <option value="20:00 tối">20:00 tối</option>
+                              <option value="21:00 tối">21:00 tối</option>
+                              <option value="22:00 tối">22:00 tối</option>
+                            </select>
                           </div>
                           <div class="form-group">
                             <label>Thời gian họp</label>
                             <input
-                              class="form-control form-control-lg"
+                              class="form-control input-field"
                               type="number"
                               name="during"
                               placeholder="Nhập thời gian họp"
@@ -86,7 +98,7 @@
                           <div class="form-group">
                             <label>Tên cuộc họp</label>
                             <input
-                              class="form-control form-control-lg"
+                              class="form-control input-field"
                               type="text"
                               name="title"
                               placeholder="Nhập tên cuộc họp"
@@ -96,10 +108,9 @@
                           <div class="form-group">
                             <label>Nội dung cuộc họp</label>
                             <textarea
-                              class="form-control form-control-lg"
+                              class="form-control"
                               type="textarea"
                               name="content"
-                              placeholder="Nhập nội dung họp"
                               rows="5"
                               v-model="this.updateMeetingInfo.content"
                             ></textarea>
@@ -127,8 +138,11 @@
           </div>
         </div>
         <div v-if="activetab === 2" class="tabcontent">
-          <button class="btn btn-primary" @click="SendEmail()">
-            Gửi email
+          <button 
+					class="btn btn-primary" 
+					style="height:3rem;width:7rem;"
+					@click="SendEmail()">
+            Gửi email &#9993;
           </button>
           <div class="table-responsive">
             <ul
@@ -233,30 +247,24 @@
       </div>
       <div v-if="activetab === 3" class="tabcontent">
         <div class="table-responsive">
-          <div class="example" style="max-width: 500px">
-            <input
-              type="text"
-              placeholder="Nhập tên người cần mời"
-              v-model="searchTerm"
-              @click="triggerSearchBar"
-            />
-            <button class="btn btn-success" @click="addPerson()">
-              Thêm người
-            </button>
+          <div class="example" style="width: 100%;">
+						<div class="row">
+							<div class="row col-sm-7 mx-auto">
+								<input
+									type="text"
+									class="invite-input col-sm-9"
+									placeholder="Nhập tên người cần mời"
+									v-model="searchTerm"
+									@click="triggerSearchBar"
+								/>
+								<button class="btn btn-success col-sm-2" @click="addPerson()">
+									Thêm người
+								</button>
+							</div>
+						</div>
             <button class="btn btn-success" @click="InvitePeople()">
               Mời người
             </button>
-            <!-- <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#userList"
-              >
-                <invitingPeopleModal />
-                <h5 class="card-title text-center text-dark">
-                  Lên danh sách người tham dự
-                </h5>
-              </button> -->
           </div>
           <ul v-if="searchUsers.length < users.length" style="max-width: 400px">
             <li
@@ -502,6 +510,14 @@ export default {
       editMeetingAPI(data)
         .then((res) => {
           console.log(res);
+          this.$swal.fire(
+            "Good job!",
+            "Cập nhật cuộc họp thành công",
+            "success"
+          );
+          window.setTimeout(function () {
+            location.reload();
+          }, 3000);
         })
         .catch((err) => {
           this.$swal.fire({
@@ -511,10 +527,6 @@ export default {
           });
           console.log(err);
         });
-      this.$swal.fire("Good job!", "Cập nhật cuộc họp thành công", "success");
-      window.setTimeout(function () {
-        location.reload();
-      }, 3000);
     },
     triggerSearchBar() {
       getAllUsersAPI()
@@ -693,5 +705,15 @@ ul li {
   margin-top: -1px; /* Prevent double borders */
   background-color: white;
   padding: 12px;
+}
+.input-field{
+	height: 2.5rem;
+	margin-bottom: 0.7rem;
+}
+label{
+	font-size: 1rem;
+}
+.invite-input{
+	border-radius: 0.5rem;
 }
 </style>

@@ -1,22 +1,3 @@
-// import { createStore } from 'vuex'
-
-// export default createStore({
-//   state: {
-//   },
-//   mutations: {
-//   },
-//   actions: {
-//   },
-//   modules: {
-//   }
-// })
-// var roomlist = [];
-
-// //roominfo = 
-// function getRoom(index) {
-//   return roomlist[index - 1];
-// }
-
 function roomlist() {
   return JSON.parse(localStorage.getItem('roomlist'));
 }

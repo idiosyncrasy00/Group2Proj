@@ -41,19 +41,36 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="/Feedback" class="nav-link">Phản hồi</a>
-          </li>
-          <li class="nav-item">
-            <a href="/Room" class="nav-link">Danh sách phòng</a>
-          </li>
-          <li class="nav-item">
-            <a href="/manageRoom" class="nav-link">Quản lý phòng</a>
+					<li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >Phòng họp
+            </a>
+            <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+              <li>
+                <a class="dropdown-item text-white" href="/manageRoom"
+									>Quản lý phòng của tôi</a>
+              </li>
+              <li>
+                <a class="dropdown-item text-white" href="/Room"
+                  >Danh sách phòng</a
+                >
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="/statistics" class="nav-link">Thống kê</a>
           </li>
+					<li class="nav-item">
+            <a href="/Feedback" class="nav-link">Phản hồi</a>
+          </li>
         </ul>
+				
         <ul class="navbar-nav" v-if="islogged == 0">
           <li class="nav-item">
             <a href="/signin" class="nav-link">Đăng nhập</a>
@@ -234,12 +251,13 @@ export default {
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {
+.dropdown-item:hover {
   background-color: #2f4f4f;
 }
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
+
   display: block;
 }
 

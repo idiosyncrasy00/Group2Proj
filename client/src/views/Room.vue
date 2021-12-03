@@ -8,27 +8,28 @@
             <div class="row">
               <!-- BEGIN RESULT -->
               <div class="col-md-11 mx-auto">
-								<span class="input-group-btn">
-									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-										<h5 class="card-title text-center text-dark">Xem lịch tất cả các phòng</h5>
-									</button>
-								</span>
                 <div class="row text-center mb-3 mt-1">
                   <h2><i class="fa fa-file-o"></i> Danh sách phòng</h2>
                 </div>
                 <!-- BEGIN SEARCH INPUT -->
                 <div class="input-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Nhập tên phòng"
-                    v-model="searchValues.roomName"
-                  />
-								</div>
-                <!-- END SEARCH INPUT -->
+                  <div class="input-group row mb-5">
+                    <!-- <p class="mb-0" style="color: gray; font-size: 90%">
+                      Please enter room info
+                    </p> -->
+                    <input
+                      type="text"
+                      class="form-control col-sm-9"
+                      placeholder="Danh sách phòng"
+                      v-model="searchValues.roomName"
+                    />
+                    <!-- <button class="btn button btn-primary col-sm-3">
+                      Tìm kiếm
+                    </button> -->
+                  </div>
 
-                <br />
-
+                  <!-- END SEARCH INPUT -->
+                  <br />
                 <!-- BEGIN TABLE RESULT -->
                 <div class="table-responsive">
                   <table class="table table-hover">
@@ -122,12 +123,13 @@
                     </tbody>
                   </table>
                 </div>
-              </div>
-              <!-- END RESULT -->
+                <!-- END RESULT -->
+								</div>
+							</div>
             </div>
           </div>
+          <!-- END SEARCH RESULT -->
         </div>
-        <!-- END SEARCH RESULT -->
       </div>
     </div>
   </div>

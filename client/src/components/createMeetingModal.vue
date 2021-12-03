@@ -20,58 +20,77 @@
           </div>
           <div class="modal-body">
             <form>
-              <div class="form-group">
-                <label>Tên phòng</label>
-                <label class="form-control form-control-lg" readonly>
-                  {{ roomname }}
-                </label>
-              </div>
-              <div class="form-group">
-                <label>Ngày họp</label>
-                <input
-                  class="form-control form-control-lg"
-                  type="date"
-                  name="date"
-                  placeholder="Nhập ngày đặt phòng"
-                  v-model="this.meetingInfo.reserveddate"
-                />
-              </div>
-              <div class="form-group">
-                <label>Thời gian bắt đầu</label>
-                <input
-                  class="form-control form-control-lg"
-                  type="time"
-                  name="startTime"
-                  placeholder="Nhập thời gian bắt đầu"
-                  v-model="this.meetingInfo.startingtime"
-                />
-              </div>
-              <div class="form-group">
-                <label>Thời gian họp (Giờ)</label>
-                <input
-                  class="form-control form-control-lg"
-                  type="number"
-                  min="1"
-                  max="10"
-                  name="during"
-                  placeholder="Nhập thời gian họp"
-                  v-model="this.meetingInfo.during"
-                />
-              </div>
-              <div class="form-group">
+						<div class="form-group">
+							<label>Tên phòng</label>
+							<label class="input form-control" readonly>
+								{{ roomname }}
+							</label>
+						</div>
+							<div class="row">
+								<div class="form-group col-sm-6">
+									<label>Thời gian bắt đầu</label>
+									<select
+										class="form-select"
+										aria-label="Default select example"
+										v-model="this.meetingInfo.startingtime"
+									>
+										<option value="08:00 sáng">08:00 sáng</option>
+										<option value="09:00 sáng">09:00 sáng</option>
+										<option value="10:00 sáng">10:00 sáng</option>
+										<option value="11:00 sáng">11:00 sáng</option>
+										<option value="12:00 sáng">12:00 sáng</option>
+										<option value="13:00 chiều">13:00 chiều</option>
+										<option value="14:00 chiều">14:00 chiều</option>
+										<option value="15:00 chiều">15:00 chiều</option>
+										<option value="16:00 chiều">16:00 chiều</option>
+										<option value="17:00 chiều">17:00 chiều</option>
+										<option value="18:00 tối">18:00 tối</option>
+										<option value="19:00 tối">19:00 tối</option>
+										<option value="20:00 tối">20:00 tối</option>
+										<option value="21:00 tối">21:00 tối</option>
+										<option value="22:00 tối">22:00 tối</option>
+									</select>
+									<!-- <input type="number" min="8" max="22" value="0" /> -->
+								</div>
+								<div class="form-group col-sm-6">
+									<label>Thời gian họp (Giờ)</label>
+									<input
+										class="form-control"
+										type="number"
+										min="1"
+										max="10"
+										name="during"
+										placeholder="Nhập thời gian họp"
+										v-model="this.meetingInfo.during"
+									/>
+								</div>
+							</div>
+						<div class="row">
+              <div class="form-group col-sm-7">
                 <label>Tên cuộc họp</label>
                 <input
-                  class="form-control form-control-lg"
+                  class="form-control"
                   type="text"
                   name="title"
                   placeholder="Nhập tên cuộc họp"
                   v-model="this.meetingInfo.title"
                 />
               </div>
+							<div class="form-group col-sm-5">
+                <label>Ngày họp</label>
+                <input
+                  class="form-control"
+                  type="date"
+                  name="date"
+                  placeholder="Nhập ngày đặt phòng"
+                  v-model="this.meetingInfo.reserveddate"
+                />
+              </div>
+						</div>
               <div class="form-group">
                 <label>Nội dung cuộc họp</label>
                 <textarea
-                  class="form-control form-control-lg"
+                  class="form-control"
                   type="textarea"
                   name="content"
                   placeholder="Nhập nội dung họp"
@@ -80,9 +99,8 @@
                 ></textarea>
               </div>
               <div class="text-center mt-3">
-                <button @click.prevent="createMeeting">Tạo</button>
+                <button class="btn btn-primary" @click.prevent="createMeeting">Tạo</button>
                 {{ errMsg }}
-                <!-- <button type="submit" class="btn btn-lg btn-primary">Sign up</button> -->
               </div>
             </form>
           </div>
@@ -107,11 +125,7 @@ export default {
   components: {},
   data() {
     return {
-      comments: [],
-      postComment: {
-        rating: "",
-        message: "",
-      },
+      // comments: [],
       meetingInfo: {
         adminid: "",
         roomid: "",
@@ -143,7 +157,7 @@ export default {
       //   });
     },
     createMeeting() {
-      const getTime = this.meetingInfo.startingtime.substring(0, 2).toString();
+      const getTime = parseInt(this.meetingInfo.startingtime.substring(0, 2));
       const meetingInfo = {
         adminid: store.getUserInfo().id,
         roomid: this.roomid,
@@ -156,10 +170,7 @@ export default {
       };
       console.log(meetingInfo);
       //axios post
-      if (
-        parseInt(this.meetingInfo.startingtime) >= 8 &&
-        parseInt(this.meetingInfo.startingtime) <= 22
-      ) {
+      if (getTime >= 8 && getTime <= 22) {
         createMeetingAPI(meetingInfo)
           .then((res) => {
             console.log(res);
@@ -182,15 +193,16 @@ export default {
       }
     },
   },
-  async created() {
-    // getRoomReviewAPI(this.roomid)
-    //   .then((res) => {
-    //     console.log(res);
-    //     this.comments = res.data;
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-  },
 };
 </script>
+
+<style>
+input{
+	height: 2.45rem;
+	margin-bottom: 0.7rem;
+}
+.input{
+	height: 2.45rem;
+	margin-bottom: 0.7rem;
+}
+</style>
