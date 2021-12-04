@@ -1,6 +1,7 @@
 <template>
-  <div class="container">
-    <!-- <label>Name</label>
+  <div class="container mt-5">
+    <form>
+      <label>Name</label>
       <input type="text" v-model="name" name="name" placeholder="Your Name" />
       <label>Email</label>
       <input

@@ -218,12 +218,6 @@ a {
   border-radius: 10px;
   box-shadow: 3px 3px 6px #e1e1e1;
 }
-
-body {
-  background: #edf1f5;
-  margin-top: 20px;
-}
-
 .btn-circle.btn-lg,
 .btn-group-lg > .btn-circle.btn {
   width: 50px;

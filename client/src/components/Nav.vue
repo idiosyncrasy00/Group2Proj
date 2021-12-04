@@ -11,67 +11,14 @@
       <a class="navbar-brand" href="/">
         <img src="../assets/logo.png" style="height: 2rem" />
       </a>
-      <!-- <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button> -->
       <div class="navbar-collapse">
         <ul class="navbar-nav me-auto mb-2 mb-l g-1">
           <li class="nav-item">
             <a href="/" class="nav-link"> Trang chủ </a>
-            <!-- <router-link
-          :to="{
-            name: 'home',
-          }"
-          class="nav-link"
-        >
-          Home
-        </router-link> -->
           </li>
           <li class="nav-item">
-            <a href="/about" class="nav-link">About</a>
+            <a href="/about" class="nav-link">Giới thiệu</a>
           </li>
-          <!-- <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Room detail
-            </a>
-            <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-              <li>
-                <a class="dropdown-item text-white" href="/FindRoom"
-                  >Find a conference room</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item text-white" href="/createRoom"
-                  >Create a conference room</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item text-white" href="/manageRoom"
-                  >Manage your rooms</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item text-white" href="#"
-                  >Something else here</a
-                >
-              </li>
-            </ul>
-          </li> -->
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -81,7 +28,7 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Danh sách cuộc họp
+              Cuộc họp của tôi
             </a>
             <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
               <li>
@@ -94,22 +41,36 @@
               </li>
             </ul>
           </li>
-          <!-- <li class="nav-item">
-            <a href="/UserList" class="nav-link">Show list of users</a>
-          </li> -->
-          <li class="nav-item">
-            <a href="/Feedback" class="nav-link">Gửi phản hồi cho quản lý</a>
-          </li>
-          <li class="nav-item">
-            <a href="/Room" class="nav-link">Danh sách phòng họp</a>
-          </li>
-          <li class="nav-item">
-            <a href="/manageRoom" class="nav-link">Quản lý phòng họp(chỉ dành cho quản lý)</a>
+					<li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >Phòng họp
+            </a>
+            <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+              <li>
+                <a class="dropdown-item text-white" href="/manageRoom"
+									>Quản lý phòng của tôi</a>
+              </li>
+              <li>
+                <a class="dropdown-item text-white" href="/Room"
+                  >Danh sách phòng</a
+                >
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="/statistics" class="nav-link">Thống kê</a>
           </li>
+					<li class="nav-item">
+            <a href="/Feedback" class="nav-link">Phản hồi</a>
+          </li>
         </ul>
+				
         <ul class="navbar-nav" v-if="islogged == 0">
           <li class="nav-item">
             <a href="/signin" class="nav-link">Đăng nhập</a>
@@ -248,7 +209,7 @@ export default {
 }
 
 .navbar-nav {
-  padding-left: 13rem;
+  padding-left: 7rem;
   margin-left: 1rem;
   position: relative;
 }
@@ -290,12 +251,13 @@ export default {
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {
+.dropdown-item:hover {
   background-color: #2f4f4f;
 }
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
+
   display: block;
 }
 

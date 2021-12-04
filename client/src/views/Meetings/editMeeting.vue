@@ -28,7 +28,7 @@
             <div class="row h-100">
               <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
                 <div class="d-table-cell align-middle">
-                  <div class="text-center mt-4">
+                  <div class="text-center mt-0">
                     <h1 class="h2">Chỉnh sửa cuộc họp</h1>
                   </div>
 
@@ -39,24 +39,15 @@
                           <div class="form-group">
                             <label>Tên phòng</label>
                             <label
-                              class="form-control form-control-lg"
-                              readonlyy
+                              class="form-control input-field"
+                              readonly
                               >{{ this.defaultMeetingInfo.room.roomname }}
                             </label>
                           </div>
                           <div class="form-group">
-                            <label>Mã cuộc họp</label>
-                            <label
-                              class="form-control form-control-lg"
-                              readonlyy
-                            >
-                              {{ this.defaultMeetingInfo.id }}</label
-                            >
-                          </div>
-                          <div class="form-group">
                             <label>Ngày họp</label>
                             <input
-                              class="form-control form-control-lg"
+                              class="form-control input-field"
                               type="date"
                               name="date"
                               placeholder="Nhập ngày đặt phòng"
@@ -73,7 +64,7 @@
                               v-model="this.updateMeetingInfo.startingtime"
                             /> -->
                             <select
-                              class="form-select"
+                              class="form-select input-field"
                               aria-label="Default select example"
                               v-model="this.updateMeetingInfo.startingtime"
                             >
@@ -97,7 +88,7 @@
                           <div class="form-group">
                             <label>Thời gian họp</label>
                             <input
-                              class="form-control form-control-lg"
+                              class="form-control input-field"
                               type="number"
                               name="during"
                               placeholder="Nhập thời gian họp"
@@ -107,7 +98,7 @@
                           <div class="form-group">
                             <label>Tên cuộc họp</label>
                             <input
-                              class="form-control form-control-lg"
+                              class="form-control input-field"
                               type="text"
                               name="title"
                               placeholder="Nhập tên cuộc họp"
@@ -117,10 +108,9 @@
                           <div class="form-group">
                             <label>Nội dung cuộc họp</label>
                             <textarea
-                              class="form-control form-control-lg"
+                              class="form-control"
                               type="textarea"
                               name="content"
-                              placeholder="Nhập nội dung họp"
                               rows="5"
                               v-model="this.updateMeetingInfo.content"
                             ></textarea>
@@ -148,8 +138,11 @@
           </div>
         </div>
         <div v-if="activetab === 2" class="tabcontent">
-          <button class="btn btn-primary" @click="SendEmail()">
-            Gửi email
+          <button 
+					class="btn btn-primary" 
+					style="height:3rem;width:7rem;"
+					@click="SendEmail()">
+            Gửi email &#9993;
           </button>
           <div class="table-responsive">
             <ul
@@ -725,5 +718,15 @@ ul li {
   margin-top: -1px; /* Prevent double borders */
   background-color: white;
   padding: 12px;
+}
+.input-field{
+	height: 2.5rem;
+	margin-bottom: 0.7rem;
+}
+label{
+	font-size: 1rem;
+}
+.invite-input{
+	border-radius: 0.5rem;
 }
 </style>

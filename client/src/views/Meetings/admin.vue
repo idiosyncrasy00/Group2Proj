@@ -2,7 +2,7 @@
   <div class="container">
     <div class="col-md-12">
       <div class="card">
-        <div class="card-body">
+        <div class="card-body mt-3 mb-4 text-center">
           <h5 class="card-title text-uppercase mb-0">Danh sách cuộc họp</h5>
         </div>
         <div class="table-responsive">

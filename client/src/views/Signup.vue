@@ -3,9 +3,9 @@
     class="container mx-auto my-auto mt-2"
     style="heigt: 70%; width: 80%; box-shadow: 0 30px 40px rgba(0, 0, 0, 0.4)"
   >
-    <div class="row text-center" style="padding: 0">
+    <div class="row" style="padding: 0">
       <div
-        class="col-sm-4"
+        class="col-sm-4 text-center"
         style="background-color: #e0e0e0; padding: 0; margin: 0"
       >
         <img
@@ -14,9 +14,9 @@
           alt=""
           style="width=7rem;"
         />
-        <h1 class="h3 mt-5 fw-normal mb-5 mx-auto">Please sign up here</h1>
+        <h1 class="h3 mt-5 fw-normal mb-5 mx-auto">Hãy đăng ký ở đây</h1>
         <a class="mx-auto" href="/signin" style="text-decoration: none"
-          >Already have an account? Sign in now</a
+          >Đã có tải khoản? Đăng nhập ngay</a
         >
         <br />
         <a class="mx-auto" href="/" style="text-decoration: none"
@@ -34,7 +34,7 @@
           >
             <div class="row">
               <div class="col-sm-6">
-                <p class="form-header">First name</p>
+                <p class="form-header">Họ</p>
                 <input
                   type="firstname"
                   class="form-control"
@@ -44,7 +44,7 @@
               </div>
 
               <div class="col-sm-6">
-                <p class="form-header">Last name</p>
+                <p class="form-header">Tên</p>
                 <input
                   type="lastname"
                   class="form-control"
@@ -54,7 +54,7 @@
               </div>
             </div>
             <div class="">
-              <p class="form-header">Username</p>
+              <p class="form-header">Tên đăng nhập</p>
               <input
                 type="username"
                 class="form-control"
@@ -64,7 +64,7 @@
             </div>
 
             <div class="">
-              <p class="form-header">Password</p>
+              <p class="form-header">Mật khẩu</p>
               <input
                 type="password"
                 class="form-control"
@@ -75,7 +75,7 @@
 
               <div class="row">
                 <div class="col-sm-4">
-                  <p class="form-header">Date of birth</p>
+                  <p class="form-header">Ngày sinh</p>
                   <input
                     type="date"
                     ref="date"
@@ -97,7 +97,7 @@
               </div>
 
               <div class=""></div>
-              <p class="form-header">Phone number</p>
+              <p class="form-header">Số điện thoại</p>
               <div class="">
                 <input
                   type="phonenumber"
@@ -108,7 +108,7 @@
               </div>
 
               <div class="">
-                <p class="form-header">Address</p>
+                <p class="form-header">Địa chỉ</p>
                 <input
                   type="address"
                   class="form-control"
@@ -119,7 +119,7 @@
             </div>
             <div class="row">
               <button class="w-25 btn btn-lg btn-primary mt-3 mx-auto">
-                Sign up
+                Đăng ký
               </button>
             </div>
             <!-- </form> -->
