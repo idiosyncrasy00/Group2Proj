@@ -55,7 +55,7 @@ const getSelfInfo = async (req, res) => {
             id: req.user.id
         }
     });
-    res.send(_.pick(user, ['id', 'firstname', 'lastname', 'email', 'dob', 'phone', 'address', 'username']));
+    res.send(_.pick(user, ['id', 'firstname', 'lastname', 'email', 'dob', 'phone', 'address', 'username', 'isadmin']));
 };
 
 const getInfo = async (req, res) => {
