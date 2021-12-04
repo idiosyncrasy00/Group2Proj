@@ -38,7 +38,7 @@ function send_email(receiver, subject="Empty", html="Empty") {
 }
 
 function send_invite_email(receiver, fullname, roomname, date, startingtime, during, title, content) {
-    let subject = `${title} Meeting on ${date}`;
+    let subject = `Thông báo cuộc họp ${title} vào ngày ${date}`;
     let html = 
 `<body>
 Kính gửi bạn ${fullname},<br>

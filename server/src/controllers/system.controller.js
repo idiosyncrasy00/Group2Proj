@@ -28,16 +28,18 @@ const getRoomStats = async (req, res) => {
         // Date validation
         let startdate = "";
         let enddate = "";
-        let date = new Date();
-        if (value.type == "date") {
-            startdate = date;
-            enddate = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
-        } else if (value.type == "month") {
-            startdate = new Date(date.getFullYear(), date.getMonth(), 1);
-            enddate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+        if (!value.year) {
+            startdate = new Date(1975, 0, 1);
+            enddate = new Date(2100, 12, 0);
+        } else if (!value.month) {
+            startdate = new Date(value.year, 0, 1);
+            enddate = new Date(value.year, 12, 0);
+        } else if (!value.day) {
+            startdate = new Date(value.year, value.month - 1, 1);
+            enddate = new Date(value.year, value.month, 0);
         } else {
-            startdate = new Date(date.getFullYear(), 0, 1);
-            enddate = new Date(date.getFullYear(), 12, 0);
+            startdate = new Date(value.year, value.month - 1, value.day);
+            enddate = new Date(value.year, value.month - 1, value.day + 1);
         }
         startdate = startdate.toISOString().replace(/T.+/, '');
         enddate = enddate.toISOString().replace(/T.+/, '');
