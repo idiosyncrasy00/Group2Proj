@@ -264,9 +264,6 @@
             <button class="btn btn-success" @click="addPerson()">
               Thêm người
             </button>
-            <button class="btn btn-success" @click="InvitePeople()">
-              Mời người
-            </button>
             <!-- <button
                 type="button"
                 class="btn btn-primary"
@@ -379,6 +376,9 @@
             </tbody>
           </table>
         </div>
+            <button class="btn btn-success but" @click="InvitePeople() ">
+              Mời người
+            </button>
       </div>
     </div>
   </div>
@@ -694,6 +694,13 @@ div.example input[type="text"] {
   float: left;
   width: 80%;
   background: #f1f1f1;
+}
+button.but{
+  padding: 8px;
+  font-size: 14px;
+  border: 2px solid grey;
+
+  background: blue;
 }
 div.example button {
   padding: 8px;
