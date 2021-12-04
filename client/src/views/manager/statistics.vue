@@ -1,11 +1,10 @@
 <template>
-<!--
+  <!--
 <div style="max-width: 600px">
     <vue3-chart-js v-bind="{ ...barChart }" />
   </div>
   -->
   <div>
-    
     <div id="tabs" class="container">
       <div class="tabs">
         <a
@@ -26,63 +25,87 @@
       </div>
       <div class="content">
         <div v-if="activetab === 1" class="tabcontent">
-          <h1>Bảng thống kê</h1> 
-          <div class="container h-100"> 
+          <h1>Bảng thống kê</h1>
+          <div class="container h-100">
             <div style="max-width: 600px">
-             
-            <b>Chọn ngày bạn muốn tra cứu</b> <br> 
-            <input type="date">
-            <br> <br>
-            <hr>
-            <vue3-chart-js v-bind="{ ...barChart }" />
+              <b>Chọn ngày bạn muốn tra cứu</b> <br />
+              <input type="date" />
+              <br />
+              <br />
+              <hr />
+              <vue3-chart-js v-bind="{ ...barChart }" />
+            </div>
           </div>
         </div>
-        </div>
-        
+
         <div v-if="activetab === 2" class="tabcontent">
-          <h1>Bảng thống kê</h1> 
-          <div class="container h-100"> 
+          <h1>Bảng thống kê</h1>
+          <div class="container h-100">
             <div style="max-width: 600px">
-             
-            <b>Chọn tháng bạn muốn tra cứu</b> <br> 
-            <input type="month">
-            <br> <br>
-            <hr>
-            <vue3-chart-js v-bind="{ ...barChart }" />
+              <b>Chọn tháng bạn muốn tra cứu</b> <br />
+              <input type="month" />
+              <br />
+              <br />
+              <hr />
+              <vue3-chart-js v-bind="{ ...barChart }" />
+            </div>
           </div>
-        </div>
         </div>
 
         <div v-if="activetab === 3" class="tabcontent">
-          <h1>Bảng thống kê</h1> 
-          <div class="container h-100"> 
+          <h1>Bảng thống kê</h1>
+          <div class="container h-100">
             <div style="max-width: 600px">
-             
-            <b>Chọn năm bạn muốn tra cứu</b> <br> 
-            <input type="number" value="2021">
-            <br> <br>
-            <hr>
-            <vue3-chart-js v-bind="{ ...barChart }" />
+              <b>Chọn năm bạn muốn tra cứu</b> <br />
+              <input type="number" value="2021" />
+              <br />
+              <br />
+              <hr />
+              <vue3-chart-js v-bind="{ ...barChart }" />
+            </div>
           </div>
         </div>
-        </div>
-
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Vue3ChartJs from "../../../node_modules/@j-t-mcc/vue3-chartjs"
+import Vue3ChartJs from "../../../node_modules/@j-t-mcc/vue3-chartjs";
+import { getRoomStatsAPI } from "@/services/room.apiServices.js";
+
 export default {
-name:"statistics",
-components: {
+  name: "statistics",
+  components: {
     Vue3ChartJs,
   },
-  data(){
-    return{
-      activetab:1
-    }
+  data() {
+    return {
+      activetab: 1,
+    };
+  },
+  async created() {
+    getRoomStatsAPI("day")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getRoomStatsAPI("month")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getRoomStatsAPI("year")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
   setup() {
     const barChart = {
@@ -96,9 +119,9 @@ components: {
             position: "bottom",
           },
           title: {
-             display: true,
-             text: 'Bảng thống kê số lượt đặt phòng',
-          }
+            display: true,
+            text: "Bảng thống kê số lượt đặt phòng",
+          },
         },
         scales: {
           y: {
@@ -128,7 +151,7 @@ components: {
       barChart,
     };
   },
-}
+};
 </script>
 
 <style>

@@ -54,10 +54,19 @@ function getMeetingsInARoomAPI(roomname, reserveddate) {
     roomname: roomname,
     reserveddate: reserveddate,
   };
-  return axios.post(baseURL + "api/util/query", data, getHeaders)
+  return axios.post(baseURL + "api/util/query", data, getHeaders);
+}
+
+//get room statistics 
+function getRoomStatsAPI(type) {
+  //get time type (day, month or year)
+  const data = {
+    type: type,
+  };
+  return axios.post(baseURL + "api/system/roomstats", data, getHeaders);
 }
 
 export {
   createRoomAPI, getRoomListAPI, editRoomAPI, deleteRoomAPI, getRoomReviewAPI, postReviewAPI, editReviewAPI,
-  deleteReviewAPI, getMeetingsInARoomAPI
+  deleteReviewAPI, getMeetingsInARoomAPI, getRoomStatsAPI
 }

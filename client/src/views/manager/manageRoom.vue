@@ -50,103 +50,45 @@
 													<!-- chỉnh sửa -->
                           <div class="col-sm-1 row">
                             <button 
-														class="btn row-btn mb-1"                   
-														data-bs-toggle="modal"
-														data-bs-target="#staticBackdrop1" 
+														type="button"
+                            class="btn btn-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop"
+                            @click="editRoomInfo(room)"
 														style="padding: 0; background-color: #6666cc;">
                               <img src="https://icon-library.com/images/edit-icon/edit-icon-21.jpg" style="height: 2rem; width: 2rem;" />
                             </button>
                             <button 
-														class="btn btn-danger row-btn" 
+														class="btn btn-danger row-btn"
+														@click="deleteRoom(room.id)"
 														style="padding: 0;">
                               <img src="https://icon-library.com/images/junk-icon/junk-icon-18.jpg" style="height: 2rem; width: 2rem;" />
                             </button>
+														<button 
+														type="button"
+														class="btn btn-primary"
+														data-bs-toggle="modal"
+														data-bs-target="#exampleModal1"
+														@click="roomReview(room)"
+														style="padding:0;background-color:#ff704d;"
+														>
+															<img src="https://i.pinimg.com/originals/b9/f0/90/b9f0902793f2e3be3b57616e1c6ddd55.png"
+															style="height:2rem; width:2rem;"
+														>
+														</button>
                           </div>
-                        </div>
-
-                        <!-- Modal -->
-                        <div
-                          class="modal fade"
-                          id="staticBackdrop"
-                          data-bs-backdrop="static"
-                          data-bs-keyboard="false"
-                          tabindex="-1"
-                          aria-labelledby="staticBackdropLabel"
-                          aria-hidden="true"
-                        >
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5
-                                  class="modal-title"
-                                  id="staticBackdropLabel"
-                                >
-                                  Thông tin phòng họp
-                                </h5>
-                                <button
-                                  type="button"
-                                  class="btn-close"
-                                  data-bs-dismiss="modal"
-                                  aria-label="Close"
-                                ></button>
-                              </div>
-                              <div class="modal-body">
-                                <!-- modal body -->
-                                <div class="form-group">
-                                  <label>Tên phòng</label>
-                                  <label
-                                    class="form-control form-control-lg"
-                                    readonly
-                                  >
-                                    {{ room.roomname }}
-                                  </label>
-                                </div>
-                                <div class="form-group">
-                                  <label>Sức chứa</label>
-																	
-                                  <input
-                                    class="form-control form-control-lg"
-                                    type="number"
-                                    min="1"
-                                    v-model="room.capacity"
-                                  />
-                                </div>
-                                <div class="form-group">
-                                  <label>Trang thiết bị</label>
-                                  <textarea
-                                    class="form-control form-control-lg"
-                                    type="textarea"
-                                    v-model="room.facilities"
-                                  />
-                                </div>
-                                <div class="form-group">
-                                  <label>Trạng thái</label>
-                                  <input
-                                    class="form-control form-control-lg"
-                                    type="text"
-                                    v-model="room.status"
-                                  />
-                                </div>
-                                <!-- end modal body -->
-                              </div>
-                              <div class="modal-footer">
-
-                                <button
-                                  type="button"
-                                  class="btn btn-secondary"
-                                  data-bs-dismiss="modal"
-                                >
-                                  Hủy bỏ
-                                </button>
-                                <button type="button" class="btn btn-primary">
-                                  Xác nhận
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- End Modal -->
-                        <!-- end chỉnh sửa -->
+													<roomEditModal
+														:roomid="this.getroomid"
+														:roomname="this.getroomname"
+														:roomcapacity="this.getroomcapacity"
+														:roomfacilities="this.getroomfacilities"
+														:roomstatus="this.getroomstatus"
+													/>
+													<roomReviewModal
+														:commentList="this.getComments"
+														:roomname="this.getroomname"
+													/>
+												</div>
                       </tr>
                     </tbody>
                   </table>
@@ -154,77 +96,8 @@
                 <!-- END TABLE RESULT -->
               </div>
               <!-- Modal -->
-              <div
-                class="modal fade"
-                id="staticBackdrop1"
-                data-bs-backdrop="static"
-                data-bs-keyboard="false"
-                tabindex="-1"
-                aria-labelledby="staticBackdropLabel"
-                aria-hidden="true"
-              >
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="staticBackdropLabel">
-                        Thông tin phòng họp
-                      </h5>
-                      <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      ></button>
-                    </div>
-                    <div class="modal-body">
-                      <!-- modal body -->
-                      <div class="form-group">
-                        <label>Tên phòng</label>
-												
-                        <input
-                          class="form-control form-control-lg"
-                          type="text"
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label>Sức chứa</label>
-                        <input
-                          class="form-control form-control-lg"
-                          type="number"
-                          min="1"
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label>Trang thiết bị</label>
-                        <textarea
-                          class="form-control form-control-lg"
-                          type="textarea"
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label>Trạng thái</label>
-                        <input
-                          class="form-control form-control-lg"
-                          type="text"
-                        />
-                      </div>
-                      <!-- end modal body -->
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-bs-dismiss="modal"
-                      >
-                        Hủy bỏ
-                      </button>
-                      <button type="button" class="btn btn-primary">
-                        Xác nhận
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <!-- Modal thêm phòng -->
+              <roomCreateModal :commentList="this.getComments" />
               <!-- End Modal -->
               <!-- end thêm phòng -->
               <!-- END RESULT -->
@@ -239,13 +112,30 @@
 </template>
 
 <script>
-import { getRoomListAPI } from "@/services/room.apiServices.js";
+import {
+  getRoomListAPI,
+  deleteRoomAPI,
+  getRoomReviewAPI,
+} from "@/services/room.apiServices.js";
+import roomCreateModal from "@/components/ManagerComponents/roomCreateModal.vue";
+import roomEditModal from "@/components/ManagerComponents/roomEditModal.vue";
+import roomReviewModal from "@/components/roomReviewModal.vue";
 
 export default {
   name: "manageRoom",
-  components: {},
+  components: {
+    roomCreateModal,
+    roomEditModal,
+    roomReviewModal,
+  },
   data() {
     return {
+      getComments: "",
+      getroomid: "",
+      getroomname: "",
+      getroomcapacity: "",
+      getroomfacilities: "",
+      getroomstatus: "",
       searchValues: {
         roomName: "",
       },
@@ -256,7 +146,51 @@ export default {
       ],
     };
   },
-
+  methods: {
+    editRoomInfo(room) {
+      this.getroomid = room.id;
+      this.getroomname = room.roomname;
+      this.getroomcapacity = room.capacity;
+      this.getroomfacilities = room.facilities;
+      this.getroomstatus = room.status;
+    },
+    deleteRoom(id) {
+      this.$swal
+        .fire({
+          title: "Bạn có chắc muốn xóa phòng này chứ?",
+          showDenyButton: true,
+          confirmButtonText: "Có",
+          denyButtonText: `Không`,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            deleteRoomAPI(id)
+              .then((res) => {
+                console.log(res);
+                this.$swal.fire("Xóa phòng thành công", "", "success");
+                window.setTimeout(function () {
+                  location.reload();
+                }, 2000);
+              })
+              .catch((err) => {
+                this.$swal.fire("Xóa phòng không thành công", "", "failed");
+                console.log(err);
+              });
+          }
+        });
+    },
+    roomReview(room) {
+      this.getroomname = room.roomname;
+      getRoomReviewAPI(room.id)
+        .then((res) => {
+          console.log(res);
+          this.getComments = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
   computed: {
     searchRooms() {
       return this.rooms.filter(
