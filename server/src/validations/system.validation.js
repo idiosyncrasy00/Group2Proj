@@ -5,9 +5,7 @@ const feedbackSchema = Joi.object({
 });
 
 const statsSchema = Joi.object({
-    year: Joi.number().integer(),
-    month: Joi.number().integer(),
-    day: Joi.number().integer()
+    date: Joi.string().required()
 });
 
 module.exports = { feedbackSchema, statsSchema };

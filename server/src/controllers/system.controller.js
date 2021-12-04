@@ -26,20 +26,24 @@ const getRoomStats = async (req, res) => {
         res.status(403).send({error: error.message});
     } else {
         // Date validation
+        let temp = value.date.split('-');
+        let year = parseInt(temp[0], 10);
+        let month = parseInt(temp[1], 10);
+        let day = parseInt(temp[2], 10);
         let startdate = "";
         let enddate = "";
-        if (!value.year) {
+        if (!year) {
             startdate = new Date(1975, 0, 1);
             enddate = new Date(2100, 12, 0);
-        } else if (!value.month) {
-            startdate = new Date(value.year, 0, 1);
-            enddate = new Date(value.year, 12, 0);
-        } else if (!value.day) {
-            startdate = new Date(value.year, value.month - 1, 1);
-            enddate = new Date(value.year, value.month, 0);
+        } else if (!month) {
+            startdate = new Date(year, 0, 1);
+            enddate = new Date(year, 12, 0);
+        } else if (!day) {
+            startdate = new Date(year, month - 1, 1);
+            enddate = new Date(year, month, 0);
         } else {
-            startdate = new Date(value.year, value.month - 1, value.day);
-            enddate = new Date(value.year, value.month - 1, value.day + 1);
+            startdate = new Date(year, month - 1, day);
+            enddate = new Date(year, month - 1, day + 1);
         }
         startdate = startdate.toISOString().replace(/T.+/, '');
         enddate = enddate.toISOString().replace(/T.+/, '');
