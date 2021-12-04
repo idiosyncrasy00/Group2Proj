@@ -19,7 +19,10 @@
           <li class="nav-item">
             <a href="/about" class="nav-link">Giới thiệu</a>
           </li>
-          <li class="nav-item dropdown">
+          <li
+            class="nav-item dropdown"
+            v-if="isAdmin == false && islogged == 1"
+          >
             <a
               class="nav-link dropdown-toggle"
               href="#"
@@ -40,8 +43,9 @@
                 >
               </li>
             </ul>
-          </li> -->
-          <li
+          </li>
+          -->
+          <!-- <li
             class="nav-item dropdown"
             v-if="isAdmin == false && islogged == 1"
           >
@@ -65,7 +69,7 @@
                 >
               </li>
             </ul>
-          </li>
+          </li> -->
           <!-- <li class="nav-item">
             <a href="/UserList" class="nav-link">Show list of users</a>
           </li> -->
@@ -86,11 +90,11 @@
           <li class="nav-item" v-if="isAdmin == true && islogged == 1">
             <a href="/statistics" class="nav-link">Thống kê</a>
           </li>
-					<li class="nav-item">
+          <li class="nav-item" v-if="isAdmin == false && islogged == 1">
             <a href="/Feedback" class="nav-link">Phản hồi</a>
           </li>
         </ul>
-				
+
         <ul class="navbar-nav" v-if="islogged == 0">
           <li class="nav-item">
             <a href="/signin" class="nav-link">Đăng nhập</a>
@@ -265,7 +269,6 @@ export default {
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
-
   display: block;
 }
 

@@ -1,17 +1,26 @@
 <template>
   <div class="container mt-5">
-    <form>
-      <label>Name</label>
-      <input type="text" v-model="name" name="name" placeholder="Your Name" />
-      <label>Email</label>
-      <input
-        type="email"
-        v-model="email"
-        name="email"
-        placeholder="Your Email"
-      /> -->
-    <label>Phản hồi</label>
-    Đánh giá phòng theo thang điểm 10
+    <label>Chọn phòng</label>
+    <select
+      class="form-select"
+      aria-label="Default select example"
+      v-model="this.reviewContent.roomid"
+    >
+      <option
+        selected
+        v-for="room in this.roomList"
+        :key="room.id"
+        :value="room.id"
+      >
+        {{ room.roomname }}
+      </option>
+      <!-- <option value="1">{{ room.roomname }}</option> -->
+    </select>
+    <!-- <div v-for="room in this.reviewContent.roomList" :key="room.id">
+      {{ room.roomname }}
+    </div> -->
+    <!-- {{ this.reviewContent.roomList.roomname }} -->
+    <label>Đánh giá phòng theo thang điểm 10</label>
     <select
       class="form-select"
       aria-label="Default select example"
@@ -29,14 +38,7 @@
       <option value="9">9</option>
       <option value="10">10</option>
     </select>
-    <!-- <textarea
-      name="message"
-      v-model="message"
-      cols="30"
-      rows="5"
-      v-model="reviewContent.message"
-    > -->
-    <!-- </textarea -->
+    <label>Phản hồi</label>
     <b-form-textarea
       id="textarea-rows"
       placeholder="Viết phản hồi của bạn vào đây..."
@@ -54,13 +56,14 @@
         :key="review.id"
       >
         <h4>{{ review.room.roomname }}</h4>
-        <span>Rating: {{ review.rating }}/10</span> <br />
+        <span>Điểm đánh giá: {{ review.rating }}/10</span> <br />
         <p>
           {{ review.message }}
         </p>
-        <b-button variant="secondary" @click="editReview()">Edit</b-button>
-        <b-button variant="danger" @click="deleteReview(review.id)"
-          >Delete</b-button
+        <b-button
+          variant="danger"
+          @click="deleteReview(review.id)"
+          >Xóa</b-button
         >
         <!-- <b-button variant="secondary">Warning</b-button> -->
       </div>
@@ -70,11 +73,17 @@
 
 <script>
 //import { feedBackAPI } from "@/services/user.apiServices.js";
-import { postReviewAPI } from "@/services/room.apiServices.js";
+import {
+  postReviewAPI,
+  //getMeetingListAPI,
+  //getInvitedMeetingsListAPI,
+} from "@/services/room.apiServices.js";
 import {
   getSelfReviewAPI,
+  //editReviewAPI,
   deleteReviewAPI,
 } from "@/services/review.apiServices.js";
+import { getRoomListAPI } from "@/services/room.apiServices.js";
 
 export default {
   name: "Feedback",
@@ -85,8 +94,9 @@ export default {
     //   message: "",
     // };
     return {
+      roomList: [],
       reviewContent: {
-        roomid: "2",
+        roomid: "",
         rating: "",
         message: "",
       },
@@ -121,10 +131,6 @@ export default {
       //     console.log(err);
       //   });
     },
-    editReview() {
-      //do something
-      return 0;
-    },
     deleteReview(id) {
       this.$swal
         .fire({
@@ -146,18 +152,6 @@ export default {
               .catch((err) => {
                 console.log(err);
               });
-            // deleteRoomAPI(id)
-            //   .then((res) => {
-            //     console.log(res);
-            //     this.$swal.fire("Xóa phản hồi thành công", "", "success");
-            //     window.setTimeout(function () {
-            //       location.reload();
-            //     }, 2000);
-            //   })
-            //   .catch((err) => {
-            //     this.$swal.fire("Xóa phản hồi không thành công", "", "failed");
-            //     console.log(err);
-            //   });
           }
         });
     },
@@ -167,6 +161,14 @@ export default {
       .then((res) => {
         console.log(res);
         this.listOfReviews = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getRoomListAPI()
+      .then((res) => {
+        console.log(res);
+        this.roomList = res.data;
       })
       .catch((err) => {
         console.log(err);

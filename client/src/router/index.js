@@ -131,7 +131,7 @@ const routes = [
   {
     path: '/statistics',
     name: 'statistics',
-    component: () => import('../views/manager/statistics'),
+    component: () => import('../views/manager/statistics2'),
     meta: {
       requiresAuth: true,
       notrequiresAuth: true,

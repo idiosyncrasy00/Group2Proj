@@ -8,9 +8,14 @@ function postReviewAPI(comment) {
   return axios.post(baseURL + "api/reviews/add", comment, getHeaders);
 }
 
-function editReviewAPI() {
-  return 0;
-}
+// function editReviewAPI(id) {
+//   const data = {
+//     "id": id,
+//     "rating": "",    // Not required
+//     "message": ""    // Not required
+//   }
+//   return axios.put(baseURL + "api/reviews/add", data, getHeaders);
+// }
 
 function deleteReviewAPI(id) {
   const headers = getHeaders.headers;
@@ -22,5 +27,5 @@ function deleteReviewAPI(id) {
 
 
 export {
-  getSelfReviewAPI, postReviewAPI, editReviewAPI, deleteReviewAPI
+  getSelfReviewAPI, postReviewAPI, deleteReviewAPI
 }

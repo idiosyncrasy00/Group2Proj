@@ -11,6 +11,8 @@ import 'aos/dist/aos.css'
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import BootstrapVue3 from 'bootstrap-vue-3';
+import VueChartkick from 'vue-chartkick'
+import 'chartkick/chart.js'
 
 
 
@@ -36,7 +38,7 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-export const app = createApp(App).use(store).use(router).use(VueSweetalert2);
+export const app = createApp(App).use(store).use(router).use(VueSweetalert2).use(VueChartkick);
 
 app.AOS = new AOS.init({
   disable: "phone",

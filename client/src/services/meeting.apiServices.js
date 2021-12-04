@@ -5,6 +5,7 @@ function createMeetingAPI(meetingInfo) {
     .post(baseURL + "api/meetings/create", meetingInfo, getHeaders);
 }
 
+//get list of meetings as an admin of the meeting
 function getMeetingListAPI() {
   return axios
     .get(baseURL + "api/util/reserved", getHeaders);

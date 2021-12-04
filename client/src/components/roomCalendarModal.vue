@@ -41,9 +41,6 @@
                     Từ <b>{{ meeting.startingtime }} giờ</b> đến
                     <b>{{ meeting.startingtime + meeting.during }} giờ</b>
                   </td>
-                  <td class="align-middle">
-                    Không có cuộc họp nào đang diễn ra!
-                  </td>
                   <td>
                     <div class="margin-10px-top font-size14">
                       {{ meeting.admin.adminname }}
