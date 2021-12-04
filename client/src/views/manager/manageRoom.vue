@@ -1,5 +1,13 @@
 <template>
   <div class="container">
+    <!-- thêm phòng -->
+    <div class="d-flex flex-row justify-content-end mt-2 mb-0">
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+          <img src="https://icon-library.com/images/create-a-icon/create-a-icon-13.jpg" style="width: 3rem; height: 3rem;" />
+        </button>
+      </span>
+    </div>
     <div class="row">
       <!-- BEGIN SEARCH RESULT -->
       <div class="col-md-12">
@@ -7,40 +15,14 @@
           <div class="grid-body">
             <div class="row">
               <!-- BEGIN RESULT -->
-              <div class="col-md-9">
-                <h2><i class="fa fa-file-o"></i> Danh sách phòng</h2>
-                <hr />
+              <div class="col-md-11 mx-auto">
+                <div class="text-center mb-3">
+                  <h2>Quản lý phòng</h2>
+                </div>
                 <!-- BEGIN SEARCH INPUT -->
 
-                <!-- <div class="input-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Danh sách phòng"
-                    v-model="searchValues.roomName"
-                  />
-                  <span class="input-group-append">
-                    <button
-                      class="
-                        btn btn-outline-secondary
-                        bg-white
-                        border-start-0 border
-                        rounded-pill
-                        ms-n3
-                      "
-                      type="button"
-                    >
-                      <i class="fa fa-search"></i>
-                    </button>
-                  </span>
-                </div> -->
                 <div class="input-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Nhập tên phòng"
-                    v-model="searchValues.roomName"
-                  />
+                  <input type="text" class="form-control" placeholder="Nhập tên phòng" v-model="searchValues.roomName" />
                 </div>
 
                 <!-- END SEARCH INPUT -->
@@ -52,81 +34,67 @@
                   <table class="table table-hover">
                     <tbody>
                       <tr v-for="room in searchRooms" :key="room.roomname">
-                        <td class="image">
-                          <img src="../../assets/logo.png" alt="" />
-                        </td>
-                        <td class="product">
-                          <strong>{{ room.roomname }}</strong>
-                          <br />Sức chứa: {{ room.capacity }} người <br />Trang
-                          thiết bị:{{ room.facilities }} <br />Trạng thái:{{
-                            room.status
-                          }}
-                        </td>
-                        <!-- chỉnh sửa -->
-                        <span class="input-group-btn">
-                          <button
-                            type="button"
+                       <div class="product row">
+                          <div class="image col-sm-1">
+                            <img src="../../assets/logo.png" alt="" style="height: 3rem; width: 3rem;" />
+                          </div>
+
+                          <div class="col-sm-6">
+                            <p>{{ room.roomname }}</p>
+                            Trang thiết bị: {{ room.facilities }}
+                          </div>
+                          <div class="col-sm-4">
+                            <p><img src="https://icon-library.com/images/person-icon-png-transparent/person-icon-png-transparent-15.jpg" style="height: 1.9rem; width: 1.9rem;" /> {{ room.capacity }}</p>
+                            Trạng thái: {{room.status}}
+                          </div>
+													<!-- chỉnh sửa -->
+                          <div class="col-sm-1 row">
+                            <button 
+														type="button"
                             class="btn btn-primary"
                             data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop"
                             @click="editRoomInfo(room)"
-                          >
-                            <h5 class="card-title text-center text-dark">
-                              Chỉnh sửa
-                            </h5>
-                          </button>
-                        </span>
-                        <roomEditModal
-                          :roomid="this.getroomid"
-                          :roomname="this.getroomname"
-                          :roomcapacity="this.getroomcapacity"
-                          :roomfacilities="this.getroomfacilities"
-                          :roomstatus="this.getroomstatus"
-                        />
-                        <span class="input-group-btn">
-                          <button type="button" class="btn btn-danger">
-                            <h5
-                              class="card-title text-center text-dark"
-                              @click="deleteRoom(room.id)"
-                            >
-                              Xóa
-                            </h5>
-                          </button>
-                        </span>
-                        <span class="input-group-btn">
-                          <button
-                            type="button"
-                            class="btn btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#exampleModal1"
-                            @click="roomReview(room)"
-                          >
-                            <h5 class="card-title text-center text-dark">
-                              Xem đánh giá của người dùng
-                            </h5>
-                          </button>
-                        </span>
-                        <roomReviewModal
-                          :commentList="this.getComments"
-                          :roomname="this.getroomname"
-                        />
+														style="padding: 0; background-color: #6666cc;">
+                              <img src="https://icon-library.com/images/edit-icon/edit-icon-21.jpg" style="height: 2rem; width: 2rem;" />
+                            </button>
+                            <button 
+														class="btn btn-danger row-btn"
+														@click="deleteRoom(room.id)"
+														style="padding: 0;">
+                              <img src="https://icon-library.com/images/junk-icon/junk-icon-18.jpg" style="height: 2rem; width: 2rem;" />
+                            </button>
+														<button 
+														type="button"
+														class="btn btn-primary"
+														data-bs-toggle="modal"
+														data-bs-target="#exampleModal1"
+														@click="roomReview(room)"
+														style="padding:0;background-color:#ff704d;"
+														>
+															<img src="https://i.pinimg.com/originals/b9/f0/90/b9f0902793f2e3be3b57616e1c6ddd55.png"
+															style="height:2rem; width:2rem;"
+														>
+														</button>
+                          </div>
+													<roomEditModal
+														:roomid="this.getroomid"
+														:roomname="this.getroomname"
+														:roomcapacity="this.getroomcapacity"
+														:roomfacilities="this.getroomfacilities"
+														:roomstatus="this.getroomstatus"
+													/>
+													<roomReviewModal
+														:commentList="this.getComments"
+														:roomname="this.getroomname"
+													/>
+												</div>
                       </tr>
                     </tbody>
                   </table>
                 </div>
                 <!-- END TABLE RESULT -->
               </div>
-              <!-- thêm phòng -->
-              <span class="input-group-btn">
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#staticBackdrop1"
-                >
-                  <h5 class="card-title text-center text-dark">Thêm phòng</h5>
-                </button>
-              </span>
               <!-- Modal -->
               <!-- Modal thêm phòng -->
               <roomCreateModal :commentList="this.getComments" />
@@ -254,22 +222,13 @@ export default {
 </script>
 
 <style scoped>
-body {
-  margin-top: 20px;
-  background: #eee;
-}
-
-.btn {
-  margin-bottom: 5px;
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
 .grid {
   position: relative;
   width: 100%;
   background: #fff;
   color: #666666;
   border-radius: 2px;
-  margin-bottom: 25px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -311,5 +270,13 @@ body {
 .search #price2 {
   display: inline;
   font-weight: 600;
+}
+.row-btn{
+	border-radius: 0;
+}
+.product{
+	font-family: 'Raleway', sans-serif;
+	font-size: 1.1rem;
+	border-bottom: thin gray solid;
 }
 </style>

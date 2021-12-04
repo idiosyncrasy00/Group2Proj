@@ -39,44 +39,44 @@
         <div class="bg-text">
           <h1>Meeting Manage Assistance</h1>
           <p class="bg-text-under">
-						A web appication help you with operating your organization's meetings
+						Ứng dụng web giúp bạn vận hành cuộc họp của công ty hiệu quả
           </p>
         </div>
         <div class="intro-button">
-          <a href="/about">About us &#10230;</a>
+          <a href="/about">Về chúng tôi &#10230;</a>
         </div>
       </div>
       <div class="row mt-4 justify-content-between">
         <div class="card col-sm-7 info-card" data-aos="fade-right">
-          <h3>We are always ready to help you connect</h3>
+          <h3>Chúng tôi luôn sẵn sàng giúp bạn kết nối</h3>
           <ul style="list-style-type: none;">
-						<li>&#187; Easy to ship your company's meetings</li>
-						<li>&#187; Easy to control your own meetings</li>
-						<li>&#187; Easy to find a room that fulfill your need</li>
-						<li>&#187; Easy to get in touch with every body in your organization</li>  	
+						<li>&#187; Dễ dàng trao đổi thông tin cuộc họp</li>
+						<li>&#187; Dễ dàng quản trị cuộc họp của chính bạn</li>
+						<li>&#187; Dễ dàng lên lịch các phòng</li>
+						<li>&#187; Dễ dàng để liên lạc với mọi người trong công ty</li>  	
           </ul>
         </div>
         <div class="card col-sm-4 bg-secondary" data-aos="fade-left"></div>
       </div>
       <div class="d-flex flex-row-reverse mt-5 justify-content-between">
         <div class="card col-sm-7 end-0 info-card" data-aos="fade-left">
-          <h3>Modernize your meeting solution</h3>
+          <h3>Hiện đại hóa giải pháp quản lý cuộc họp</h3>
           <ul style="list-style-type: square;">
-						<li>Create a meeting and invite your colleagues constantly</li>
-						<li>Your meeting calendar is always here</li>
-						<li>Schedule your room efficiently</li>
+						<li>Tạo cuộc họp và mời đồng nghiệp của bạn ngay lập tức</li>
+						<li>Lịch họp của bạn luôn có sẵn ở đây</li>
+						<li>Ghi nhớ mọi thứ thông tin về họp hành</li>
           </ul>
         </div>
         <div class="card col-sm-4 bg-primary" data-aos="fade-right"></div>
       </div>
       <div class="row mt-5 justify-content-between">
         <div class="card col-sm-7 info-card" data-aos="fade-right">
-          <h3>Free, simple and fast</h3>
+          <h3>Miễn phí, đơn giản và tiện lợi</h3>
           <ul>
-						<li>Zero-time create your account </li>
-						<li>Zero-time to learn to use</li>
-						<li>Zero-time to level up your company's meeting solution</li>
-						<li>Free for everything</li>  	
+						<li>Không tốn thời gian để tạo một account </li>
+						<li>Không tốn thời gian để học cách sử dụng</li>
+						<li>Không tốn thời gian để nâng cấp giải pháp cho công ty của bạn</li>
+						<li>Miễn phí mọi thứ</li>  	
           </ul>
         </div>
         <div class="card col-sm-4 bg-danger" data-aos="fade-left"></div>

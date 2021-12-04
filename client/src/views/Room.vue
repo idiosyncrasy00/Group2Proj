@@ -1,24 +1,18 @@
 <template>
-  <div class="container">
+  <div class="container" style="padding: 0;">
     <div class="row">
       <!-- BEGIN SEARCH RESULT -->
-      <div class="col-md-12">
+      <div class="col-sm-12">
         <div class="grid search">
           <div class="grid-body">
             <div class="row">
               <!-- BEGIN RESULT -->
-              <div class="col-md-9 mx-auto">
+              <div class="col-md-11 mx-auto">
                 <div class="row text-center mb-3 mt-1">
                   <h2><i class="fa fa-file-o"></i> Danh sách phòng</h2>
                 </div>
                 <!-- BEGIN SEARCH INPUT -->
                 <div class="input-group">
-                  <!-- <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Nhập tên phòng"
-                    v-model="searchValues.roomName"
-                  /> -->
                   <div class="input-group row mb-5">
                     <!-- <p class="mb-0" style="color: gray; font-size: 90%">
                       Please enter room info
@@ -35,100 +29,103 @@
                   </div>
 
                   <!-- END SEARCH INPUT -->
-
                   <br />
-
-                  <!-- BEGIN TABLE RESULT -->
-                  <div class="table-responsive">
-                    <table class="table table-hover">
-                      <tbody>
-                        <tr v-for="room in searchRooms" :key="room.roomname">
-                          <td class="image">
-                            <img src="../assets/logo.png" alt="" />
-                          </td>
-                          <td class="product">
-                            <strong>{{ room.roomname }}</strong>
-                            <br />Sức chứa: {{ room.capacity }} người
-                            <br />Trang thiết bị:{{ room.facilities }}
-                            <br />Trạng thái:{{ room.status }}
-                          </td>
-                          <!-- <span class="input-group-btn">
-                          <button
-                            class="btn btn-primary"
-                            type="button"
-                            v-if="room.status != 'Bảo trì'"
-                            @click="roomBooking(room)"
-                          >
-                            <h5 class="card-title text-center text-dark">
-                              Đặt phòng
-                            </h5>
-                          </button>
-                        </span> -->
-                          <span class="input-group-btn">
-                            <button
-                              type="button"
-                              class="btn btn-primary btn-sm"
-                              data-bs-toggle="modal"
-                              data-bs-target="#exampleModal3"
-                              v-if="room.status != 'Bảo trì'"
-                              @click="roomBooking2(room)"
-                            >
-                              <h5 class="card-title text-center text-dark">
-                                Đặt phòng
-                              </h5>
-                            </button>
-                          </span>
-                          <!--modal đặt phòng-->
-                          <createMeetingModal
-                            id="exampleModal3"
-                            :roomid="this.getRoomID"
-                            :roomname="this.getRoomName"
-                          />
-                          <span class="input-group-btn">
-                            <button
-                              type="button"
-                              class="btn btn-primary btn-sm"
-                              data-bs-toggle="modal"
-                              data-bs-target="#exampleModal"
-                              @click="getMeetingsInARoom(room)"
-                            >
-                              <h5 class="card-title text-center text-dark">
-                                Xem lịch
-                              </h5>
-                            </button>
-                          </span>
-                          <!--modal lịch đặt phòng-->
-                          <roomCalendarModal
-                            id="exampleModal"
-                            :roomname="this.getRoomName"
-                          />
-                          <span class="input-group-btn">
-                            <button
-                              type="button"
-                              class="btn btn-primary btn-sm"
-                              data-bs-toggle="modal"
-                              data-bs-target="#exampleModal1"
-                              @click="roomReview(room)"
-                            >
-                              <h5 class="card-title text-center text-dark">
-                                Đánh giá
-                              </h5>
-                            </button>
-                          </span>
-                          <!--modal đánh giá-->
-                          <roomReviewModal
-                            id="#exampleModal1"
-                            :roomid="this.getRoomID"
-                            :commentList="this.getComments"
-                          />
-                        </tr>
-                        <!--end of for loop-->
-                      </tbody>
-                    </table>
-                  </div>
+                <!-- BEGIN TABLE RESULT -->
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr v-for="room in searchRooms" :key="room.roomname">
+                         <div class="product row">
+														<div class="image col-sm-1">
+															<img 
+															src="../assets/logo.png" 
+															alt="" 
+															style="height: 3rem;width: 3rem;"
+															/>
+														</div>
+														<div class="col-sm-6">
+																<p>{{ room.roomname }}</p>
+																Trang thiết bị: {{ room.facilities }}
+														</div>
+														<div class="col-sm-4">
+															<p>
+																<img src="https://icon-library.com/images/person-icon-png-transparent/person-icon-png-transparent-15.jpg"
+																style="height: 1.9rem;width: 1.9rem;"
+																/> {{ room.capacity }}
+															</p>
+															Trạng thái: {{room.status}}
+														</div>
+														<div class="col-sm-1 hide">
+															<span class="input-group-btn">
+																<button
+																type="button"
+																class="btn"
+																data-bs-toggle="modal"
+																data-bs-target="#exampleModal3"
+																v-if="room.status != 'Bảo trì'"
+																@click="roomBooking2(room)"
+																style="padding:0;background-color:#8cff66;">
+																	<img src="https://icon-library.com/images/562674.png"
+																	style="height:2rem; width:2rem;"
+																	>
+																</button>
+															</span>
+															<!-- Button trigger calendar -->
+															<span class="input-group-btn">
+																<button 
+																type="button"
+																class="btn btn-light"
+																data-bs-toggle="modal"
+																data-bs-target="#exampleModal"
+																@click="getMeetingsInARoom(room)"
+																style="padding:0;">
+																	<img src="https://rjglobalsolutions.com/wp-content/uploads/2021/08/106-1067742_calendar-icon-png-transparent-calendar-line-icon-png.jpg"
+																	style="height:2rem; width:2rem;"
+																	>
+																</button>
+															</span>
+															<!-- Button trigger feedback -->
+															<span class="input-group-btn">
+																<button 
+																type="button"
+																class="btn"
+																data-bs-toggle="modal"
+																data-bs-target="#exampleModal1"
+																@click="roomReview(room)"
+																style="padding:0;background-color:#ff704d;"
+																>
+																	<img src="https://i.pinimg.com/originals/b9/f0/90/b9f0902793f2e3be3b57616e1c6ddd55.png"
+																	style="height:2rem; width:2rem;"
+																	>
+																</button>
+															</span>
+														</div>
+													</div>        
+                        <!--modal đặt phòng-->
+                        <createMeetingModal
+                          id="exampleModal3"
+                          :roomid="this.getRoomID"
+                          :roomname="this.getRoomName"
+                        />
+                        <!--modal lịch đặt phòng-->
+                        <roomCalendarModal
+                          id="exampleModal"
+                          :roomname="this.getRoomName"
+                        />
+                        <!--modal đánh giá-->
+                        <roomReviewModal
+                          id="#exampleModal1"
+                          :roomid="this.getRoomID"
+                          :commentList="this.getComments"
+                        />
+                      </tr>
+                      <!--end of for loop-->
+                    </tbody>
+                  </table>
                 </div>
                 <!-- END RESULT -->
-              </div>
+								</div>
+							</div>
             </div>
           </div>
           <!-- END SEARCH RESULT -->
@@ -242,64 +239,32 @@ export default {
 };
 </script>
 
-<style scoped>
-.grid {
-  position: relative;
-  width: 100%;
-  background: #fff;
-  color: #666666;
-  border-radius: 2px;
-  margin-bottom: 25px;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+.input-group{
+	border-radius: 1rem;
 }
-
-.grid .grid-body {
-  padding: 15px 20px 15px 20px;
-  font-size: 0.9em;
-  line-height: 1.9em;
+.table-responsive{
+	overflow: hidden;
+	width: 100%;
+	padding: 0;
+	margin:0;
 }
-
-.search table tr td.rate {
-  color: #f39c12;
-  line-height: 50px;
-}
-
-.search table tr:hover {
-  cursor: pointer;
-}
-
-.search table tr td.image {
-  width: 50px;
-}
-
-.search table tr td img {
-  width: 50px;
-  height: 50px;
-}
-
-.search table tr td.rate {
-  color: #f39c12;
-  line-height: 50px;
-}
-
-.search table tr td.price {
-  font-size: 1.5em;
-  line-height: 50px;
-}
-
-.search #price1,
-.search #price2 {
-  display: inline;
-  font-weight: 600;
+.product{
+	border-bottom: thin gray solid;
+	font-family: 'Comfortaa', cursive;
 }
 
 .center {
   margin-left: auto;
   margin-right: auto;
 }
+<<<<<<< HEAD
+=======
 body {
   margin-top: 20px;
 }
+>>>>>>> 40a53e675954ccc2b16ed2ca77882acf5aee3aa0
 .bg-light-gray {
   background-color: #f7f7f7;
 }

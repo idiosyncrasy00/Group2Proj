@@ -56,7 +56,7 @@
                     placeholder="Username"
                     v-model="signinValues.username"
                   />
-                  <label for="floatingInput">Username</label>
+                  <label for="floatingInput">Tên đăng nhập</label>
                 </div>
                 <div
                   class="form-floating"
@@ -73,12 +73,12 @@
                     placeholder="Password"
                     v-model="signinValues.password"
                   />
-                  <label for="floatingPassword">Password</label>
+                  <label for="floatingPassword">Mật khẩu</label>
                 </div>
 
                 <div class="checkbox mb-3">
                   <label>
-                    <input type="checkbox" value="remember-me" /> Remember me
+                    <input type="checkbox" value="remember-me" /> Ghi nhớ
                   </label>
                 </div>
                 <button
@@ -99,11 +99,11 @@
                   "
                   style="background-color: #38c75c; margin-bottom: 5px"
                 >
-                  Sign in
+                  Đăng nhập
                 </button>
                 <div class="row text-center mt-2">
                   <a href="/signup" style="text-decoration: none"
-                    >Dont have an account? Sign up here</a
+                    >Chưa có tài khoản? Tạo một cái ngay</a
                   >
                   <a href="/" style="text-decoration: none"
                     >Quay trở về trang chủ</a
