@@ -5,7 +5,7 @@ const feedbackSchema = Joi.object({
 });
 
 const statsSchema = Joi.object({
-    type: Joi.string().empty(Joi.not('date', 'month', 'year')).default('date'),
+    date: Joi.string().required()
 });
 
 module.exports = { feedbackSchema, statsSchema };

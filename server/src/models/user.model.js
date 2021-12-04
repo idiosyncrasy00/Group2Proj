@@ -37,6 +37,10 @@ module.exports = (sequelize, DataTypes) => {
             validate: {
                 is: /^\$2[ayb]\$.{56}$/i
             }
+        },
+        isadmin: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     }, {
         charset: "utf8",

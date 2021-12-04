@@ -247,24 +247,27 @@
       </div>
       <div v-if="activetab === 3" class="tabcontent">
         <div class="table-responsive">
-          <div class="example" style="width: 100%;">
-						<div class="row">
-							<div class="row col-sm-7 mx-auto">
-								<input
-									type="text"
-									class="invite-input col-sm-9"
-									placeholder="Nhập tên người cần mời"
-									v-model="searchTerm"
-									@click="triggerSearchBar"
-								/>
-								<button class="btn btn-success col-sm-2" @click="addPerson()">
-									Thêm người
-								</button>
-							</div>
-						</div>
-            <button class="btn btn-success" @click="InvitePeople()">
-              Mời người
+          <div class="example" style="max-width: 500px">
+            <input
+              type="text"
+              placeholder="Nhập tên người cần mời"
+              v-model="searchTerm"
+              @click="triggerSearchBar"
+            />
+            <button class="btn btn-success" @click="addPerson()">
+              Thêm người
             </button>
+            <!-- <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#userList"
+              >
+                <invitingPeopleModal />
+                <h5 class="card-title text-center text-dark">
+                  Lên danh sách người tham dự
+                </h5>
+              </button> -->
           </div>
           <ul v-if="searchUsers.length < users.length" style="max-width: 400px">
             <li
@@ -366,6 +369,9 @@
             </tbody>
           </table>
         </div>
+            <button class="btn btn-success but" @click="InvitePeople() ">
+              Mời người
+            </button>
       </div>
     </div>
   </div>
@@ -681,6 +687,13 @@ div.example input[type="text"] {
   float: left;
   width: 80%;
   background: #f1f1f1;
+}
+button.but{
+  padding: 8px;
+  font-size: 14px;
+  border: 2px solid grey;
+
+  background: blue;
 }
 div.example button {
   padding: 8px;

@@ -5,7 +5,7 @@
         <p>{{ mail }}</p>
         <p>{{ phone }}</p>
 				<div class="item">
-            <a href="/Feedback" style="text-decoration: none;">Send feedback to us</a>
+            <a href="/Feedback" style="text-decoration: none;">Gửi phản hồi tới chúng tôi</a>
         </div>
       </div>
       <div id="contacts--social">

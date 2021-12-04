@@ -17,7 +17,7 @@
             <a href="/" class="nav-link"> Trang chủ </a>
           </li>
           <li class="nav-item">
-            <a href="/about" class="nav-link">About</a>
+            <a href="/about" class="nav-link">Giới thiệu</a>
           </li>
           <li class="nav-item dropdown">
             <a
@@ -209,7 +209,7 @@ export default {
 }
 
 .navbar-nav {
-  padding-left: 4rem;
+  padding-left: 7rem;
   margin-left: 1rem;
   position: relative;
 }

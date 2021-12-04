@@ -29,7 +29,7 @@
           <div class="container h-100">
             <div style="max-width: 600px">
               <b>Chọn ngày bạn muốn tra cứu</b> <br />
-              <input type="date" />
+              <input type="date" v-model="date1"/>
               <br />
               <br />
               <hr />
@@ -43,7 +43,7 @@
           <div class="container h-100">
             <div style="max-width: 600px">
               <b>Chọn tháng bạn muốn tra cứu</b> <br />
-              <input type="month" />
+              <input type="month" v-model="date2"/>
               <br />
               <br />
               <hr />
@@ -81,6 +81,9 @@ export default {
   },
   data() {
     return {
+      date1: "yyyy-mm-dd",
+      date2: "yyyy-mm",
+      date3: "",
       activetab: 1,
     };
   },

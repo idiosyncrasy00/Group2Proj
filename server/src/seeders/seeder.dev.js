@@ -29,8 +29,8 @@ module.exports = {
             dob: "2000-01-01",
             phone: "7605325323",
             address: "99 Cầu Giấy",
-            username: "rahsaan",
-            password: await encrypt.generate("rahsaan")
+            username: "person1",
+            password: await encrypt.generate("person1")
         }, {
             id: 12,
             firstname: "Quang",
@@ -39,8 +39,9 @@ module.exports = {
             dob: "2000-01-20",
             phone: "1325468452",
             address: "24 Hoàng Văn Thụ",
-            username: "test1234",
-            password: await encrypt.generate("test1234")
+            username: "admin",
+            password: await encrypt.generate("admin"),
+            isadmin: true
         }, {
             id: 13,
             firstname: "Thanh",
@@ -49,8 +50,8 @@ module.exports = {
             dob: "2001-05-11",
             phone: "1325484212",
             address: "15 Xuân Thủy",
-            username: "test12345",
-            password: await encrypt.generate("test12345")
+            username: "person2",
+            password: await encrypt.generate("person2")
         }, {
             id: 14,
             firstname: "Xuân",
@@ -59,8 +60,8 @@ module.exports = {
             dob: "2001-01-24",
             phone: "5462158745",
             address: "40 Hồ Tùng Mậu",
-            username: "test1111",
-            password: await encrypt.generate("test1111")
+            username: "person3",
+            password: await encrypt.generate("person3")
         }]);
         await db.Meeting.bulkCreate([{
             id: 101,
