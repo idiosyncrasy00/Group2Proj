@@ -29,7 +29,14 @@
           <div class="container h-100">
             <div style="max-width: 600px">
               <b>Chọn ngày bạn muốn tra cứu</b> <br />
-              <input type="date" v-model="date1"/>
+              <input type="date" v-model="date1" />
+              <button
+                type="button"
+                class="btn btn-secondary btn-sm"
+                @click="getDayStatistics()"
+              >
+                Tra cứu
+              </button>
               <br />
               <br />
               <hr />
@@ -43,7 +50,14 @@
           <div class="container h-100">
             <div style="max-width: 600px">
               <b>Chọn tháng bạn muốn tra cứu</b> <br />
-              <input type="month" v-model="date2"/>
+              <input type="month" v-model="date2" />
+              <button
+                type="button"
+                class="btn btn-secondary btn-sm"
+                @click="getMonthStatistics()"
+              >
+                Tra cứu
+              </button>
               <br />
               <br />
               <hr />
@@ -58,6 +72,13 @@
             <div style="max-width: 600px">
               <b>Chọn năm bạn muốn tra cứu</b> <br />
               <input type="number" value="2021" />
+              <button
+                type="button"
+                class="btn btn-secondary btn-sm"
+                @click="getYearStatistics()"
+              >
+                Tra cứu
+              </button>
               <br />
               <br />
               <hr />
@@ -76,84 +97,120 @@ import { getRoomStatsAPI } from "@/services/room.apiServices.js";
 
 export default {
   name: "statistics",
+  //mixins: [Bar],
   components: {
     Vue3ChartJs,
   },
   data() {
     return {
-      date1: "yyyy-mm-dd",
-      date2: "yyyy-mm",
-      date3: "",
+      // date1: "yyyy-mm-dd",
+      // date2: "yyyy-mm",
+      // date3: "",
+      date1: new Date().toISOString().slice(0, 10),
+      date2: new Date().toISOString().slice(0, 7),
+      date3: new Date().toISOString().slice(0, 4),
       activetab: 1,
-    };
-  },
-  async created() {
-    getRoomStatsAPI("day")
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    getRoomStatsAPI("month")
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    getRoomStatsAPI("year")
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
-  setup() {
-    const barChart = {
-      type: "bar",
-      options: {
-        min: 0,
-        max: 100,
-        responsive: true,
-        plugins: {
-          legend: {
-            position: "bottom",
+      roomList: [],
+      //bar chart
+      barChart: {
+        type: "bar",
+        options: {
+          min: 0,
+          max: 100,
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "bottom",
+            },
+            title: {
+              display: true,
+              text: "Bảng thống kê số lượt đặt phòng",
+            },
           },
-          title: {
-            display: true,
-            text: "Bảng thống kê số lượt đặt phòng",
-          },
-        },
-        scales: {
-          y: {
-            min: 0,
-            max: 10,
-            ticks: {
-              callback: function (value) {
-                return `${value}`;
+          scales: {
+            y: {
+              min: 0,
+              max: 10,
+              ticks: {
+                callback: function (value) {
+                  return `${value}`;
+                },
               },
             },
           },
         },
+        data: {
+          labels: [],
+          datasets: [
+            {
+              label: "Số lượt đặt phòng",
+              backgroundColor: "gray",
+              data: [],
+            },
+          ],
+        },
       },
-      data: {
-        labels: ["Phòng 1", "Phòng 2", "Phòng 3", "Phòng 4"],
-        datasets: [
-          {
-            label: "Số lượt đặt phòng",
-            backgroundColor: "gray",
-            data: [3, 2, 5, 1],
-          },
-        ],
-      },
-    };
-
-    return {
-      barChart,
     };
   },
+  // computed: {
+  //   barChartData: function () {
+  //     console.log(this.barChart.data);
+  //     return this.barChart.data;
+  //   },
+  // },
+  methods: {
+    getDayStatistics() {
+      getRoomStatsAPI(this.date1)
+        .then((res) => {
+          //console.log(res);
+          for (var i = 0; i < res.data.length; i++) {
+            //this.barChart.data.labels.push(res.data[i].roomname);
+            //console.log(typeof res.data[i].roomname);
+            this.barChart.data.datasets[0].data.push(res.data[i].usage);
+            //this.barChart.update();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getMonthStatistics() {
+      getRoomStatsAPI(this.date2)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getYearStatistics() {
+      getRoomStatsAPI(this.date3)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+  // mounted() {
+  //   this.renderChart(this.barChart)
+  // },
+  async created() {
+    getRoomStatsAPI(this.date1)
+      .then((res) => {
+        //console.log(res);
+        for (var i = 0; i < res.data.length; i++) {
+          this.barChart.data.labels.push(res.data[i].roomname);
+          //console.log(typeof res.data[i].roomname);
+          //this.barChart.update();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  setup() {},
 };
 </script>
 

@@ -15,10 +15,10 @@ function editRoomAPI(data) {
     .put(baseURL + "api/rooms/edit", data, getHeaders);
 }
 
-function deleteRoomAPI(roomID) {
+function deleteRoomAPI(id) {
   const headers = getHeaders.headers;
   const data = {
-    roomID: roomID,
+    id: id,
   };
   return axios.delete(baseURL + "api/rooms/delete", {
     headers,
@@ -58,10 +58,10 @@ function getMeetingsInARoomAPI(roomname, reserveddate) {
 }
 
 //get room statistics 
-function getRoomStatsAPI(type) {
+function getRoomStatsAPI(date) {
   //get time type (day, month or year)
   const data = {
-    type: type,
+    date: date,
   };
   return axios.post(baseURL + "api/system/roomstats", data, getHeaders);
 }

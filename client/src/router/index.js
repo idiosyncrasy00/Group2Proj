@@ -116,7 +116,7 @@ const routes = [
     component: () => import('../views/Room.vue'),
     meta: {
       requiresAuth: true,
-      notrequiresAuth: true,
+      notrequiresAuth: false,
     }
   },
   {

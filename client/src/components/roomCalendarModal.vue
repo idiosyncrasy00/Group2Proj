@@ -22,7 +22,10 @@
         </div>
         <div class="modal-body">
           <!-- Modal body 1-->
-          <input type="date" v-model="getDate" @click="showTime()" />
+          <input type="date" v-model="getDate" />
+          <button type="button" class="btn btn-sm" @click="showTime()">
+            Chọn
+          </button>
           <hr />
           <div class="table-responsive">
             <table class="table table-bordered text-center center">
@@ -34,20 +37,14 @@
               </thead>
               <tbody v-for="meeting in meetingList" :key="meeting.id">
                 <tr>
-                  <td class="align-middle">{{ meeting.startingtime }}</td>
+                  <td class="align-middle">
+                    Từ <b>{{ meeting.startingtime }} giờ</b> đến
+                    <b>{{ meeting.startingtime + meeting.during }} giờ</b>
+                  </td>
+                  <td class="align-middle">
+                    Không có cuộc họp nào đang diễn ra!
+                  </td>
                   <td>
-                    <span
-                      class="
-                        bg-gray
-                        padding-5px-tb padding-15px-lr
-                        border-radius-5
-                        margin-10px-bottom
-                        text-white
-                        font-size16
-                        xs-font-size13
-                      "
-                      ></span
-                    >
                     <div class="margin-10px-top font-size14">
                       {{ meeting.admin.adminname }}
                     </div>
@@ -63,8 +60,9 @@
             type="button"
             class="btn btn-secondary"
             data-bs-dismiss="modal"
+            @click="closeModal()"
           >
-            Close
+            Đóng
           </button>
         </div>
       </div>
@@ -85,8 +83,10 @@ export default {
   props: ["roomname"],
   data() {
     return {
+      isAppeared: false,
       getDate: "",
       meetingList: "",
+      timeList: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
     };
   },
   methods: {
@@ -101,6 +101,10 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    closeModal() {
+      this.getDate = "";
+      this.meetingList = "";
     },
   },
 };

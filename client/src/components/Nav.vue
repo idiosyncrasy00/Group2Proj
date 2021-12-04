@@ -72,7 +72,10 @@
               </li>
             </ul>
           </li> -->
-          <li class="nav-item dropdown">
+          <li
+            class="nav-item dropdown"
+            v-if="isAdmin == false && islogged == 1"
+          >
             <a
               class="nav-link dropdown-toggle"
               href="#"
@@ -97,16 +100,21 @@
           <!-- <li class="nav-item">
             <a href="/UserList" class="nav-link">Show list of users</a>
           </li> -->
-          <li class="nav-item">
+          <li class="nav-item" v-if="isAdmin == false && islogged == 1">
             <a href="/Feedback" class="nav-link">Gửi phản hồi cho quản lý</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-if="isAdmin == false">
             <a href="/Room" class="nav-link">Danh sách phòng họp</a>
           </li>
           <li class="nav-item">
-            <a href="/manageRoom" class="nav-link">Quản lý phòng họp(chỉ dành cho quản lý)</a>
+            <a
+              href="/manageRoom"
+              class="nav-link"
+              v-if="isAdmin == true && islogged == 1"
+              >Quản lý phòng họp(chỉ dành cho quản lý)</a
+            >
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-if="isAdmin == true && islogged == 1">
             <a href="/statistics" class="nav-link">Thống kê</a>
           </li>
         </ul>
@@ -183,21 +191,8 @@ export default {
     return {
       islogged: "0",
       user: "",
+      isAdmin: false,
       showNotify: false,
-      dropdownItems: [
-        {
-          title: "Web",
-          link: "#",
-        },
-        {
-          title: "Design",
-          link: "#",
-        },
-        {
-          title: "Videos",
-          link: "#",
-        },
-      ],
     };
   },
   components: {
@@ -227,6 +222,7 @@ export default {
         localStorage.setItem("userinfo", JSON.stringify(res.data));
         this.islogged = 1;
         this.user = res.data;
+        this.isAdmin = res.data.isadmin;
       })
       .catch((err) => {
         console.log(err);
