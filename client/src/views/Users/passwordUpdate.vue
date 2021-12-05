@@ -1,12 +1,12 @@
 <template>
   <div class="col-md-4 mx-auto">
     <span class="anchor" id="formChangePassword"></span>
-    <hr class="mb-5" />
+    <div class="mb-5" />
 
     <!-- form card change password -->
     <div class="card card-outline-secondary">
       <div class="card-header text-center">
-        <h3 class="mb-0">Đổi mật khẩu</h3>
+        <h3 class="mb-0">Đổi mật khẩu &#9919;</h3>
       </div>
       <div class="card-body">
         <div class="form-group">
@@ -35,6 +35,9 @@
         </div>
         <div class="form-group">
           <label for="inputPasswordNewVerify">Xác nhận mật khẩu mới</label>
+					<div class="form-text small text-muted">
+            Nhập lại mật khẩu mới để xác nhận
+          </div>
           <input
             type="password"
             class="form-control"
@@ -42,9 +45,7 @@
             required=""
             v-model="confirmedpassword"
           />
-          <span class="form-text small text-muted">
-            Nhap mat khau moi de xac nhan lai
-          </span>
+          
         </div>
         <div class="form-group text-center">
           <button
