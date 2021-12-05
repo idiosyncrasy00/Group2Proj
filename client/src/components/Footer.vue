@@ -26,7 +26,7 @@ export default {
 			return{
 					mail : 'contact.meeting_manage@dev.com',
 					phone : '0983983983',
-					mention : '2021 | Group2.Inc'
+					mention : '2021 | Nhóm 2'
 				}
 		},
 };

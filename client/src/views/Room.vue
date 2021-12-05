@@ -47,7 +47,7 @@
                             <div class="col-sm-4">
                               <p>
                                 <img
-                                  src="https://icon-library.com/images/person-icon-png-transparent/person-icon-png-transparent-15.jpg"
+                                  src="../assets/people.png"
                                   style="height: 1.9rem; width: 1.9rem"
                                 />
                                 {{ room.capacity }}
@@ -66,7 +66,7 @@
                                   style="padding: 0; background-color: #8cff66"
                                 >
                                   <img
-                                    src="https://icon-library.com/images/562674.png"
+                                    src="../assets/booking.png"
                                     style="height: 2rem; width: 2rem"
                                   />
                                 </button>
@@ -82,7 +82,7 @@
                                   style="padding: 0"
                                 >
                                   <img
-                                    src="https://rjglobalsolutions.com/wp-content/uploads/2021/08/106-1067742_calendar-icon-png-transparent-calendar-line-icon-png.jpg"
+                                    src="../assets/calendar.jpg"
                                     style="height: 2rem; width: 2rem"
                                   />
                                 </button>
@@ -98,7 +98,7 @@
                                   style="padding: 0; background-color: #ff704d"
                                 >
                                   <img
-                                    src="https://i.pinimg.com/originals/b9/f0/90/b9f0902793f2e3be3b57616e1c6ddd55.png"
+                                    src="../assets/like.png"
                                     style="height: 2rem; width: 2rem"
                                   />
                                 </button>
@@ -265,10 +265,10 @@ export default {
   margin-left: auto;
   margin-right: auto;
 }
-<<<<<<< HEAD ======= body {
+body {
   margin-top: 20px;
 }
->>>>>>>40a53e675954ccc2b16ed2ca77882acf5aee3aa0 .bg-light-gray {
+.bg-light-gray {
   background-color: #f7f7f7;
 }
 .table-bordered thead td,
