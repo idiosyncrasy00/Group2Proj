@@ -36,11 +36,11 @@
           <div class="card-body">
             <div class="row gutters">
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <h6 class="mb-2 text-primary">Personal Details</h6>
+                <h6 class="mb-2 text-primary">Thông tin cá nhân</h6>
               </div>
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <div class="form-group">
-                  <label for="firstName">First Name</label>
+                  <label for="firstName">Họ</label>
                   <input
                     type="text"
                     class="form-control"
@@ -52,7 +52,7 @@
               </div>
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <div class="form-group">
-                  <label for="lastName">Last Name</label>
+                  <label for="lastName">Tên</label>
                   <input
                     type="text"
                     class="form-control"
@@ -64,7 +64,7 @@
               </div>
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <div class="form-group">
-                  <label for="dob">Date of birth</label>
+                  <label for="dob">Ngày sinh</label>
                   <input
                     type="date"
                     class="form-control"
@@ -76,7 +76,7 @@
               </div>
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <div class="form-group">
-                  <label for="address">Address</label>
+                  <label for="address">Địa chỉ</label>
                   <input
                     type="url"
                     class="form-control"
@@ -88,7 +88,7 @@
               </div>
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <div class="form-group">
-                  <label for="userName">Username</label>
+                  <label for="userName">Tên đăng nhập</label>
                   <input
                     type="text"
                     class="form-control"
@@ -101,11 +101,11 @@
             </div>
             <div class="row gutters">
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <h6 class="mt-3 mb-2 text-primary">Contacts</h6>
+                <h6 class="mt-3 mb-2 text-primary">Liên hệ</h6>
               </div>
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <div class="form-group">
-                  <label for="phoneNumber">Phone number</label>
+                  <label for="phoneNumber">Số điện thoại</label>
                   <input
                     type="name"
                     class="form-control"
@@ -139,7 +139,7 @@
                     style="margin-right: 2%"
                     @click="switchToInfo"
                   >
-                    Cancel
+                    Thoát
                   </button>
                   <button
                     type="button"
@@ -148,7 +148,7 @@
                     class="btn btn-primary"
                     @click="submitUpdateInfo"
                   >
-                    Update
+                    Cập nhật
                   </button>
                 </div>
               </div>
@@ -162,19 +162,19 @@
         id="showInfo"
       >
         <div class="row mb-1">
-          <p class="fieldTitle">Full name</p>
+          <p class="fieldTitle">Tên đầy đủ</p>
           <p style="padding-left: 2rem">
             <!-- {{ userInfo.firstName }} {{ userInfo.lastName }} -->
             {{ userInfo.firstname }} {{ userInfo.lastname }}
           </p>
         </div>
         <div class="row mb-1">
-          <p class="fieldTitle">Date of birth:</p>
+          <p class="fieldTitle">Ngày sinh:</p>
           <!-- <p style="padding-left: 2rem">{{ userInfo.dateOfBirth }}</p> -->
           <p style="padding-left: 2rem">{{ userInfo.dob }}</p>
         </div>
         <div class="row mb-1">
-          <p class="fieldTitle">Address</p>
+          <p class="fieldTitle">Địa chỉ</p>
           <!-- <p style="padding-left: 2rem">{{ userInfo.address }}</p> -->
           <p style="padding-left: 2rem">{{ userInfo.address }}</p>
         </div>
@@ -184,11 +184,11 @@
           <p style="padding-left: 2rem">{{ userInfo.email }}</p>
         </div>
         <div class="row mb-1">
-          <p class="fieldTitle">Phone number:</p>
+          <p class="fieldTitle">Số điện thoại:</p>
           <!-- <p style="padding-left: 2rem">{{ userInfo.phoneNumber }}</p> -->
           <p style="padding-left: 2rem">{{ userInfo.phone }}</p>
           <button class="btn btn-primary w-50 mx-auto" @click="switchToUpdate">
-            Update your info
+            Cập nhật
           </button>
         </div>
       </div>

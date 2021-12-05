@@ -28,19 +28,19 @@
       </div>
       <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 border border-5">
         <div class="row mb-1">
-          <p class="fieldTitle">Full name</p>
+          <p class="fieldTitle">Tên đầy đủ</p>
           <p style="padding-left: 2rem">
             <!-- {{ userInfo.firstName }} {{ userInfo.lastName }} -->
             {{ userInfo.firstname }} {{ userInfo.lastname }}
           </p>
         </div>
         <div class="row mb-1">
-          <p class="fieldTitle">Date of birth:</p>
+          <p class="fieldTitle">Ngày sinh:</p>
           <!-- <p style="padding-left: 2rem">{{ userInfo.dateOfBirth }}</p> -->
           <p style="padding-left: 2rem">{{ userInfo.dob }}</p>
         </div>
         <div class="row mb-1">
-          <p class="fieldTitle">Address</p>
+          <p class="fieldTitle">Địa chỉ</p>
           <!-- <p style="padding-left: 2rem">{{ userInfo.address }}</p> -->
           <p style="padding-left: 2rem">{{ userInfo.address }}</p>
         </div>
@@ -50,7 +50,7 @@
           <p style="padding-left: 2rem">{{ userInfo.email }}</p>
         </div>
         <div class="row mb-1">
-          <p class="fieldTitle">Phone number:</p>
+          <p class="fieldTitle">Số điện thoại:</p>
           <!-- <p style="padding-left: 2rem">{{ userInfo.phoneNumber }}</p> -->
           <p style="padding-left: 2rem">{{ userInfo.phone }}</p>
         </div>

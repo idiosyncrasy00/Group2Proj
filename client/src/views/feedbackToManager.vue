@@ -1,43 +1,6 @@
+
 <template>
   <div class="container mt-5">
-    <label>Chọn phòng</label>
-    <select
-      class="form-select"
-      aria-label="Default select example"
-      v-model="this.reviewContent.roomid"
-    >
-      <option
-        selected
-        v-for="room in this.roomList"
-        :key="room.id"
-        :value="room.id"
-      >
-        {{ room.roomname }}
-      </option>
-      <!-- <option value="1">{{ room.roomname }}</option> -->
-    </select>
-    <!-- <div v-for="room in this.reviewContent.roomList" :key="room.id">
-      {{ room.roomname }}
-    </div> -->
-    <!-- {{ this.reviewContent.roomList.roomname }} -->
-    <label>Đánh giá phòng theo thang điểm 10</label>
-    <select
-      class="form-select"
-      aria-label="Default select example"
-      v-model="reviewContent.rating"
-    >
-      <option selected>Đánh giá phòng</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-    </select>
     <label>Phản hồi</label>
     <b-form-textarea
       id="textarea-rows"
@@ -46,39 +9,16 @@
       v-model="reviewContent.message"
     ></b-form-textarea>
     <input type="submit" @click.prevent="sendReview()" value="Gửi" />
-    <div class="col-sm-5 col-md-6 col-12 pb-4">
-      <h1>Danh sách phản hồi của bạn</h1>
-      <div
-        class="comment mt-4 text-justify darker float-left"
-        v-for="review in listOfReviews"
-        :key="review.id"
-      >
-        <h4>{{ review.room.roomname }}</h4>
-        <span>Điểm đánh giá: {{ review.rating }}/10</span> <br />
-        <p>
-          {{ review.message }}
-        </p>
-        <b-button
-          variant="danger"
-          @click="deleteReview(review.id)"
-          >Xóa</b-button
-        >
-        <!-- <b-button variant="secondary">Warning</b-button> -->
-      </div>
-    </div>
-  </div>
+	</div>
 </template>
 
 <script>
-//import { feedBackAPI } from "@/services/user.apiServices.js";
+
 import {
   postReviewAPI,
-  //getMeetingListAPI,
-  //getInvitedMeetingsListAPI,
 } from "@/services/room.apiServices.js";
 import {
   getSelfReviewAPI,
-  //editReviewAPI,
   deleteReviewAPI,
 } from "@/services/review.apiServices.js";
 import { getRoomListAPI } from "@/services/room.apiServices.js";
@@ -86,11 +26,6 @@ import { getRoomListAPI } from "@/services/room.apiServices.js";
 export default {
   name: "Feedback",
   data() {
-    // return {
-    //   name: "",
-    //   email: "",
-    //   message: "",
-    // };
     return {
       roomList: [],
       reviewContent: {
@@ -106,8 +41,6 @@ export default {
       postReviewAPI(this.reviewContent)
         .then((res) => {
           console.log(res);
-          //this.reviewContent.push(res.data);
-          //this.reviewContent.roomid = "";
           this.$swal.fire(
             "Gửi phản hồi cho người quản lý phòng họp thành công",
             "",

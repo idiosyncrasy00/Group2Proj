@@ -3,8 +3,9 @@
     <!-- thêm phòng -->
     <div class="d-flex flex-row justify-content-end mt-2 mb-0">
       <span class="input-group-btn">
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+        <button type="button" class="btn btn-success text-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
           <img src="https://icon-library.com/images/create-a-icon/create-a-icon-13.jpg" style="width: 3rem; height: 3rem;" />
+					Thêm phòng họp
         </button>
       </span>
     </div>

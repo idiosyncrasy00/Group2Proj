@@ -11,7 +11,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            Đánh giá cho {{ roomname }}
+            Đánh giá cho {{ roomname }} 
           </h5>
           <button
             type="button"
