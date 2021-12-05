@@ -25,40 +25,45 @@
       </div>
       <div class="content">
         <div v-if="activetab === 1" class="tabcontent">
-          <h1>Bảng thống kê</h1>
+          <h4>Bảng thống kê</h4>
           <div class="container h-100">
-            <div style="max-width: 600px">
-              <b>Chọn ngày bạn muốn tra cứu</b> <br />
-              <input type="date" v-model="date1" />
-              <button
-                type="button"
-                class="btn btn-secondary btn-sm"
-                @click="getDayStatistics()"
-              >
-                Tra cứu
-              </button>
+            <div class="mx-auto" style="max-width: 80%">
+              <b>Chọn ngày bạn muốn tra cứu</b> 
+							<br />
+							<div class="row">
+								<input type="date" class = "col-sm-4" v-model="date1" />
+								<button
+									type="button"
+									class="btn btn-secondary btn-sm col-sm-2"
+									@click="getDayStatistics()"
+								>
+									Tra cứu
+								</button>
+							</div>
               <br />
               <br />
               <hr />
-              <!-- <vue3-chart-js v-bind="{ ...barChart }" /> -->
-              <column-chart :data="this.roomList1"></column-chart>
+              <!-- <vue3-chart-js v-bind="{ ...barChart }"/> -->
+              <column-chart class="w-100" :data="this.roomList1"></column-chart>
             </div>
           </div>
         </div>
 
         <div v-if="activetab === 2" class="tabcontent">
-          <h1>Bảng thống kê</h1>
+          <h4>Bảng thống kê</h4>
           <div class="container h-100">
-            <div style="max-width: 600px">
+            <div class="mx-auto" style="max-width: 80%">
               <b>Chọn tháng bạn muốn tra cứu</b> <br />
-              <input type="month" v-model="date2" />
-              <button
-                type="button"
-                class="btn btn-secondary btn-sm"
-                @click="getMonthStatistics()"
-              >
-                Tra cứu
-              </button>
+							<div class="row">
+								<input type="month" class="col-sm-4" v-model="date2" />
+								<button
+									type="button"
+									class="btn btn-secondary btn-sm col-sm-2"
+									@click="getMonthStatistics()"
+								>
+									Tra cứu
+								</button>
+							</div>
               <br />
               <br />
               <hr />
@@ -68,18 +73,20 @@
         </div>
 
         <div v-if="activetab === 3" class="tabcontent">
-          <h1>Bảng thống kê</h1>
+          <h4>Bảng thống kê</h4>
           <div class="container h-100">
-            <div style="max-width: 600px">
+            <div class="mx-auto" style="max-width: 80%">
               <b>Chọn năm bạn muốn tra cứu</b> <br />
-              <input type="number" value="2021" />
-              <button
-                type="button"
-                class="btn btn-secondary btn-sm"
-                @click="getYearStatistics()"
-              >
-                Tra cứu
-              </button>
+							<div class="row">
+								<input type="number" class="col-sm-4" value="2021" />
+								<button
+									type="button"
+									class="btn btn-secondary btn-sm col-sm-2"
+									@click="getYearStatistics()"
+								>
+									Tra cứu
+								</button>
+							</div>
               <br />
               <br />
               <hr />
