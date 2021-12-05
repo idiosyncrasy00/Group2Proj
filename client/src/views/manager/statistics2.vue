@@ -9,7 +9,7 @@
       <div class="tabs">
         <a
           v-on:click="activetab = 1"
-          v-bind:class="[activetab === 1 ? 'active' : '']"
+          v-bind:class="[activetab === 1 || activetab === '' ? 'active' : '']"
           >Ngày</a
         >
         <a
@@ -79,7 +79,7 @@
             <div class="mx-auto" style="max-width: 80%">
               <b>Chọn năm bạn muốn tra cứu</b> <br />
               <div class="row">
-                <input type="number" class="col-sm-4" value="2021" />
+                <input type="number" class="col-sm-4" v-model="date3" />
                 <button
                   type="button"
                   class="btn btn-secondary btn-sm col-sm-2"
@@ -103,47 +103,41 @@
 <script>
 //import Vue3ChartJs from "../../../node_modules/@j-t-mcc/vue3-chartjs";
 import { getRoomStatsAPI } from "@/services/room.apiServices.js";
-import ChartUI from "@/components/ChartUI.vue";
 
 export default {
   name: "statistics",
   //mixins: [Bar],
-  components: {
-    //Vue3ChartJs,
-    ChartUI,
-  },
+  components: {},
   data() {
     return {
       // date1: "yyyy-mm-dd",
       // date2: "yyyy-mm",
       // date3: "",
-      date1: "",
-      date2: "",
-      date3: "",
-      activetab: 1,
-      getroomList: [],
-      roomList1: [],
-      roomList2: [
-        // ["", 43435],
-        // ["Mon", 46],
-        // ["Tue", 28],
-      ],
-      roomList3: [
-        // ["", 43435],
-        // ["Mon", 46],
-        // ["Tue", 28],
-      ],
+      date1: JSON.parse(localStorage.getItem("input1")),
+      date2: JSON.parse(localStorage.getItem("input2")),
+      date3: JSON.parse(localStorage.getItem("input3")),
+      activetab: JSON.parse(localStorage.getItem("activetab")) || '',
+      roomList1: JSON.parse(localStorage.getItem("getstatistic1")),
+      roomList2: JSON.parse(localStorage.getItem("getstatistic2")),
+      roomList3: JSON.parse(localStorage.getItem("getstatistic3")),
     };
   },
   methods: {
     getDayStatistics() {
+      if (localStorage.getItem("getstatistic1") != "") {
+        localStorage.removeItem("getstatistic1");
+      }
+      var temp = [];
+      //var temp_activetab = 1;
       getRoomStatsAPI(this.date1)
         .then((res) => {
           console.log(res);
           for (var i = 0; i < res.data.length; i++) {
-            this.roomList1.push([res.data[i].roomname, res.data[i].usage]);
+            temp.push([res.data[i].roomname, res.data[i].usage]);
           }
-          //localStorage.setItem("getstatistic", this.roomList1);
+          localStorage.setItem("getstatistic1", JSON.stringify(temp));
+          localStorage.setItem("activetab", 1);
+          localStorage.setItem("input1", JSON.stringify(this.date1));
           window.location.reload();
         })
         .catch((err) => {
@@ -154,13 +148,20 @@ export default {
       // console.log(this.getroomList);
     },
     getMonthStatistics() {
-      //this.activetab = 2;
+      if (localStorage.getItem("getstatistic2") != "") {
+        localStorage.removeItem("getstatistic2");
+      }
+      var temp = [];
       getRoomStatsAPI(this.date2)
         .then((res) => {
           console.log(res);
           for (var i = 0; i < res.data.length; i++) {
-            this.roomList2.push([res.data[i].roomname, res.data[i].usage]);
+            temp.push([res.data[i].roomname, res.data[i].usage]);
           }
+          localStorage.setItem("getstatistic2", JSON.stringify(temp));
+          localStorage.setItem("activetab", 2);
+          localStorage.setItem("input2", JSON.stringify(this.date2));
+          window.location.reload();
         })
         .catch((err) => {
           console.log(err);
@@ -170,12 +171,20 @@ export default {
       //console.log(this.getroomList)
     },
     getYearStatistics() {
-      getRoomStatsAPI(this.date3)
+      if (localStorage.getItem("getstatistic3") != "") {
+        localStorage.removeItem("getstatistic3");
+      }
+      var temp = [];
+      getRoomStatsAPI(JSON.stringify(this.date3))
         .then((res) => {
           console.log(res);
           for (var i = 0; i < res.data.length; i++) {
-            this.roomList3.push([res.data[i].roomname, res.data[i].usage]);
+            temp.push([res.data[i].roomname, res.data[i].usage]);
           }
+          localStorage.setItem("getstatistic3", JSON.stringify(temp));
+          localStorage.setItem("activetab", 3);
+          localStorage.setItem("input3", JSON.stringify(this.date3));
+          window.location.reload();
         })
         .catch((err) => {
           console.log(err);

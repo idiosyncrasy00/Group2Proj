@@ -26,44 +26,37 @@
           <div class="form-group">
             <label>Tên phòng</label>
             <label class="form-control form-control-lg" readonly>
-              {{ this.roomname }}
+              <!-- {{ this.roominfo.name }} -->
+              {{ this.roominfo.name }}
             </label>
           </div>
           <div class="form-group">
             <label
               >Sức chứa (Hiện tại phòng có sức chứa tối đa
-              <b>{{ this.roomcapacity }}</b
+              <b>{{ this.roominfo.name }}</b
               >)</label
             >
             <input
               class="form-control form-control-lg"
               type="number"
               min="1"
-              v-model="this.updateRoomInfo.capacity"
+              v-model="this.roominfo.capacity"
             />
           </div>
           <div class="form-group">
-            <label
-              >Trang thiết bị (Hiện tại phòng đang có
-              <b>{{ this.roomfacilities }}</b
-              >)</label
-            >
+            <label>Trang thiết bị</label>
             <textarea
               class="form-control form-control-lg"
               type="textarea"
-              v-model="this.updateRoomInfo.facilities"
+              v-model="this.roominfo.facilities"
             />
           </div>
           <div class="form-group">
-            <label
-              >Trạng thái (Hiện tại phòng đang trong trạng thái
-              <b>{{ this.roomstatus }}</b
-              >)</label
-            >
+            <label>Trạng thái</label>
             <input
               class="form-control form-control-lg"
               type="text"
-              v-model="this.updateRoomInfo.status"
+              v-model="this.roominfo.status"
             />
           </div>
           <!-- end modal body -->
@@ -91,36 +84,21 @@
 import { editRoomAPI } from "@/services/room.apiServices.js";
 export default {
   inheritAttrs: false,
-  props: ["roomid", "roomname", "roomcapacity", "roomfacilities", "roomstatus"],
+  //props: ["roomid", "roomname", "roomcapacity", "roomfacilities", "roomstatus"],
   data() {
     return {
-      roominfo: {
-        id: this.roomid,
-        roomname: this.roomname,
-        capacity: this.roomcapacity,
-        facilities: this.roomfacilities,
-        status: this.roomstatus,
-      },
-      updateRoomInfo: {
-        id: this.roomid,
-        roomname: this.roomname,
-        capacity: "",
-        facilities: "",
-        status: "",
-      },
+      roominfo: JSON.parse(localStorage.getItem("roominfo")),
     };
   },
   methods: {
     editRoomInfo() {
-      // console.log(this.updateRoomInfo.id);
-      // console.log(this.updateRoomInfo.roomname);
       const data = {
-        id: this.roomid,
-        roomname: this.roomname,
-        capacity: this.updateRoomInfo.capacity,
-        facilities: this.updateRoomInfo.facilities,
-        status: this.updateRoomInfo.status,
-      }
+        id: this.roominfo.id,
+        roomname: this.roominfo.name,
+        capacity: this.roominfo.capacity,
+        facilities: this.roominfo.facilities,
+        status: this.roominfo.status,
+      };
       editRoomAPI(data)
         .then((res) => {
           console.log(res);

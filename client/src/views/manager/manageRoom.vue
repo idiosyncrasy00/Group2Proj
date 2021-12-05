@@ -113,13 +113,7 @@
                               />
                             </button>
                           </div>
-                          <roomEditModal
-                            :roomid="this.getroomid"
-                            :roomname="this.getroomname"
-                            :roomcapacity="this.getroomcapacity"
-                            :roomfacilities="this.getroomfacilities"
-                            :roomstatus="this.getroomstatus"
-                          />
+                          <roomEditModal />
                           <roomReviewModal
                             :commentList="this.getComments"
                             :roomname="this.getroomname"
@@ -184,11 +178,14 @@ export default {
   },
   methods: {
     editRoomInfo(room) {
-      this.getroomid = room.id;
-      this.getroomname = room.roomname;
-      this.getroomcapacity = room.capacity;
-      this.getroomfacilities = room.facilities;
-      this.getroomstatus = room.status;
+      const roominfo = {
+        id: room.id,
+        name: room.roomname,
+        capacity: room.capacity,
+        facilities: room.facilities,
+        status: room.status,
+      };
+      localStorage.setItem("roominfo", JSON.stringify(roominfo));
     },
     deleteRoom(id) {
       this.$swal
