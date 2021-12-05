@@ -7,12 +7,12 @@
         : true
     "
   >
-    <div class="container-fluid">
+    <div class="container-fluid d-flex justify-content-between">
       <a class="navbar-brand" href="/">
         <img src="../assets/logo.png" style="height: 2rem" />
       </a>
       <div class="navbar-collapse">
-        <ul class="navbar-nav me-auto mb-2 mb-l g-1">
+        <ul class="navbar-nav me-auto mb-2 mb-l mx-auto">
           <li class="nav-item">
             <a href="/" class="nav-link"> Trang chủ </a>
           </li>
@@ -44,35 +44,6 @@
               </li>
             </ul>
           </li>
-          -->
-          <!-- <li
-            class="nav-item dropdown"
-            v-if="isAdmin == false && islogged == 1"
-          >
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >Phòng họp
-            </a>
-            <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-              <li>
-                <a class="dropdown-item text-white" href="/manageRoom"
-									>Quản lý phòng của tôi</a>
-              </li>
-              <li>
-                <a class="dropdown-item text-white" href="/Room"
-                  >Danh sách phòng</a
-                >
-              </li>
-            </ul>
-          </li> -->
-          <!-- <li class="nav-item">
-            <a href="/UserList" class="nav-link">Show list of users</a>
-          </li> -->
           <li class="nav-item" v-if="isAdmin == false && islogged == 1">
             <a href="/FeedbackManager" class="nav-link">Phản hồi cho quản lý</a>
           </li>
@@ -104,24 +75,6 @@
           </li>
         </ul>
         <ul class="navbar-nav" margin-left="1rem" v-if="islogged == 1">
-          <!--div
-            v-on:mouseover="mouseOverNotify"
-            v-on:mouseleave="mouseLeaveNotify"
-          >
-            <li class="nav-item">
-              <a
-                href="#"
-                class="nav-link notification"
-                style="font-size: 1.2rem"
-              >
-                <span>&#128276; </span>
-                <span class="badge">0</span>
-              </a>
-            </li>
-            <div v-if="this.showNotify">
-              <Notify> </Notify>
-            </div>
-          </div-->
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -216,18 +169,17 @@ export default {
 
 <style scoped>
 .navbar-brand {
-  padding-left: 1rem;
+  padding-left: 0.7rem;
   position: relative;
 }
 
 .navbar-nav {
-  padding-left: 7rem;
   margin-left: 1rem;
   position: relative;
 }
 
 .nav-item {
-  padding-left: 2rem;
+  padding-left: 1.5rem;
 }
 
 /* Dropdown Button */
@@ -235,7 +187,6 @@ export default {
   background-color: transparent;
   color: white;
   padding-top: 8px;
-  margin-left: 10px;
   font-size: 16px;
   border: none;
 }

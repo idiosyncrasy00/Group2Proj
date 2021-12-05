@@ -54,13 +54,6 @@
                           </div>
                           <div class="form-group">
                             <label>Thời gian bắt đầu</label>
-                            <!-- <input
-                              class="form-control form-control-lg"
-                              type="time"
-                              name="startTime"
-                              placeholder="Nhập thời gian bắt đầu"
-                              v-model="this.updateMeetingInfo.startingtime"
-                            /> -->
                             <select
                               class="form-select input-field"
                               aria-label="Default select example"
@@ -86,7 +79,8 @@
                               <option value="22">22:00 tối</option>
                             </select>
                           </div>
-                          <div class="form-group">
+                          </div>
+													<div class="form-group">
                             <label>Thời gian họp</label>
                             <input
                               class="form-control input-field"
@@ -124,6 +118,7 @@
                               type="button"
                               class="btn btn-primary"
                               @click.prevent="updateMeeting"
+															style="height:3rem;width:6rem;"
                             >
                               Xác nhận
                             </button>
@@ -636,7 +631,7 @@ a {
 }
 
 .tabcontent {
-  padding: 30px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 10px;
   box-shadow: 3px 3px 6px #e1e1e1;
