@@ -3,9 +3,17 @@
     <!-- thêm phòng -->
     <div class="d-flex flex-row justify-content-end mt-2 mb-0">
       <span class="input-group-btn">
-        <button type="button" class="btn btn-success text-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
-          <img src="https://icon-library.com/images/create-a-icon/create-a-icon-13.jpg" style="width: 3rem; height: 3rem;" />
-					Thêm phòng họp
+        <button
+          type="button"
+          class="btn btn-success text-dark"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop1"
+        >
+          <img
+            src="https://icon-library.com/images/create-a-icon/create-a-icon-13.jpg"
+            style="width: 3rem; height: 3rem"
+          />
+          Thêm phòng họp
         </button>
       </span>
     </div>
@@ -23,7 +31,12 @@
                 <!-- BEGIN SEARCH INPUT -->
 
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Nhập tên phòng" v-model="searchValues.roomName" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Nhập tên phòng"
+                    v-model="searchValues.roomName"
+                  />
                 </div>
 
                 <!-- END SEARCH INPUT -->
@@ -35,61 +48,83 @@
                   <table class="table table-hover">
                     <tbody>
                       <tr v-for="room in searchRooms" :key="room.roomname">
-                       <div class="product row">
+                        <div class="product row">
                           <div class="image col-sm-1">
-                            <img src="../../assets/logo.png" alt="" style="height: 3rem; width: 3rem;" />
+                            <img
+                              src="../../assets/logo.png"
+                              alt=""
+                              style="height: 3rem; width: 3rem"
+                            />
                           </div>
 
                           <div class="col-sm-6">
-                            <p>{{ room.roomname }}</p>
+                            <p>
+                              {{ room.roomname }} - điểm đánh giá trung bình:
+                              {{ room.rating }}/10
+                            </p>
                             Trang thiết bị: {{ room.facilities }}
                           </div>
                           <div class="col-sm-4">
-                            <p><img src="https://icon-library.com/images/person-icon-png-transparent/person-icon-png-transparent-15.jpg" style="height: 1.9rem; width: 1.9rem;" /> {{ room.capacity }}</p>
-                            Trạng thái: {{room.status}}
+                            <p>
+                              <img
+                                src="https://icon-library.com/images/person-icon-png-transparent/person-icon-png-transparent-15.jpg"
+                                style="height: 1.9rem; width: 1.9rem"
+                              />
+                              {{ room.capacity }}
+                            </p>
+                            Trạng thái: {{ room.status }}
                           </div>
-													<!-- chỉnh sửa -->
+                          <!-- chỉnh sửa -->
                           <div class="col-sm-1 row">
-                            <button 
-														type="button"
-                            class="btn btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop"
-                            @click="editRoomInfo(room)"
-														style="padding: 0; background-color: #6666cc;">
-                              <img src="https://icon-library.com/images/edit-icon/edit-icon-21.jpg" style="height: 2rem; width: 2rem;" />
+                            <button
+                              type="button"
+                              class="btn btn-primary"
+                              data-bs-toggle="modal"
+                              data-bs-target="#staticBackdrop"
+                              @click="editRoomInfo(room)"
+                              style="padding: 0; background-color: #6666cc"
+                            >
+                              <img
+                                src="https://icon-library.com/images/edit-icon/edit-icon-21.jpg"
+                                style="height: 2rem; width: 2rem"
+                              />
                             </button>
-                            <button 
-														class="btn btn-danger row-btn"
-														@click="deleteRoom(room.id)"
-														style="padding: 0;">
-                              <img src="https://icon-library.com/images/junk-icon/junk-icon-18.jpg" style="height: 2rem; width: 2rem;" />
+                            <button
+                              class="btn btn-danger row-btn"
+                              @click="deleteRoom(room.id)"
+                              style="padding: 0"
+                            >
+                              <img
+                                src="https://icon-library.com/images/junk-icon/junk-icon-18.jpg"
+                                style="height: 2rem; width: 2rem"
+                              />
                             </button>
-														<button 
-														type="button"
-														class="btn btn-primary"
-														data-bs-toggle="modal"
-														data-bs-target="#exampleModal1"
-														@click="roomReview(room)"
-														style="padding:0;background-color:#ff704d;"
-														>
-															<img src="https://i.pinimg.com/originals/b9/f0/90/b9f0902793f2e3be3b57616e1c6ddd55.png"
-															style="height:2rem; width:2rem;"
-														>
-														</button>
+                            <button
+                              type="button"
+                              class="btn btn-primary"
+                              data-bs-toggle="modal"
+                              data-bs-target="#exampleModal1"
+                              @click="roomReview(room)"
+                              style="padding: 0; background-color: #ff704d"
+                            >
+                              <img
+                                src="https://i.pinimg.com/originals/b9/f0/90/b9f0902793f2e3be3b57616e1c6ddd55.png"
+                                style="height: 2rem; width: 2rem"
+                              />
+                            </button>
                           </div>
-													<roomEditModal
-														:roomid="this.getroomid"
-														:roomname="this.getroomname"
-														:roomcapacity="this.getroomcapacity"
-														:roomfacilities="this.getroomfacilities"
-														:roomstatus="this.getroomstatus"
-													/>
-													<roomReviewModal
-														:commentList="this.getComments"
-														:roomname="this.getroomname"
-													/>
-												</div>
+                          <roomEditModal
+                            :roomid="this.getroomid"
+                            :roomname="this.getroomname"
+                            :roomcapacity="this.getroomcapacity"
+                            :roomfacilities="this.getroomfacilities"
+                            :roomstatus="this.getroomstatus"
+                          />
+                          <roomReviewModal
+                            :commentList="this.getComments"
+                            :roomname="this.getroomname"
+                          />
+                        </div>
                       </tr>
                     </tbody>
                   </table>
@@ -223,7 +258,7 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap");
 .grid {
   position: relative;
   width: 100%;
@@ -272,12 +307,12 @@ export default {
   display: inline;
   font-weight: 600;
 }
-.row-btn{
-	border-radius: 0;
+.row-btn {
+  border-radius: 0;
 }
-.product{
-	font-family: 'Raleway', sans-serif;
-	font-size: 1.1rem;
-	border-bottom: thin gray solid;
+.product {
+  font-family: "Raleway", sans-serif;
+  font-size: 1.1rem;
+  border-bottom: thin gray solid;
 }
 </style>

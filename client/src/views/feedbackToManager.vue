@@ -6,104 +6,38 @@
       id="textarea-rows"
       placeholder="Viết phản hồi của bạn vào đây..."
       rows="8"
-      v-model="reviewContent.message"
+      v-model="this.messageContent"
     ></b-form-textarea>
-    <input type="submit" @click.prevent="sendReview()" value="Gửi" />
-	</div>
+    <input type="submit" @click.prevent="sendFeedback()" value="Gửi" />
+  </div>
 </template>
 
 <script>
-
-import {
-  postReviewAPI,
-} from "@/services/room.apiServices.js";
-import {
-  getSelfReviewAPI,
-  deleteReviewAPI,
-} from "@/services/review.apiServices.js";
-import { getRoomListAPI } from "@/services/room.apiServices.js";
+import { feedBackAPI } from "@/services/user.apiServices.js";
 
 export default {
   name: "Feedback",
   data() {
     return {
-      roomList: [],
-      reviewContent: {
-        roomid: "",
-        rating: "",
-        message: "",
-      },
-      listOfReviews: [],
+      messageContent: "",
     };
   },
   methods: {
-    sendReview() {
-      postReviewAPI(this.reviewContent)
+    sendFeedback() {
+      feedBackAPI(this.messageContent)
         .then((res) => {
           console.log(res);
           this.$swal.fire(
-            "Gửi phản hồi cho người quản lý phòng họp thành công",
-            "",
+            "Thành công!",
+            "Gửi góp ý đến nhà phát triển thành công",
             "success"
           );
-          this.reviewContent.message = "";
-          this.reviewContent.rating = "";
+          this.messageContent = "";
         })
         .catch((err) => {
           console.log(err);
         });
-      // feedBackAPI(this.message)
-      //   .then((res) => {
-      //     console.log(res);
-      //     this.$swal.fire("Good job!", "gui feedback thanh cong", "success");
-      //   })
-      //   .catch((err) => {
-      //     this.$swal.fire("No!", "gui feedback ko thanh cong", "error");
-      //     console.log(err);
-      //   });
     },
-    deleteReview(id) {
-      this.$swal
-        .fire({
-          title: "Bạn có chắc muốn xóa phản hồi này chứ?",
-          showDenyButton: true,
-          confirmButtonText: "Có",
-          denyButtonText: `Không`,
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            deleteReviewAPI(id)
-              .then((res) => {
-                console.log(res);
-                this.$swal.fire("Xóa phản hồi thành công", "", "success");
-                window.setTimeout(function () {
-                  location.reload();
-                }, 2000);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }
-        });
-    },
-  },
-  async created() {
-    getSelfReviewAPI()
-      .then((res) => {
-        console.log(res);
-        this.listOfReviews = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    getRoomListAPI()
-      .then((res) => {
-        console.log(res);
-        this.roomList = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   },
 };
 </script>

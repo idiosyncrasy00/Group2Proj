@@ -38,9 +38,7 @@
                         <form>
                           <div class="form-group">
                             <label>Tên phòng</label>
-                            <label
-                              class="form-control input-field"
-                              readonly
+                            <label class="form-control input-field" readonly
                               >{{ this.defaultMeetingInfo.room.roomname }}
                             </label>
                           </div>
@@ -51,7 +49,7 @@
                               type="date"
                               name="date"
                               placeholder="Nhập ngày đặt phòng"
-                              v-model="this.updateMeetingInfo.reserveddate"
+                              v-model="this.defaultMeetingInfo.reserveddate"
                             />
                           </div>
                           <div class="form-group">
@@ -66,23 +64,26 @@
                             <select
                               class="form-select input-field"
                               aria-label="Default select example"
-                              v-model="this.updateMeetingInfo.startingtime"
+                              v-model="this.defaultMeetingInfo.startingtime"
                             >
-                              <option value="08:00 sáng">08:00 sáng</option>
-                              <option value="09:00 sáng">09:00 sáng</option>
-                              <option value="10:00 sáng">10:00 sáng</option>
-                              <option value="11:00 sáng">11:00 sáng</option>
-                              <option value="12:00 sáng">12:00 sáng</option>
-                              <option value="13:00 chiều">13:00 chiều</option>
-                              <option value="14:00 chiều">14:00 chiều</option>
-                              <option value="15:00 chiều">15:00 chiều</option>
-                              <option value="16:00 chiều">16:00 chiều</option>
-                              <option value="17:00 chiều">17:00 chiều</option>
-                              <option value="18:00 tối">18:00 tối</option>
-                              <option value="19:00 tối">19:00 tối</option>
-                              <option value="20:00 tối">20:00 tối</option>
-                              <option value="21:00 tối">21:00 tối</option>
-                              <option value="22:00 tối">22:00 tối</option>
+                              <option selected="selected">
+                                {{ this.defaultMeetingInfo.startingtime }}
+                              </option>
+                              <option value="08">08:00 sáng</option>
+                              <option value="09">09:00 sáng</option>
+                              <option value="10">10:00 sáng</option>
+                              <option value="11">11:00 sáng</option>
+                              <option value="12">12:00 sáng</option>
+                              <option value="13">13:00 chiều</option>
+                              <option value="14">14:00 chiều</option>
+                              <option value="15">15:00 chiều</option>
+                              <option value="16">16:00 chiều</option>
+                              <option value="17">17:00 chiều</option>
+                              <option value="18">18:00 tối</option>
+                              <option value="19">19:00 tối</option>
+                              <option value="20">20:00 tối</option>
+                              <option value="21">21:00 tối</option>
+                              <option value="22">22:00 tối</option>
                             </select>
                           </div>
                           <div class="form-group">
@@ -92,7 +93,7 @@
                               type="number"
                               name="during"
                               placeholder="Nhập thời gian họp"
-                              v-model="this.updateMeetingInfo.during"
+                              v-model="this.defaultMeetingInfo.during"
                             />
                           </div>
                           <div class="form-group">
@@ -102,7 +103,7 @@
                               type="text"
                               name="title"
                               placeholder="Nhập tên cuộc họp"
-                              v-model="this.updateMeetingInfo.title"
+                              v-model="this.defaultMeetingInfo.title"
                             />
                           </div>
                           <div class="form-group">
@@ -112,7 +113,7 @@
                               type="textarea"
                               name="content"
                               rows="5"
-                              v-model="this.updateMeetingInfo.content"
+                              v-model="this.defaultMeetingInfo.content"
                             ></textarea>
                           </div>
                           <div class="text-center mt-3">
@@ -138,10 +139,11 @@
           </div>
         </div>
         <div v-if="activetab === 2" class="tabcontent">
-          <button 
-					class="btn btn-primary" 
-					style="height:3rem;width:7rem;"
-					@click="SendEmail()">
+          <button
+            class="btn btn-primary"
+            style="height: 3rem; width: 7rem"
+            @click="SendEmail()"
+          >
             Gửi email &#9993;
           </button>
           <div class="table-responsive">
@@ -369,9 +371,9 @@
             </tbody>
           </table>
         </div>
-            <button class="btn btn-success but" @click="InvitePeople() ">
-              Mời người
-            </button>
+        <button class="btn btn-success but" @click="InvitePeople()">
+          Mời người
+        </button>
       </div>
     </div>
   </div>
@@ -501,19 +503,29 @@ export default {
       this.getUsersIdList.splice(index, 1);
     },
     updateMeeting() {
-      const data = {
+      // const data = {
+      //   id: this.$route.params.meetingid,
+      //   roomid: this.$route.params.roomid,
+      //   reserveddate: this.updateMeetingInfo.reserveddate,
+      //   startingtime: this.updateMeetingInfo.startingtime.substring(0, 2),
+      //   during: this.updateMeetingInfo.during,
+      //   title: this.updateMeetingInfo.title,
+      //   content: this.updateMeetingInfo.content,
+      //   status: "ok",
+      // };
+      const updateMeetingInfo = {
         id: this.$route.params.meetingid,
         roomid: this.$route.params.roomid,
-        reserveddate: this.updateMeetingInfo.reserveddate,
-        startingtime: this.updateMeetingInfo.startingtime.substring(0, 2),
-        during: this.updateMeetingInfo.during,
-        title: this.updateMeetingInfo.title,
-        content: this.updateMeetingInfo.content,
-        status: "ok",
+        reserveddate: this.defaultMeetingInfo.reserveddate, // Not required
+        startingtime: this.defaultMeetingInfo.startingtime, // Not required
+        during: this.defaultMeetingInfo.during, // Not required
+        title: this.defaultMeetingInfo.title, // Not required
+        content: this.defaultMeetingInfo.content, // Not required
+        //status: "", // Not required
       };
-      console.log(data);
+      console.log(updateMeetingInfo);
       //PUT
-      editMeetingAPI(data)
+      editMeetingAPI(updateMeetingInfo)
         .then((res) => {
           console.log(res);
           this.$swal.fire(
@@ -688,7 +700,7 @@ div.example input[type="text"] {
   width: 80%;
   background: #f1f1f1;
 }
-button.but{
+button.but {
   padding: 8px;
   font-size: 14px;
   border: 2px solid grey;
@@ -719,14 +731,14 @@ ul li {
   background-color: white;
   padding: 12px;
 }
-.input-field{
-	height: 2.5rem;
-	margin-bottom: 0.7rem;
+.input-field {
+  height: 2.5rem;
+  margin-bottom: 0.7rem;
 }
-label{
-	font-size: 1rem;
+label {
+  font-size: 1rem;
 }
-.invite-input{
-	border-radius: 0.5rem;
+.invite-input {
+  border-radius: 0.5rem;
 }
 </style>

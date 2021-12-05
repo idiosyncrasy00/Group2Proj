@@ -20,73 +20,73 @@
           </div>
           <div class="modal-body">
             <form>
-						<div class="form-group">
-							<label>Tên phòng</label>
-							<label class="input form-control" readonly>
-								{{ roomname }}
-							</label>
-						</div>
-							<div class="row">
-								<div class="form-group col-sm-6">
-									<label>Thời gian bắt đầu</label>
-									<select
-										class="form-select"
-										aria-label="Default select example"
-										v-model="this.meetingInfo.startingtime"
-									>
-										<option value="08:00 sáng">08:00 sáng</option>
-										<option value="09:00 sáng">09:00 sáng</option>
-										<option value="10:00 sáng">10:00 sáng</option>
-										<option value="11:00 sáng">11:00 sáng</option>
-										<option value="12:00 sáng">12:00 sáng</option>
-										<option value="13:00 chiều">13:00 chiều</option>
-										<option value="14:00 chiều">14:00 chiều</option>
-										<option value="15:00 chiều">15:00 chiều</option>
-										<option value="16:00 chiều">16:00 chiều</option>
-										<option value="17:00 chiều">17:00 chiều</option>
-										<option value="18:00 tối">18:00 tối</option>
-										<option value="19:00 tối">19:00 tối</option>
-										<option value="20:00 tối">20:00 tối</option>
-										<option value="21:00 tối">21:00 tối</option>
-										<option value="22:00 tối">22:00 tối</option>
-									</select>
-									<!-- <input type="number" min="8" max="22" value="0" /> -->
-								</div>
-								<div class="form-group col-sm-6">
-									<label>Thời gian họp (Giờ)</label>
-									<input
-										class="form-control"
-										type="number"
-										min="1"
-										max="10"
-										name="during"
-										placeholder="Nhập thời gian họp"
-										v-model="this.meetingInfo.during"
-									/>
-								</div>
-							</div>
-						<div class="row">
-              <div class="form-group col-sm-7">
-                <label>Tên cuộc họp</label>
-                <input
-                  class="form-control"
-                  type="text"
-                  name="title"
-                  placeholder="Nhập tên cuộc họp"
-                  v-model="this.meetingInfo.title"
-                />
+              <div class="form-group">
+                <label>Tên phòng</label>
+                <label class="input form-control" readonly>
+                  {{ roomname }}
+                </label>
               </div>
-							<div class="form-group col-sm-5">
-                <label>Ngày họp</label>
-                <input
-                  class="form-control"
-                  type="date"
-                  name="date"
-                  placeholder="Nhập ngày đặt phòng"
-                  v-model="this.meetingInfo.reserveddate"
-                />
+              <div class="row">
+                <div class="form-group col-sm-6">
+                  <label>Thời gian bắt đầu</label>
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                    v-model="this.meetingInfo.startingtime"
+                  >
+                    <option value="08:00 sáng">08:00 sáng</option>
+                    <option value="09:00 sáng">09:00 sáng</option>
+                    <option value="10:00 sáng">10:00 sáng</option>
+                    <option value="11:00 sáng">11:00 sáng</option>
+                    <option value="12:00 sáng">12:00 sáng</option>
+                    <option value="13:00 chiều">13:00 chiều</option>
+                    <option value="14:00 chiều">14:00 chiều</option>
+                    <option value="15:00 chiều">15:00 chiều</option>
+                    <option value="16:00 chiều">16:00 chiều</option>
+                    <option value="17:00 chiều">17:00 chiều</option>
+                    <option value="18:00 tối">18:00 tối</option>
+                    <option value="19:00 tối">19:00 tối</option>
+                    <option value="20:00 tối">20:00 tối</option>
+                    <option value="21:00 tối">21:00 tối</option>
+                    <option value="22:00 tối">22:00 tối</option>
+                  </select>
+                  <!-- <input type="number" min="8" max="22" value="0" /> -->
+                </div>
+                <div class="form-group col-sm-6">
+                  <label>Thời gian họp (Giờ)</label>
+                  <input
+                    class="form-control"
+                    type="number"
+                    min="1"
+                    max="10"
+                    name="during"
+                    placeholder="Nhập thời gian họp"
+                    v-model="this.meetingInfo.during"
+                  />
+                </div>
               </div>
-						</div>
+              <div class="row">
+                <div class="form-group col-sm-7">
+                  <label>Tên cuộc họp</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="title"
+                    placeholder="Nhập tên cuộc họp"
+                    v-model="this.meetingInfo.title"
+                  />
+                </div>
+                <div class="form-group col-sm-5">
+                  <label>Ngày họp</label>
+                  <input
+                    class="form-control"
+                    type="date"
+                    name="date"
+                    placeholder="Nhập ngày đặt phòng"
+                    v-model="this.meetingInfo.reserveddate"
+                  />
+                </div>
+              </div>
               <div class="form-group">
                 <label>Nội dung cuộc họp</label>
                 <textarea
@@ -99,7 +99,9 @@
                 ></textarea>
               </div>
               <div class="text-center mt-3">
-                <button class="btn btn-primary" @click.prevent="createMeeting">Tạo</button>
+                <button class="btn btn-primary" @click.prevent="createMeeting">
+                  Tạo
+                </button>
                 {{ errMsg }}
               </div>
             </form>
@@ -135,8 +137,6 @@ export default {
         during: "",
         title: "",
         content: "", // Not required
-        password: "1", // Not required
-        status: "ok", // Not required
       },
       errMsg: "",
     };
@@ -160,23 +160,48 @@ export default {
       const getTime = parseInt(this.meetingInfo.startingtime.substring(0, 2));
       const meetingInfo = {
         adminid: store.getUserInfo().id,
+        //admin: {id: 11, adminname: "Đức Hoàng"},
         roomid: this.roomid,
         reserveddate: this.meetingInfo.reserveddate,
         startingtime: getTime,
         during: this.meetingInfo.during,
         title: this.meetingInfo.title,
         content: this.meetingInfo.content, // Not required
-        status: this.meetingInfo.status, // Not required
       };
+      const getFormInfo = {
+        room: { id: this.roomid, roomname: this.roomname },
+        during: this.meetingInfo.during,
+        title: this.meetingInfo.title,
+        content: this.meetingInfo.content, // Not required
+        reserveddate: this.meetingInfo.reserveddate,
+        startingtime: getTime,
+      };
+      //       admin: {id: 11, adminname: "Đức Hoàng"}
+      // content: "rrrr"
+      // during: 2
+      // reserveddate: "2021-12-16"
+      // room: {id: 1, roomname: "Phòng 101"}
+      // startingtime: 13
+      // title: "rew"
       console.log(meetingInfo);
       //axios post
       if (getTime >= 8 && getTime <= 22) {
         createMeetingAPI(meetingInfo)
           .then((res) => {
             console.log(res);
-            this.$swal.fire("Good job!", "Tạo cuộc họp thành công", "success");
+            this.$swal.fire(
+              "Thành công!",
+              "Tạo cuộc họp thành công",
+              "success"
+            );
+            localStorage.setItem("meetinginfo", JSON.stringify(getFormInfo));
             window.setTimeout(function () {
-              location.href = "/Room";
+              location.href =
+                "/admin/editMeeting/" +
+                "roomid=" +
+                res.data.roomid +
+                "/meetingid=" +
+                res.data.id;
             }, 3000);
           })
           .catch((err) => {
@@ -191,18 +216,25 @@ export default {
       } else {
         this.errMsg = "Giờ đặt họp chỉ cho phép từ 8:00 AM đến 22:00 PM";
       }
+      // if (isSuccess == true) {
+
+      //   this.$swal.fire("Thành công!", "Tạo cuộc họp thành công", "success");
+      //   window.setTimeout(function () {
+      //     location.href = "/admin";
+      //   }, 3000);
+      // }
     },
   },
 };
 </script>
 
 <style>
-input{
-	height: 2.45rem;
-	margin-bottom: 0.7rem;
+input {
+  height: 2.45rem;
+  margin-bottom: 0.7rem;
 }
-.input{
-	height: 2.45rem;
-	margin-bottom: 0.7rem;
+.input {
+  height: 2.45rem;
+  margin-bottom: 0.7rem;
 }
 </style>
