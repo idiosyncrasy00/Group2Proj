@@ -11,11 +11,14 @@
               <thead>
                 <tr>
                   <th scope="col" class="border-0 text-uppercase font-medium">
-                    Mã phòng
+                    Tên phòng
+                  </th>
+                  <th scope="col" class="border-0 text-uppercase font-medium">
+                    Tên cuộc họp
                   </th>
                   <th scope="col" class="border-0 text-uppercase font-medium">
                     Mã cuộc họp
-                  </th>
+                  </th>                 
                   <th scope="col" class="border-0 text-uppercase font-medium">
                     Ngày tổ chức
                   </th>
@@ -26,32 +29,28 @@
                     Thời gian họp
                   </th>
                   <th scope="col" class="border-0 text-uppercase font-medium">
-                    Tên cuộc họp
-                  </th>
-                  <th scope="col" class="border-0 text-uppercase font-medium">
                     Rời cuộc họp
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="meeting in meetings" :key="meeting.id">
-                  <td class="pl-4">{{ meeting.roomid }}</td>
+                  <td class="pl-4">{{ meeting.room.roomname }}</td>
                   <td>
-                    <span class="text-muted">{{ meeting.id }}</span>
+                  <span>{{ meeting.title }}</span>
                   </td>
                   <td>
-                    <span class="text-muted">{{ meeting.reserveddate }}</span>
+                    <span>{{ meeting.id }}</span>
                   </td>
                   <td>
-                    <span class="text-muted"
-                      >{{ meeting.startingtime }} giờ</span
+                    <span>{{ meeting.reserveddate }}</span>
+                  </td>
+                  <td>
+                    <span>{{ meeting.startingtime }} giờ</span
                     ><br />
                   </td>
                   <td>
-                    <span class="text-muted">{{ meeting.during }} giờ</span>
-                  </td>
-                  <td>
-                    <span class="text-muted">{{ meeting.title }}</span>
+                    <span>{{ meeting.during }} giờ</span>
                   </td>
                   <td>
                     <button
@@ -142,7 +141,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$table-bg-color:#600080;
+$table-bg-color:#505050	;
 .card {
   position: relative;
   display: flex;

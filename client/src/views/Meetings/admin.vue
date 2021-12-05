@@ -1,9 +1,10 @@
 <template>
   <div class="container">
+    <div class="row">
     <div class="col-md-12">
       <div class="card">
-        <div class="card-body mt-3 mb-4 text-center">
-          <h5 class="card-title text-uppercase mb-0">Danh sách cuộc họp</h5>
+        <div class="card-body text-center">
+          <h5 class="card-title text-uppercase mb-2 mt-1">Danh sách cuộc họp</h5>
         </div>
         <div class="table-responsive">
           <table class="table no-wrap user-table mb-0">
@@ -31,7 +32,7 @@
                   Chỉnh sửa
                 </th>
                 <th scope="col" class="border-0 text-uppercase font-medium">
-                  Xóa
+                  Rời cuộc họp
                 </th>
               </tr>
             </thead>
@@ -39,20 +40,20 @@
               <tr v-for="meeting in meetings" :key="meeting.id">
                 <td class="pl-4">{{ meeting.room.roomname }}</td>
                 <td>
-                  <span class="text-muted">{{ meeting.title }}</span>
+                  <span>{{ meeting.title }}</span>
                 </td>
                 <td>
-                  <span class="text-muted"> {{ meeting.id }}</span>
+                  <span> {{ meeting.id }}</span>
                 </td>
                 <td>
-                  <span class="text-muted">{{ meeting.reserveddate }}</span
+                  <span>{{ meeting.reserveddate }}</span
                   ><br />
                 </td>
                 <td>
-                  <span class="text-muted">{{ meeting.startingtime }} giờ</span>
+                  <span>{{ meeting.startingtime }} giờ</span>
                 </td>
                 <td>
-                  <span class="text-muted">{{ meeting.during }} tiếng</span>
+                  <span>{{ meeting.during }} tiếng</span>
                 </td>
                 <td>
                   <button class="btn btn-danger" type="button" @click="editMeeting(meeting)">
@@ -107,6 +108,7 @@
             </tbody>
           </table>
         </div>
+      </div>
       </div>
     </div>
     <!-- </div> -->
@@ -220,7 +222,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+$table-bg-color:#505050	;
 .card {
   position: relative;
   display: flex;
@@ -260,12 +263,27 @@ button:not(:disabled) {
   border-radius: 20px;
 }
 
-#calendar {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  color: #2c3e50;
-  height: 67vh;
-  width: 90vw;
-  margin-left: auto;
-  margin-right: auto;
+.table-responsive{
+	border-radius: 1rem;
+	border-collapse: collapse;
+	font-size: 0.9em;
+	font-family: sans-serif;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.table-responsive thead tr {
+	background-color: $table-bg-color;
+	color: #ffffff;
+	text-align: left;
+}
+.table-responsive tbody tr {
+    border-bottom: thin solid #dddddd;
+}
+
+.table-responsive tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.table-responsive tbody tr:last-of-type {
+    border-bottom: 2px solid $table-bg-color;
 }
 </style>
