@@ -23,6 +23,14 @@ function getMeetingsAsHost() {
   return JSON.parse(localStorage.getItem('meetingsInfoAsHost'));
 }
 
-module.exports = { getUserInfo, getMeetingsAsParticipant, getMeetingsAsHost, getARoomInfo, roomlist };
+function formatDate(date) {
+  const getDateArray = date.split("-");
+  var temp = getDateArray[0];
+  getDateArray[0] = getDateArray[2];
+  getDateArray[2] = temp;
+  return (getDateArray.join("-"));
+}
+
+module.exports = { getUserInfo, getMeetingsAsParticipant, getMeetingsAsHost, getARoomInfo, roomlist, formatDate };
 
 //console.log(roomlist);

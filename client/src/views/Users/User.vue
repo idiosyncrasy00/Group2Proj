@@ -45,7 +45,7 @@
                     type="text"
                     class="form-control"
                     id="firstName"
-                    v-model="updateFirstName"
+                    v-model="this.userInfo.lastname"
                     placeholder="Enter First Name"
                   />
                 </div>
@@ -57,7 +57,7 @@
                     type="text"
                     class="form-control"
                     id="lastName"
-                    v-model="updateLastName"
+                    v-model="this.userInfo.firstname"
                     placeholder="Enter Last Name"
                   />
                 </div>
@@ -69,7 +69,7 @@
                     type="date"
                     class="form-control"
                     id="dob"
-                    v-model="updateDob"
+                    v-model="this.userInfo.dob"
                     placeholder="Enter Date Of Birth"
                   />
                 </div>
@@ -81,7 +81,7 @@
                     type="url"
                     class="form-control"
                     id="address"
-                    v-model="updateAddress"
+                    v-model="this.userInfo.address"
                     placeholder="Enter Address"
                   />
                 </div>
@@ -93,7 +93,7 @@
                     type="text"
                     class="form-control"
                     id="userName"
-                    v-model="updateUsername"
+                    v-model="this.userInfo.username"
                     placeholder="Enter User name"
                   />
                 </div>
@@ -110,7 +110,7 @@
                     type="name"
                     class="form-control"
                     id="phoneNumber"
-                    v-model="updatePhoneNumber"
+                    v-model="this.userInfo.phone"
                     placeholder="Enter Phone Number"
                   />
                 </div>
@@ -122,7 +122,7 @@
                     type="name"
                     class="form-control"
                     id="email"
-                    v-model="updateEmail"
+                    v-model="this.userInfo.email"
                     placeholder="Enter Email"
                   />
                 </div>
@@ -165,13 +165,13 @@
           <p class="fieldTitle">Tên đầy đủ</p>
           <p style="padding-left: 2rem">
             <!-- {{ userInfo.firstName }} {{ userInfo.lastName }} -->
-            {{ userInfo.firstname }} {{ userInfo.lastname }}
+            {{ userInfo.lastname }} {{ userInfo.firstname }}
           </p>
         </div>
         <div class="row mb-1">
           <p class="fieldTitle">Ngày sinh:</p>
           <!-- <p style="padding-left: 2rem">{{ userInfo.dateOfBirth }}</p> -->
-          <p style="padding-left: 2rem">{{ userInfo.dob }}</p>
+          <p style="padding-left: 2rem">{{ this.dob }}</p>
         </div>
         <div class="row mb-1">
           <p class="fieldTitle">Địa chỉ</p>
@@ -197,7 +197,11 @@
 </template>
 
 <script>
-import store from "@/store/index.js";
+import {
+  getUserInfo,
+  formatDate
+} from "@/store/index.js";
+//import formatDate from "@/store/dateFormat.js";
 import {
   updateUserInfoAPI,
   //getUserInfoAPI,
@@ -208,24 +212,9 @@ export default {
   data() {
     return {
       // getUser: this.$route.params.getUser,
+      dob: "",
       showInfo: true,
-      updateFirstName: "",
-      updateLastName: "",
-      updateDob: "",
-      updateAddress: "",
-      updateUsername: "",
-      updatePhoneNumber: "",
-      updateEmail: "",
       userInfo: "",
-      updateInfo: {
-        firstName: "",
-        lastName: "",
-        dateOfBirth: "",
-        address: "",
-        email: "",
-        phoneNumber: "",
-        userName: "",
-      },
     };
   },
   methods: {
@@ -240,34 +229,14 @@ export default {
       this.showInfo = false;
     },
     submitUpdateInfo() {
-      if (this.updateFirstName != null && this.updateFirstName != "")
-        this.updateInfo.firstName = this.updateFirstName;
-
-      if (this.updateLastName != null && this.updateLastName != "")
-        this.updateInfo.lastName = this.lastName;
-
-      if (this.updateDob != null && this.updateDob != "")
-        this.updateInfo.dateOfBirth = this.dateOfBirth;
-
-      if (this.updateAddress != null && this.updateAddress != "")
-        this.updateInfo.address = this.address;
-
-      if (this.updateEmail != null && this.updateEmail != "")
-        this.updateInfo.email = this.email;
-
-      if (this.updatePhoneNumber != null && this.updatePhoneNumber != "")
-        this.updateInfo.phoneNumber = this.phoneNumber;
-
-      if (this.updateUsername != null && this.updateUsername != "")
-        this.updateInfo.userName = this.userName;
       //PUT
       var updatedData = {
-        firstname: this.updateFirstName,
-        lastname: this.updateLastName,
-        email: this.updateEmail,
-        dob: this.updateDob,
-        phone: this.updatePhoneNumber, // not required
-        address: this.updateAddress, // not required
+        firstname: this.userInfo.firstname,
+        lastname: this.userInfo.lastname,
+        email: this.userInfo.email,
+        dob: this.userInfo.dob,
+        phone: this.userInfo.phone, // not required
+        address: this.userInfo.address, // not required
       };
       updateUserInfoAPI(updatedData)
         .then((res) => {
@@ -275,7 +244,7 @@ export default {
           //this.$swal.fire("Good job!", "Cập nhật thông tin cá nhân thành công", "success");
           this.$swal.fire({
             icon: "success",
-            title: "YAY!...",
+            title: "Thành công",
             text: "Cập nhật thông tin cá nhân thành công",
             // footer: '<a href="">Why do I have this issue?</a>',
           });
@@ -288,7 +257,7 @@ export default {
           this.$swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Cập nhật thông tin cá nhân thất bại :(",
+            text: "Cập nhật thông tin cá nhân thất bại",
             // footer: '<a href="">Why do I have this issue?</a>',
           });
         });
@@ -296,7 +265,8 @@ export default {
   },
   component: {},
   async created() {
-    this.userInfo = store.getUserInfo();
+    this.userInfo = getUserInfo();
+    this.dob = formatDate(getUserInfo().dob);
   },
 };
 </script>

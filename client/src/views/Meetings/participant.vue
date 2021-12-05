@@ -4,7 +4,9 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-body text-center">
-            <h5 class="card-title text-uppercase mb-2 mt-1">Danh sách cuộc họp</h5>
+            <h5 class="card-title text-uppercase mb-2 mt-1">
+              Danh sách cuộc họp
+            </h5>
           </div>
           <div class="table-responsive">
             <table class="table no-wrap user-table mb-0">
@@ -92,7 +94,7 @@ import {
   getInvitedMeetingsListAPI,
   participantLeavesMeetingAPI,
 } from "@/services/meeting.apiServices.js";
-//import store from "@/store/index.js";
+import { formatDate } from "@/store/index.js";
 
 export default {
   name: "participant",
@@ -132,6 +134,11 @@ export default {
     getInvitedMeetingsListAPI()
       .then((res) => {
         this.meetings = res.data;
+        for (var i = 0; i < this.meetings.length; i++) {
+          this.meetings[i].reserveddate = formatDate(
+            this.meetings[i].reserveddate
+          );
+        }
         console.log(res);
       })
       .catch((err) => {
@@ -142,7 +149,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$table-bg-color:#600080;
+$table-bg-color: #600080;
 .card {
   position: relative;
   display: flex;
@@ -182,27 +189,27 @@ button:not(:disabled) {
   border-radius: 20px;
 }
 
-.table-responsive{
-	border-radius: 1rem;
-	border-collapse: collapse;
-	font-size: 0.9em;
-	font-family: sans-serif;
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+.table-responsive {
+  border-radius: 1rem;
+  border-collapse: collapse;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 .table-responsive thead tr {
-	background-color: $table-bg-color;
-	color: #ffffff;
-	text-align: left;
+  background-color: $table-bg-color;
+  color: #ffffff;
+  text-align: left;
 }
 .table-responsive tbody tr {
-    border-bottom: thin solid #dddddd;
+  border-bottom: thin solid #dddddd;
 }
 
 .table-responsive tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+  background-color: #f3f3f3;
 }
 
 .table-responsive tbody tr:last-of-type {
-    border-bottom: 2px solid $table-bg-color;
+  border-bottom: 2px solid $table-bg-color;
 }
 </style>

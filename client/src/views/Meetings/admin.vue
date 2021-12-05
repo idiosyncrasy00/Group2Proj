@@ -55,7 +55,11 @@
                   <span class="text-muted">{{ meeting.during }} tiếng</span>
                 </td>
                 <td>
-                  <button class="btn btn-danger" type="button" @click="editMeeting(meeting)">
+                  <button
+                    class="btn btn-danger"
+                    type="button"
+                    @click="editMeeting(meeting)"
+                  >
                     <!-- <router-link
                       :to="{
                         name: 'editMeeting',
@@ -135,6 +139,7 @@ import {
   getMeetingListAPI,
   deleteMeetingAPI,
 } from "@/services/meeting.apiServices.js";
+import { formatDate } from "@/store/index.js";
 export default {
   name: "admin",
   data() {
@@ -196,22 +201,11 @@ export default {
         console.log(res);
         this.meetings = res.data;
         console.log(this.meetings.length);
-        // for (var i = 0; i < this.meetings.length; i++) {
-        //   this.events.push({
-        //     id: this.meetings[i].id,
-        //     startDate:
-        //       this.meetings[i].reserveddate +
-        //       " " +
-        //       this.meetings[i].startingtime,
-        //     title:
-        //       this.meetings[i].title +
-        //       " " +
-        //       "Room name is " +
-        //       this.meetings[i].roomid +
-        //       " and meeting id is " +
-        //       this.meetings[i].id,
-        //   });
-        // }
+        for (var i = 0; i < this.meetings.length; i++) {
+          this.meetings[i].reserveddate = formatDate(
+            this.meetings[i].reserveddate
+          );
+        }
       })
       .catch((err) => {
         console.log(err);
