@@ -31,11 +31,7 @@
             </label>
           </div>
           <div class="form-group">
-            <label
-              >Sức chứa (Hiện tại phòng có sức chứa tối đa
-              <b>{{ this.roominfo.name }}</b
-              >)</label
-            >
+            <label>Sức chứa </label>
             <input
               class="form-control form-control-lg"
               type="number"

@@ -142,15 +142,6 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-      // feedBackAPI(this.message)
-      //   .then((res) => {
-      //     console.log(res);
-      //     this.$swal.fire("Good job!", "gui feedback thanh cong", "success");
-      //   })
-      //   .catch((err) => {
-      //     this.$swal.fire("No!", "gui feedback ko thanh cong", "error");
-      //     console.log(err);
-      //   });
     },
     deleteReview(id) {
       this.$swal

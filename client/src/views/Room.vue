@@ -266,7 +266,7 @@ export default {
   margin-right: auto;
 }
 body {
-  margin-top: 20px;
+  margin-top: 0px;
 }
 .bg-light-gray {
   background-color: #f7f7f7;
