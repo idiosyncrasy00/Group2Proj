@@ -36,7 +36,7 @@
                   class="col-sm-12 mb-3 fw-normal mx-auto text-center"
                   style="padding-bottom: 10px"
                 >
-                  Welcome in to Meeting Manage
+                  Chào mừng bạn đến với website quản lý phòng họp
                 </h4>
               </div>
               <div class="card login-card">

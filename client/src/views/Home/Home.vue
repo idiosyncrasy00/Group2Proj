@@ -37,7 +37,7 @@
           &#10095;
         </div>
         <div class="bg-text">
-          <h1>Meeting Manage Assistance</h1>
+          <h1>Website quản lý phòng họp</h1>
           <p class="bg-text-under">
 						Ứng dụng web giúp bạn vận hành cuộc họp của công ty hiệu quả
           </p>

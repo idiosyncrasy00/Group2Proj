@@ -16,7 +16,7 @@
         />
         <h1 class="h3 mt-5 fw-normal mb-5 mx-auto">Hãy đăng ký ở đây</h1>
         <a class="mx-auto" href="/signin" style="text-decoration: none"
-          >Đã có tải khoản? Đăng nhập ngay</a
+          >Đã có tài khoản? Đăng nhập ngay</a
         >
         <br />
         <a class="mx-auto" href="/" style="text-decoration: none"
@@ -38,7 +38,7 @@
                 <input
                   type="firstname"
                   class="form-control"
-                  placeholder="Your first name"
+                  placeholder="Nhập họ của bạn"
                   v-model="signupValues.firstname"
                 />
               </div>
@@ -48,7 +48,7 @@
                 <input
                   type="lastname"
                   class="form-control"
-                  placeholder="Your last name"
+                  placeholder="Nhập tên của bạn"
                   v-model="signupValues.lastname"
                 />
               </div>
@@ -58,7 +58,7 @@
               <input
                 type="username"
                 class="form-control"
-                placeholder="Your Username"
+                placeholder="Nhập tên đăng nhập"
                 v-model="signupValues.username"
               />
             </div>
@@ -69,7 +69,7 @@
                 type="password"
                 class="form-control"
                 id="floatingPassword"
-                placeholder="Password"
+                placeholder="Nhập mật khẩu"
                 v-model="signupValues.password"
               />
 
@@ -90,7 +90,7 @@
                   <input
                     type="email"
                     class="form-control"
-                    placeholder="Your email"
+                    placeholder="Nhập email của bạn"
                     v-model="signupValues.email"
                   />
                 </div>
@@ -102,7 +102,7 @@
                 <input
                   type="phonenumber"
                   class="form-control"
-                  placeholder="Your Phone number"
+                  placeholder="Nhập số điện thoại của bạn"
                   v-model="signupValues.phone"
                 />
               </div>
@@ -112,7 +112,7 @@
                 <input
                   type="address"
                   class="form-control"
-                  placeholder="Your address"
+                  placeholder="Nhập địa chỉ của bạn"
                   v-model="signupValues.address"
                 />
               </div>
