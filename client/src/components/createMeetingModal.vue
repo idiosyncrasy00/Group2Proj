@@ -34,21 +34,21 @@
                     aria-label="Default select example"
                     v-model="this.meetingInfo.startingtime"
                   >
-                    <option value="08:00 sáng">08:00 sáng</option>
-                    <option value="09:00 sáng">09:00 sáng</option>
-                    <option value="10:00 sáng">10:00 sáng</option>
-                    <option value="11:00 sáng">11:00 sáng</option>
-                    <option value="12:00 sáng">12:00 sáng</option>
-                    <option value="13:00 chiều">13:00 chiều</option>
-                    <option value="14:00 chiều">14:00 chiều</option>
-                    <option value="15:00 chiều">15:00 chiều</option>
-                    <option value="16:00 chiều">16:00 chiều</option>
-                    <option value="17:00 chiều">17:00 chiều</option>
-                    <option value="18:00 tối">18:00 tối</option>
-                    <option value="19:00 tối">19:00 tối</option>
-                    <option value="20:00 tối">20:00 tối</option>
-                    <option value="21:00 tối">21:00 tối</option>
-                    <option value="22:00 tối">22:00 tối</option>
+                    <option value="08:00 sáng">08:00 giờ</option>
+                    <option value="09:00 sáng">09:00 giờ</option>
+                    <option value="10:00 sáng">10:00 giờ</option>
+                    <option value="11:00 sáng">11:00 giờ</option>
+                    <option value="12:00 sáng">12:00 giờ</option>
+                    <option value="13:00 chiều">13:00 giờ</option>
+                    <option value="14:00 chiều">14:00 giờ</option>
+                    <option value="15:00 chiều">15:00 giờ</option>
+                    <option value="16:00 chiều">16:00 giờ</option>
+                    <option value="17:00 chiều">17:00 giờ</option>
+                    <option value="18:00 tối">18:00 giờ</option>
+                    <option value="19:00 tối">19:00 giờ</option>
+                    <option value="20:00 tối">20:00 giờ</option>
+                    <option value="21:00 tối">21:00 giờ</option>
+                    <option value="22:00 tối">22:00 giờ</option>
                   </select>
                   <!-- <input type="number" min="8" max="22" value="0" /> -->
                 </div>

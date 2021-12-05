@@ -1,96 +1,94 @@
 <template>
   <div class="container mt-5">
-		<div v-if="this.showForm">
-			<label>Chọn phòng</label>
-			<select
-				class="form-select"
-				aria-label="Default select example"
-				v-model="this.reviewContent.roomid"
-			>
-				<option
-					selected
-					v-for="room in this.roomList"
-					:key="room.id"
-					:value="room.id"
-				>
-					{{ room.roomname }}
-				</option>
-				<!-- <option value="1">{{ room.roomname }}</option> -->
-			</select>
-			<label>Đánh giá phòng theo thang điểm 10</label>
-			<select
-				class="form-select"
-				aria-label="Default select example"
-				v-model="reviewContent.rating"
-			>
-				<option selected>Đánh giá phòng</option>
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-				<option value="6">6</option>
-				<option value="7">7</option>
-				<option value="8">8</option>
-				<option value="9">9</option>
-				<option value="10">10</option>
-			</select>
-			<label>Phản hồi</label>
-			<b-form-textarea
-				id="textarea-rows"
-				placeholder="Viết phản hồi của bạn vào đây..."
-				rows="8"
-				v-model="reviewContent.message"
-			></b-form-textarea>
-			<input 
-			type="submit" 
-			@click.prevent="sendReview()" 
-			value="Gửi"
-			style="height:3rem;"
-			/>
-			<button 
-			type="submit" 
-			@click.prevent="this.showForm = 0"
-			class="btn btn-secondary"
-			style="height:3rem; margin-left: 2rem;"
-			> 
-				Danh sách phản hồi 
-			</button>
-		</div>
-		<div v-if="!this.showForm">
-			<div class="col-sm-10 mx-auto pb-4">
-				<h3 style="margin-bottom: 3rem;">Danh sách phản hồi của bạn</h3>
-				<div
-					class="comment mt-4 darker row"
-					v-for="review in listOfReviews"
-					:key="review.id"
-				>	
-					<div class="col-sm-4">
-						<h5>{{ review.room.roomname }}</h5>
-						<span>Điểm đánh giá: {{ review.rating }}/10</span> <br />
-					</div>
-					<div class="col-sm-7">
-						<p>
-							{{ review.message }}
-						</p>
-					</div>
-					<div class="col-sm-1">
-						<b-button
-							variant="danger"
-							@click="deleteReview(review.id)"
-							>Xóa</b-button
-						>
-					</div>
-				</div>
-				<b-button
-							variant="secondary"
-							@click="this.showForm = 1"
-							style="width: 5rem; margin-top: 3rem;"
-							>Trở về</b-button
-						>
-			</div>
-		</div>
-	</div>
+    <div v-if="this.showForm">
+      <label>Chọn phòng</label>
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        v-model="this.reviewContent.roomid"
+      >
+        <option
+          selected
+          v-for="room in this.roomList"
+          :key="room.id"
+          :value="room.id"
+        >
+          {{ room.roomname }}
+        </option>
+        <!-- <option value="1">{{ room.roomname }}</option> -->
+      </select>
+      <label>Đánh giá phòng theo thang điểm 10</label>
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        v-model="reviewContent.rating"
+      >
+        <option selected>Đánh giá phòng</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
+      <label>Phản hồi</label>
+      <b-form-textarea
+        id="textarea-rows"
+        placeholder="Viết phản hồi của bạn vào đây..."
+        rows="8"
+        v-model="reviewContent.message"
+      ></b-form-textarea>
+      <input
+        type="submit"
+        @click.prevent="sendReview()"
+        value="Gửi"
+        style="height: 3rem"
+      />
+      <button
+        type="submit"
+        @click.prevent="this.showForm = 0"
+        class="btn btn-secondary"
+        style="height: 3rem; margin-left: 2rem"
+      >
+        Danh sách phản hồi
+      </button>
+    </div>
+    <div v-if="!this.showForm">
+      <div class="col-sm-10 mx-auto pb-4">
+        <h3 style="margin-bottom: 3rem">Danh sách phản hồi của bạn</h3>
+        <div
+          class="comment mt-4 darker row"
+          v-for="review in listOfReviews"
+          :key="review.id"
+        >
+          <div class="col-sm-4">
+            <h5>{{ review.room.roomname }}</h5>
+            <span>Điểm đánh giá: {{ review.rating }}/10</span> <br />
+          </div>
+          <div class="col-sm-7">
+            <p>
+              {{ review.message }}
+            </p>
+          </div>
+          <div class="col-sm-1">
+            <b-button variant="danger" @click="deleteReview(review.id)"
+              >Xóa</b-button
+            >
+          </div>
+        </div>
+        <b-button
+          variant="secondary"
+          @click="this.showForm = 1"
+          style="width: 5rem; margin-top: 3rem"
+          >Trở về</b-button
+        >
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -116,7 +114,7 @@ export default {
     //   message: "",
     // };
     return {
-			showForm: true,
+      showForm: true,
       roomList: [],
       reviewContent: {
         roomid: "",
@@ -244,7 +242,7 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: #45a049;
 }
-.comment{
-	border-bottom: thin lightgray solid;
+.comment {
+  border-bottom: thin lightgray solid;
 }
 </style>

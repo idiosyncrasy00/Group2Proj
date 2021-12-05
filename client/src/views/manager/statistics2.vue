@@ -28,22 +28,23 @@
           <h4>Bảng thống kê</h4>
           <div class="container h-100">
             <div class="mx-auto" style="max-width: 80%">
-              <b>Chọn ngày bạn muốn tra cứu</b> 
-							<br />
-							<div class="row">
-								<input type="date" class = "col-sm-4" v-model="date1" />
-								<button
-									type="button"
-									class="btn btn-secondary btn-sm col-sm-2"
-									@click="getDayStatistics()"
-								>
-									Tra cứu
-								</button>
-							</div>
+              <b>Chọn ngày bạn muốn tra cứu</b>
+              <br />
+              <div class="row">
+                <input type="date" class="col-sm-4" v-model="date1" />
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-sm col-sm-2"
+                  @click="getDayStatistics()"
+                >
+                  Tra cứu
+                </button>
+              </div>
               <br />
               <br />
               <hr />
               <!-- <vue3-chart-js v-bind="{ ...barChart }"/> -->
+              <!-- <ChartUI :data="thí"/> -->
               <column-chart class="w-100" :data="this.roomList1"></column-chart>
             </div>
           </div>
@@ -54,16 +55,16 @@
           <div class="container h-100">
             <div class="mx-auto" style="max-width: 80%">
               <b>Chọn tháng bạn muốn tra cứu</b> <br />
-							<div class="row">
-								<input type="month" class="col-sm-4" v-model="date2" />
-								<button
-									type="button"
-									class="btn btn-secondary btn-sm col-sm-2"
-									@click="getMonthStatistics()"
-								>
-									Tra cứu
-								</button>
-							</div>
+              <div class="row">
+                <input type="month" class="col-sm-4" v-model="date2" />
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-sm col-sm-2"
+                  @click="getMonthStatistics()"
+                >
+                  Tra cứu
+                </button>
+              </div>
               <br />
               <br />
               <hr />
@@ -77,16 +78,16 @@
           <div class="container h-100">
             <div class="mx-auto" style="max-width: 80%">
               <b>Chọn năm bạn muốn tra cứu</b> <br />
-							<div class="row">
-								<input type="number" class="col-sm-4" value="2021" />
-								<button
-									type="button"
-									class="btn btn-secondary btn-sm col-sm-2"
-									@click="getYearStatistics()"
-								>
-									Tra cứu
-								</button>
-							</div>
+              <div class="row">
+                <input type="number" class="col-sm-4" value="2021" />
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-sm col-sm-2"
+                  @click="getYearStatistics()"
+                >
+                  Tra cứu
+                </button>
+              </div>
               <br />
               <br />
               <hr />
@@ -102,28 +103,26 @@
 <script>
 //import Vue3ChartJs from "../../../node_modules/@j-t-mcc/vue3-chartjs";
 import { getRoomStatsAPI } from "@/services/room.apiServices.js";
+import ChartUI from "@/components/ChartUI.vue";
 
 export default {
   name: "statistics",
   //mixins: [Bar],
   components: {
     //Vue3ChartJs,
+    ChartUI,
   },
   data() {
     return {
       // date1: "yyyy-mm-dd",
       // date2: "yyyy-mm",
       // date3: "",
-      date1: new Date().toISOString().slice(0, 10),
-      date2: new Date().toISOString().slice(0, 7),
-      date3: new Date().toISOString().slice(0, 4),
+      date1: "",
+      date2: "",
+      date3: "",
       activetab: 1,
       getroomList: [],
-      roomList1: [
-        // ["", 43435],
-        // ["Mon", 46],
-        // ["Tue", 28],
-      ],
+      roomList1: [],
       roomList2: [
         // ["", 43435],
         // ["Mon", 46],
@@ -144,15 +143,18 @@ export default {
           for (var i = 0; i < res.data.length; i++) {
             this.roomList1.push([res.data[i].roomname, res.data[i].usage]);
           }
+          //localStorage.setItem("getstatistic", this.roomList1);
+          window.location.reload();
         })
         .catch((err) => {
           console.log(err);
         });
-      //console.log(this.roomList);
-      //this.roomList = this.getroomList;
-      console.log(this.getroomList);
+      // //console.log(this.roomList);
+      // //this.roomList = this.getroomList;
+      // console.log(this.getroomList);
     },
     getMonthStatistics() {
+      //this.activetab = 2;
       getRoomStatsAPI(this.date2)
         .then((res) => {
           console.log(res);
@@ -186,17 +188,8 @@ export default {
   // mounted() {
   //   this.renderChart(this.barChart)
   // },
-  async created() {
-    // getRoomStatsAPI(this.date1)
-    //   .then((res) => {
-    //     //console.log(res);
-    //     for (var i = 0; i < res.data.length; i++) {
-    //       this.roomList.push([res.data[i].roomname, res.data[i].usage]);
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+  mounted() {
+    //this.data();
   },
   setup() {},
 };

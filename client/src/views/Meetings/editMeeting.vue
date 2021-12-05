@@ -1,41 +1,41 @@
 <template>
   <div>
-    <link
-      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <div id="tabs" class="container">
-      <div class="tabs">
-        <a
-          v-on:click="activetab = 1"
-          v-bind:class="[activetab === 1 ? 'active' : '']"
-          >Thông tin cuộc họp</a
-        >
-        <a
-          v-on:click="activetab = 2"
-          v-bind:class="[activetab === 2 ? 'active' : '']"
-          >Danh sách thành viên</a
-        >
-        <a
-          v-on:click="activetab = 3"
-          v-bind:class="[activetab === 3 ? 'active' : '']"
-          >Lên danh sách người tham gia</a
-        >
-      </div>
-      <div class="content">
-        <div v-if="activetab === 1" class="tabcontent">
-          <div class="container h-100">
-            <div class="row h-100">
-              <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
-                <div class="d-table-cell align-middle">
-                  <div class="text-center mt-0">
-                    <h1 class="h2">Chỉnh sửa cuộc họp</h1>
-                  </div>
+    <div>
+      <link
+        href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+        rel="stylesheet"
+      />
+      <div id="tabs" class="container">
+        <div class="tabs">
+          <a
+            v-on:click="activetab = 1"
+            v-bind:class="[activetab === 1 ? 'active' : '']"
+            >Thông tin cuộc họp</a
+          >
+          <a
+            v-on:click="activetab = 2"
+            v-bind:class="[activetab === 2 ? 'active' : '']"
+            >Danh sách thành viên</a
+          >
+          <a
+            v-on:click="activetab = 3"
+            v-bind:class="[activetab === 3 ? 'active' : '']"
+            >Lên danh sách người tham gia</a
+          >
+        </div>
+        <div class="content">
+          <div v-if="activetab === 1" class="tabcontent">
+            <div class="container h-100">
+              <div class="row h-100">
+                <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+                  <div class="d-table-cell align-middle">
+                    <div class="text-center mt-0">
+                      <h1 class="h2">Chỉnh sửa cuộc họp</h1>
+                    </div>
 
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="m-sm-4">
-                        <form>
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="m-sm-4">
                           <div class="form-group">
                             <label>Tên phòng</label>
                             <label class="form-control input-field" readonly
@@ -60,71 +60,71 @@
                               v-model="this.defaultMeetingInfo.startingtime"
                             >
                               <option selected="selected">
-                                {{ this.defaultMeetingInfo.startingtime }}
+                                {{ this.defaultMeetingInfo.startingtime }}:00
+                                giờ
                               </option>
-                              <option value="08">08:00 sáng</option>
-                              <option value="09">09:00 sáng</option>
-                              <option value="10">10:00 sáng</option>
-                              <option value="11">11:00 sáng</option>
-                              <option value="12">12:00 sáng</option>
-                              <option value="13">13:00 chiều</option>
-                              <option value="14">14:00 chiều</option>
-                              <option value="15">15:00 chiều</option>
-                              <option value="16">16:00 chiều</option>
-                              <option value="17">17:00 chiều</option>
-                              <option value="18">18:00 tối</option>
-                              <option value="19">19:00 tối</option>
-                              <option value="20">20:00 tối</option>
-                              <option value="21">21:00 tối</option>
-                              <option value="22">22:00 tối</option>
+                              <option value="08">08:00 giờ</option>
+                              <option value="09">09:00 giờ</option>
+                              <option value="10">10:00 giờ</option>
+                              <option value="11">11:00 giờ</option>
+                              <option value="12">12:00 giờ</option>
+                              <option value="13">13:00 giờ</option>
+                              <option value="14">14:00 giờ</option>
+                              <option value="15">15:00 giờ</option>
+                              <option value="16">16:00 giờ</option>
+                              <option value="17">17:00 giờ</option>
+                              <option value="18">18:00 giờ</option>
+                              <option value="19">19:00 giờ</option>
+                              <option value="20">20:00 giờ</option>
+                              <option value="21">21:00 giờ</option>
+                              <option value="22">22:00 giờ</option>
                             </select>
                           </div>
-                          </div>
-													<div class="form-group">
-                            <label>Thời gian họp</label>
-                            <input
-                              class="form-control input-field"
-                              type="number"
-                              name="during"
-                              placeholder="Nhập thời gian họp"
-                              v-model="this.defaultMeetingInfo.during"
-                            />
-                          </div>
-                          <div class="form-group">
-                            <label>Tên cuộc họp</label>
-                            <input
-                              class="form-control input-field"
-                              type="text"
-                              name="title"
-                              placeholder="Nhập tên cuộc họp"
-                              v-model="this.defaultMeetingInfo.title"
-                            />
-                          </div>
-                          <div class="form-group">
-                            <label>Nội dung cuộc họp</label>
-                            <textarea
-                              class="form-control"
-                              type="textarea"
-                              name="content"
-                              rows="5"
-                              v-model="this.defaultMeetingInfo.content"
-                            ></textarea>
-                          </div>
-                          <div class="text-center mt-3">
-                            <!-- <button @click.prevent="updateMeeting">
+                        </div>
+                        <div class="form-group">
+                          <label>Thời gian họp</label>
+                          <input
+                            class="form-control input-field"
+                            type="number"
+                            name="during"
+                            placeholder="Nhập thời gian họp"
+                            v-model="this.defaultMeetingInfo.during"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label>Tên cuộc họp</label>
+                          <input
+                            class="form-control input-field"
+                            type="text"
+                            name="title"
+                            placeholder="Nhập tên cuộc họp"
+                            v-model="this.defaultMeetingInfo.title"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label>Nội dung cuộc họp</label>
+                          <textarea
+                            class="form-control"
+                            type="textarea"
+                            name="content"
+                            rows="5"
+                            v-model="this.defaultMeetingInfo.content"
+                          ></textarea>
+                        </div>
+                        <div class="text-center mt-3">
+                          <!-- <button @click.prevent="updateMeeting">
                               Xác nhận
                             </button> -->
-                            <button
-                              type="button"
-                              class="btn btn-primary"
-                              @click.prevent="updateMeeting"
-															style="height:3rem;width:6rem;"
-                            >
-                              Xác nhận
-                            </button>
-                            <!-- <button type="submit" class="btn btn-lg btn-primary">Sign up</button> -->
-                          </div>
-                        </form>
+                          <button
+                            type="button"
+                            class="btn btn-primary"
+                            @click.prevent="updateMeeting"
+                            style="height: 3rem; width: 6rem"
+                          >
+                            Xác nhận
+                          </button>
+                          <!-- <button type="submit" class="btn btn-lg btn-primary">Sign up</button> -->
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -133,139 +133,16 @@
             </div>
           </div>
         </div>
-        <div v-if="activetab === 2" class="tabcontent">
-          <button
-            class="btn btn-primary"
-            style="height: 3rem; width: 7rem"
-            @click="SendEmail()"
-          >
-            Gửi email &#9993;
-          </button>
-          <div class="table-responsive">
-            <ul
-              v-if="searchUsers.length < users.length"
-              style="max-width: 400px"
-            >
-              <li
-                v-for="user in searchUsers"
-                :key="user.email"
-                @click="
-                  selectUser(
-                    user.fullname,
-                    user.id,
-                    user.email,
-                    user.phone,
-                    user.address
-                  )
-                "
-                class="cursor-pointer hover:bg-gray-100 p-1"
-              >
-                {{ user.fullname }}
-                <br />
-                Email:{{ user.email }}
-                <label> &emsp;&emsp; </label>
-                SĐT:{{ user.phone }}
-                <br />
-              </li>
-            </ul>
-
-            <table class="table no-wrap user-table mb-0">
-              <thead>
-                <tr>
-                  <th
-                    scope="col"
-                    class="border-0 text-uppercase font-medium pl-4"
-                  >
-                    ID
-                  </th>
-                  <th scope="col" class="border-0 text-uppercase font-medium">
-                    Tên
-                  </th>
-                  <th scope="col" class="border-0 text-uppercase font-medium">
-                    Địa chỉ
-                  </th>
-                  <th scope="col" class="border-0 text-uppercase font-medium">
-                    Email
-                  </th>
-                  <th scope="col" class="border-0 text-uppercase font-medium">
-                    SĐT
-                  </th>
-                  <th scope="col" class="border-0 text-uppercase font-medium">
-                    Xóa
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="invitedUser in invitedUsers" :key="invitedUser.id">
-                  <td class="pl-4">
-                    <h5>{{ invitedUser.id }}</h5>
-                  </td>
-                  <td>
-                    <h5 class="font-medium mb-0">{{ invitedUser.fullname }}</h5>
-                  </td>
-                  <td>
-                    <h5 class="text-muted">{{ invitedUser.address }}</h5>
-                  </td>
-                  <td>
-                    <h5 class="text-muted">{{ invitedUser.email }}</h5>
-                  </td>
-                  <td>
-                    <h5 class="text-muted">{{ invitedUser.phone }}</h5>
-                  </td>
-                  <td>
-                    <button
-                      class="btn btn-danger"
-                      type="button"
-                      @click="deleteParticipant(invitedUser.id)"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-trash"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
-                        />
-                      </svg>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
-      <div v-if="activetab === 3" class="tabcontent">
+      <div v-if="activetab === 2" class="tabcontent">
+        <button
+          class="btn btn-primary"
+          style="height: 3rem; width: 7rem"
+          @click="SendEmail()"
+        >
+          Gửi email &#9993;
+        </button>
         <div class="table-responsive">
-          <div class="example" style="max-width: 500px">
-            <input
-              type="text"
-              placeholder="Nhập tên người cần mời"
-              v-model="searchTerm"
-              @click="triggerSearchBar"
-            />
-            <button class="btn btn-success" @click="addPerson()">
-              Thêm người
-            </button>
-            <!-- <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#userList"
-              >
-                <invitingPeopleModal />
-                <h5 class="card-title text-center text-dark">
-                  Lên danh sách người tham dự
-                </h5>
-              </button> -->
-          </div>
           <ul v-if="searchUsers.length < users.length" style="max-width: 400px">
             <li
               v-for="user in searchUsers"
@@ -317,32 +194,27 @@
               </tr>
             </thead>
             <tbody>
-              <tr
-                v-for="(invitingUser, index) in invitingUsers"
-                :key="invitingUser.id"
-              >
+              <tr v-for="invitedUser in invitedUsers" :key="invitedUser.id">
                 <td class="pl-4">
-                  <h5>{{ invitingUser.id }}</h5>
+                  <h5>{{ invitedUser.id }}</h5>
                 </td>
                 <td>
-                  <h5 class="font-medium mb-0">
-                    {{ invitingUser.fullname }}
-                  </h5>
+                  <h5 class="font-medium mb-0">{{ invitedUser.fullname }}</h5>
                 </td>
                 <td>
-                  <h5 class="text-muted">{{ invitingUser.address }}</h5>
+                  <h5 class="text-muted">{{ invitedUser.address }}</h5>
                 </td>
                 <td>
-                  <h5 class="text-muted">{{ invitingUser.email }}</h5>
+                  <h5 class="text-muted">{{ invitedUser.email }}</h5>
                 </td>
                 <td>
-                  <h5 class="text-muted">{{ invitingUser.phone }}</h5>
+                  <h5 class="text-muted">{{ invitedUser.phone }}</h5>
                 </td>
                 <td>
                   <button
                     class="btn btn-danger"
                     type="button"
-                    @click="removeUserItem(index)"
+                    @click="deleteParticipant(invitedUser.id)"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -366,10 +238,132 @@
             </tbody>
           </table>
         </div>
-        <button class="btn btn-success but" @click="InvitePeople()">
-          Mời người
-        </button>
       </div>
+    </div>
+    <div v-if="activetab === 3" class="tabcontent">
+      <div class="table-responsive">
+        <div class="example" style="max-width: 500px">
+          <input
+            type="text"
+            placeholder="Nhập tên người cần mời"
+            v-model="searchTerm"
+            @click="triggerSearchBar"
+          />
+          <button class="btn btn-success" @click="addPerson()">
+            Thêm người
+          </button>
+          <!-- <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#userList"
+              >
+                <invitingPeopleModal />
+                <h5 class="card-title text-center text-dark">
+                  Lên danh sách người tham dự
+                </h5>
+              </button> -->
+        </div>
+        <ul v-if="searchUsers.length < users.length" style="max-width: 400px">
+          <li
+            v-for="user in searchUsers"
+            :key="user.email"
+            @click="
+              selectUser(
+                user.fullname,
+                user.id,
+                user.email,
+                user.phone,
+                user.address
+              )
+            "
+            class="cursor-pointer hover:bg-gray-100 p-1"
+          >
+            {{ user.fullname }}
+            <br />
+            Email:{{ user.email }}
+            <label> &emsp;&emsp; </label>
+            SĐT:{{ user.phone }}
+            <br />
+          </li>
+        </ul>
+
+        <table class="table no-wrap user-table mb-0">
+          <thead>
+            <tr>
+              <th scope="col" class="border-0 text-uppercase font-medium pl-4">
+                ID
+              </th>
+              <th scope="col" class="border-0 text-uppercase font-medium">
+                Tên
+              </th>
+              <th scope="col" class="border-0 text-uppercase font-medium">
+                Địa chỉ
+              </th>
+              <th scope="col" class="border-0 text-uppercase font-medium">
+                Email
+              </th>
+              <th scope="col" class="border-0 text-uppercase font-medium">
+                SĐT
+              </th>
+              <th scope="col" class="border-0 text-uppercase font-medium">
+                Xóa
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="(invitingUser, index) in invitingUsers"
+              :key="invitingUser.id"
+            >
+              <td class="pl-4">
+                <h5>{{ invitingUser.id }}</h5>
+              </td>
+              <td>
+                <h5 class="font-medium mb-0">
+                  {{ invitingUser.fullname }}
+                </h5>
+              </td>
+              <td>
+                <h5 class="text-muted">{{ invitingUser.address }}</h5>
+              </td>
+              <td>
+                <h5 class="text-muted">{{ invitingUser.email }}</h5>
+              </td>
+              <td>
+                <h5 class="text-muted">{{ invitingUser.phone }}</h5>
+              </td>
+              <td>
+                <button
+                  class="btn btn-danger"
+                  type="button"
+                  @click="removeUserItem(index)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-trash"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                    />
+                  </svg>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button class="btn btn-success but" @click="InvitePeople()">
+        Mời người
+      </button>
     </div>
   </div>
 </template>
@@ -519,6 +513,17 @@ export default {
         //status: "", // Not required
       };
       console.log(updateMeetingInfo);
+      const getFormInfo = {
+        room: {
+          id: this.$route.params.meetingid,
+          roomname: this.defaultMeetingInfo.room.roomname,
+        },
+        during: this.defaultMeetingInfo.during,
+        title: this.defaultMeetingInfo.title,
+        content: this.defaultMeetingInfo.content, // Not required
+        reserveddate: this.defaultMeetingInfo.reserveddate,
+        startingtime: this.defaultMeetingInfo.startingtime,
+      };
       //PUT
       editMeetingAPI(updateMeetingInfo)
         .then((res) => {
@@ -528,6 +533,7 @@ export default {
             "Cập nhật cuộc họp thành công",
             "success"
           );
+          localStorage.setItem("meetinginfo", JSON.stringify(getFormInfo));
           window.setTimeout(function () {
             location.reload();
           }, 3000);
