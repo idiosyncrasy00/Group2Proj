@@ -38,7 +38,7 @@ const createMeeting = async (req, res) => {
                         value.password = ""
                     }
                     let meeting = await Meeting.create(value);
-                    res.send(_.pick(meeting, ['id', 'status']));
+                    res.send(_.pick(meeting, ['id', 'roomid']));
                 } else {
                     res.status(400).send({error: "The time has been overlapped by another meeting"})
                 }
