@@ -14,18 +14,12 @@
                 <!-- BEGIN SEARCH INPUT -->
                 <div class="input-group">
                   <div class="input-group row mb-5">
-                    <!-- <p class="mb-0" style="color: gray; font-size: 90%">
-                      Please enter room info
-                    </p> -->
                     <input
                       type="text"
                       class="form-control col-sm-9"
                       placeholder="Danh sách phòng"
                       v-model="searchValues.roomName"
                     />
-                    <!-- <button class="btn button btn-primary col-sm-3">
-                      Tìm kiếm
-                    </button> -->
                   </div>
 
                   <!-- END SEARCH INPUT -->
@@ -116,6 +110,7 @@
                         <roomReviewModal
                           id="#exampleModal1"
                           :roomid="this.getRoomID"
+													:roomname="this.getRoomName"
                           :commentList="this.getComments"
                         />
                       </tr>

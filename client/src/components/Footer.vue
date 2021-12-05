@@ -24,7 +24,7 @@
 export default {
 	data(){
 			return{
-					mail : 'abcxyz@gmail.com',
+					mail : 'contact.meeting_manage@dev.com',
 					phone : '0983983983',
 					mention : '2021 | Group2.Inc'
 				}

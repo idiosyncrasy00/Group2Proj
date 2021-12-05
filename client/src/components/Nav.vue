@@ -74,7 +74,7 @@
             <a href="/UserList" class="nav-link">Show list of users</a>
           </li> -->
           <li class="nav-item" v-if="isAdmin == false && islogged == 1">
-            <a href="/Feedback" class="nav-link">Gửi phản hồi cho quản lý</a>
+            <a href="/FeedbackManager" class="nav-link">Phản hồi cho quản lý</a>
           </li>
           <li class="nav-item" v-if="isAdmin == false">
             <a href="/Room" class="nav-link">Danh sách phòng họp</a>
@@ -84,7 +84,7 @@
               href="/manageRoom"
               class="nav-link"
               v-if="isAdmin == true && islogged == 1"
-              >Quản lý phòng họp(chỉ dành cho quản lý)</a
+              >Quản lý phòng họp</a
             >
           </li>
           <li class="nav-item" v-if="isAdmin == true && islogged == 1">
@@ -104,7 +104,7 @@
           </li>
         </ul>
         <ul class="navbar-nav" margin-left="1rem" v-if="islogged == 1">
-          <div
+          <!--div
             v-on:mouseover="mouseOverNotify"
             v-on:mouseleave="mouseLeaveNotify"
           >
@@ -115,13 +115,13 @@
                 style="font-size: 1.2rem"
               >
                 <span>&#128276; </span>
-                <!--span class="badge">0</span-->
+                <span class="badge">0</span>
               </a>
             </li>
             <div v-if="this.showNotify">
               <Notify> </Notify>
             </div>
-          </div>
+          </div-->
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -131,7 +131,7 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Hello {{ user.username }}
+              Chào {{ user.username }}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>

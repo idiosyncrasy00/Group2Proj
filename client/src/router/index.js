@@ -110,6 +110,15 @@ const routes = [
       notrequiresAuth: false,
     }
   },
+	{
+    path: '/FeedbackManager',
+    name: 'FeedbackManager',
+    component: () => import('../views/feedbackToManager.vue'),
+    meta: {
+      requiresAuth: true,
+      notrequiresAuth: false,
+    }
+  },
   {
     path: '/Room',
     name: 'Room',
