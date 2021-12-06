@@ -58,14 +58,14 @@
       </button>
     </div>
     <div v-if="!this.showForm">
-      <div class="col-sm-10 mx-auto pb-4">
+      <div class="col-sm-13 mx-auto pb-4">
         <h3 style="margin-bottom: 3rem">Danh sách phản hồi của bạn</h3>
         <div
           class="comment mt-4 darker row"
           v-for="review in listOfReviews"
           :key="review.id"
         >
-          <div class="col-sm-4 bg-white">
+          <div class="col-sm-3 bg-white">
             <h5>{{ review.room.roomname }}</h5>
             <span>Điểm đánh giá: {{ review.rating }}/10</span> <br />
           </div>
@@ -74,11 +74,16 @@
               {{ review.message }}
             </p>
           </div>
-          <div class="col-sm-1 bg-white">
+          <!--
+          <div class="col-sm-2 bg-white">
             <b-button variant="danger" @click="deleteReview(review.id)"
               >Xóa</b-button
             >
           </div>
+          -->
+          <div class="col-sm-2 bg-white d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="button" class="btn btn-danger btn-lg " @click="deleteReview(review.id)">Xóa</button>
+          </div>          
         </div>
         <b-button
           variant="secondary"
