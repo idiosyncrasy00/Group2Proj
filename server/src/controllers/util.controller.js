@@ -14,7 +14,8 @@ const getReservedMeetingList = async (req, res) => {
         where: {
             adminid: req.user.id
         },
-        attributes: ['id', 'adminid', 'roomid', 'reserveddate', 'startingtime', 'during', 'title', 'content', 'status'],
+        attributes: ['id', 'adminid', 'roomid', 'reserveddate', 'startingtime', 'during', 'title', 'content', 'status',
+            [sequelize.fn('DATE_FORMAT', sequelize.col('reserveddate'), "%d-%m-%Y"), 'reserveddatev2']],
         include: [{
             model: User,
             as: "admin",
@@ -33,7 +34,8 @@ const getReservedMeetingList = async (req, res) => {
 
 const getInvitedMeetingList = async (req, res) => {
     let meetings = await Meeting.findAll({
-        attributes: ['id', 'adminid', 'roomid', 'reserveddate', 'startingtime', 'during', 'title', 'content', 'status'],
+        attributes: ['id', 'adminid', 'roomid', 'reserveddate', 'startingtime', 'during', 'title', 'content', 'status',
+            [sequelize.fn('DATE_FORMAT', sequelize.col('reserveddate'), "%d-%m-%Y"), 'reserveddatev2']],
         include: [{
             model: User,
             as: "participant",

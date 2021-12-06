@@ -2,85 +2,156 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <div class="card">
-          <div class="card-body text-center">
-            <h5 class="card-title text-uppercase mb-2 mt-1">
-              Danh sách cuộc họp
-            </h5>
+        <div class="row">
+          <div class="col-md-3">
+            <br />
+            <h3 class="grid-title">TÌM KIẾM</h3>
+            <hr />
+            <h5>Tên phòng:</h5>
+            <div>
+              <input
+                type="text"
+                class="form-control"
+                v-model="searchValues.roomName"
+              />
+            </div>
+            <h5>Tên người chủ trì:</h5>
+            <div>
+              <input
+                type="text"
+                class="form-control"
+                v-model="searchValues.adminName"
+              />
+            </div>
+            <h5>Tên cuộc họp:</h5>
+            <div>
+              <input
+                type="text"
+                class="form-control"
+                v-model="searchValues.meetingTitle"
+              />
+            </div>
+            <h5>Ngày đặt phòng:</h5>
+            <div>
+              <input
+                type="date"
+                class="form-control"
+                v-model="searchValues.reservedDate"
+              />
+            </div>
+            <hr />
           </div>
-          <div class="table-responsive">
-            <table class="table no-wrap user-table mb-0">
-              <thead>
-                <tr>
-                  <th scope="col" class="border-0 text-uppercase font-medium">
-                    Tên phòng
-                  </th>
-                  <th scope="col" class="border-0 text-uppercase font-medium">
-                    Tên cuộc họp
-                  </th>
-                  <th scope="col" class="border-0 text-uppercase font-medium">
-                    Mã cuộc họp
-                  </th>                 
-                  <th scope="col" class="border-0 text-uppercase font-medium">
-                    Ngày tổ chức
-                  </th>
-                  <th scope="col" class="border-0 text-uppercase font-medium">
-                    Thời gian bắt đầu
-                  </th>
-                  <th scope="col" class="border-0 text-uppercase font-medium">
-                    Thời gian họp
-                  </th>
-                  <th scope="col" class="border-0 text-uppercase font-medium">
-                    Rời cuộc họp
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="meeting in meetings" :key="meeting.id">
-                  <td class="pl-4">{{ meeting.room.roomname }}</td>
-                  <td>
-                  <span>{{ meeting.title }}</span>
-                  </td>
-                  <td>
-                    <span>{{ meeting.id }}</span>
-                  </td>
-                  <td>
-                    <span>{{ meeting.reserveddate }}</span>
-                  </td>
-                  <td>
-                    <span>{{ meeting.startingtime }} giờ</span
-                    ><br />
-                  </td>
-                  <td>
-                    <span>{{ meeting.during }} giờ</span>
-                  </td>
-                  <td>
-                    <button
-                      class="btn btn-danger"
-                      type="button"
-                      @click="leaveMeeting(meeting.id)"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-trash"
-                        viewBox="0 0 16 16"
+          <div class="col-md-9">
+            <div class="card">
+              <div class="card-body text-center">
+                <h3 class="card-title text-uppercase mb-2 mt-1">
+                  Danh sách cuộc họp
+                </h3>
+              </div>
+              <div class="table-responsive">
+                <table class="table no-wrap user-table mb-0">
+                  <thead>
+                    <tr>
+                      <th
+                        scope="col"
+                        class="border-0 text-uppercase font-medium"
                       >
-                        <path
-                          d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
-                        />
-                      </svg>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                        Tên phòng
+                      </th>
+                      <th
+                        scope="col"
+                        class="border-0 text-uppercase font-medium"
+                      >
+                        Tên cuộc họp
+                      </th>
+                      <th
+                        scope="col"
+                        class="border-0 text-uppercase font-medium"
+                      >
+                        Mã cuộc họp
+                      </th>
+                      <th
+                        scope="col"
+                        class="border-0 text-uppercase font-medium"
+                      >
+                        Người chủ trì
+                      </th>
+                      <th
+                        scope="col"
+                        class="border-0 text-uppercase font-medium"
+                      >
+                        Ngày tổ chức
+                      </th>
+                      <th
+                        scope="col"
+                        class="border-0 text-uppercase font-medium"
+                      >
+                        Thời gian bắt đầu
+                      </th>
+                      <th
+                        scope="col"
+                        class="border-0 text-uppercase font-medium"
+                      >
+                        Thời gian họp
+                      </th>
+                      <th
+                        scope="col"
+                        class="border-0 text-uppercase font-medium"
+                      >
+                        Rời cuộc họp
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="meeting in searchMeetings" :key="meeting.id">
+                      <td class="pl-4">{{ meeting.room.roomname }}</td>
+                      <td>
+                        <span>{{ meeting.title }}</span>
+                      </td>
+                      <td>
+                        <span>{{ meeting.id }}</span>
+                      </td>
+                      <td>
+                        <span>{{ meeting.admin.adminname }}</span>
+                      </td>
+                      <td>
+                        <span>{{ meeting.reserveddatev2 }}</span>
+                      </td>
+                      <td>
+                        <span>{{ meeting.startingtime }} giờ</span><br />
+                      </td>
+                      <td>
+                        <span>{{ meeting.during }} giờ</span>
+                      </td>
+                      <td>
+                        <button
+                          class="btn btn-danger"
+                          type="button"
+                          @click="leaveMeeting(meeting.id)"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            class="bi bi-trash"
+                            viewBox="0 0 16 16"
+                          >
+                            <path
+                              d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                            />
+                            <path
+                              fill-rule="evenodd"
+                              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                            />
+                          </svg>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -92,13 +163,20 @@
 import {
   getInvitedMeetingsListAPI,
   participantLeavesMeetingAPI,
+  //searchMeetingsAPI,
 } from "@/services/meeting.apiServices.js";
-import { formatDate } from "@/store/index.js";
+//import { formatDate } from "@/store/index.js";
 
 export default {
   name: "participant",
   data() {
     return {
+      searchValues: {
+        roomName: "",
+        meetingTitle: "",
+        reservedDate: "",
+        adminName: "",
+      },
       meetings: [],
     };
   },
@@ -133,22 +211,35 @@ export default {
     getInvitedMeetingsListAPI()
       .then((res) => {
         this.meetings = res.data;
-        for (var i = 0; i < this.meetings.length; i++) {
-          this.meetings[i].reserveddate = formatDate(
-            this.meetings[i].reserveddate
-          );
-        }
         console.log(res);
       })
       .catch((err) => {
         console.log(err);
       });
   },
+  computed: {
+    searchMeetings() {
+      return this.meetings.filter((item) => {
+        return (
+          item.room.roomname
+            .toLowerCase()
+            .search(this.searchValues.roomName.toLowerCase()) != -1 &&
+          item.title
+            .toLowerCase()
+            .search(this.searchValues.meetingTitle.toLowerCase()) != -1 &&
+          item.admin.adminname
+            .toLowerCase()
+            .search(this.searchValues.adminName.toLowerCase()) != -1 &&
+          item.reserveddate.search(this.searchValues.reservedDate) != -1
+        );
+      });
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-$table-bg-color:#505050	;
+$table-bg-color: #505050;
 .card {
   position: relative;
   display: flex;

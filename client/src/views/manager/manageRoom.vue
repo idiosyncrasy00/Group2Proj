@@ -59,7 +59,7 @@
 
                           <div class="col-sm-6">
                             <p>
-                              {{ room.roomname }} - điểm đánh giá trung bình:
+                              <b>{{ room.roomname }} </b> - Đánh giá trung bình:
                               {{ room.rating }}/10
                             </p>
                             Trang thiết bị: {{ room.facilities }}
