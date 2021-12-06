@@ -23,6 +23,7 @@
         aria-label="Default select example"
         v-model="reviewContent.rating"
       >
+        <option selected>Đánh giá phòng</option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>

@@ -44,11 +44,14 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item" v-if="isAdmin == false && islogged == 1">
-            <a href="/FeedbackManager" class="nav-link">Phản hồi cho quản lý</a>
-          </li>
           <li class="nav-item" v-if="isAdmin == false">
             <a href="/Room" class="nav-link">Danh sách phòng họp</a>
+          </li>          
+          <li class="nav-item" v-if="isAdmin == false && islogged == 1">
+            <a href="/Feedback" class="nav-link">Phản hồi phòng họp</a>
+          </li>
+          <li class="nav-item" v-if="isAdmin == false && islogged == 1">
+            <a href="/FeedbackManager" class="nav-link">Phản hồi cho quản lý</a>
           </li>
           <li class="nav-item">
             <a
@@ -61,9 +64,7 @@
           <li class="nav-item" v-if="isAdmin == true && islogged == 1">
             <a href="/statistics" class="nav-link">Thống kê</a>
           </li>
-          <li class="nav-item" v-if="isAdmin == false && islogged == 1">
-            <a href="/Feedback" class="nav-link">Phản hồi</a>
-          </li>
+          
         </ul>
 
         <ul class="navbar-nav" v-if="islogged == 0">

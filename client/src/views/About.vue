@@ -17,7 +17,12 @@
 	<div class="col-sm-9">
 		<h5> NHÓM CHÚNG TÔI </h5>
 		<p style="font-size:1.5rem;">
-			Nhóm 2, gồm 5 thành viên
+			Nhóm 2, gồm 5 thành viên : <br>
+			<i>- Vương Vũ Đức Hoàng (nhóm trưởng) </i><br>
+			<i>- Trần Xuân Hải </i> <br>
+			<i>- Vương Thanh Phương </i><br>
+			<i>- Nguyễn Vinh Quang </i><br>
+			<i>- Tạ Đình Quý </i>
 		</p>
 	</div>
 </div>
@@ -35,7 +40,7 @@
 <div class="row mt-5 row text-section-end" data-aos="fade-up">
 	<div class="col-sm-1"></div>
 	<div class="col-sm-8">
-		<h5> Dự án này </h5>
+		<h5> DỰ ÁN NÀY </h5>
 		<p style="font-size:1.5rem;">
 			Khung dự án
 		</p>
