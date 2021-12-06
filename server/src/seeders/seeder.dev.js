@@ -141,7 +141,7 @@ module.exports = {
             id: 21,
             userid: 12,
             message: "Tính năng tạo cuộc họp vẫn còn nhiều lỗi",
-            time: "2021-11-23 09:50:18"
+            time: "2021-11-23"
         }]);
         await db.Review.bulkCreate([{
             id: 31,
@@ -149,21 +149,21 @@ module.exports = {
             roomid: 1,
             rating: 7,
             message: "Phòng họp hơi chật nhưng vẫn đủ để dùng",
-            time: "2021-11-23 09:50:18"
+            time: "2021-11-23"
         }, {
             id: 32,
             userid: 12,
             roomid: 3,
             rating: 10,
             message: "Phòng họp sạch sẽ, thoáng mát. Cơ sở vật chất tiện nghi",
-            time: "2021-11-24 09:50:18"
+            time: "2021-11-24"
         }, {
             id: 33,
             userid: 13,
             roomid: 1,
             rating: 3,
             message: "Phòng họp vẫn còn bẩn, không đủ ánh sáng",
-            time: "2021-11-25 09:50:18"
+            time: "2021-11-25"
         }]);
         // Run loader
         await require('./loader').reloadRating();
