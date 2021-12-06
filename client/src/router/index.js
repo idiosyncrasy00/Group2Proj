@@ -110,7 +110,7 @@ const routes = [
       notrequiresAuth: false,
     }
   },
-	{
+  {
     path: '/FeedbackManager',
     name: 'FeedbackManager',
     component: () => import('../views/feedbackToManager.vue'),
@@ -140,7 +140,7 @@ const routes = [
   {
     path: '/statistics',
     name: 'statistics',
-    component: () => import('../views/manager/statistics2'),
+    component: () => import('../views/manager/statistics'),
     meta: {
       requiresAuth: true,
       notrequiresAuth: true,
