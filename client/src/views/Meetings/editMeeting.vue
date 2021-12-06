@@ -40,7 +40,7 @@
                             <label>Tên phòng</label>
                             <label
                               class="form-control form-control-lg"
-                              readonlyy
+                              readonly
                               >{{ this.defaultMeetingInfo.room.roomname }}
                             </label>
                           </div>
@@ -48,7 +48,7 @@
                             <label>Mã cuộc họp</label>
                             <label
                               class="form-control form-control-lg"
-                              readonlyy
+                              readonly
                             >
                               {{ this.defaultMeetingInfo.id }}</label
                             >
@@ -73,7 +73,7 @@
                               v-model="this.updateMeetingInfo.startingtime"
                             /> -->
                             <select
-                              class="form-select"
+                              class="form-select form-control form-control-lg"
                               aria-label="Default select example"
                               v-model="this.defaultMeetingInfo.startingtime"
                             >
@@ -413,7 +413,7 @@ export default {
       users: [],
       invitedUsers: [],
       invitingUsers: [],
-      activetab: 2,
+      activetab: 1,
       roomid: this.$route.params.roomid,
       meetingid: this.$route.params.meetingid,
       defaultMeetingInfo: JSON.parse(localStorage.getItem("meetinginfo")),

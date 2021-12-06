@@ -55,7 +55,7 @@
                     <span>{{ meeting.startingtime }} giờ</span>
                   </td>
                   <td>
-                    <span>{{ meeting.during }} tiếng</span>
+                    <span>{{ meeting.during }} giờ </span>
                   </td>
                   <td>
                     <button

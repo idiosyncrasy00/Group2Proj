@@ -6,11 +6,11 @@
     <!-- form card change password -->
     <div class="card card-outline-secondary">
       <div class="card-header text-center">
-        <h3 class="mb-0">Đổi mật khẩu &#9919;</h3>
+        <h3 class="mb-0">Đổi mật khẩu</h3>
       </div>
       <div class="card-body">
         <div class="form-group">
-          <label for="inputPasswordOld">Mật khẩu hiện tại</label>
+          <label for="inputPasswordOld">Mật khẩu hiện tại:</label>
           <input
             type="password"
             class="form-control"
@@ -20,7 +20,7 @@
           />
         </div>
         <div class="form-group">
-          <label for="inputPasswordNew">Mật khẩu mới</label>
+          <label for="inputPasswordNew">Mật khẩu mới:</label>
           <input
             type="password"
             class="form-control"
@@ -34,10 +34,7 @@
             </span> -->
         </div>
         <div class="form-group">
-          <label for="inputPasswordNewVerify">Xác nhận mật khẩu mới</label>
-					<div class="form-text small text-muted">
-            Nhập lại mật khẩu mới để xác nhận
-          </div>
+          <label for="inputPasswordNewVerify">Xác nhận mật khẩu mới:</label>
           <input
             type="password"
             class="form-control"
@@ -83,8 +80,8 @@ export default {
       updatePasswordAPI(data)
         .then((res) => {
           this.$swal.fire(
-            "Good job!",
-            "Cap nhat mat khau thanh cong",
+            "Thành công!",
+            "Cập nhật mật khẩu thành công",
             "success"
           );
           window.setTimeout(function () {
@@ -93,13 +90,13 @@ export default {
           console.log(res);
         })
         .catch((err) => {
-          this.$swal.fire("Failed!", "Cap nhat mat khau that bai", "error");
+          this.$swal.fire("Thất bại!", "Cập nhật mật khẩu thất bại", "error");
           console.log(err);
         });
       if (this.newpassword != this.confirmedpassword) {
         this.$swal.fire(
-          "Failed!",
-          "Mat khau xac nhan khong duoc trung voi mat khau moi",
+          "Thất bại!",
+          "Mật khẩu xác nhận phải trùng với mật khẩu mới",
           "error"
         );
       }

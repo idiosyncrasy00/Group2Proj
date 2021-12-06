@@ -2,7 +2,7 @@
   <div id="footer">
     <div id="contacts">
       <div id="contacts--contact">
-        <p>{{ mail }}</p>
+        <p><i>{{ mail }}</i></p>
         <p>{{ phone }}</p>
         <div class="item">
           <a href="/FeedbackManager" style="text-decoration: none"
