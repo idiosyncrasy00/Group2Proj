@@ -35,7 +35,7 @@ module.exports = {
             id: 12,
             firstname: "Đức",
             lastname: "Hoàng",
-            email: "inconsolable789@gmail.com",
+            email: "pooppooppoop407@gmail.com",
             dob: "2000-01-20",
             phone: "0132546852",
             address: "24 Hoàng Văn Thụ",
