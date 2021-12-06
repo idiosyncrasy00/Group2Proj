@@ -138,9 +138,15 @@ export default {
           );
           this.reviewContent.message = "";
           this.reviewContent.rating = "";
+          window.setTimeout(function () {
+            location.reload();
+          }, 2000);
         })
         .catch((err) => {
           console.log(err);
+          if (err.response.status === 403) {
+            this.$swal.fire("Các mục không được để trống", "", "failed");
+          }
         });
     },
     deleteReview(id) {

@@ -35,6 +35,9 @@ export default {
           this.messageContent = "";
         })
         .catch((err) => {
+          if (err.response.status === 403) {
+            this.$swal.fire("Tin nhắn không được để trống", "", "failed");
+          }
           console.log(err);
         });
     },
