@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer');
 
 var transporter = null;
 const sender = "Ban tổ chức cuộc họp <danielfred@gmail.com>";
+const dev_email = "stickchachacha123@gmail.com";
 
 // Init mailer
 function init_mailer() {
@@ -66,7 +67,19 @@ Ban tổ chức cuộc họp,<br>
     send_email(receiver, subject, html);
 }
 
+function send_feedback_email(id, userid, message) {
+    let subject = `Phản hồi ứng dụng số ${id}`;
+    let html = 
+`<body>
+ID phản hồi: ${id}<br>
+ID người phản hồi: ${userid}<br>
+Tin nhắn:<br>
+${message}
+</body>`
+    send_email(dev_email, subject, html);
+}
+
 //init_mailer();
 //send_invite_email('vinhquangit01@gmail.com', 'NGUYEN VINH QUANG', 'a', '2021-12-04', '8', '2', 'b', 'c');
 
-module.exports = { init_mailer, send_email, send_invite_email };
+module.exports = { init_mailer, send_email, send_invite_email, send_feedback_email };

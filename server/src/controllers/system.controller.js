@@ -1,5 +1,6 @@
-const { Feedback, Room, sequelize } = require('../models');
+const { Feedback, Room, User, sequelize } = require('../models');
 const validation = require('../validations/system.validation');
+const email_util = require('../utilities/email');
 
 
 const sendFeedback = async (req, res) => {
@@ -8,12 +9,13 @@ const sendFeedback = async (req, res) => {
         res.status(403).send({error: error.message});
     } else {
         try {
-            await Feedback.create({
+            let feedback = await Feedback.create({
                 userid: req.user.id,
                 message: value.message,
                 time: sequelize.fn('NOW')
             });
             res.send();
+            email_util.send_feedback_email(feedback.id, feedback.userid, feedback.message);
         } catch(error) {
             res.status(400).send({ error: error.message });
         }
