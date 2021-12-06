@@ -515,12 +515,11 @@ export default {
       const data = {
         id: this.$route.params.meetingid,
         roomid: this.$route.params.roomid,
-        reserveddate: this.updateMeetingInfo.reserveddate,
-        startingtime: this.updateMeetingInfo.startingtime.substring(0, 2),
-        during: this.updateMeetingInfo.during,
-        title: this.updateMeetingInfo.title,
-        content: this.updateMeetingInfo.content,
-        status: "ok",
+        reserveddate: this.defaultMeetingInfo.reserveddate,
+        startingtime: this.defaultMeetingInfo.startingtime,
+        during: this.defaultMeetingInfo.during,
+        title: this.defaultMeetingInfo.title,
+        content: this.defaultMeetingInfo.content,
       };
       console.log(data);
       //PUT

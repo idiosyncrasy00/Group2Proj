@@ -27,105 +27,106 @@
         class="col-sm-8"
         style="background-color: #b3ccff; padding: 0; margin: 0"
       >
-        <form style="height: 100%" @submit="handleSubmit" action="/signup">
-          <main
-            class="form-signup card"
-            style="background-color: var(--bg-color)"
-          >
+        <main
+          class="form-signup card"
+          style="background-color: var(--bg-color)"
+        >
+          <div class="row">
+            <div class="col-sm-6">
+              <p class="form-header">Họ</p>
+              <input
+                type="firstname"
+                class="form-control"
+                placeholder="Nhập họ của bạn"
+                v-model="signupValues.firstname"
+              />
+            </div>
+
+            <div class="col-sm-6">
+              <p class="form-header">Tên</p>
+              <input
+                type="lastname"
+                class="form-control"
+                placeholder="Nhập tên của bạn"
+                v-model="signupValues.lastname"
+              />
+            </div>
+          </div>
+          <div class="">
+            <p class="form-header">Tên đăng nhập</p>
+            <input
+              type="username"
+              class="form-control"
+              placeholder="Nhập tên đăng nhập"
+              v-model="signupValues.username"
+            />
+          </div>
+
+          <div class="">
+            <p class="form-header">Mật khẩu</p>
+            <input
+              type="password"
+              class="form-control"
+              id="floatingPassword"
+              placeholder="Nhập mật khẩu"
+              v-model="signupValues.password"
+            />
+
             <div class="row">
-              <div class="col-sm-6">
-                <p class="form-header">Họ</p>
+              <div class="col-sm-4">
+                <p class="form-header">Ngày sinh</p>
                 <input
-                  type="firstname"
+                  type="date"
+                  ref="date"
                   class="form-control"
-                  placeholder="Nhập họ của bạn"
-                  v-model="signupValues.firstname"
+                  id="inputDate"
+                  v-model="signupValues.dob"
+                  v-on:keyup.enter="this.$refs.duration.focus()"
                 />
               </div>
-
-              <div class="col-sm-6">
-                <p class="form-header">Tên</p>
+              <div class="col-sm-8">
+                <p class="form-header">Email</p>
                 <input
-                  type="lastname"
+                  type="email"
                   class="form-control"
-                  placeholder="Nhập tên của bạn"
-                  v-model="signupValues.lastname"
+                  placeholder="Nhập email của bạn"
+                  v-model="signupValues.email"
                 />
               </div>
             </div>
+
+            <div class=""></div>
+            <p class="form-header">Số điện thoại</p>
             <div class="">
-              <p class="form-header">Tên đăng nhập</p>
               <input
-                type="username"
+                type="phonenumber"
                 class="form-control"
-                placeholder="Nhập tên đăng nhập"
-                v-model="signupValues.username"
+                placeholder="Nhập số điện thoại của bạn"
+                v-model="signupValues.phone"
               />
             </div>
 
             <div class="">
-              <p class="form-header">Mật khẩu</p>
+              <p class="form-header">Địa chỉ</p>
               <input
-                type="password"
+                type="address"
                 class="form-control"
-                id="floatingPassword"
-                placeholder="Nhập mật khẩu"
-                v-model="signupValues.password"
+                placeholder="Nhập địa chỉ của bạn"
+                v-model="signupValues.address"
               />
-
-              <div class="row">
-                <div class="col-sm-4">
-                  <p class="form-header">Ngày sinh</p>
-                  <input
-                    type="date"
-                    ref="date"
-                    class="form-control"
-                    id="inputDate"
-                    v-model="signupValues.dob"
-                    v-on:keyup.enter="this.$refs.duration.focus()"
-                  />
-                </div>
-                <div class="col-sm-8">
-                  <p class="form-header">Email</p>
-                  <input
-                    type="email"
-                    class="form-control"
-                    placeholder="Nhập email của bạn"
-                    v-model="signupValues.email"
-                  />
-                </div>
-              </div>
-
-              <div class=""></div>
-              <p class="form-header">Số điện thoại</p>
-              <div class="">
-                <input
-                  type="phonenumber"
-                  class="form-control"
-                  placeholder="Nhập số điện thoại của bạn"
-                  v-model="signupValues.phone"
-                />
-              </div>
-
-              <div class="">
-                <p class="form-header">Địa chỉ</p>
-                <input
-                  type="address"
-                  class="form-control"
-                  placeholder="Nhập địa chỉ của bạn"
-                  v-model="signupValues.address"
-                />
-              </div>
             </div>
-            <div class="row">
-              <button class="w-25 btn btn-lg btn-primary mt-3 mx-auto">
-                Đăng ký
-              </button>
-            </div>
-            <!-- </form> -->
-          </main>
-        </form>
-        <p>{{ errMsg }}</p>
+          </div>
+          <div class="row">
+            <button
+              class="w-25 btn btn-lg btn-primary mt-3 mx-auto"
+              @click="register()"
+            >
+              Đăng ký
+            </button>
+            <p id="errMsg">{{ errMsg }}</p>
+          </div>
+          <!-- </form> -->
+        </main>
       </div>
     </div>
   </div>
@@ -153,8 +154,8 @@ export default {
     };
   },
   methods: {
-    async handleSubmit(e) {
-      e.preventDefault();
+    register() {
+      //e.preventDefault();
       const data = {
         firstname: this.signupValues.firstname,
         lastname: this.signupValues.lastname,
@@ -176,7 +177,12 @@ export default {
           }
         })
         .catch((err) => {
-          this.errMsg = err.response.data;
+          if (err.response.status === 403) {
+            this.errMsg = "Hãy điền vào các ô còn trống!";
+          } else if (err.response.status === 400) {
+            this.errMsg = "Tên đăng nhập, email hoặc SĐT của bạn đã tồn tại.";
+          }
+          //this.errMsg = err.response.data;
           console.log(err);
         });
     },
@@ -188,6 +194,10 @@ export default {
 </script>
 
 <style>
+#errMsg {
+  color: red;
+  margin-left: 0px;
+}
 body {
   display: center;
   align-items: center;

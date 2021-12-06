@@ -113,7 +113,92 @@
                               />
                             </button>
                           </div>
-                          <roomEditModal />
+                          <div
+                            class="modal fade"
+                            id="staticBackdrop"
+                            data-bs-backdrop="static"
+                            data-bs-keyboard="false"
+                            tabindex="-1"
+                            aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true"
+                          >
+                            <!--edit modal-->
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5
+                                    class="modal-title"
+                                    id="staticBackdropLabel"
+                                  >
+                                    Thông tin phòng họp
+                                  </h5>
+                                  <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                  ></button>
+                                </div>
+                                <div class="modal-body">
+                                  <!-- modal body -->
+                                  <div class="form-group">
+                                    <label>Tên phòng</label>
+                                    <label
+                                      class="form-control form-control-lg"
+                                      readonly
+                                    >
+                                      <!-- {{ this.roominfo.name }} -->
+                                      {{ this.getroomname }}
+                                    </label>
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Sức chứa </label>
+                                    <input
+                                      class="form-control form-control-lg"
+                                      type="number"
+                                      min="1"
+                                      v-model="this.getroomcapacity"
+                                    />
+                                    <!-- {{ this.getroomcapacity }} -->
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Trang thiết bị</label>
+                                    <textarea
+                                      class="form-control form-control-lg"
+                                      type="textarea"
+                                      v-model="this.getroomfacilities"
+                                    />
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Trạng thái</label>
+                                    <input
+                                      class="form-control form-control-lg"
+                                      type="text"
+                                      v-model="this.getroomstatus"
+                                    />
+                                  </div>
+                                  <!-- end modal body -->
+                                </div>
+                                <div class="modal-footer">
+                                  <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                  >
+                                    Hủy bỏ
+                                  </button>
+                                  <button
+                                    type="button"
+                                    class="btn btn-primary"
+                                    @click="editRoomInfo()"
+                                  >
+                                    Xác nhận
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--end edit modal-->
                           <roomReviewModal
                             :commentList="this.getComments"
                             :roomname="this.getroomname"
@@ -125,12 +210,7 @@
                 </div>
                 <!-- END TABLE RESULT -->
               </div>
-              <!-- Modal -->
-              <!-- Modal thêm phòng -->
-              <roomCreateModal :commentList="this.getComments" />
-              <!-- End Modal -->
-              <!-- end thêm phòng -->
-              <!-- END RESULT -->
+              <roomCreateModal />
             </div>
           </div>
         </div>
@@ -178,14 +258,11 @@ export default {
   },
   methods: {
     editRoomInfo(room) {
-      const roominfo = {
-        id: room.id,
-        name: room.roomname,
-        capacity: room.capacity,
-        facilities: room.facilities,
-        status: room.status,
-      };
-      localStorage.setItem("roominfo", JSON.stringify(roominfo));
+      this.getroomid = room.id;
+      this.getroomname = room.roomname;
+      this.getroomcapacity = room.capacity;
+      this.getroomfacilities = room.facilities;
+      this.getroomstatus = room.status;
     },
     deleteRoom(id) {
       this.$swal

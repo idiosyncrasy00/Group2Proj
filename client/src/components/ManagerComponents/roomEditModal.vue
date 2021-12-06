@@ -27,7 +27,7 @@
             <label>Tên phòng</label>
             <label class="form-control form-control-lg" readonly>
               <!-- {{ this.roominfo.name }} -->
-              {{ this.roominfo.name }}
+              {{ this.roomname }}
             </label>
           </div>
           <div class="form-group">
@@ -36,15 +36,15 @@
               class="form-control form-control-lg"
               type="number"
               min="1"
-              v-model="this.roominfo.capacity"
             />
+            {{this.roomcapacity}}
           </div>
           <div class="form-group">
             <label>Trang thiết bị</label>
             <textarea
               class="form-control form-control-lg"
               type="textarea"
-              v-model="this.roominfo.facilities"
+              v-model="facilities"
             />
           </div>
           <div class="form-group">
@@ -52,7 +52,7 @@
             <input
               class="form-control form-control-lg"
               type="text"
-              v-model="this.roominfo.status"
+              v-model="status"
             />
           </div>
           <!-- end modal body -->
@@ -81,16 +81,24 @@ import { editRoomAPI } from "@/services/room.apiServices.js";
 export default {
   inheritAttrs: false,
   //props: ["roomid", "roomname", "roomcapacity", "roomfacilities", "roomstatus"],
+  props: ["roomid", "roomname", "roomcapacity", "roomfacilities", "roomstatus"],
   data() {
     return {
-      roominfo: JSON.parse(localStorage.getItem("roominfo")),
+      // roominfo: {
+      //   capacity: this.roomcapacity,
+      //   facilities: this.roomfacilities,
+      //   status: this.roomstatus,
+      // },
+      capacity: "",
+      facilities: "",
+      status: "",
     };
   },
   methods: {
     editRoomInfo() {
       const data = {
-        id: this.roominfo.id,
-        roomname: this.roominfo.name,
+        id: this.roomid,
+        roomname: this.roomname,
         capacity: this.roominfo.capacity,
         facilities: this.roominfo.facilities,
         status: this.roominfo.status,
@@ -116,15 +124,27 @@ export default {
           console.log(err);
         });
     },
+    // exitModal() {
+    //   localStorage.removeItem("roominfo");
+    // },
   },
-  // async created() {
-  //   alert(this.roomname);
+  // mounted() {
+  //   this.roominfo.capacity = this.roomcapacity;
+  //   this.roominfo.facilities = this.roomfacilities;
   // },
-  // async created() {
-  //   this.getroomname = this.roomname;
-  //   this.getroomcapacity = this.roomcapacity;
-  //   this.getroomfacilities = this.roomfacilities;
-  //   this.getroomstatus = this.roomstatus;
+  // watch: {
+  //   capacity: () => this.$emit('update:capacity', value),
+  //   //this.roominfo.capacity: value => this.$emit('update:number1', value)
+  // },
+  // computed: {
+  //   computedCapacity: {
+  //     get() {
+  //       return this.roomcapacity;
+  //     },
+  //     set(value) {
+  //       this.$emit("update:roomcapacity", value);
+  //     },
+  //   },
   // },
 };
 </script>

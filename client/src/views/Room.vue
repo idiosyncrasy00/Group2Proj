@@ -39,8 +39,8 @@
                             </div>
                             <div class="col-sm-6">
                               <p>
-                                {{ room.roomname }} - Đánh giá trung bình:
-                                {{ room.rating }}/10
+                                <b>{{ room.roomname }}</b> - Đánh giá trung
+                                bình: {{ room.rating }}/10
                               </p>
                               Trang thiết bị: {{ room.facilities }}
                             </div>

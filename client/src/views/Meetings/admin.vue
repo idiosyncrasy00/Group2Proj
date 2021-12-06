@@ -179,9 +179,8 @@ export default {
         this.meetings = res.data;
         //console.log(this.meetings.length);
         for (var i = 0; i < this.meetings.length; i++) {
-          this.reserveddateFormat.push(
-            formatDate(this.meetings[i].reserveddate)
-          );
+          var temp = this.meetings[i].reserveddate;
+          this.reserveddateFormat.push(formatDate(temp));
         }
       })
       .catch((err) => {
