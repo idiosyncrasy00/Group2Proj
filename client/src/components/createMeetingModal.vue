@@ -168,21 +168,6 @@ export default {
         title: this.meetingInfo.title,
         content: this.meetingInfo.content, // Not required
       };
-      const getFormInfo = {
-        room: { id: this.roomid, roomname: this.roomname },
-        during: this.meetingInfo.during,
-        title: this.meetingInfo.title,
-        content: this.meetingInfo.content, // Not required
-        reserveddate: this.meetingInfo.reserveddate,
-        startingtime: getTime,
-      };
-      //       admin: {id: 11, adminname: "Đức Hoàng"}
-      // content: "rrrr"
-      // during: 2
-      // reserveddate: "2021-12-16"
-      // room: {id: 1, roomname: "Phòng 101"}
-      // startingtime: 13
-      // title: "rew"
       console.log(meetingInfo);
       //axios post
       if (getTime >= 8 && getTime <= 22) {
@@ -194,6 +179,15 @@ export default {
               "Tạo cuộc họp thành công",
               "success"
             );
+            const getFormInfo = {
+              id: res.data.id,
+              room: { id: this.roomid, roomname: this.roomname },
+              during: this.meetingInfo.during,
+              title: this.meetingInfo.title,
+              content: this.meetingInfo.content, // Not required
+              reserveddate: this.meetingInfo.reserveddate,
+              startingtime: getTime,
+            };
             localStorage.setItem("meetinginfo", JSON.stringify(getFormInfo));
             window.setTimeout(function () {
               location.href =
