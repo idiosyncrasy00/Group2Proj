@@ -65,16 +65,16 @@
           v-for="review in listOfReviews"
           :key="review.id"
         >
-          <div class="col-sm-4">
+          <div class="col-sm-4 bg-white">
             <h5>{{ review.room.roomname }}</h5>
             <span>Điểm đánh giá: {{ review.rating }}/10</span> <br />
           </div>
-          <div class="col-sm-7">
+          <div class="col-sm-7 bg-white">
             <p>
               {{ review.message }}
             </p>
           </div>
-          <div class="col-sm-1">
+          <div class="col-sm-1 bg-white">
             <b-button variant="danger" @click="deleteReview(review.id)"
               >Xóa</b-button
             >
