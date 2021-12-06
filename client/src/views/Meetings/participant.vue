@@ -2,6 +2,35 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-3">
+        <br>
+      <h2 class="grid-title">Tìm kiếm</h2>
+            <hr>
+      <h5>Tên phòng:</h5>
+            <div>
+              <input type="text" class="form-control">
+            </div>
+      <h5>Tên người chủ trì:</h5>
+            <div>
+              <input type="text" class="form-control">
+            </div>
+      <h5>Tên cuộc họp:</h5>
+            <div>
+              <input type="text" class="form-control">
+            </div>
+      <h5>Ngày đặt phòng:</h5>
+            <div>
+              <input type="date" class="form-control">
+            </div>
+      <hr>
+      <button class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+      </button>
+      </div>
+      <div class="col-md-9">
         <div class="card">
           <div class="card-body text-center">
             <h5 class="card-title text-uppercase mb-2 mt-1">
@@ -82,6 +111,8 @@
               </tbody>
             </table>
           </div>
+        </div>
+      </div>
         </div>
       </div>
     </div>
