@@ -49,7 +49,7 @@
                 class="w-100"
                 :data="this.roomList1"
                 :min="0"
-                :max="20"
+                :max="this.getMax"
                 xtitle="Tên phòng họp"
                 ytitle="Số lần đặt phòng"
               ></column-chart>
@@ -78,7 +78,7 @@
               <column-chart
                 :data="this.roomList2"
                 :min="0"
-                :max="60"
+                :max="this.getMax"
                 xtitle="Tên phòng họp"
                 ytitle="Số lần đặt phòng"
               ></column-chart>
@@ -107,7 +107,7 @@
               <column-chart
                 :data="this.roomList3"
                 :min="0"
-                :max="100"
+                :max="this.getMax"
                 xtitle="Tên phòng họp"
                 ytitle="Số lần đặt phòng"
               ></column-chart>
@@ -132,6 +132,7 @@ export default {
       // date1: "yyyy-mm-dd",
       // date2: "yyyy-mm",
       // date3: "",
+      getMax: JSON.parse(localStorage.getItem("getMaxValue")) || 2,
       date1: JSON.parse(localStorage.getItem("input1")),
       date2: JSON.parse(localStorage.getItem("input2")),
       date3: JSON.parse(localStorage.getItem("input3")),
@@ -150,10 +151,16 @@ export default {
       //var temp_activetab = 1;
       getRoomStatsAPI(this.date1)
         .then((res) => {
-          console.log(res);
+          var max = 2;
           for (var i = 0; i < res.data.length; i++) {
             temp.push([res.data[i].roomname, res.data[i].usage]);
+            if (res.data[i].usage > max) {
+              max = res.data[i].usage;
+            }
           }
+          console.log(max);
+          console.log(res);
+          localStorage.setItem("getMaxValue", max.toString());
           localStorage.setItem("getstatistic1", JSON.stringify(temp));
           localStorage.setItem("activetab", 1);
           localStorage.setItem("input1", JSON.stringify(this.date1));
@@ -173,10 +180,16 @@ export default {
       var temp = [];
       getRoomStatsAPI(this.date2)
         .then((res) => {
-          console.log(res);
+          var max = 2;
           for (var i = 0; i < res.data.length; i++) {
             temp.push([res.data[i].roomname, res.data[i].usage]);
+            if (res.data[i].usage > max) {
+              max = res.data[i].usage;
+            }
           }
+          console.log(max);
+          console.log(res);
+          localStorage.setItem("getMaxValue", max.toString());
           localStorage.setItem("getstatistic2", JSON.stringify(temp));
           localStorage.setItem("activetab", 2);
           localStorage.setItem("input2", JSON.stringify(this.date2));
@@ -196,10 +209,16 @@ export default {
       var temp = [];
       getRoomStatsAPI(JSON.stringify(this.date3))
         .then((res) => {
-          console.log(res);
+          var max = 2;
           for (var i = 0; i < res.data.length; i++) {
             temp.push([res.data[i].roomname, res.data[i].usage]);
+            if (res.data[i].usage > max) {
+              max = res.data[i].usage;
+            }
           }
+          //console.log(res);
+          console.log(max);
+          localStorage.setItem("getMaxValue", max.toString());
           localStorage.setItem("getstatistic3", JSON.stringify(temp));
           localStorage.setItem("activetab", 3);
           localStorage.setItem("input3", JSON.stringify(this.date3));
@@ -213,13 +232,16 @@ export default {
       //console.log(this.getroomList);
     },
   },
-  // mounted() {
-  //   this.renderChart(this.barChart)
-  // },
-  mounted() {
-    //this.data();
+  maxValue(arr) {
+    let max = arr[0];
+
+    for (let val of arr) {
+      if (val > max) {
+        max = val;
+      }
+    }
+    return max;
   },
-  setup() {},
 };
 </script>
 
