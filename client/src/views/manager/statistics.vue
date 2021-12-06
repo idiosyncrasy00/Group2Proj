@@ -92,7 +92,7 @@
             <div class="mx-auto" style="max-width: 80%">
               <b>Chọn năm bạn muốn tra cứu</b> <br />
               <div class="row">
-                <input type="number" class="col-sm-4" v-model="date3" />
+                <input type="number"  min="2000" max="2099" class="col-sm-4" v-model="date3" />
                 <button
                   type="button"
                   class="btn btn-secondary btn-sm col-sm-2"
@@ -135,7 +135,7 @@ export default {
       getMax: JSON.parse(localStorage.getItem("getMaxValue")) || 2,
       date1: JSON.parse(localStorage.getItem("input1")),
       date2: JSON.parse(localStorage.getItem("input2")),
-      date3: JSON.parse(localStorage.getItem("input3")),
+      date3: JSON.parse(localStorage.getItem("input3")) || 2021,
       activetab: JSON.parse(localStorage.getItem("activetab")) || 1,
       roomList1: JSON.parse(localStorage.getItem("getstatistic1")),
       roomList2: JSON.parse(localStorage.getItem("getstatistic2")),
