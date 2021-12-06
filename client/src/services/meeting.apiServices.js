@@ -97,8 +97,18 @@ function sendEmailAPI(meetingid) {
   return axios.post(baseURL + "api/meetings/sendemail", data, getHeaders);
 }
 
+function searchMeetingsAPI(roomname, reserveddate, title, adminname) {
+  const data = {
+    "roomname": roomname,
+    "reserveddate": reserveddate,
+    "title": title,
+    "adminname": adminname,
+  }
+  return axios.post(baseURL + "api/util/query", data, getHeaders);
+}
+
 export {
   createMeetingAPI, getMeetingListAPI, editMeetingAPI, deleteMeetingAPI, getInvitedMeetingsListAPI,
   invitePeopleAPI, invitePerson, adminDeletesParticipantAPI, participantLeavesMeetingAPI, listparticipantAPI, getAllUsersAPI,
-  sendEmailAPI
+  sendEmailAPI, searchMeetingsAPI
 };
