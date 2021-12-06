@@ -97,8 +97,10 @@ const getReview = async (req, res) => {
             model: Room,
             as: "room",
             attributes: ['id', 'roomname']
-        }]
+        }],
+        raw: true
     });
+    reviews.forEach(i => i['time'] = new Date(i['time']).toISOString().replace(/T.+/, ''));
     res.send(reviews);
 };
 
