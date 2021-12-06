@@ -17,7 +17,7 @@
                     <input
                       type="text"
                       class="form-control col-sm-9"
-                      placeholder="Danh sách phòng"
+                      placeholder="Nhập tên phòng"
                       v-model="searchValues.roomName"
                     />
                   </div>
