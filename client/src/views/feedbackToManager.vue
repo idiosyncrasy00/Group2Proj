@@ -36,7 +36,7 @@ export default {
         })
         .catch((err) => {
           if (err.response.status === 403) {
-            this.$swal.fire("Message không được để trống", "", "failed");
+            this.$swal.fire("Tin nhắn không được để trống", "", "failed");
           }
           console.log(err);
         });
