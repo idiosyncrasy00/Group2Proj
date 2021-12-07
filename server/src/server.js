@@ -1,28 +1,34 @@
+// Dotenv
+if (process.env.NODE_ENV == "production") {
+    require('dotenv').config();
+} else {
+    const {resolve} = require('path');
+    require('dotenv').config({ path: resolve(__dirname, "../.env.development") });
+}
+
+// Dependencies
 const express = require('express');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
-const db = require('./models');
-const mailer = require('./utilities/email');
 
 // Middlewares
 console.log('Setting middlewares ...');
 app.use(cors({
-    origin: "http://localhost:8080",
+    origin: (process.env.FRONTEND_ENDPOINT || "http://localhost:8080").replace(/\/$/, ''),
     exposedHeaders: ['accesstoken']
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 
-// Dotenv
-require('dotenv').config();
-
 // Database
+const db = require('./models');
 (async () => await db.db_init())();
 
 // Email
+const mailer = require('./utilities/email');
 mailer.init_mailer();
 
 // Routes
