@@ -4,7 +4,7 @@ services:
     build:
       context: client
     ports:
-      - 8080:80
+      - 80:80
   server:
     build:
       context: server
