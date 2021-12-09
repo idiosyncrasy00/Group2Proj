@@ -10,6 +10,7 @@ services:
       context: server
     environment:
       NODE_ENV: "production"
+    restart: always
     ports:
       - 3000:3000
     command: >
