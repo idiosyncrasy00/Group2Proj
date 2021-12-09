@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:3000/";
+const baseURL = process.env.VUE_APP_API_ENDPOINT;
 
 const getHeaders = {
   headers: {

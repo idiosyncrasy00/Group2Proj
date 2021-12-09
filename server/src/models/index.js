@@ -32,18 +32,16 @@ require('./associations')(db);
 //
 
 async function db_init() {
-    await db.sequelize.sync();
-    if (env === 'development' || env === 'development-local') {
-        try {
-            const initdb_env = process.env.INIT_DB || "yes";
-            if (initdb_env === "yes") {
-                let seeder = require('../seeders/seeder.dev');
-                await seeder.down(db);
-                await seeder.up(db);
-            }
-        } catch(error) {
-            console.log(error.message);
+    try {
+        await db.sequelize.sync();
+        const initdb_env = process.env.INIT_DB || "yes";
+        if (initdb_env === "yes") {
+            let seeder = require('../seeders/seeder.dev');
+            await seeder.down(db);
+            await seeder.up(db);
         }
+    } catch(error) {
+        console.log(error.message);
     }
 }
 
