@@ -39,7 +39,7 @@
         <div class="bg-text">
           <h1>Website quản lý phòng họp</h1>
           <p class="bg-text-under">
-						Ứng dụng web giúp bạn vận hành cuộc họp của công ty hiệu quả
+            Ứng dụng web giúp bạn vận hành cuộc họp của công ty hiệu quả
           </p>
         </div>
         <div class="intro-button">
@@ -49,11 +49,11 @@
       <div class="row mt-4 justify-content-between">
         <div class="card col-sm-7 info-card" data-aos="fade-right">
           <h3>Chúng tôi luôn sẵn sàng giúp bạn kết nối</h3>
-          <ul style="list-style-type: none;">
-						<li>&#187; Dễ dàng trao đổi thông tin cuộc họp</li>
-						<li>&#187; Dễ dàng quản trị cuộc họp của chính bạn</li>
-						<li>&#187; Dễ dàng lên lịch các phòng</li>
-						<li>&#187; Dễ dàng để liên lạc với mọi người trong công ty</li>  	
+          <ul style="list-style-type: none">
+            <li>&#187; Dễ dàng trao đổi thông tin cuộc họp</li>
+            <li>&#187; Dễ dàng quản trị cuộc họp của chính bạn</li>
+            <li>&#187; Dễ dàng lên lịch các phòng</li>
+            <li>&#187; Dễ dàng để liên lạc với mọi người trong công ty</li>
           </ul>
         </div>
         <div class="card col-sm-4 bg-secondary" data-aos="fade-left"></div>
@@ -61,10 +61,10 @@
       <div class="d-flex flex-row-reverse mt-5 justify-content-between">
         <div class="card col-sm-7 end-0 info-card" data-aos="fade-left">
           <h3>Hiện đại hóa giải pháp quản lý cuộc họp</h3>
-          <ul style="list-style-type: square;">
-						<li>Tạo cuộc họp và mời đồng nghiệp của bạn ngay lập tức</li>
-						<li>Lịch họp của bạn luôn có sẵn ở đây</li>
-						<li>Ghi nhớ mọi thứ thông tin về họp hành</li>
+          <ul style="list-style-type: square">
+            <li>Tạo cuộc họp và mời đồng nghiệp của bạn ngay lập tức</li>
+            <li>Lịch họp của bạn luôn có sẵn ở đây</li>
+            <li>Ghi nhớ mọi thứ thông tin về họp hành</li>
           </ul>
         </div>
         <div class="card col-sm-4 bg-primary" data-aos="fade-right"></div>
@@ -73,10 +73,12 @@
         <div class="card col-sm-7 info-card" data-aos="fade-right">
           <h3>Miễn phí, đơn giản và tiện lợi</h3>
           <ul>
-						<li>Không tốn thời gian để tạo một account </li>
-						<li>Không tốn thời gian để học cách sử dụng</li>
-						<li>Không tốn thời gian để nâng cấp giải pháp cho công ty của bạn</li>
-						<li>Miễn phí mọi thứ</li>  	
+            <li>Không tốn thời gian để tạo một account</li>
+            <li>Không tốn thời gian để học cách sử dụng</li>
+            <li>
+              Không tốn thời gian để nâng cấp giải pháp cho công ty của bạn
+            </li>
+            <li>Miễn phí mọi thứ</li>
           </ul>
         </div>
         <div class="card col-sm-4 bg-danger" data-aos="fade-left"></div>
@@ -219,11 +221,11 @@ slides-group {
   font-weight: 900;
   font-family: "Roboto", sans-serif;
 }
-.bg-text-under{
-		font-size: 2.1rem;
-		font-weight: 200;
-		font-family: 'Comfortaa', cursive;
-	}
+.bg-text-under {
+  font-size: 2.1rem;
+  font-weight: 200;
+  font-family: "Comfortaa", cursive;
+}
 .intro-button {
   color: white;
   font-weight: bold;
@@ -240,7 +242,7 @@ slides-group {
   text-decoration: none;
   color: white;
 }
-.info-card{
-	padding: 2rem;
+.info-card {
+  padding: 2rem;
 }
 </style>

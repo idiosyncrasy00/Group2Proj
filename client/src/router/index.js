@@ -13,7 +13,7 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    component: () => import('../views/About.vue'),
+    component: () => import('../views/Home/About.vue'),
     meta: {
       requiresAuth: true,
       notrequiresAuth: true,
@@ -104,16 +104,16 @@ const routes = [
   {
     path: '/Feedback',
     name: 'Feedback',
-    component: () => import('../views/Feedback.vue'),
+    component: () => import('../views/Feedback/Feedback.vue'),
     meta: {
       requiresAuth: true,
       notrequiresAuth: false,
     }
   },
-	{
+  {
     path: '/FeedbackManager',
     name: 'FeedbackManager',
-    component: () => import('../views/feedbackToManager.vue'),
+    component: () => import('../views/Feedback/feedbackToManager.vue'),
     meta: {
       requiresAuth: true,
       notrequiresAuth: false,
@@ -122,7 +122,7 @@ const routes = [
   {
     path: '/Room',
     name: 'Room',
-    component: () => import('../views/Room.vue'),
+    component: () => import('../views/Rooms/Room.vue'),
     meta: {
       requiresAuth: true,
       notrequiresAuth: false,
@@ -140,7 +140,7 @@ const routes = [
   {
     path: '/statistics',
     name: 'statistics',
-    component: () => import('../views/manager/statistics2'),
+    component: () => import('../views/manager/statistics'),
     meta: {
       requiresAuth: true,
       notrequiresAuth: true,
