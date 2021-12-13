@@ -81,8 +81,8 @@
                               class="btn btn-primary"
                               data-bs-toggle="modal"
                               data-bs-target="#staticBackdrop"
-                              @click="editRoomInfo(room)"
                               style="padding: 0; background-color: #6666cc"
+                              @click="openModalEditRoom(room)"
                             >
                               <img
                                 src="../../assets/edit-icon.png"
@@ -194,6 +194,7 @@
                                   >
                                     Xác nhận
                                   </button>
+                                  <!--end -->
                                 </div>
                               </div>
                             </div>
@@ -226,6 +227,7 @@ import {
   getRoomListAPI,
   deleteRoomAPI,
   getRoomReviewAPI,
+  editRoomAPI,
 } from "@/services/room.apiServices.js";
 import roomCreateModal from "@/components/ManagerComponents/roomCreateModal.vue";
 import roomEditModal from "@/components/ManagerComponents/roomEditModal.vue";
@@ -257,12 +259,42 @@ export default {
     };
   },
   methods: {
-    editRoomInfo(room) {
+    openModalEditRoom(room) {
+      console.log(room)
       this.getroomid = room.id;
       this.getroomname = room.roomname;
       this.getroomcapacity = room.capacity;
       this.getroomfacilities = room.facilities;
       this.getroomstatus = room.status;
+    },
+    editRoomInfo() {
+      const data = {
+        id: this.getroomid,
+        roomname: this.getroomname,
+        capacity: this.getroomcapacity,
+        facilities: this.getroomfacilities,
+        status: this.getroomstatus,
+      };
+      editRoomAPI(data)
+        .then((res) => {
+          console.log(res);
+          this.$swal.fire(
+            "Thành công!",
+            "Cập nhật thông tin phòng thành công",
+            "success"
+          );
+          window.setTimeout(function () {
+            location.reload();
+          }, 3000);
+        })
+        .catch((err) => {
+          this.$swal.fire(
+            "Cập nhật thông tin phòng thất bại!",
+            "Các mục không được để trống",
+            "failed"
+          );
+          console.log(err);
+        });
     },
     deleteRoom(id) {
       this.$swal

@@ -11,9 +11,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">
-            Thêm phòng họp
-          </h5>
+          <h5 class="modal-title" id="staticBackdropLabel">Thêm phòng họp</h5>
           <button
             type="button"
             class="btn-close"
@@ -101,6 +99,13 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          if (err.response.status === 403) {
+            this.$swal.fire(
+              "Thất bại!",
+              "Các mục không được để trống",
+              "failed"
+            );
+          }
         });
     },
   },

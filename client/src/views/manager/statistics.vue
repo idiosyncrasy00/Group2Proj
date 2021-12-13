@@ -45,7 +45,14 @@
               <hr />
               <!-- <vue3-chart-js v-bind="{ ...barChart }"/> -->
               <!-- <ChartUI :data="thí"/> -->
-              <column-chart class="w-100" :data="this.roomList1"></column-chart>
+              <column-chart
+                class="w-100"
+                :data="this.roomList1"
+                :min="0"
+                :max="this.getMax"
+                xtitle="Tên phòng họp"
+                ytitle="Số lần đặt phòng"
+              ></column-chart>
             </div>
           </div>
         </div>
@@ -68,7 +75,13 @@
               <br />
               <br />
               <hr />
-              <column-chart :data="this.roomList2"></column-chart>
+              <column-chart
+                :data="this.roomList2"
+                :min="0"
+                :max="this.getMax"
+                xtitle="Tên phòng họp"
+                ytitle="Số lần đặt phòng"
+              ></column-chart>
             </div>
           </div>
         </div>
@@ -79,7 +92,7 @@
             <div class="mx-auto" style="max-width: 80%">
               <b>Chọn năm bạn muốn tra cứu</b> <br />
               <div class="row">
-                <input type="number" class="col-sm-4" v-model="date3" />
+                <input type="number"  min="2000" max="2099" class="col-sm-4" v-model="date3" />
                 <button
                   type="button"
                   class="btn btn-secondary btn-sm col-sm-2"
@@ -91,7 +104,13 @@
               <br />
               <br />
               <hr />
-              <column-chart :data="this.roomList3"></column-chart>
+              <column-chart
+                :data="this.roomList3"
+                :min="0"
+                :max="this.getMax"
+                xtitle="Tên phòng họp"
+                ytitle="Số lần đặt phòng"
+              ></column-chart>
             </div>
           </div>
         </div>
@@ -113,10 +132,11 @@ export default {
       // date1: "yyyy-mm-dd",
       // date2: "yyyy-mm",
       // date3: "",
+      getMax: JSON.parse(localStorage.getItem("getMaxValue")) || 2,
       date1: JSON.parse(localStorage.getItem("input1")),
       date2: JSON.parse(localStorage.getItem("input2")),
-      date3: JSON.parse(localStorage.getItem("input3")),
-      activetab: JSON.parse(localStorage.getItem("activetab")) || "",
+      date3: JSON.parse(localStorage.getItem("input3")) || 2021,
+      activetab: JSON.parse(localStorage.getItem("activetab")) || 1,
       roomList1: JSON.parse(localStorage.getItem("getstatistic1")),
       roomList2: JSON.parse(localStorage.getItem("getstatistic2")),
       roomList3: JSON.parse(localStorage.getItem("getstatistic3")),
@@ -131,10 +151,16 @@ export default {
       //var temp_activetab = 1;
       getRoomStatsAPI(this.date1)
         .then((res) => {
-          console.log(res);
+          var max = 2;
           for (var i = 0; i < res.data.length; i++) {
             temp.push([res.data[i].roomname, res.data[i].usage]);
+            if (res.data[i].usage > max) {
+              max = res.data[i].usage;
+            }
           }
+          console.log(max);
+          console.log(res);
+          localStorage.setItem("getMaxValue", max.toString());
           localStorage.setItem("getstatistic1", JSON.stringify(temp));
           localStorage.setItem("activetab", 1);
           localStorage.setItem("input1", JSON.stringify(this.date1));
@@ -154,10 +180,16 @@ export default {
       var temp = [];
       getRoomStatsAPI(this.date2)
         .then((res) => {
-          console.log(res);
+          var max = 2;
           for (var i = 0; i < res.data.length; i++) {
             temp.push([res.data[i].roomname, res.data[i].usage]);
+            if (res.data[i].usage > max) {
+              max = res.data[i].usage;
+            }
           }
+          console.log(max);
+          console.log(res);
+          localStorage.setItem("getMaxValue", max.toString());
           localStorage.setItem("getstatistic2", JSON.stringify(temp));
           localStorage.setItem("activetab", 2);
           localStorage.setItem("input2", JSON.stringify(this.date2));
@@ -177,10 +209,16 @@ export default {
       var temp = [];
       getRoomStatsAPI(JSON.stringify(this.date3))
         .then((res) => {
-          console.log(res);
+          var max = 2;
           for (var i = 0; i < res.data.length; i++) {
             temp.push([res.data[i].roomname, res.data[i].usage]);
+            if (res.data[i].usage > max) {
+              max = res.data[i].usage;
+            }
           }
+          //console.log(res);
+          console.log(max);
+          localStorage.setItem("getMaxValue", max.toString());
           localStorage.setItem("getstatistic3", JSON.stringify(temp));
           localStorage.setItem("activetab", 3);
           localStorage.setItem("input3", JSON.stringify(this.date3));
@@ -194,13 +232,16 @@ export default {
       //console.log(this.getroomList);
     },
   },
-  // mounted() {
-  //   this.renderChart(this.barChart)
-  // },
-  mounted() {
-    //this.data();
+  maxValue(arr) {
+    let max = arr[0];
+
+    for (let val of arr) {
+      if (val > max) {
+        max = val;
+      }
+    }
+    return max;
   },
-  setup() {},
 };
 </script>
 

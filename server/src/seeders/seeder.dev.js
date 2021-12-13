@@ -23,45 +23,55 @@ module.exports = {
         }]);
         await db.User.bulkCreate([{
             id: 11,
-            firstname: "Đức",
-            lastname: "Hoàng",
-            email: "inconsolable789@gmail.com",
+            firstname: "Quang",
+            lastname: "Anh",
+            email: "quanganh124@gmail.com",
             dob: "2000-01-01",
-            phone: "7605325323",
+            phone: "0760532533",
             address: "99 Cầu Giấy",
             username: "person1",
             password: await encrypt.generate("person1")
         }, {
             id: 12,
-            firstname: "Quang",
-            lastname: "Anh",
-            email: "randomemail@gmail.com",
+            firstname: "Đức",
+            lastname: "Hoàng",
+            email: "pooppooppoop407@gmail.com",
             dob: "2000-01-20",
-            phone: "1325468452",
+            phone: "0132546852",
             address: "24 Hoàng Văn Thụ",
-            username: "admin",
-            password: await encrypt.generate("admin"),
-            isadmin: true
+            username: "person2",
+            password: await encrypt.generate("person2"),
         }, {
             id: 13,
             firstname: "Thanh",
             lastname: "Phương",
             email: "19021346@vnu.edu.vn",
             dob: "2001-05-11",
-            phone: "1325484212",
+            phone: "0132548421",
             address: "15 Xuân Thủy",
-            username: "person2",
-            password: await encrypt.generate("person2")
+            username: "person4",
+            password: await encrypt.generate("person4")
         }, {
             id: 14,
             firstname: "Xuân",
             lastname: "Hải",
             email: "gmxancrazy24114@gmail.com",
             dob: "2001-01-24",
-            phone: "5462158745",
+            phone: "0546215845",
             address: "40 Hồ Tùng Mậu",
             username: "person3",
             password: await encrypt.generate("person3")
+        }, {
+            id: 15,
+            firstname: "Xuân",
+            lastname: "Thủy",
+            email: "xuanthuy123@gmail.com",
+            dob: "2001-05-06",
+            phone: "0419277487",
+            address: "68 Phạm Hùng",
+            username: "admin",
+            password: await encrypt.generate("admin"),
+            isadmin: true
         }]);
         await db.Meeting.bulkCreate([{
             id: 101,
@@ -77,12 +87,12 @@ module.exports = {
         }, {
             id: 102,
             adminid: 11,
-            roomid: 3,
+            roomid: 1,
             reserveddate: "2021-12-02",
             startingtime: 11,
             during: 3,
             title: "Họp tổng kết năm",
-            content: "Tổng kết năm học",
+            content: "Tổng kết năm học 2020-2021",
             password: "",
             status: "Đang chờ"
         }, {
@@ -107,6 +117,17 @@ module.exports = {
             content: "Nâng lương trước thời hạn",
             password: "",
             status: "Đang diễn ra"
+        }, {
+            id: 105,
+            roomid: 2,
+            adminid: 11,
+            reserveddate: "2021-12-16",
+            startingtime: 14,
+            during: 2,
+            title: "Họp hội đồng quản trị",
+            content: "Triển khai các dự án trọng điểm trong năm tới.",
+            password: "",
+            status: "Đang chờ"
         }]);
         await db.Participant.bulkCreate([{
             meetingid: 101,
@@ -129,11 +150,11 @@ module.exports = {
             userid: 11,
             isaccepting: true
         }, {
-            meetingid: 104,
+            meetingid: 102,
             userid: 14,
             isaccepting: true
         }, {
-            meetingid: 104,
+            meetingid: 102,
             userid: 13,
             isaccepting: true
         }]);
@@ -172,12 +193,12 @@ module.exports = {
     down: async (db) => {
         await db.Participant.destroy({
             where: {
-                meetingid: [101, 102, 103]
+                meetingid: [101, 102, 103, 104, 105]
             }
         });
         await db.Meeting.destroy({
             where: {
-                id: [101, 102, 103]
+                id: [101, 102, 103, 104, 105]
             }
         });
         await db.Feedback.destroy({
@@ -197,7 +218,7 @@ module.exports = {
         });
         await db.User.destroy({
             where: {
-                id: [11, 12, 13, 14]
+                id: [11, 12, 13, 14, 15]
             }
         });
     }

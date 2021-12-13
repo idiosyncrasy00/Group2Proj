@@ -4,12 +4,13 @@ services:
     build:
       context: client
     ports:
-      - 8080:80
+      - 80:80
   server:
     build:
       context: server
     environment:
       NODE_ENV: "production"
+    restart: always
     ports:
       - 3000:3000
     command: >

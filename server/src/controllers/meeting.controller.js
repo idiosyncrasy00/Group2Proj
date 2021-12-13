@@ -23,6 +23,9 @@ const createMeeting = async (req, res) => {
                     }
                 });
                 let check = true;
+                if (value.startingtime + value.during > 23) {
+                    check = false;
+                }
                 for (let meet of available_meetings) {
                     if (value.startingtime >= meet.startingtime && value.startingtime <= meet.startingtime + meet.during) {
                         check = false;
@@ -86,6 +89,9 @@ const editMeeting = async (req, res) => {
                         }
                     });
                     let check = true;
+                    if (value.startingtime + value.during > 23) {
+                        check = false;
+                    }
                     for (let meet in available_meetings) {
                         if (value.startingtime >= meet.startingtime && value.startingtime <= meet.startingtime + meet.during) {
                             check = false;

@@ -1,8 +1,8 @@
 const nodemailer = require('nodemailer');
-//require('dotenv').config();  // For testing only
 
 var transporter = null;
 const sender = "Ban tổ chức cuộc họp <danielfred@gmail.com>";
+const dev_email = process.env.DEV_EMAIL || "randomemail@gmail.com";
 
 // Init mailer
 function init_mailer() {
@@ -23,18 +23,20 @@ function init_mailer() {
 }
 
 function send_email(receiver, subject="Empty", html="Empty") {
-    transporter.sendMail({
-        from: sender,
-        to: receiver,
-        subject: subject,
-        html: html
-    }, (error, s) => {
-        if (error) {
-            console.log("Email recorded but not sent. Credential invalid");
-        } else {
-            console.log("Email sent");
-        }
-    });
+    if (transporter != null) {
+        transporter.sendMail({
+            from: sender,
+            to: receiver,
+            subject: subject,
+            html: html
+        }, (error, s) => {
+            if (error) {
+                console.log("Email recorded but not sent. Credential invalid");
+            } else {
+                console.log("Email sent");
+            }
+        });
+    }
 }
 
 function send_invite_email(receiver, fullname, roomname, date, startingtime, during, title, content) {
@@ -58,15 +60,19 @@ Ban tổ chức cuộc họp,<br>
     Nhóm 2<br>
 <span style="opacity: 0"> ${Date.now()} </span>
 </body>`;
-    // console.log('>>>>>>>');
-    // console.log(subject);
-    // console.log('>>>>>>>');
-    // console.log(html);
-    // console.log('>>>>>>>');
     send_email(receiver, subject, html);
 }
 
-//init_mailer();
-//send_invite_email('vinhquangit01@gmail.com', 'NGUYEN VINH QUANG', 'a', '2021-12-04', '8', '2', 'b', 'c');
+function send_feedback_email(id, userid, message) {
+    let subject = `Phản hồi ứng dụng số ${id}`;
+    let html = 
+`<body>
+ID phản hồi: ${id}<br>
+ID người phản hồi: ${userid}<br>
+Tin nhắn:<br>
+${message}
+</body>`
+    send_email(dev_email, subject, html);
+}
 
-module.exports = { init_mailer, send_email, send_invite_email };
+module.exports = { init_mailer, send_email, send_invite_email, send_feedback_email };
