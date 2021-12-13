@@ -32,22 +32,22 @@
                           <div class="product row">
                             <div class="image col-sm-1">
                               <img
-                                src="../assets/logo.png"
+                                src="../../assets/logo.png"
                                 alt=""
                                 style="height: 3rem; width: 3rem"
                               />
                             </div>
                             <div class="col-sm-6">
                               <p>
-                                <b> {{ room.roomname }} </b> - Đánh giá trung bình:
-                                {{ room.rating }}/10
+                                <b> {{ room.roomname }} </b> - Đánh giá trung
+                                bình: {{ room.rating }}/10
                               </p>
                               Trang thiết bị: {{ room.facilities }}
                             </div>
                             <div class="col-sm-4">
                               <p>
                                 <img
-                                  src="../assets/people.png"
+                                  src="../../assets/people.png"
                                   style="height: 1.9rem; width: 1.9rem"
                                 />
                                 {{ room.capacity }}
@@ -66,7 +66,7 @@
                                   style="padding: 0; background-color: #8cff66"
                                 >
                                   <img
-                                    src="../assets/booking.png"
+                                    src="../../assets/booking.png"
                                     style="height: 2rem; width: 2rem"
                                   />
                                 </button>
@@ -82,7 +82,7 @@
                                   style="padding: 0"
                                 >
                                   <img
-                                    src="../assets/calendar.jpg"
+                                    src="../../assets/calendar.jpg"
                                     style="height: 2rem; width: 2rem"
                                   />
                                 </button>
@@ -98,7 +98,7 @@
                                   style="padding: 0; background-color: #ff704d"
                                 >
                                   <img
-                                    src="../assets/like.png"
+                                    src="../../assets/like.png"
                                     style="height: 2rem; width: 2rem"
                                   />
                                 </button>
@@ -147,9 +147,9 @@ import {
   //getMeetingsInARoomAPI,
   //postReviewAPI,
 } from "@/services/room.apiServices.js";
-import roomCalendarModal from "@/components/roomCalendarModal.vue";
-import roomReviewModal from "@/components/roomReviewModal.vue";
-import createMeetingModal from "@/components/createMeetingModal.vue";
+import roomCalendarModal from "@/components/UserServices/roomCalendarModal.vue";
+import roomReviewModal from "@/components/UserServices/roomReviewModal.vue";
+import createMeetingModal from "@/components/UserServices/createMeetingModal.vue";
 
 export default {
   name: "room",

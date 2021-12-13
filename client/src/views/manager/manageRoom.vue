@@ -10,7 +10,7 @@
           data-bs-target="#staticBackdrop1"
         >
           <img
-            src="https://icon-library.com/images/create-a-icon/create-a-icon-13.jpg"
+            src="../../assets/create-icon.png"
             style="width: 3rem; height: 3rem"
           />
           Thêm phòng họp
@@ -67,7 +67,7 @@
                           <div class="col-sm-4">
                             <p>
                               <img
-                                src="https://icon-library.com/images/person-icon-png-transparent/person-icon-png-transparent-15.jpg"
+                                src="../../assets/people.png"
                                 style="height: 1.9rem; width: 1.9rem"
                               />
                               {{ room.capacity }}
@@ -85,7 +85,7 @@
                               @click="openModalEditRoom(room)"
                             >
                               <img
-                                src="https://icon-library.com/images/edit-icon/edit-icon-21.jpg"
+                                src="../../assets/edit-icon.png"
                                 style="height: 2rem; width: 2rem"
                               />
                             </button>
@@ -95,7 +95,7 @@
                               style="padding: 0"
                             >
                               <img
-                                src="https://icon-library.com/images/junk-icon/junk-icon-18.jpg"
+                                src="../../assets/junk-icon.png"
                                 style="height: 2rem; width: 2rem"
                               />
                             </button>
@@ -108,7 +108,7 @@
                               style="padding: 0; background-color: #ff704d"
                             >
                               <img
-                                src="https://i.pinimg.com/originals/b9/f0/90/b9f0902793f2e3be3b57616e1c6ddd55.png"
+                                src="../../assets/like.png"
                                 style="height: 2rem; width: 2rem"
                               />
                             </button>
@@ -231,7 +231,7 @@ import {
 } from "@/services/room.apiServices.js";
 import roomCreateModal from "@/components/ManagerComponents/roomCreateModal.vue";
 import roomEditModal from "@/components/ManagerComponents/roomEditModal.vue";
-import roomReviewModal from "@/components/roomReviewModal.vue";
+import roomReviewModal from "@/components/UserServices/roomReviewModal.vue";
 
 export default {
   name: "manageRoom",
