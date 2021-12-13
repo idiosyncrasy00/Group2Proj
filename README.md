@@ -31,7 +31,7 @@ NODEMAILER_ACCESSTOKEN=
 
 You can easily deploy the whole project by one single docker command. Make sure to install [docker](https://docs.docker.com/get-docker/) and [docker-compose](https://docs.docker.com/compose/install/) in your machine first.
 
-####  - Production deploy in localhost:
+###  - Production deployment in localhost:
 ```
 docker-compose up -d
 ```
@@ -39,10 +39,10 @@ Make sure no process in your machine is using port 80 when deploying the project
  - [`http://localhost`](http://localhost): for the main application
  - [`http://localhost/adminer`](http://localhost/adminer): for the database manager (adminer)
 
-####  - Production deploy with domain name:
+###  - Production deployment with domain name:
 You can deploy the project publicly to a custom domain name while running it in a home server or even a cloud platform. You need to register a domain name, point it to your home server or cloud public IP address. Then edit the file `client/nginx.conf`and set `server_name` in line 15 to your domain name. For example:
 ```nginx
-server_name		yourdomain.com www.yourdomain.com	
+server_name yourdomain.com www.yourdomain.com	
 ```
 After that, you can deploy your application by running this command:
 ```
@@ -52,7 +52,7 @@ The application can be accessed by running these urls;
 - `http://${server_name}`: for the main application
 - `http://${server_name}/adminer`: for the database manager (adminer)
 
-####  - Development deploy:
+###  - Development deployment:
 If you want to deploy the project in development process for testing, you can run this command:
 ```
 docker-compose -f docker-compose-dev.yml up -d
@@ -112,7 +112,7 @@ docker-compose -f docker-compose-dev.yml up -d --build
 
 ## 4. Real website
 
-You can access our website in this url:
+You can access our website using this url:
 [http://group2meeting.tk/](http://group2meeting.tk/)
 
 *Important note:*
