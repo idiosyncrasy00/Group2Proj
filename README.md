@@ -97,14 +97,28 @@ Password: admin
 Database: testdb
 ```
 
-###  3.3. Reset database
+###  3.3. Default accounts
+After deployment you can use these accounts to test the program.
+- User accounts:
+```
+person1 - person1
+person2 - person2
+person3 - person3
+person4 - person4
+```
+- Admin accounts:
+```
+admin - admin
+```
+
+###  3.4. Reset database
 If you change the database structure, you have to reset the database before testing:
 ```bash
 cd server/
 npm run db_reset
 ```
 
-### 3.4. Rebuild docker (for development docker deploy)
+### 3.5. Rebuild docker (for development docker deploy)
 If you add, modify, delete a package, change an environment variable or modify something else that's outside the `src/` folder in both client and server application, you have to rebuild the docker image by running this command:
 ```
 docker-compose -f docker-compose-dev.yml up -d --build
